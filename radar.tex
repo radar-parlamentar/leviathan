@@ -67,11 +67,13 @@
 \begin{document}
  
 \maketitle 
-\Saulo{O título era ``Comparação quantitativa da atuação parlamentar de partidos políticos utilizando Análise de Componentes Principais''. O termo ``atuação parlamentar'' é impreciso pois estamos analisando apenas as votações, e apenas as nominais. O termo ``partidos políticos'' também, pois analisamos agregado por partido mas também desagregado, por parlamentar.}
 
-\section*{Resumo}
+\begin{abstract}
 
-Este artigo trás uma revisão de métodos de análise de votações legislativas nominais e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Uma generalização para possibilitar análises agregadas por partido é introduzida. São apresentados gráficos bidimensionais de algumas legislaturas do Congresso Americano e da Câmara dos Deputados e Senado brasileiros, por parlamentar e agrupados por partido, e comparados os resultados do modelo ACP com os do conhecido modelo WNOMINATE. O modelo ACP além de ser mais simples, computacionalmente mais rápido e de mais fácil interpretação, apresentou métricas de adequação (fitness) melhores para as casas legislativas brasileiras.\Saulo{este último, a confirmar!}
+A literatura sobre análise quantitativa de votações nominais em casas legislativas é bem extensa e relativamente antiga. No entanto, poucos são os trabalhos que se debruçam sobre a aplicação de tais métodos nas casas legislativas brasileiras. Este artigo trás uma revisão de métodos de análise de votações legislativas nominais e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Apresentaremos também nossa abordagem para o tratamento de abstenções e sobre a realização de análises agregadas por partido, temas pouco explorados na literatura, que normalmente foca em análises de casas legislativas dos Estados Unidos. 
+
+São apresentados gráficos bidimensionais de algumas legislaturas do Congresso Americano e da Câmara dos Deputados e Senado brasileiros, por parlamentar e agrupados por partido, e comparados os resultados do modelo ACP com os do conhecido modelo WNOMINATE. O modelo ACP além de ser mais simples, computacionalmente mais rápido e de mais fácil interpretação, apresentou métricas de adequação (fitness) melhores para as casas legislativas brasileiras.\Saulo{este último, a confirmar!}
+\end{abstract}
 
 \section{Introdução}
 \label{sec:intro}
@@ -81,6 +83,8 @@ Este artigo trás uma revisão de métodos de análise de votações legislativa
 %questão
 %solução, avaliação
 
+\Leo{deixar pra ajeitar a coesão da introdução por último}
+
 Modelos espaciais para análise de votações no âmbito legislativo existem pelo menos desde 1957, com Downs~\cite{downs1957}, e se tornaram mais numerosos e mais utilizados a partir da década de 1980, com o aumento da disponibilidade e redução de custo de processamento computacional e com a proposição em 1985 do famoso algoritmo NOMINATE por Poole e Rosenthal~\cite{poole-rosenthal1985}, até hoje o mais conhecido e utilizado. O objetivo destes modelos de escalonamento dimensional é representar os parlamentares ou partidos em um espaço geométrico com algumas poucas dimensões (frequentemente uma ou duas) de tal forma que o comportamento de cada um nas votações seja em grande parte explicado por sua posição (coordenadas) neste espaço, sendo que esta posição, também chamada ``ponto ideal'' do legislador ou partido, é estimada a partir dos votos observados nas votações.
 
 Existe uma literatura relativamente ampla sobre o assunto focando no Congresso Americano ou outras entidades estadounidenses como o senado e suprema corte, inclusive comparando a performance de diferentes modelos 
@@ -88,11 +92,22 @@ Existe uma literatura relativamente ampla sobre o assunto focando no Congresso A
 \cite{poole-rosenthal2000,clinton-jackman-rivers04},
 mas são poucos os estudos de votações em entidades brasileiras. Um exemplo é Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02}.
 
-Este artigo está organizado da seguinte forma: A seção \ref{sec:formulacao} traz a formulação matemática que propomos para aplicação da análise de componentes principais ao problema de modelagem de votações legislativas; \ref{sec:revbib} apresenta uma breve revisão de literatura;  \ref{sec:metodo} introduz os indicadores de \emph{fitness} utilizados na comparação dos métodos; \ref{sec:resultados} contém os resultados obtidos \ins{com tais e tais dados}; \ref{sec:discussao} apresenta uma discussão dos resultados e \ref{sec:conclusoes} conclui. \ins{etc... etc...}
+\ins{A ACP é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados}~\cite{DataMining2003}, \ins{e algoritmos de determinação de componentes principais através de decomposição em valores singulares (SVD) são amplamente disponíveis em softwares e bibliotecas de matemática e estatística.}
 
-\Saulo{Este artigo não foi escrito visando nenhum periódico específico, por isso busquei abordar com certa profundidade todos os aspectos: revisão de outros métodos, explicação da ACP, aspectos computacionais, comparação com wnominate, discussão de resultados. Um artigo para publicação em periódico precisará ser mais ``enxugado'' conforme a publicação escolhida.}
+\Leo{Falar que implementamos o ACP no Radar Parlamentar.}
 
-\section{O Modelo ACP para Análise de Votações}
+Os objetivos deste trabalho são:
+
+\begin{itemize}
+\item Contextualizar o uso da ACP no histórico da literatura de análise quantitativa de votações nominais em casa legislativas.
+\item Apresentar nossa abordagem do uso da ACP no contexto brasileiro, com o devido preenchimento de algumas lacunas da literatura.
+\item Mostrar os resultados da aplicação de nossa abordagem para a ACP nas casas legislativas federais do Brasil.
+\end{itemize}
+
+Este artigo está organizado da seguinte forma: ...
+
+
+\section{O modelo ACP para análise de votações nominais}
 \label{sec:formulacao}
 
 Considera-se uma casa legislativa com $M$ membros (parlamentares) e $N$ votações nominais de interesse. O voto $x_{ij}$ de um parlamentar $j$ em uma votação $i$ será modelado por um valor numérico como segue:
@@ -163,7 +178,9 @@ A variância (amostral) var$(i)$ de cada votação, ou dimensão é:
 
 A análise de componentes principais consiste em uma rotação de base \textbf{R} deste espaço vetorial tal que os dados (centralizados) transformados $\mathbf{\Gamma} = \mathbf{R}\cdot \mathbf{X^{*}}$ concentram a máxima variância possível na primeira dimensão, a segunda dimensão possui a máxima variância possível sob a restrição de ser ortogonal à primeira, e assim sucessivamente. A cada vetor da nova base é dado o nome de \emph{componente principal}, os valores de $\mathbf{R}$ são chamados \emph{pesos} (ou \emph{loadings}) e as coordenadas obtidas em $\mathbf{\Gamma}$ são chamadas de \emph{scores}.
 
-A ACP é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados~\cite{DataMining2003}, e algoritmos de determinação de componentes principais através de decomposição em valores singulares (SVD) são amplamente disponíveis em softwares e bibliotecas de matemática e estatística. A execução é tipicamente muito rápida, com complexidade $O(mn^2)$ onde $m>n$ são as dimensões da matriz de dados, utilizando a notação \emph{big-Oh}~\cite{golub-vanloan}. Neste trabalho foi utilizada a função \emph{prcomp} do R e a execução para $m\approx n \approx 400$ leva menos de 2 segundos em um computador pessoal com processador de 2,4 GHz.
+
+///////////////
+ A execução é tipicamente muito rápida, com complexidade $O(mn^2)$ onde $m>n$ são as dimensões da matriz de dados, utilizando a notação \emph{big-Oh}~\cite{golub-vanloan}. Neste trabalho foi utilizada a função \emph{prcomp} do R e a execução para $m\approx n \approx 400$ leva menos de 2 segundos em um computador pessoal com processador de 2,4 GHz.
 
 Como a matriz de rotação $\mathbf{R}$ é ortonormal, sua inversa é igual à transposta $\mathbf{R}^{t}$, e tem-se $\mathbf{X^{*}} = \mathbf{R}^t \cdot \mathbf{\Gamma}$.
 
@@ -227,7 +244,36 @@ onde o numerador é a soma da variância das $d$ primeiras componentes principai
 
 Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adotar $d$ tal que se fosse adotado $d+1$ o ganho em $\nu_d$ seria pequeno. Dito isso, o critério é arbitrário, e deve depender do objetivo da análise. Para uma visualização do aspecto geral de distribuição dos parlamentares é prático utilizar $d=2$, já que assim a visualização no plano é muito mais simples. Seja qual for, a escolha deve vir acompanhada do valor de $\nu_d$ correspondente, afim de que se possa ter uma idéia de quanta informação está sendo desconsiderada.
 
-\subsection*{Análise por Partido}
+
+\section{Revisão de outros métodos}
+\label{sec:revbib}
+
+
+Outros métodos similares de escalonamento multidimensional foram propostos desde então, construindo sobre bases teóricas de análise de componentes principais que remontam ao início do século 20 com Pearson~\cite{pearson1901} e Hotelling~\cite{hotelling1933}, e notando a equivalência destes com métodos utilizados em outras disciplinas, como em psicologia e educação na padronização de provas e análise estatística de resultados em testes de múltipla escolha.
+
+Primórdios... discrete choice model...
+
+Os trabalhos mais proeminentes publicados na área são os de Poole... optimal classification, nominate...
+
+Problemas do nominate...
+
+Izumi~\cite{izumi2016senado} utiliza o OC de Poole para analisar o senado brasileiro, e encontra que... justifica porque o NOMINATE não seria adequado para analisar o congresso brasileiro, devido às fortes premissas do modelo.
+
+\Leo{Com as considerações do Izumi, talvez não seja mais tão interessante comparar o PCA com o nominate... será q faz sentido comparar com o OC?}
+
+Muitos trabalhos consideram modelos lineares para a análise de votações nominais menos adequados do que os modelos não lineares, como o nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, demonstram rigorosamente a equivalência de modelos lineares com os resultados obtidos por Poole, tendo como principal vantagem a simplicidade e eficiência computacional dos métodos lineares.
+
+Mesmo heckman se apoia em uma teoria profunda sobre discrete choice model, porém acreditamos que independente de um modelo que explique o processo de tomada de decisão de parlamentares, a ACP é útil enquanto análise de conjuntura de uma casa legislativa que de fato aconteceu. Assim, tem-se uma figura simplificada para facilitar a análise de tal conjuntura. 
+
+Além disso, tanto Poole quanto Heckman adotam uma postura de análise preditiva. Embora seja possível avaliar a qualidade do modelo com base na capacidade de reconstrução dos dados originais a partir do mapa de votações, os autores usam um tom que pode confundir um leitor desavisado, dando a impressão de que se trata da tentativa de predizer o resultado de votações futuras, ainda mais quando tais modelos tentam explicar o modelo de escolha de opção do legislador com base em atributos da opções de escolha e na distribuição de preferências do legislados no espaço de possibilidade.... Nesse sentido, de fato, se se soubesse os atributos de cada votação a priori, e as funções de utilidade de cada parlamentar, poderíamos prever o resultado das votações. Mas na prática, temos que em função dos resultados observáveis é que podemos estimar coisas como funções de utilidade dos parlamentares ou os atributos das votações. Dessa forma, queremos apenas destacar que ao descartar a ambição de se ter um modelo preditivo, mais ainda a ACP se mostra conceitualmente útil em prover uma ferramenta que auxilie o cientista político na análise de conjuntura de uma casa legislativa por meio de um mapa espacial de votações.
+
+
+
+Controvérsias sobre quantidade de dimensões
+
+\section{Peculiaridades de nossa abordagem considerando o contexto brasileiro}
+
+\subsection*{Análise por partido}
 
 No modelo apresentado, nada impede que os valores de $\mathbf{X}$ possuam valores reais, situados por exemplo no intervalo [-1;1], em vez de apenas os valores discretos \{-1;0;1\}. Esta observação permite uma extensão direta do modelo para analisar os parlamentares agregados por partido em vez de considerá-los individualmente, bastando considerar o voto médio do partido em cada votação antes de iniciar a análise.
 
@@ -240,7 +286,9 @@ onde $j \in k$ denota que o parlamentar $j$ pertence ao partido $k$, e $|k|$ é 
 
 Esta análise é útil para analisar afinidades partidárias e coalizões em ambientes com vários partidos, como é tipicamente o caso das casas legislativas no Brasil.
 
-\subsection*{Tratamento de Valores Faltantes}
+\ins{No Radar Parlamentar, porém, não aplicamos essa técnica, pois para esse software optamos pela coexistência de partidos e parlamentares individuais no mesmo mapa especial. O método proposto acima é válido, mas seu resultado não possui relação direta com o resultado da análise por parlamentar. Assim sendo, no Radar Parlamentar os partidos são posicionados no centroide das posições ocupadas por seus parlamentares. Segue fórmula da hora...}
+
+\subsection*{Tratamento de valores faltantes}
 
 Todos os métodos de análise de votações legislativas encontrados na literatura revisada descartam ausências e abstenções antes de iniciar a análise, considerando explicita- ou implicitamente que tais atitudes não trazem informação acerca das preferências políticas do legislador, e notando que tais situações representam a minoria dos casos. Por exemplo, Heckman e Snyder notam que as abstenções representam menos de 1\% dos votos para câmara e senado estadounidenses, e as assumem aleatórias em relação a resultados das votações e a preferências dos parlamentares \cite[p.40]{heckman-snyder1997}.
 
@@ -251,14 +299,6 @@ No modelo proposto, ausência, abstenção e obstrução são modeladas através
 Este viés pode parecer arbitrário, porém esta abordagem é consistente tanto com a idéia de que um voto nulo representaria uma indiferença do parlamentar quanto aos resultados SIM e NÃO (o voto nulo é euclidianamente equidistante das duas alternativas) quanto da idéia de que ao não votar o parlamentar pode ter uma preferência contrária àquela que se imagina que será aprovada na votação, como em um ``boicote'' pessoal (ou em grupo) à votação. Em outras palavras, um parlamentar teria maior tendência de comparecer e não se abster nem obstruir a votação em propostas nas quais ele esteja inclinado a votar com a maioria. Se estas hipóteses são arbitrárias, pode-se dizer que são pelo menos tão arbitrárias quanto a alternativa de considerar que um voto nulo equivale a um parlamentar com preferência igual à preferência média da casa. Nossos resultados sugerem que de fato a forma proposta de modelagem melhora os índices de classificação correta.
 
 No caso da análise por partidos, ao excluir votos nulos do cálculo da média na equação \ref{eq:voto-partido} estaria-se buscando considerar que a opinião ``do partido'' é composta apenas pela opinião daqueles que votaram ou SIM ou NÃO. Outra opção é excluir apenas as ausências, se os dados permitirem discriminar esta opção. Os resultados aqui apresentados não excluem estes votos, para que a análise reflita o fato de que uma abstenção ou mesmo uma ausência não são equivalentes a concordar com a opinião geral do partido. Além disso a análise fica mais simples, já que não há necessidade de tratamento especial de partidos que tenham estado por exemplo cem porcento ausentes em uma dada votação.
-
-\section{Revisão de Outros Métodos}
-\label{sec:revbib}
-
-
-Outros métodos similares de escalonamento multidimensional foram propostos desde então, construindo sobre bases teóricas de análise de componentes principais que remontam ao início do século 20 com Pearson~\cite{pearson1901} e Hotelling~\cite{hotelling1933}, e notando a equivalência destes com métodos utilizados em outras disciplinas, como em psicologia e educação na padronização de provas e análise estatística de resultados em testes de múltipla escolha.
-
-As análises foram feitas no software de estatística \textbf{R} \footnote{O código dos scripts utilizado está disponível em \url{https://github.com/leonardofl/radar_parlamentar} sob licensa \emph{AGPL v3}} Como referência para \emph{benchmarking} foi adotado o algoritmo WNOMINATE, através do pacote \emph{wnominate} para \textbf{R} \footnote{O pacote wnominate pode ser encontrado na \emph{Comprehensive R Archive Network}, no endereço  \url{http://CRAN.R-project.org/package=wnominate}}.
 
 
 
@@ -271,6 +311,8 @@ As análises foram feitas no software de estatística \textbf{R} \footnote{O có
 \label{sec:resultados}
 
 \ins{Mostrar resultados de indicadores e gráficos.}
+
+As análises foram feitas no software de estatística \textbf{R} \footnote{O código dos scripts utilizado está disponível em \url{https://github.com/leonardofl/radar_parlamentar} sob licensa \emph{AGPL v3}} Como referência para \emph{benchmarking} foi adotado o algoritmo WNOMINATE, através do pacote \emph{wnominate} para \textbf{R} \footnote{O pacote wnominate pode ser encontrado na \emph{Comprehensive R Archive Network}, no endereço  \url{http://CRAN.R-project.org/package=wnominate}}.
 
 
 \section{Discussão}
