@@ -8,6 +8,7 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{hyperref}
+\usepackage{xspace}
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -58,7 +59,9 @@
 \newcommand\Saulo[1]{\nb{Saulo}{#1}}
 \newcommand\Ricardo[1]{\nb{Ricardo}{#1}}
 
-\newcommand\pca{Análise de Componentes Principais}
+\newcommand\pca{Análise de Componentes Principais\xspace}
+\newcommand\nay{NÃO\xspace}
+\newcommand\yea{SIM\xspace}
 
 \title{Análise de Votações Legislativas Utilizando Componentes Principais}
 \author{}
@@ -253,7 +256,24 @@ Outros métodos similares de escalonamento multidimensional foram propostos desd
 
 Primórdios... discrete choice model...
 
-Os trabalhos mais proeminentes publicados na área são os de Poole... optimal classification, nominate...
+Os trabalhos mais proeminentes publicados na área são os de Poole, sendo seus métodos mais famosos o \emph{Optimal Classification} e o NOMINATE [REF]. Esses métodos visam a construção de um \emph{mapa espacial de votações}, onde cada ponto representa um parlamentar e cada linha representa uma votação, de forma que pontos de um lado da linha representam parlamentares que votaram \yea, enquanto que os pontos do outro lado da linha representam parlamentares que votaram \nay. Para uma pequena quantidade de votações pode ser possível uma construção perfeita de tal mapa, como por exemplo podemos observar na Figura~\ref{fig:mapa-classificacao-perfeita}.
+
+[FIGURA - mapa com classificação perfeita]
+
+Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso, o mapa de votações não é construído tentar descrever perfeitamente o comportamento dos parlamentares, mas sim tentando maximizar a quantidade de classificações corretas.
+
+O \emph{Optimal Classification} (OC) consiste em um processo iterativo que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando os pontos e movendo os linhas. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados garantem que a cada passo o erro nunca aumenta.
+
+Nominate...
+
+A configuração inicial do mapa de votações a ser usado no processos do OC e do NOMINATE é definida, segundo Poole, pelo seguinte processo: 1) constrói-se uma matriz de concordância entre parlamentares; 2) transforma os valores de concordância em distâncias quadráticas; 3) centraliza duplamente a matriz de distâncias quadráticas; 4) realiza sobre essa matriz uma decomposição de autovetores-autovalores. \Leo{O que comentar sobre esse processo maluco? Alguma relação com o PCA?}
+
+% Texto original do parágrafo acima:
+%The best method I have found to get good starting values for the legisla-
+%tors is to (1) compute the legislator-by-legislator matrix of agreement scores,
+%(2) transform the agreement score matrix into squared distances, (3) double-
+%center the matrix of squared distances, and (4) perform an eigenvalue–
+%eigenvector decomposition of the double-centered matrix.
 
 Problemas do nominate...
 
@@ -271,7 +291,7 @@ Além disso, tanto Poole quanto Heckman adotam uma postura de análise preditiva
 
 Controvérsias sobre quantidade de dimensões
 
-\section{Peculiaridades de nossa abordagem considerando o contexto brasileiro}
+\section{Peculiaridades de nossa abordagem}
 
 \subsection*{Análise por partido}
 
@@ -299,6 +319,12 @@ No modelo proposto, ausência, abstenção e obstrução são modeladas através
 Este viés pode parecer arbitrário, porém esta abordagem é consistente tanto com a idéia de que um voto nulo representaria uma indiferença do parlamentar quanto aos resultados SIM e NÃO (o voto nulo é euclidianamente equidistante das duas alternativas) quanto da idéia de que ao não votar o parlamentar pode ter uma preferência contrária àquela que se imagina que será aprovada na votação, como em um ``boicote'' pessoal (ou em grupo) à votação. Em outras palavras, um parlamentar teria maior tendência de comparecer e não se abster nem obstruir a votação em propostas nas quais ele esteja inclinado a votar com a maioria. Se estas hipóteses são arbitrárias, pode-se dizer que são pelo menos tão arbitrárias quanto a alternativa de considerar que um voto nulo equivale a um parlamentar com preferência igual à preferência média da casa. Nossos resultados sugerem que de fato a forma proposta de modelagem melhora os índices de classificação correta.
 
 No caso da análise por partidos, ao excluir votos nulos do cálculo da média na equação \ref{eq:voto-partido} estaria-se buscando considerar que a opinião ``do partido'' é composta apenas pela opinião daqueles que votaram ou SIM ou NÃO. Outra opção é excluir apenas as ausências, se os dados permitirem discriminar esta opção. Os resultados aqui apresentados não excluem estes votos, para que a análise reflita o fato de que uma abstenção ou mesmo uma ausência não são equivalentes a concordar com a opinião geral do partido. Além disso a análise fica mais simples, já que não há necessidade de tratamento especial de partidos que tenham estado por exemplo cem porcento ausentes em uma dada votação.
+
+\subsection*{Lidando com migração partidária}
+
+Citar Izumi
+
+\subsection*{Análise temporal}
 
 
 
