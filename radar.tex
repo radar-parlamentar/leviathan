@@ -262,7 +262,11 @@ Os trabalhos mais proeminentes publicados na área são os de Poole, sendo seus 
 
 Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso, o mapa de votações não é construído tentar descrever perfeitamente o comportamento dos parlamentares, mas sim tentando maximizar a quantidade de classificações corretas.
 
+\Leo{Conceitos teóricos: pontos ideais, função utilidade, etc. Noção de predição e erro no contexto de estimativa de pontos ideias. Talvez um pouco antes.}
+
 O \emph{Optimal Classification} (OC) consiste em um processo iterativo que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando os pontos e movendo os linhas. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados garantem que a cada passo o erro nunca aumenta.
+
+No OC não se tem a posição exata dos parlamentares, assim como não se tem a distâncias exata entre eles. O que temos saber a qual politopo o parlamentar pertence.
 
 Nominate...
 
@@ -304,7 +308,9 @@ Além disso, tanto Poole quanto Heckman adotam uma postura de análise preditiva
 
 Controvérsias sobre quantidade de dimensões
 
-\section{Peculiaridades de nossa abordagem}
+\section{Decisões de nossa abordagem}
+
+Dizer que utilizamos o PCA e como modelamos nossa matriz de entrada conta apenas parte da história. Ao utilizar o PCA diversas outras pequenas decisões devem ser feitas. Nesta seção tratamos dessas decisões, assim como algumas variações do tipo de análise. Algumas dessas decisões são feitas em função das características do sistema político brasileiro, em contraste com o sistema político do EUA, usalmente abordado na literatura.
 
 \subsection*{Análise por partido}
 
@@ -333,11 +339,18 @@ Este viés pode parecer arbitrário, porém esta abordagem é consistente tanto 
 
 No caso da análise por partidos, ao excluir votos nulos do cálculo da média na equação \ref{eq:voto-partido} estaria-se buscando considerar que a opinião ``do partido'' é composta apenas pela opinião daqueles que votaram ou SIM ou NÃO. Outra opção é excluir apenas as ausências, se os dados permitirem discriminar esta opção. Os resultados aqui apresentados não excluem estes votos, para que a análise reflita o fato de que uma abstenção ou mesmo uma ausência não são equivalentes a concordar com a opinião geral do partido. Além disso a análise fica mais simples, já que não há necessidade de tratamento especial de partidos que tenham estado por exemplo cem porcento ausentes em uma dada votação.
 
+\subsection*{Tratamento de votações unânimes}
+
 \subsection*{Lidando com migração partidária}
 
 Citar Izumi
 
 \subsection*{Análise temporal}
+
+O objetivo de nossa análise temporal não é que se possa comparar as posições de um parlamentar/partido ao longo do tempo, mas que se possa comparar as distâncias relativas desses elementos entre si ao longo do tempo.
+
+Efeito de extremistas na visualização temporal: um extremista de um período afeta a visualização de outros períodos (deixando parlamentares muito concentrados). Procede ???
+
 
 
 
