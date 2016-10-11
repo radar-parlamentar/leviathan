@@ -248,7 +248,7 @@ onde o numerador é a soma da variância das $d$ primeiras componentes principai
 Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adotar $d$ tal que se fosse adotado $d+1$ o ganho em $\nu_d$ seria pequeno. Dito isso, o critério é arbitrário, e deve depender do objetivo da análise. Para uma visualização do aspecto geral de distribuição dos parlamentares é prático utilizar $d=2$, já que assim a visualização no plano é muito mais simples. Seja qual for, a escolha deve vir acompanhada do valor de $\nu_d$ correspondente, afim de que se possa ter uma idéia de quanta informação está sendo desconsiderada.
 
 
-\section{Revisão de outros métodos}
+\section{Revisão da literatura}
 \label{sec:revbib}
 
 
@@ -262,26 +262,29 @@ Os trabalhos mais proeminentes publicados na área são os de Poole, sendo seus 
 
 Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso, o mapa de votações não é construído tentar descrever perfeitamente o comportamento dos parlamentares, mas sim tentando maximizar a quantidade de classificações corretas.
 
-\Leo{Conceitos teóricos: pontos ideais, função utilidade, etc. Noção de predição e erro no contexto de estimativa de pontos ideias. Talvez um pouco antes.}
+Por trás do processo de construção do mapa de votação há vários conceitos envolvidos. Inicialmente consideramos que parlamentares e as diferentes opções (\yea ou \nay) de cada votação possuem pontos ideais no espaço. Assim sendo, em uma votação um parlamentar define seu voto em função da localização de seu ponto ideal e dos pontos ideias das opções associadas à votação. Uma primeira abordagem seria dizer que o parlamentar vota na opção cujo ponto está mais próximo de seu ponto ideal. Mas em vez disso, usamos o conceito de \emph{função utilidade}, que atribui a cada ponto no espaço um valor. Quanto mais alto esse valor, maior é a probabilidade de que o parlamentar vote em uma opção associada a esse ponto do espaço. 
 
-O \emph{Optimal Classification} (OC) consiste em um processo iterativo que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando os pontos e movendo os linhas. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados garantem que a cada passo o erro nunca aumenta.
+Duas premissas importantes usualmente aplicadas às funções utilidade são 1) as funções são de pico único, sendo que no ponto ideal do parlamentar a função tem seu valor máximo; 2) a função é simétrica, ou seja, o parlamentar é indiferente a duas opções igualmente distantes de seu ponto ideal.
+
+A função utilidade possui uma parcela determinística e também uma parcela estocástica, que possibilita a modelagem de \emph{erros de votação}. Um erro de votação seria a ideia de que o parlamentar não votou de acordo com suas preferências políticas. Um erro pode ter acontecido no sentido de que o parlamentar pode ter avaliado erroneamente os atributos das opções que definiriam seus pontos no espaço. Mas o erro pode refletir o fato de que fatores não modelados foram decisivos naquela votação em específico.
+
+O \emph{Optimal Classification} (OC) consiste em um processo iterativo que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando os pontos e movendo os linhas. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados garantem que a cada passo o erro nunca aumenta. \Leo{relacionar função de utilidade com esses algoritmos}.
 
 No OC não se tem a posição exata dos parlamentares, assim como não se tem a distâncias exata entre eles. O que temos saber a qual politopo o parlamentar pertence.
 
-Nominate...
+Após a construção do mapa podemos observar que normalmente alguns parlamentares caem do lado errado de algumas retas. Isso significa que se o leitor do mapa fosse reconstituir os votos dados pelos parlamentares em cada votação, ele se enganaria em alguns casos. Esses erros representam uma imperfeição do mapa construído. Contudo, é preciso estar atento à linguagem utilizada na literatura, que explica a situação em termos de erros de predição, como se o modelo não fosse capaz de predizer as votações. Fica o alerta pois em nosso caso não há predições no sentido de que funções de utilidade encontrada serão aplicada em novas votações que não foram utilizadas na construção do mapa.
 
-\begin{quote}
-The approach that Howard Rosenthal and I developed, which we dubbed
-NOMINATE, solves the estimation problem by dividing the parameters into
-three sets and estimating each set separately with the other two held fixed.
-Given reasonable starting values for the legislator ideal points, we can estimate
-the roll call parameters given these ideal points. Similarly, given estimates of
-the roll call parameters, we can obtain better estimates of the ideal points. The
-third set is the utility function parameters, which are estimated given both the
-legislator ideal points and the roll call outcome points. NOMINATE cycles
-through the three sets until they reproduce each other. 9 That is, at convergence
-each set is reproduced by the other two – the parameters no longer change.
-\end{quote}
+\Leo{qualidade dos resultados observados com OC...}
+
+No NOMINATE temos algumas premissas a mais sobre as funções de utilidade. A mais importante é de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
+
+Agora mais precisamente, dado um parlamentar $x$ e uma opção $z$, a função de utilidade utilizada pelo NOMINATE é $U(x,z) = \beta * e^{\frac{-(x-z)^2}{2}} + \varepsilon$. Quanto mais perto $z$ está de $x$, maior o valor de $U$, sendo U simétrica e de pico único. $\beta$ é o fator de ruído, que determina o peso da parcela determinística da função de utilidade. Já a parcela estocástica é $\varepsilon$ segue a distribuição de valor extremo do tipo I.
+
+Dada toda essa modelagem, a ideia básica do NOMINATE segue uma lógica parecida com a do OC. No NOMINATE temos três grupos de parâmetros: pontos ideias dos parlamentares, pontos ideais das opções das votações envolvidas e os parâmetros das funções de utilidade. Dada uma configuração inicial de pontos ideias dos legisladores, aplicamos sucessivamente os três seguintes passos: 1) estimamos os parâmetros das votações com base nos parâmetros dos parlamentares; 2) baseado nos parâmetros das votações, os parâmetros dos parlamentares são refinados; 3) com base nos parâmetros dos legisladores e das votações, os parâmetros das funções de utilidade são estimados. Esses passos são repetidos até a convergência, que é quando o refinamento para de ter efeito e os mesmos valores são produzidos.
+
+%The approach that Howard Rosenthal and I developed, which we dubbed NOMINATE, solves the estimation problem by dividing the parameters into three sets and estimating each set separately with the other two held fixed. Given reasonable starting values for the legislator ideal points, we can estimate the roll call parameters given these ideal points. Similarly, given estimates of the roll call parameters, we can obtain better estimates of the ideal points. The third set is the utility function parameters, which are estimated given both the legislator ideal points and the roll call outcome points. NOMINATE cycles through the three sets until they reproduce each other. 9 That is, at convergence each set is reproduced by the other two – the parameters no longer change.
+
+\Leo{O que são os ``parâmetros'' dos pontos ideais, das votações e da função utilidade? Na descrição parece que faltou dizer que os pontos ideais dos parlamentares devem ser estimados com base nas funções utilidade.}
 
 A configuração inicial do mapa de votações a ser usado no processos do OC e do NOMINATE é definida, segundo Poole, pelo seguinte processo: 1) constrói-se uma matriz de concordância entre parlamentares; 2) transforma os valores de concordância em distâncias quadráticas; 3) centraliza duplamente a matriz de distâncias quadráticas; 4) realiza sobre essa matriz uma decomposição de autovetores-autovalores. \Leo{O que comentar sobre esse processo maluco? Alguma relação com o PCA?}
 
@@ -300,7 +303,9 @@ Izumi~\cite{izumi2016senado} utiliza o OC de Poole para analisar o senado brasil
 
 Muitos trabalhos consideram modelos lineares para a análise de votações nominais menos adequados do que os modelos não lineares, como o nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, demonstram rigorosamente a equivalência de modelos lineares com os resultados obtidos por Poole, tendo como principal vantagem a simplicidade e eficiência computacional dos métodos lineares.
 
-Mesmo heckman se apoia em uma teoria profunda sobre discrete choice model, porém acreditamos que independente de um modelo que explique o processo de tomada de decisão de parlamentares, a ACP é útil enquanto análise de conjuntura de uma casa legislativa que de fato aconteceu. Assim, tem-se uma figura simplificada para facilitar a análise de tal conjuntura. 
+\Leo{Elaborar sobre Heckman...}
+
+Mesmo Heckman se apoia em uma teoria profunda sobre discrete choice model, porém acreditamos que independente de um modelo que explique o processo de tomada de decisão de parlamentares, a ACP é útil enquanto análise de conjuntura de uma casa legislativa que de fato aconteceu. Assim, tem-se uma figura simplificada para facilitar a análise de tal conjuntura. 
 
 Além disso, tanto Poole quanto Heckman adotam uma postura de análise preditiva. Embora seja possível avaliar a qualidade do modelo com base na capacidade de reconstrução dos dados originais a partir do mapa de votações, os autores usam um tom que pode confundir um leitor desavisado, dando a impressão de que se trata da tentativa de predizer o resultado de votações futuras, ainda mais quando tais modelos tentam explicar o modelo de escolha de opção do legislador com base em atributos da opções de escolha e na distribuição de preferências do legislados no espaço de possibilidade.... Nesse sentido, de fato, se se soubesse os atributos de cada votação a priori, e as funções de utilidade de cada parlamentar, poderíamos prever o resultado das votações. Mas na prática, temos que em função dos resultados observáveis é que podemos estimar coisas como funções de utilidade dos parlamentares ou os atributos das votações. Dessa forma, queremos apenas destacar que ao descartar a ambição de se ter um modelo preditivo, mais ainda a ACP se mostra conceitualmente útil em prover uma ferramenta que auxilie o cientista político na análise de conjuntura de uma casa legislativa por meio de um mapa espacial de votações.
 
