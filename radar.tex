@@ -62,6 +62,7 @@
 \newcommand\pca{Análise de Componentes Principais\xspace}
 \newcommand\nay{NÃO\xspace}
 \newcommand\yea{SIM\xspace}
+\newcommand\nominate{NOMINATE\xspace}
 
 \title{Análise de Votações Legislativas Utilizando Componentes Principais}
 \author{}
@@ -303,15 +304,24 @@ Izumi~\cite{izumi2016senado} utiliza o OC de Poole para analisar o senado brasil
 
 Muitos trabalhos consideram modelos lineares para a análise de votações nominais menos adequados do que os modelos não lineares, como o nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, demonstram rigorosamente a equivalência de modelos lineares com os resultados obtidos por Poole, tendo como principal vantagem a simplicidade e eficiência computacional dos métodos lineares.
 
-\Leo{Elaborar sobre Heckman...}
+Para Heckman e Snyder, a decisão de se votar \yea ou \nay em uma votação é modelada como o resultado de um processo de escolha racional no qual os legisladores usam suas preferências para ponderar sobre as características da votação. Assim, dizemos que uma opção é localizada em um espaço no qual cada dimensão seria uma característica da opção. Nesse caso, a função de utilidade recebe um vetor no espaço de características e retorna um número real. Cada legislador teria sua própria função utilidade e escolheria a opção que resultasse no maior valor da função utilidade. Diferentemente do NOMINATE, temos aqui uma função utilidade quadrática.
+
+A função utilidade de Heckman e Snyder, assim como a do NOMINATE, é incrementada com uma parcela de erros aleatórios. Considera-se que uma das fontes de erro seja a dificuldade para o parlamentar estimar o valor de cada característica. 
+
+Os autores utilizam diferentes métodos algébricos para estimar as preferências dos legisladores. Um dos métodos mais simples utilizados é justamente a Análise de Componentes Principais (ACP). \Leo{Elaborar relação entre o PCA e a função utilidade}
 
 Mesmo Heckman se apoia em uma teoria profunda sobre discrete choice model, porém acreditamos que independente de um modelo que explique o processo de tomada de decisão de parlamentares, a ACP é útil enquanto análise de conjuntura de uma casa legislativa que de fato aconteceu. Assim, tem-se uma figura simplificada para facilitar a análise de tal conjuntura. 
 
 Além disso, tanto Poole quanto Heckman adotam uma postura de análise preditiva. Embora seja possível avaliar a qualidade do modelo com base na capacidade de reconstrução dos dados originais a partir do mapa de votações, os autores usam um tom que pode confundir um leitor desavisado, dando a impressão de que se trata da tentativa de predizer o resultado de votações futuras, ainda mais quando tais modelos tentam explicar o modelo de escolha de opção do legislador com base em atributos da opções de escolha e na distribuição de preferências do legislados no espaço de possibilidade.... Nesse sentido, de fato, se se soubesse os atributos de cada votação a priori, e as funções de utilidade de cada parlamentar, poderíamos prever o resultado das votações. Mas na prática, temos que em função dos resultados observáveis é que podemos estimar coisas como funções de utilidade dos parlamentares ou os atributos das votações. Dessa forma, queremos apenas destacar que ao descartar a ambição de se ter um modelo preditivo, mais ainda a ACP se mostra conceitualmente útil em prover uma ferramenta que auxilie o cientista político na análise de conjuntura de uma casa legislativa por meio de um mapa espacial de votações.
 
+Um debate existente na literatura é sobre a quantidade de dimensões necessárias para representar um mapa espacial de votações. De acordo com McCarty~\cite{mccarty2011measuring}, essa é uma polêmica sem conclusão definitiva.
+
+Nos estudos sobre o NOMINATE, Poole afirma que para o congresso americano, na maior parte do tempo \Leo{quando?} uma dimensão explica suficientemente bem \Leo{quantificar} o comportamento dos legisladores. Essa dimensão estaria ligada ao espectro político-ideológico presente nos EUA, possuindo uma escala que vai do extremo liberal ao extremo conservador. No entanto, em determinado período da história dos EUA \Leo{quando?} é preciso a utilização de duas dimensões. A segunda dimensão estaria ligada principalmente a questões associadas a direitos civis, tendo uma correlação com a região dos parlamentares (norte ou sul dos EUA).
+
+Já para Heckman e Snyder, existem pelo menos cinco dimensões significativas. Essas dimensões a mais podem não fazer tanta diferença na taxa global de sucesso de classificação, mas são decisivas em algumas votações específicas, por representarem substantivamente assuntos específicos. Exemplos de tais assuntos: direitos civis e eleitorais, agricultura, ajuda internacional, gasto militar, teto da dívida, água, aborto e reforma do congresso.
 
 
-Controvérsias sobre quantidade de dimensões. Poole diz que 1; Heckman diz que 2. Polêmica sem conclusão definitiva, de acordo com McCarty.
+
 
 \section{Decisões de nossa abordagem}
 
@@ -359,6 +369,8 @@ Efeito de extremistas na visualização temporal: um extremista de um período a
 \Leo{Comparar em linhas gerais nosso método de análise temporal com o D-NOMINATE (dynamic nominate).}
 
 
+Heckman encontra uma alta correção entre as coordenadas de um legislador ao longo do tempo (e não são apenas para as duas primeiras coordenadas... chega-se a até 6 ou 8 fatores com correlação ao longo do tempo). Mas duvido que no caso brasileiro essas correlações seriam altas.
+
 \section{Medidas de Adequação (Fitness)}
 \label{sec:metodo}
 
@@ -370,6 +382,10 @@ Efeito de extremistas na visualização temporal: um extremista de um período a
 \ins{Mostrar resultados de indicadores e gráficos.}
 
 As análises foram feitas no software de estatística \textbf{R} \footnote{O código dos scripts utilizado está disponível em \url{https://github.com/leonardofl/radar_parlamentar} sob licensa \emph{AGPL v3}} Como referência para \emph{benchmarking} foi adotado o algoritmo WNOMINATE, através do pacote \emph{wnominate} para \textbf{R} \footnote{O pacote wnominate pode ser encontrado na \emph{Comprehensive R Archive Network}, no endereço  \url{http://CRAN.R-project.org/package=wnominate}}.
+
+...
+
+Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos na distribuição do mapa espacial que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. These findindgs illustrate the ``reasonableness'' of estimates obtained from our model. Vamos na mesma linha... mostrar que nossos mapas obtidos fazem sentido do ponto de vista político.
 
 
 \section{Discussão}
