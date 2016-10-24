@@ -53,6 +53,7 @@
 \newcommand\info[1]{\nb{Info}{#1}}
 
 % Single author comment
+\newcommand\todo[1]{\nb{ToDo}{#1}}
 \newcommand\Leo[1]{\nb{Leo}{#1}}
 \newcommand\Gui[1]{\nb{Gui}{#1}}
 \newcommand\Davi[1]{\nb{Davi}{#1}}
@@ -252,34 +253,56 @@ Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adot
 \section{Revisão da literatura}
 \label{sec:revbib}
 
+\Leo{Um objetivo desta revisão é ser o mais didática possível, inclusive para não fluentes em matemática. Isso por si só pode ser uma boa contribuição para auxiliar novos estudantes de ciências políticas, inclusive da graduação, a entrarem nessa área. Esse objetivo deve ser dito aqui e também na introdução}.
 
-Outros métodos similares de escalonamento multidimensional foram propostos desde então, construindo sobre bases teóricas de análise de componentes principais que remontam ao início do século 20 com Pearson~\cite{pearson1901} e Hotelling~\cite{hotelling1933}, e notando a equivalência destes com métodos utilizados em outras disciplinas, como em psicologia e educação na padronização de provas e análise estatística de resultados em testes de múltipla escolha.
+\%\%\%\%
 
 Primórdios... discrete choice model...
 
-Os trabalhos mais proeminentes publicados na área são os de Poole, sendo seus métodos mais famosos o \emph{Optimal Classification} e o NOMINATE [REF]. Esses métodos visam a construção de um \emph{mapa espacial de votações}, onde cada ponto representa um parlamentar e cada linha representa uma votação, de forma que pontos de um lado da linha representam parlamentares que votaram \yea, enquanto que os pontos do outro lado da linha representam parlamentares que votaram \nay. Para uma pequena quantidade de votações pode ser possível uma construção perfeita de tal mapa, como por exemplo podemos observar na Figura~\ref{fig:mapa-classificacao-perfeita}.
+Outros métodos similares de escalonamento multidimensional foram propostos desde então, construindo sobre bases teóricas de análise de componentes principais que remontam ao início do século 20 com Pearson~\cite{pearson1901} e Hotelling~\cite{hotelling1933}, e notando a equivalência destes com métodos utilizados em outras disciplinas, como em psicologia e educação na padronização de provas e análise estatística de resultados em testes de múltipla escolha.
 
-[FIGURA - mapa com classificação perfeita]
+\%\%\%\%
 
-Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso, o mapa de votações não é construído tentar descrever perfeitamente o comportamento dos parlamentares, mas sim tentando maximizar a quantidade de classificações corretas.
+Os trabalhos mais proeminentes publicados sobre a construção de mapas espaciais de votações são os de Keith Poole. Apresentaremos na sequência conceitos básicos utilizados por Poole na construção dos mapas especiais e os procedimentos utilizados para a construção dos mapas. Todos esses conceitos e procedimentos estão descritos detalhadamente no livro de Poole sobre modelos espaciais de votações~\cite{poole2005book}.
 
-Por trás do processo de construção do mapa de votação há vários conceitos envolvidos. Inicialmente consideramos que parlamentares e as diferentes opções (\yea ou \nay) de cada votação possuem pontos ideais no espaço. Assim sendo, em uma votação um parlamentar define seu voto em função da localização de seu ponto ideal e dos pontos ideias das opções associadas à votação. Uma primeira abordagem seria dizer que o parlamentar vota na opção cujo ponto está mais próximo de seu ponto ideal. Mas em vez disso, usamos o conceito de \emph{função utilidade}, que atribui a cada ponto no espaço um valor. Quanto mais alto esse valor, maior é a probabilidade de que o parlamentar vote em uma opção associada a esse ponto do espaço. 
+O primeiro conceito é do que seria uma \emph{votação perfeita}. Considere um mapa espacial de votações onde cada ponto representa um parlamentar e cada linha representa uma votação, de forma que pontos de um lado da linha representam parlamentares que votaram \yea, enquanto que os pontos do outro lado da linha representam parlamentares que votaram \nay. Para uma pequena quantidade de votações pode ser possível uma construção perfeita de tal mapa, como, por exemplo, podemos observar na Figura~\ref{fig:mapa-classificacao-perfeita}.
 
-Duas premissas importantes usualmente aplicadas às funções utilidade são 1) as funções são de pico único, sendo que no ponto ideal do parlamentar a função tem seu valor máximo; 2) a função é simétrica, ou seja, o parlamentar é indiferente a duas opções igualmente distantes de seu ponto ideal.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.7]{figs/votacao-perfeita.png}
+  \caption{Mapa espacial de votação com classificação perfeita.}
+  \label{fig:mapa-classificacao-perfeita}
+\end{figure}
 
-A função utilidade possui uma parcela determinística e também uma parcela estocástica, que possibilita a modelagem de \emph{erros de votação}. Um erro de votação seria a ideia de que o parlamentar não votou de acordo com suas preferências políticas. Um erro pode ter acontecido no sentido de que o parlamentar pode ter avaliado erroneamente os atributos das opções que definiriam seus pontos no espaço. Mas o erro pode refletir o fato de que fatores não modelados foram decisivos naquela votação em específico.
+No exemplo fornecido, podemos ver pelo mapa que o parlamentar $p1$ votou \yea na votação $v1$ e \nay para a votação $v2$. Já $p2$ votou \yea para $v1$ e \yea para $v2$. Por fim, $p3$ votou \nay para $v1$ e \yea para $v2$. Como a partir do mapa descrevemos perfeitamente o comportamento dos parlamentares, dizemos que trata-se de uma votação perfeita.
 
-O \emph{Optimal Classification} (OC) consiste em um processo iterativo que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando os pontos e movendo os linhas. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados garantem que a cada passo o erro nunca aumenta. \Leo{relacionar função de utilidade com esses algoritmos}.
+Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso é importante entender que o mapa de votações não é construído de forma a descrever perfeitamente o comportamento dos parlamentares. Em vez disso, o mapa de votações tenta maximizar a quantidade de classificações corretas. 
 
-No OC não se tem a posição exata dos parlamentares, assim como não se tem a distâncias exata entre eles. O que temos saber a qual politopo o parlamentar pertence.
+Na concepção dos trabalhos de Poole, considera-se que em um mapa de votações cada parlamentar possui seu \emph{ponto ideal} no espaço. Nesse mesmo espaço, uma votação também possui pontos associados às suas possíveis opções (\yea e \nay). A reta que representa a votação na Figura~\ref{fig:mapa-classificacao-perfeita} é construída em função desses pontos que representam a votação. Dessa forma, o comportamento de um parlamentar numa dada votação é função de relações entre seu ponto ideal e a representação espacial da votação. 
 
-Após a construção do mapa podemos observar que normalmente alguns parlamentares caem do lado errado de algumas retas. Isso significa que se o leitor do mapa fosse reconstituir os votos dados pelos parlamentares em cada votação, ele se enganaria em alguns casos. Esses erros representam uma imperfeição do mapa construído. Contudo, é preciso estar atento à linguagem utilizada na literatura, que explica a situação em termos de erros de predição, como se o modelo não fosse capaz de predizer as votações. Fica o alerta pois em nosso caso não há predições no sentido de que funções de utilidade encontrada serão aplicada em novas votações que não foram utilizadas na construção do mapa.
+Dados os pontos ideias associados a parlamentares e votações, uma primeira abordagem simplista para determinar o voto do parlamentar em uma votação seria dizer que o parlamentar vota deterministicamente na opção mais próxima de seu ponto ideal. Mas em vez disso, Poole utiliza o conceito de \emph{função utilidade}, que atribui a cada ponto no espaço um valor. Quanto mais alto esse valor, maior é a \emph{probabilidade} de que o parlamentar vote na opção associada a esse ponto do espaço. 
 
-\Leo{qualidade dos resultados observados com OC...}
+Duas premissas importantes são usualmente aplicadas às funções utilidade: 1) as funções são de pico único (i.e., possuem apenas um ponto de valor máximo), sendo esse pico localizado no ponto ideal do parlamentar; 2) a função é simétrica, ou seja, o parlamentar é indiferente a duas opções igualmente distantes de seu ponto ideal.
 
-No NOMINATE temos algumas premissas a mais sobre as funções de utilidade. A mais importante é de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
+\todo{Fazer figura ilustrativa?}
 
-Agora mais precisamente, dado um parlamentar $x$ e uma opção $z$, a função de utilidade utilizada pelo NOMINATE é $U(x,z) = \beta * e^{\frac{-(x-z)^2}{2}} + \varepsilon$. Quanto mais perto $z$ está de $x$, maior o valor de $U$, sendo U simétrica e de pico único. $\beta$ é o fator de ruído, que determina o peso da parcela determinística da função de utilidade. Já a parcela estocástica é $\varepsilon$ segue a distribuição de valor extremo do tipo I.
+A função utilidade possui uma parcela determinística e também uma parcela estocástica, que possibilita a modelagem de \emph{erros de votação}. Um erro de votação seria a ideia de que o parlamentar não votou de acordo com suas preferências políticas. Um erro pode ter acontecido no sentido de que o parlamentar pode ter avaliado erroneamente a localização espacial das opções de uma dada votação. Mas o erro pode refletir também o fato de que fatores subjacentes não captados pelo modelo foram decisivos na determinação da opção escolhida.
+
+Dados os conceitos básicos apresentados (pontos ideias, funções utilidade etc.) vamos descrever agora os principais métodos de construção de mapas espaciais de votações elaborados por Poole. São eles o \emph{Optimal Classification} e o NOMINATE.
+
+O \emph{Optimal Classification} (OC) consiste em um processo iterativo\footnote{Um processo iterativo é aquele no qual um algoritmo é repetido várias vezes, sendo que a cada repetição, o resultado se aproxima mais do solução correta.} que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando os pontos e movendo os linhas. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados garantem que a cada passo o erro nunca aumenta. \todo{Relacionar função de utilidade com esses algoritmos}.
+
+O OC não define uma posição exata dos parlamentares no mapa de votações, assim como não define uma distância exata entre dois dados parlamentares. O que o OC fornece são regiões do espaço nas quais os parlamentares podem ser posicionados. Essas regiões são denominadas de politopos e representam padrões de opções escolhidas nas votações. Voltemos à Figura~\ref{fig:mapa-classificacao-perfeita}: note que se alterarmos ligeiramente a posição de um parlamentar, digamos $p1$, seu padrão de opções escolhidas não se altera. Esse padrão se mantêm enquanto o ponto ideal não atravessar uma das retas que representam as votações. Dessa forma, dizemos que essa região do espaço delimitada pelas retas que mantêm o padrão de escolhas de $p1$ é o seu politopo.
+
+Após a construção do mapa podemos observar que normalmente alguns parlamentares caem do lado errado de algumas retas. Isso significa que se o leitor do mapa fosse reconstituir os votos dados pelos parlamentares em cada votação, ele se enganaria em alguns casos. Esses erros representam uma imperfeição do mapa construído. A literatura costuma apresentar esses erros como uma incapacidade do modelo obtido em \emph{predizer} corretamente os resultados de algumas votações. É preciso ficar atento com o uso do termo \emph{predição}, pois os mapas de votações ou funções utilidades obtidos não serão utilizados na tentativa de predizer o resultado de votações futuras, ou mesmo votações passadas que não foram utilizadas para a produção do mapa de votações. 
+
+Como exemplo de aplicação, Poole mostra os resultados do OC quando aplicado à votação de revogação das leis do milho na Casa dos Comuns do parlamento inglês em 1846. Nessa situação, o algoritmo apresentou uma taxa de classificação correta de 95,2\% para os 430 parlamentares que votaram nessa matéria. \Leo{hum, que estranho o exemplo dado de apenas uma votação... acho q OC deve ser interessante quando aplicado a várias votações de uma vez.}
+
+O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui na verdade uma família de algoritmos com ligeiras variações entre si. No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
+
+\todo{Fazer figura ilustrativa de função exponencial vs função quadrática.}
+
+Agora mais precisamente, dado um parlamentar $x$ e uma opção $z$, a função de utilidade utilizada pelo NOMINATE é $U(x,z) = \beta * e^{\frac{-(x-z)^2}{2}} + \varepsilon$. Quanto mais perto $z$ está de $x$, maior o valor de $U$, sendo U simétrica e de pico único. \Leo{hummm... essa definição parece ser um tanto quando unidimensional, não? No mapa 2D o que seria um valor de x ou um valor de z?} $\beta$ é o fator de ruído, que determina o peso da parcela determinística da função de utilidade. Já a parcela estocástica é $\varepsilon$ segue a distribuição de valor extremo do tipo I\footnote{\todo{Explicar ``distribuição de valor extremo do tipo I''}}.
 
 Dada toda essa modelagem, a ideia básica do NOMINATE segue uma lógica parecida com a do OC. No NOMINATE temos três grupos de parâmetros: pontos ideias dos parlamentares, pontos ideais das opções das votações envolvidas e os parâmetros das funções de utilidade. Dada uma configuração inicial de pontos ideias dos legisladores, aplicamos sucessivamente os três seguintes passos: 1) estimamos os parâmetros das votações com base nos parâmetros dos parlamentares; 2) baseado nos parâmetros das votações, os parâmetros dos parlamentares são refinados; 3) com base nos parâmetros dos legisladores e das votações, os parâmetros das funções de utilidade são estimados. Esses passos são repetidos até a convergência, que é quando o refinamento para de ter efeito e os mesmos valores são produzidos.
 
@@ -295,6 +318,8 @@ A configuração inicial do mapa de votações a ser usado no processos do OC e 
 %(2) transform the agreement score matrix into squared distances, (3) double-
 %center the matrix of squared distances, and (4) perform an eigenvalue–
 %eigenvector decomposition of the double-centered matrix.
+
+Citar Leoni (wnominate na cdep)...
 
 Problemas do nominate...
 
