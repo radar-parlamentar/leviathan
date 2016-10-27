@@ -90,12 +90,12 @@ São apresentados gráficos bidimensionais de algumas legislaturas do Congresso 
 
 \Leo{deixar pra ajeitar a coesão da introdução por último}
 
-Modelos espaciais para análise de votações no âmbito legislativo existem pelo menos desde 1957, com Downs~\cite{downs1957}, e se tornaram mais numerosos e mais utilizados a partir da década de 1980, com o aumento da disponibilidade e redução de custo de processamento computacional e com a proposição em 1985 do famoso algoritmo NOMINATE por Poole e Rosenthal~\cite{poole-rosenthal1985}, até hoje o mais conhecido e utilizado. O objetivo destes modelos de escalonamento dimensional é representar os parlamentares ou partidos em um espaço geométrico com algumas poucas dimensões (frequentemente uma ou duas) de tal forma que o comportamento de cada um nas votações seja em grande parte explicado por sua posição (coordenadas) neste espaço, sendo que esta posição, também chamada ``ponto ideal'' do legislador ou partido, é estimada a partir dos votos observados nas votações.
+Modelos espaciais para análise de votações no âmbito legislativo existem pelo menos desde 1957, com Downs~\cite{downs1957}, e se tornaram mais numerosos e mais utilizados a partir da década de 1980, com o aumento da disponibilidade e redução de custo de processamento computacional e com a proposição em 1985 do famoso algoritmo NOMINATE por Poole e Rosenthal~\cite{poole1985nominate}, até hoje o mais conhecido e utilizado. O objetivo destes modelos de escalonamento dimensional é representar os parlamentares ou partidos em um espaço geométrico com algumas poucas dimensões (frequentemente uma ou duas) de tal forma que o comportamento de cada um nas votações seja em grande parte explicado por sua posição (coordenadas) neste espaço, sendo que esta posição, também chamada ``ponto ideal'' do legislador ou partido, é estimada a partir dos votos observados nas votações.
 
 Existe uma literatura relativamente ampla sobre o assunto focando no Congresso Americano ou outras entidades estadounidenses como o senado e suprema corte, inclusive comparando a performance de diferentes modelos 
-%\cite{poole-rosenthal1985,heckman-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
+%\cite{poole1985nominate}man-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
 \cite{poole-rosenthal2000,clinton-jackman-rivers04},
-mas são poucos os estudos de votações em entidades brasileiras. Um exemplo é Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02}.
+mas são poucos os estudos de votações em entidades brasileiras. Um exemplo é Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02cdep}.
 
 \ins{A ACP é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados}~\cite{DataMining2003}, \ins{e algoritmos de determinação de componentes principais através de decomposição em valores singulares (SVD) são amplamente disponíveis em softwares e bibliotecas de matemática e estatística.}
 
@@ -302,13 +302,13 @@ O outro método de construção de mapas espaciais de votações consagrado por 
 
 \todo{Fazer figura ilustrativa de função exponencial vs função quadrática.}
 
-Agora mais precisamente, dado um parlamentar $x$ e uma opção $z$, a função de utilidade utilizada pelo NOMINATE é $U(x,z) = \beta * e^{\frac{-(x-z)^2}{2}} + \varepsilon$. Quanto mais perto $z$ está de $x$, maior o valor de $U$, sendo U simétrica e de pico único. \Leo{hummm... essa definição parece ser um tanto quando unidimensional, não? No mapa 2D o que seria um valor de x ou um valor de z?} $\beta$ é o fator de ruído, que determina o peso da parcela determinística da função de utilidade. Já a parcela estocástica é $\varepsilon$ segue a distribuição de valor extremo do tipo I\footnote{\todo{Explicar ``distribuição de valor extremo do tipo I''}}.
+Agora vamos detalhar a função utilidade utilizada no \nominate~\cite{poole1985nominate}. Considere a localização $x$ de um parlamentar e a localização $o$ de uma opção de uma votação. Essas localizações são pontos em um espaço multi-dimensional, onde cada dimensão representa preferências sobre um determinado tema político. Para uma votação temos $o_y$, a localização da opção \yea, e $o_n$, a localização da opção \nay. 
 
-No NOMINATE temos três grupos de parâmetros: pontos ideias dos parlamentares, pontos ideais das opções das votações envolvidas e os parâmetros das funções de utilidade. Dada uma configuração inicial de pontos ideias dos legisladores, aplicamos sucessivamente os três seguintes passos: 1) estimamos os parâmetros das votações com base nos parâmetros dos parlamentares; 2) baseado nos parâmetros das votações, os parâmetros dos parlamentares são refinados; 3) com base nos parâmetros dos legisladores e das votações, os parâmetros das funções de utilidade são estimados. Esses passos são repetidos até a convergência, que é quando o refinamento para de ter efeito e os mesmos valores são produzidos.
+A função utilidade utilizada pelo \nominate é $U(x,o) = \beta * e^{\frac{-w(x-o)^2}{2}} + \varepsilon$, onde $(x-o)^2$ representa a distância euclidiana entre os pontos $x$ e $o$. Quanto mais perto $z$ está de $o$, maior o valor de $U$, sendo $U$ simétrica e de pico único. $\beta$ e $w$ são parâmetros da função utilidade, sendo $\beta$ o fator de ruído, que determina o peso da parcela determinística da função de utilidade. $\varepsilon$ é a parcela estocástica e segue a distribuição de valor extremo do tipo I\footnote{\todo{Explicar ``distribuição de valor extremo do tipo I''}} \Leo{Leoni disse: ``O termo $\epsilon$ segue a distribuição logística''}.
 
-%The approach that Howard Rosenthal and I developed, which we dubbed NOMINATE, solves the estimation problem by dividing the parameters into three sets and estimating each set separately with the other two held fixed. Given reasonable starting values for the legislator ideal points, we can estimate the roll call parameters given these ideal points. Similarly, given estimates of the roll call parameters, we can obtain better estimates of the ideal points. The third set is the utility function parameters, which are estimated given both the legislator ideal points and the roll call outcome points. NOMINATE cycles through the three sets until they reproduce each other. 9 That is, at convergence each set is reproduced by the other two – the parameters no longer change.
+No NOMINATE temos então três grupos de parâmetros: pontos ideias dos parlamentares (um $x$ para cada parlamentar), pontos ideais das opções das votações envolvidas (um $o_n$ e um $o_y$ para cada votação) e os parâmetros da função utilidade ($\beta$ e $w$). O objetivo do \nominate é encontrar os valores de todos esses parâmetros para que se possa desenhar o mapa espacial de votações.
 
-\Leo{O que são os ``parâmetros'' dos pontos ideais, das votações e da função utilidade? Na descrição parece que faltou dizer que os pontos ideais dos parlamentares devem ser estimados com base nas funções utilidade.}
+Dada uma configuração inicial de pontos ideias de legisladores e opções de votações, o \nominate aplica sucessivamente os três seguintes passos: 1) estima-se os parâmetros da função utilidade com base nos parâmetros dos legisladores e das votações; 2) estima-se os parâmetros dos legisladores com base nos parâmetros das votações e da função utilidade; 3) estima-se os parâmetros das votações com base nos parâmetros dos legisladores e da função utilidade. Cada um desses passos possui seu próprio algoritmo com suas complexidades. Os três passos são repetidos até a convergência, que é quando o refinamento para de ter efeito e os mesmos valores são produzidos.
 
 Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do mapa de votações a ser refinada. Poole define essa configuração inicial pelo seguinte processo: 1) constrói-se uma matriz de concordância entre parlamentares; 2) transforma-se os valores de concordância em distâncias quadráticas; 3) centraliza-se duplamente a matriz de distâncias quadráticas; 4) realiza-se sobre essa matriz uma decomposição de autovetores-autovalores. \Leo{O que comentar sobre esse processo maluco? Alguma relação com o PCA?}
 
@@ -319,9 +319,10 @@ Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do map
 %center the matrix of squared distances, and (4) perform an eigenvalue–
 %eigenvector decomposition of the double-centered matrix.
 
-\todo{Resultados obtidos por Poole com o \nominate}
+\todo{Resultados obtidos por Poole com o \nominate. Acho que não achei isso no livro.}
 
-\todo{Citar Leoni (wnominate na cdep)... e ribeiro (wnomiante no chile)}
+\todo{Citar Leoni (wnominate na cdep: parei em ``Dimensionalidade e Precisão do Modelo no Caso Brasileiro'')... e ribeiro (wnomiante no chile)}
+
 
 Problemas do nominate...
 
@@ -347,6 +348,9 @@ Nos estudos sobre o NOMINATE, Poole afirma que para o congresso americano, na ma
 
 Já para Heckman e Snyder, existem pelo menos cinco dimensões significativas. Essas dimensões a mais podem não fazer tanta diferença na taxa global de sucesso de classificação, mas são decisivas em algumas votações específicas, por representarem substantivamente assuntos específicos. Exemplos de tais assuntos: direitos civis e eleitorais, agricultura, ajuda internacional, gasto militar, teto da dívida, água, aborto e reforma do congresso.
 
+Utilizando o W-NOMINATE, uma variação do \nominate, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo estatístico.
+
+% leoni traduz "outcome" como "consequência política"
 
 
 
