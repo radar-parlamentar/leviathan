@@ -64,6 +64,7 @@
 \newcommand\nay{NÃO\xspace}
 \newcommand\yea{SIM\xspace}
 \newcommand\nominate{NOMINATE\xspace}
+\newcommand\wnominate{W-NOMINATE\xspace}
 
 \title{Análise de Votações Legislativas Utilizando Componentes Principais}
 \author{}
@@ -319,10 +320,19 @@ Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do map
 %center the matrix of squared distances, and (4) perform an eigenvalue–
 %eigenvector decomposition of the double-centered matrix.
 
+\Leo{OC produz apenas politopos, mas \nominate produz distâncias... comentar sobre isso?}
+
 \todo{Resultados obtidos por Poole com o \nominate. Acho que não achei isso no livro.}
 
-\todo{Citar Leoni (wnominate na cdep: parei em ``Dimensionalidade e Precisão do Modelo no Caso Brasileiro'')... e ribeiro (wnomiante no chile)}
+Para a valiar os resultados de um modelo como o \nominate podemos usar a taxa de classificação correta, que nos informa a porcentagem de acertos e erros do modelo. Mas os cientistas políticos costumam usar uma outra medida, a PRE (redução proporcional do erro). Isso porque modelos extremamente ingênuos poderiam obter boas taxas de classificação correta. Exemplo: o modelo pode prever que todos os parlamentares votam na opção vencedora. Dessa forma, numa votação em que 90\% dos legisladores votaram com a maioria, o modelo ingênuo teria apenas 10\% de erro. Já a PRE mede em quantos porcentos o erro foi reduzido do modelo ingênuo para o modelo avaliado. Ou seja,
 
+\[PRE = \frac{\textrm{votos da minoria} * \textrm{erros do modelo}}{\textrm{votos da minoria}}.\]
+
+A fórmula da PRE considera apenas uma votação. Para se avaliar um conjunto de votações, se utiliza a APRE (redução proporcional do erro agregado), onde a quantidade de votos na minoria e a quantidade de erros são consideradas para todas as votações.
+
+Aplicando o \wnominate, uma das variações do \nominate, à Câmara dos Deputados, Leoni~\cite{leoni02cdep} encontra taxas de classificação correta de 86,4\% e 90,4\% para as 49ª e 50ª legislaturas respectivamente. Já em termos de APRE, as taxas encontradas são de 52,3\% e 64,8\% para as mesmas legislaturas.
+
+\todo{Citar ribeiro (wnomiante no chile)}
 
 Problemas do nominate...
 
@@ -348,7 +358,7 @@ Nos estudos sobre o NOMINATE, Poole afirma que para o congresso americano, na ma
 
 Já para Heckman e Snyder, existem pelo menos cinco dimensões significativas. Essas dimensões a mais podem não fazer tanta diferença na taxa global de sucesso de classificação, mas são decisivas em algumas votações específicas, por representarem substantivamente assuntos específicos. Exemplos de tais assuntos: direitos civis e eleitorais, agricultura, ajuda internacional, gasto militar, teto da dívida, água, aborto e reforma do congresso.
 
-Utilizando o W-NOMINATE, uma variação do \nominate, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo estatístico.
+Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo.
 
 % leoni traduz "outcome" como "consequência política"
 
