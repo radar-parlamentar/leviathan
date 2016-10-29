@@ -95,7 +95,7 @@ Modelos espaciais para análise de votações no âmbito legislativo existem pel
 
 Existe uma literatura relativamente ampla sobre o assunto focando no Congresso Americano ou outras entidades estadounidenses como o senado e suprema corte, inclusive comparando a performance de diferentes modelos 
 %\cite{poole1985nominate}man-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
-\cite{poole-rosenthal2000,clinton-jackman-rivers04},
+\cite{poole-rosenthal2000,clinton2004ideal},
 mas são poucos os estudos de votações em entidades brasileiras. Um exemplo é Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02cdep}.
 
 \ins{A ACP é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados}~\cite{DataMining2003}, \ins{e algoritmos de determinação de componentes principais através de decomposição em valores singulares (SVD) são amplamente disponíveis em softwares e bibliotecas de matemática e estatística.}
@@ -303,7 +303,7 @@ Para a utilização do OC, não é preciso premissas sobre a distribuição da f
 
 Como exemplo de aplicação, Poole mostra os resultados do OC quando aplicado à votação de revogação das leis do milho na Casa dos Comuns do parlamento inglês em 1846. Nessa situação, o algoritmo apresentou uma taxa de classificação correta de 95,2\% para os 430 parlamentares que votaram nessa matéria. \Leo{hum, que estranho o exemplo dado de apenas uma votação... acho q OC deve ser interessante quando aplicado a várias votações de uma vez.}
 
-O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui na verdade uma família de algoritmos com ligeiras variações entre si. No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
+O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui na verdade uma família de algoritmos com ligeiras variações entre si. No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos~\cite{clinton2004ideal} são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
 
 \todo{Fazer figura ilustrativa de função exponencial vs função quadrática.}
 
@@ -352,8 +352,6 @@ Embasado por esses questionamentos, Izumi prefere adotar o Optimal Classificatio
 Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao OC. Como disse Poole~\cite{poole2000oc}, as únicas premissas para a aplicação do OC são 1) o espaço de escolha é euclideano; e 2) preferências são simétricas e de pico-único. Como o próprio Izumi disse, a simetria é uma premissa que pode ser questionada na prática, e essa não somente para o caso brasileiro.
 
 \Leo{Com as considerações do Izumi, talvez não seja mais tão interessante comparar o PCA com o nominate... será q faz sentido comparar com o OC?}
-
-\todo{IDEAL: funcional utilidade é quadrática e os erros seguem a distribuição normal.}
 
 \subsection{Modelos lineares de Heckman e Snyder}
 
