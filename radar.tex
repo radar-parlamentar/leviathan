@@ -264,7 +264,7 @@ A aplicação de modelos multidimensionais em economia está relacionada com a e
 
 Seguimos agora com a descrição de modelos multidimensionais voltados mais especificamente à elaboração de mapas espaciais de votações no âmbito de casas legislativas.
 
-\subsection{Keith Poole: optimal classification e \nominate}
+\subsection*{Keith Poole: optimal classification e \nominate}
 
 Os trabalhos mais proeminentes publicados sobre a construção de mapas espaciais de votações são os de Keith Poole. Apresentaremos na sequência conceitos básicos utilizados por Poole na construção dos mapas especiais e os procedimentos utilizados para a construção dos mapas. Todos esses conceitos e procedimentos estão descritos detalhadamente no livro de Poole sobre modelos espaciais de votações~\cite{poole2005book}.
 
@@ -313,7 +313,7 @@ Agora vamos detalhar a função utilidade utilizada no \nominate~\cite{poole1985
 
 A função utilidade utilizada pelo \nominate~\cite{poole1985nominate} é 
 
-\[ U(x,o) = \beta * e^{\frac{-w*d^2}{2}} + \varepsilon,\] 
+\[ U(x,o) = \beta * e^{\frac{-w^2*d^2}{2}} + \varepsilon,\] 
 
 \noindent
 onde $d$ representa a distância entre os pontos $x$ e $o$, dada por $|x -o|$. Quanto mais perto $z$ está de $o$, maior o valor de $U$, sendo $U$ simétrica e de pico único. $\beta$ e $w$ são parâmetros da função utilidade, sendo $\beta$ o fator de ruído, que determina o peso da parcela determinística da função utilidade. $\varepsilon$ é a parcela estocástica, que representa erros distribuídos independentemente de conforme a distribuição logística. Poole afirma que teoricamente a distribuição normal para $\varepsilon$ seria mais adequada. No entanto, devido às limitações computacionais da época, Poole optou pela distribuição logística, que é mais simples do ponto de vista computacional e razoavelmente similar à função normal.
@@ -331,15 +331,19 @@ Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do map
 %center the matrix of squared distances, and (4) perform an eigenvalue–
 %eigenvector decomposition of the double-centered matrix.
 
-\todo{Resultados obtidos por Poole com o \nominate. Acho que não achei isso no livro.}
+Analisando 172 votações realizadas por 440 parlamentares na 85ª legislatura do congresso dos EUA, Poole~\cite{poole1985nominate} obtém uma taxa de classificação correta de 78,9\% utilizando o \nominate com apenas uma dimensão.
 
-Para a valiar os resultados de um modelo como o \nominate podemos usar a taxa de classificação correta, que nos informa a porcentagem de acertos e erros do modelo. Mas os cientistas políticos costumam usar uma outra medida, a PRE (redução proporcional do erro). Isso porque modelos extremamente ingênuos poderiam obter boas taxas de classificação correta. Exemplo: o modelo pode prever que todos os parlamentares votam na opção vencedora. Dessa forma, numa votação em que 90\% dos legisladores votaram com a maioria, o modelo ingênuo teria apenas 10\% de erro. Já a PRE mede em quantos porcentos o erro foi reduzido do modelo ingênuo para o modelo avaliado. Ou seja,
+\subsection*{Formas de se avaliar os resultados produzidos}
+
+Para avaliar os resultados de um modelo espacial de votações podemos usar a taxa de classificação correta, que nos informa a porcentagem de acertos e erros do modelo. Sendo $U$ a função utilidade, se os parâmetros obtidos pelo modelo definem que $U(\textrm{SIM}) > U(\textrm{NÃO})$ pra um determinado parlamentar em uma determinada votação, temos um acerto caso o parlamentar realmente tenha votado \yea naquela votação ou um erro se na realidade o parlamentar votou \nay.
+
+No entanto, o problema é que modelos extremamente ingênuos podem obter boas taxas de classificação correta. Exemplo: o modelo pode prever que todos os parlamentares votam na opção vencedora. Dessa forma, numa votação em que 90\% dos legisladores votaram com a maioria, o modelo ingênuo teria apenas 10\% de erro. Por isso, utiliza-se também a PRE (redução proporcional do erro), que mede em quantos porcentos o erro foi reduzido do modelo ingênuo para o modelo avaliado. Ou seja,
 
 \[PRE = \frac{\textrm{votos da minoria} * \textrm{erros do modelo}}{\textrm{votos da minoria}}.\]
 
 A fórmula da PRE considera apenas uma votação. Para se avaliar um conjunto de votações, se utiliza a APRE (redução proporcional do erro agregado), onde a quantidade de votos na minoria e a quantidade de erros são consideradas para todas as votações.
 
-\subsection{Aplicações dos trabalhos de Poole ao congresso brasileiro}
+\subsection*{Aplicações no congresso brasileiro}
 
 Aplicando o \wnominate, uma das variações do \nominate, à Câmara dos Deputados, Leoni~\cite{leoni02cdep} encontra taxas de classificação correta de 86,4\% e 90,4\% para as 49ª e 50ª legislaturas respectivamente. Já em termos de APRE, as taxas encontradas são de 52,3\% e 64,8\% para as mesmas legislaturas.
 
@@ -353,7 +357,7 @@ Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao O
 
 \Leo{Com as considerações do Izumi, talvez não seja mais tão interessante comparar o PCA com o nominate... será q faz sentido comparar com o OC?}
 
-\subsection{Modelos lineares de Heckman e Snyder}
+\subsection*{Modelos lineares de Heckman e Snyder}
 
 Muitos trabalhos consideram modelos lineares para a análise de votações nominais menos adequados do que os modelos não lineares, como o \nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, demonstram rigorosamente a equivalência de modelos lineares com os resultados obtidos por Poole, tendo como principal vantagem a simplicidade e eficiência computacional dos métodos lineares.
 
@@ -363,7 +367,7 @@ A função utilidade de Heckman e Snyder, assim como a do NOMINATE, é increment
 
 Os autores utilizam diferentes métodos algébricos para estimar as preferências dos legisladores. Um dos métodos mais simples utilizados é justamente a Análise de Componentes Principais (ACP). \Leo{Elaborar relação entre o PCA e a função utilidade. No que o nosso uso aparentemente mais simples da PCA é diferente do uso aparentemente mais elaborado da PCA como feito por Heckman?}
 
-\subsection{Dimensionalidade dos mapas de votações}
+\subsection*{Dimensionalidade dos mapas de votações}
 
 Um debate existente na literatura é sobre a quantidade de dimensões necessárias para representar um mapa espacial de votações. De acordo com McCarty~\cite{mccarty2011measuring}, essa é uma polêmica sem conclusão definitiva.
 
@@ -377,7 +381,7 @@ Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que um
 
 % leoni traduz "outcome" como "consequência política"
 
-\subsection{Discussão}
+\subsection*{Discussão}
 
 \Leo{Oi Saulo, principalmente essa parte que eu queria ver oq vc acha... se oq tá escrito aí não é besteira =S}
 
@@ -422,6 +426,14 @@ Este viés pode parecer arbitrário, porém esta abordagem é consistente tanto 
 No caso da análise por partidos, ao excluir votos nulos do cálculo da média na equação \ref{eq:voto-partido} estaria-se buscando considerar que a opinião ``do partido'' é composta apenas pela opinião daqueles que votaram ou SIM ou NÃO. Outra opção é excluir apenas as ausências, se os dados permitirem discriminar esta opção. Os resultados aqui apresentados não excluem estes votos, para que a análise reflita o fato de que uma abstenção ou mesmo uma ausência não são equivalentes a concordar com a opinião geral do partido. Além disso a análise fica mais simples, já que não há necessidade de tratamento especial de partidos que tenham estado por exemplo cem porcento ausentes em uma dada votação.
 
 \subsection*{Tratamento de votações unânimes}
+
+E tb de parlamentares que faltam bastante.
+
+Acho que no caso, simplesmente não consideramos esses problemas e usamos todo mundo.
+
+Mas pelo menos sobre votações unânimes isso tem a parte ruim de deixar o mapa mais embolado e difícil de ler. Por outro lado, ajuda a mostrar a realidade de que na prática, apesar das diferenças, eles não são tão diferentes assim.
+
+\nominate faz uns cortes pra não pegar todo mundo.
 
 \subsection*{Lidando com migração partidária}
 
