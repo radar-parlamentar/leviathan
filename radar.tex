@@ -237,6 +237,8 @@ Para $\widehat{x}_{ij} > 0$ o modelo prevê que o parlamentar $j$ vota SIM na vo
 
 Este modelo prevê apenas votos SIM ou NÃO, ou seja, não prevê a possibilidade de abstenções, obstruções ou ausências.
 
+\Leo{Sugestão: esse conceito de preditor não é fundamental em si para a elaboração do mapa de votações. Então eu deixaria para apresentar esse conceito mais próximo da seção de avaliação dos resultados, sendo esse preditor um artifício mais para podermos avaliar os resultados. Além disso, acho que cabe alguma discussão sobre a arbitrariedade da fórmula do preditor (conforme comentei na Seção~\ref{sec:resultados}).}
+
 \subsection*{Escolha do Número de Dimensões \emph{d}}
 
 O modelo será tanto mais preciso na classificação correta das votações quanto maior for o número de dimensões retidas $d \leq N$. Porém está claro que um modelo simples é mais útil: analisar cada uma do total de $N$ dimensões seria tão trabalhoso quanto analisar individualmente cada uma das $N$ votações (e tão completo quanto). O objetivo é simplificar, retendo o essencial da informação.
@@ -394,7 +396,7 @@ Ou seja, mesmo sem o embasamento de uma teoria, o mapa de votações produzido p
 
 
 
-\section{Decisões de nossa abordagem}
+\section{Outros aspectos de nossa abordagem}
 
 Dizer que utilizamos o PCA e como modelamos nossa matriz de entrada conta apenas parte da história. Ao utilizar o PCA diversas outras pequenas decisões devem ser feitas. Nesta seção tratamos dessas decisões, assim como algumas variações do tipo de análise. Algumas dessas decisões são feitas em função das características do sistema político brasileiro, em contraste com o sistema político do EUA, usalmente abordado na literatura.
 
@@ -421,7 +423,7 @@ Já 53a legislatura da Câmara dos Deputados brasileira (período de 2003 a 2006
 
 No modelo proposto, ausência, abstenção e obstrução são modeladas através do valor 0. Em relação à alternativa de descartar estas situações, que serão referidas genericamente como votos ``nulos'', esta modelagem introduz um viés no sentido oposto ao voto médio dos que realmente votaram. Ou seja, supondo sem perda de generalidade que o voto da maioria é sempre SIM, o voto médio dos que votaram será sempre maior que zero, e se o parlamentar faz voto nulo sua preferência nesta votação será modelada como sendo ligeiramente oposta ao SIM (pois seu voto é numericamente menor do que a média), mas não tão oposta quanto se o parlamentar tivesse efetivamente votado NÃO.
 
-Este viés pode parecer arbitrário, porém esta abordagem é consistente tanto com a idéia de que um voto nulo representaria uma indiferença do parlamentar quanto aos resultados SIM e NÃO (o voto nulo é euclidianamente equidistante das duas alternativas) quanto da idéia de que ao não votar o parlamentar pode ter uma preferência contrária àquela que se imagina que será aprovada na votação, como em um ``boicote'' pessoal (ou em grupo) à votação. Em outras palavras, um parlamentar teria maior tendência de comparecer e não se abster nem obstruir a votação em propostas nas quais ele esteja inclinado a votar com a maioria. Se estas hipóteses são arbitrárias, pode-se dizer que são pelo menos tão arbitrárias quanto a alternativa de considerar que um voto nulo equivale a um parlamentar com preferência igual à preferência média da casa. Nossos resultados sugerem que de fato a forma proposta de modelagem melhora os índices de classificação correta.
+Este viés pode parecer arbitrário, porém esta abordagem é consistente tanto com a ideia de que um voto nulo representaria uma indiferença do parlamentar quanto aos resultados SIM e NÃO (o voto nulo é euclidianamente equidistante das duas alternativas) quanto da ideia de que ao não votar o parlamentar pode ter uma preferência contrária àquela que se imagina que será aprovada na votação, como em um ``boicote'' pessoal (ou em grupo) à votação. Em outras palavras, um parlamentar teria maior tendência de comparecer e não se abster nem obstruir a votação em propostas nas quais ele esteja inclinado a votar com a maioria. Se estas hipóteses são arbitrárias, pode-se dizer que são pelo menos tão arbitrárias quanto a alternativa de considerar que um voto nulo equivale a um parlamentar com preferência igual à preferência média da casa. Nossos resultados sugerem que de fato a forma proposta de modelagem melhora os índices de classificação correta.
 
 No caso da análise por partidos, ao excluir votos nulos do cálculo da média na equação \ref{eq:voto-partido} estaria-se buscando considerar que a opinião ``do partido'' é composta apenas pela opinião daqueles que votaram ou SIM ou NÃO. Outra opção é excluir apenas as ausências, se os dados permitirem discriminar esta opção. Os resultados aqui apresentados não excluem estes votos, para que a análise reflita o fato de que uma abstenção ou mesmo uma ausência não são equivalentes a concordar com a opinião geral do partido. Além disso a análise fica mais simples, já que não há necessidade de tratamento especial de partidos que tenham estado por exemplo cem porcento ausentes em uma dada votação.
 
@@ -437,22 +439,38 @@ Mas pelo menos sobre votações unânimes isso tem a parte ruim de deixar o mapa
 
 \subsection*{Lidando com migração partidária}
 
+Nossa abordagem: quando o parlamentar troca de partido, se torna um novo parlamentar. Desvantagem: parlamentar estava no partido A no período 1 e foi para o partido B no período 2. Na matriz de votação que engloba os períodos 1 e 2, a linha do parlamentar no partido A estará cheias de direita à esquerda e a linha do parlamentar no partido B estará cheias de zeros à esquerda.
+
 Citar Izumi
 
 \subsection*{Análise temporal}
 
-O objetivo de nossa análise temporal não é que se possa comparar as posições de um parlamentar/partido ao longo do tempo, mas que se possa comparar as distâncias relativas desses elementos entre si ao longo do tempo.
+\Leo{analista político... existe esse termo? hehe}
+
+Para o analista político é interessante visualizar como a conjuntura de alianças parlamentares se altera ao longo do tempo. Daí a necessidade de algoritmos que possibilitem a comparação entre mapas de votações de períodos distintos. Por conta dessa necessidade, desenvolvemos um algoritmo próprio de orientação e escalonamento de um conjunto de mapas de votações.
+
+O objetivo de nosso algoritmo para análise temporal não é possibilitar a comparação entre as posições de um parlamentar ao longo do tempo, pois os eixos e posições se alteram em seus significados de um período para o outro. O que pretendemos é que se possa comparar as distâncias relativas dos parlamentares entre si ao longo do tempo. Dessa forma é possível verificar nos mapas de votação, por exemplo, o afastamento e aproximação entre partido ao longo do tempo. Na Figura~\ref{fig:transicao-pmdb} temos um exemplo de alteração de posições relativas com profundo significado político. \\
+
+FIGURA: PMDB indo do PSDB ao PT na transição FHC - Lula. \\
+
+O problema está no fato de que mesmo que pouco se altere entre as posições relativas dos parlamentares de um período para o outro (i.e. parlamentares continuaram votando com as mesmas alianças), um mesmo parlamentar pode ocupar posições totalmente diferentes nos diferentes mapas produzidos pela ACP. Até mesmo para exatamente o mesmo conjunto de votações, detalhes de precisão de cálculos devido a utilização de diferentes máquinas podem resultar em mapas rotacionados um em relação ao outro.
+
+Para melhor visualizar as mudanças nestas posições relativas é conveniente rotacionar o resultado de uma das análises em torno da origem, de tal forma que seja minimizada alguma medida das "distâncias" percorridas pelos partidos entre os períodos. A Figura~\ref{fig:rotacoes} ilustra esta idéia, em que o resultado da
+PCA de 2011 foi rotacionado de $\theta$ = 160º. \\
+
+
+FIGURA: Explicando rotações dos mapas de votações \\
+
+\Leo{hum, agora pra continuar tenho que copiar várias fórmulas to texto original, do qual não achei o .tex}.
+
+%%%%%%%%
+
 
 Efeito de extremistas na visualização temporal: um extremista de um período afeta a visualização de outros períodos (deixando parlamentares muito concentrados). Procede ???
 
 \Leo{Comparar em linhas gerais nosso método de análise temporal com o D-NOMINATE (dynamic nominate).}
 
-
 Heckman encontra uma alta correção entre as coordenadas de um legislador ao longo do tempo (e não são apenas para as duas primeiras coordenadas... chega-se a até 6 ou 8 fatores com correlação ao longo do tempo). Mas duvido que no caso brasileiro essas correlações seriam altas.
-
-\subsection*{Quantidade de dimensões utilizadas}
-
-Quantidade defina a priori, pois duas dimensões pode-se visualizar facilmente no plano. Se segunda dimensão explica pouca coisa a mais, tudo bem, isso ficará evidente pela dispersão dos pontos no gráfico.
 
 \section{Medidas de Adequação (Fitness)}
 \label{sec:metodo}
@@ -471,6 +489,8 @@ As análises foram feitas no software de estatística \textbf{R} \footnote{O có
 Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos na distribuição do mapa espacial que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. These findindgs illustrate the ``reasonableness'' of estimates obtained from our model. Vamos na mesma linha... mostrar que nossos mapas obtidos fazem sentido do ponto de vista político.
 
 ...
+
+\Leo{Problematizando o preditor}:
 
 Problema da taxa de classificação correta no PCA: para modelar as votações, mapeando opções em valores numéricos, tudo bem. Mas o cálculo da taxa de classificação correta depende do mapeamento inverso, dado um valor entre -1 e 1 definir uma das opções (\yea, \nay ou ABSTENÇÃO). Definir os valores limiares desse mapeamento inverso é arbitrário, sendo que essa escolha arbitrária pode alterar drasticamente os valores obtidos. 
 
