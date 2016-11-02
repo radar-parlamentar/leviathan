@@ -449,9 +449,14 @@ Citar Izumi
 
 Para o analista político é interessante visualizar como a conjuntura de alianças parlamentares se altera ao longo do tempo. Daí a necessidade de algoritmos que possibilitem a comparação entre mapas de votações de períodos distintos. Por conta dessa necessidade, desenvolvemos um algoritmo próprio de orientação e escalonamento de um conjunto de mapas de votações.
 
-O objetivo de nosso algoritmo para análise temporal não é possibilitar a comparação entre as posições de um parlamentar ao longo do tempo, pois os eixos e posições se alteram em seus significados de um período para o outro. O que pretendemos é que se possa comparar as distâncias relativas dos parlamentares entre si ao longo do tempo. Dessa forma é possível verificar nos mapas de votação, por exemplo, o afastamento e aproximação entre partido ao longo do tempo. Na Figura~\ref{fig:transicao-pmdb} temos um exemplo de alteração de posições relativas com profundo significado político. \\
+O objetivo de nosso algoritmo para análise temporal não é possibilitar a comparação entre as posições de um parlamentar ao longo do tempo, pois os eixos e posições se alteram em seus significados de um período para o outro. O que pretendemos é que se possa comparar as distâncias relativas dos parlamentares entre si ao longo do tempo. Dessa forma é possível verificar nos mapas de votação, por exemplo, o afastamento e aproximação entre partido ao longo do tempo. Na Figura~\ref{fig:fhc2-lula1} temos um exemplo de alteração de posições relativas com profundo significado político. \\
 
-FIGURA: PMDB indo do PSDB ao PT na transição FHC - Lula. \\
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.37]{figs/fhc2-lula1.png}
+  \caption{Os dois mapas de votações destacam a mudança de posição relativa do PMDB, indo da proximidade com o PSDB no fim do governo FHC para a proximidade com o PT no primeiro governo de Lula.}
+  \label{fig:fhc2-lula1}
+\end{figure}
 
 O problema está no fato de que mesmo que pouco se altere entre as posições relativas dos parlamentares de um período para o outro (i.e. parlamentares continuaram votando com as mesmas alianças), um mesmo parlamentar pode ocupar posições totalmente diferentes nos diferentes mapas produzidos pela ACP. Até mesmo para exatamente o mesmo conjunto de votações, detalhes de precisão de cálculos devido a utilização de diferentes máquinas podem resultar em mapas rotacionados um em relação ao outro.
 
