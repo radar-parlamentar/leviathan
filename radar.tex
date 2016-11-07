@@ -93,7 +93,7 @@ São apresentados gráficos bidimensionais de algumas legislaturas do Congresso 
 
 Modelos espaciais para análise de votações no âmbito legislativo existem pelo menos desde 1957, com Downs~\cite{downs1957}, e se tornaram mais numerosos e mais utilizados a partir da década de 1980, com o aumento da disponibilidade e redução de custo de processamento computacional e com a proposição em 1985 do famoso algoritmo NOMINATE por Poole e Rosenthal~\cite{poole1985nominate}, até hoje o mais conhecido e utilizado. O objetivo destes modelos de escalonamento dimensional é representar os parlamentares ou partidos em um espaço geométrico com algumas poucas dimensões (frequentemente uma ou duas) de tal forma que o comportamento de cada um nas votações seja em grande parte explicado por sua posição (coordenadas) neste espaço, sendo que esta posição, também chamada ``ponto ideal'' do legislador ou partido, é estimada a partir dos votos observados nas votações.
 
-Existe uma literatura relativamente ampla sobre o assunto focando no Congresso Americano ou outras entidades estadounidenses como o senado e suprema corte, inclusive comparando a performance de diferentes modelos 
+Existe uma literatura relativamente ampla sobre o assunto focando no Congresso Americano ou outras entidades estadounidenses como a suprema corte, inclusive comparando a performance de diferentes modelos 
 %\cite{poole1985nominate}man-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
 \cite{poole-rosenthal2000,clinton2004ideal},
 mas são poucos os estudos de votações em entidades brasileiras. Um exemplo é Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02cdep}.
@@ -283,21 +283,21 @@ O primeiro conceito é do que seria uma \emph{votação perfeita}. Considere um 
 
 No exemplo fornecido, podemos ver pelo mapa que o parlamentar $p1$ votou \yea na votação $v1$ e \nay para a votação $v2$. Já $p2$ votou \yea para $v1$ e \yea para $v2$. Por fim, $p3$ votou \nay para $v1$ e \yea para $v2$. Como a partir do mapa descrevemos perfeitamente o comportamento dos parlamentares, dizemos que trata-se de uma votação perfeita.
 
-Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso é importante entender que o mapa de votações não é construído de forma a descrever perfeitamente o comportamento dos parlamentares. Em vez disso, o mapa de votações tenta maximizar a quantidade de classificações corretas. 
+Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso é importante entender que o mapa de votações não é necessariamente construído de forma a descrever perfeitamente o comportamento dos parlamentares. Todo mapa gera distorções, e todo tipo de mapa procurar amenizar algum tipo de distorção. Em mapas de votações, uma ``distorção'' a ser amenizada é a quantidade de classificações incorretas presentes no mapa.
 
-Na concepção dos trabalhos de Poole, considera-se que em um mapa de votações cada parlamentar possui seu \emph{ponto ideal} no espaço. Nesse mesmo espaço, uma votação também possui pontos associados às suas possíveis opções (\yea e \nay). A reta que representa a votação na Figura~\ref{fig:mapa-classificacao-perfeita} é construída em função desses pontos que representam a votação. Dessa forma, o comportamento de um parlamentar numa dada votação é função de relações entre seu ponto ideal e a representação espacial da votação. 
+Na concepção dos trabalhos de Poole, considera-se que em um mapa de votações cada parlamentar possui seu \emph{ponto ideal} no espaço. Nesse mesmo espaço, uma votação também possui pontos associados às suas possíveis opções (\yea e \nay). As retas que representam as votações na Figura~\ref{fig:mapa-classificacao-perfeita} são construídas em função dos pontos que representam suas respectivas votações. Dessa forma, a estimativa do comportamento de um parlamentar numa dada votação é função de relações entre seu ponto ideal e a representação espacial da votação. 
 
 Dados os pontos ideias associados a parlamentares e votações, uma primeira abordagem simplista para determinar o voto do parlamentar em uma votação seria dizer que o parlamentar vota deterministicamente na opção mais próxima de seu ponto ideal. Mas em vez disso, Poole utiliza o conceito de \emph{função utilidade}, que atribui a cada ponto no espaço um valor. Quanto mais alto esse valor, maior é a \emph{probabilidade} de que o parlamentar vote na opção associada a esse ponto do espaço. 
 
 Duas premissas importantes são usualmente aplicadas às funções utilidade: 1) as funções são de pico único (i.e., possuem apenas um ponto de valor máximo), sendo esse pico localizado no ponto ideal do parlamentar; 2) a função é simétrica, ou seja, o parlamentar é indiferente a duas opções igualmente distantes de seu ponto ideal.
 
-\todo{Fazer figura ilustrativa?}
+\todo{Fazer figura ilustrativa}
 
 A função utilidade possui uma parcela determinística e também uma parcela estocástica, que possibilita a modelagem de \emph{erros de votação}. Um erro de votação seria a ideia de que o parlamentar não votou de acordo com suas preferências políticas. Um erro pode ter acontecido no sentido de que o parlamentar pode ter avaliado erroneamente a localização espacial das opções de uma dada votação. Mas o erro pode refletir também o fato de que fatores subjacentes não captados pelo modelo foram decisivos na determinação da opção escolhida.
 
-Dados os conceitos básicos apresentados (pontos ideias, funções utilidade etc.) vamos descrever agora os principais métodos de construção de mapas espaciais de votações elaborados por Poole. São eles o \emph{Optimal Classification} e o NOMINATE.
+Dados os conceitos básicos apresentados (pontos ideias, funções utilidade e erros de votação) vamos descrever agora os principais métodos de construção de mapas espaciais de votações elaborados por Poole. São eles o \emph{Optimal Classification} e o NOMINATE.
 
-O \emph{Optimal Classification} (OC) consiste em um processo iterativo\footnote{Um processo iterativo é aquele no qual um algoritmo é repetido várias vezes, sendo que depois de uma certa quantidade de repetições há uma \emph{convergência}, ou seja, o resultado não mais se altera com mais repetições do processo.} que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando os pontos e movendo os linhas. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados garantem que a cada passo o erro nunca aumenta. 
+O \emph{Optimal Classification} (OC) consiste em um processo iterativo\footnote{Um processo iterativo é aquele no qual um algoritmo é repetido várias vezes, sendo que depois de uma certa quantidade de repetições há uma \emph{convergência}, ou seja, o resultado não mais se altera com mais repetições do processo.} que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando os pontos e movendo as linhas. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados garantem que a cada passo o erro nunca aumenta. 
 
 O OC não define uma posição exata dos parlamentares no mapa de votações, assim como não define uma distância exata entre dois dados parlamentares. O que o OC fornece são regiões do espaço nas quais os parlamentares podem ser posicionados. Essas regiões são denominadas de politopos e representam padrões de opções escolhidas nas votações. Voltemos à Figura~\ref{fig:mapa-classificacao-perfeita}: note que se alterarmos ligeiramente a posição de um parlamentar, digamos $p1$, seu padrão de opções escolhidas não se altera. Esse padrão se mantêm enquanto o ponto ideal não atravessar uma das retas que representam as votações. Dessa forma, dizemos que essa região do espaço delimitada pelas retas que mantêm o padrão de escolhas de $p1$ é o seu politopo.
 
@@ -305,9 +305,9 @@ Após a construção do mapa podemos observar que normalmente alguns parlamentar
 
 Para a utilização do OC, não é preciso premissas sobre a distribuição da função utilidade. Apenas considerar que ela é simétrica e de pico-único. Embora o conceito de função utilidade não apareça diretamente na aplicação do algoritmo, ele é importante para explicar os erros de classificação, no sentido de que há uma certa probabilidade de que o legislador vote na opção contrária do que o mapa de votações indica.
 
-Como exemplo de aplicação, Poole~\cite{poole2005book} mostra os resultados do OC quando aplicado à votação de revogação das leis do milho na Casa dos Comuns do parlamento inglês em 1846. Nessa situação, o algoritmo apresentou uma taxa de classificação correta de 95,2\% para os 430 parlamentares que votaram nessa matéria. Já em outro estudo mais extenso~\cite{poole-rosenthal2000}, analisando da 80ª à 104ª legislatura do senado dos EUA, Poole obteve taxas de classificação correta para duas dimensões que vão de 85,8\% a 91,3\%.
+Como exemplo de aplicação, Poole~\cite{poole2005book} mostra os resultados do OC quando aplicado à votação de revogação das leis do milho na Casa dos Comuns do parlamento inglês em 1846. Nessa situação, o algoritmo apresentou uma taxa de classificação correta de 95,2\% para os 430 parlamentares que votaram nessa matéria. Já em outro estudo~\cite{poole-rosenthal2000}, analisando da 80ª à 104ª legislatura do senado dos EUA, Poole obteve taxas de classificação correta para duas dimensões que vão de 85,8\% a 91,3\%.
 
-O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui na verdade uma família de algoritmos com ligeiras variações entre si. Diferentemente do OC, o \nominate produz posições exatas dos pontos ideais de parlamentares e votações, podendo-se assim atribuir distâncias entre esses pontos. Já o OC produz apenas a localização dos pontos ideias dos parlamentares nos politopos representando padrões de votações.
+O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui na verdade uma família de algoritmos com ligeiras variações entre si. Diferentemente do OC, o \nominate produz posições exatas dos pontos ideais de parlamentares e votações, podendo-se assim atribuir distâncias entre esses pontos. 
 
 No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos~\cite{clinton2004ideal} são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
 
@@ -320,7 +320,7 @@ A função utilidade utilizada pelo \nominate~\cite{poole1985nominate} é
 \[ U(x,o) = \beta * e^{\frac{-w^2*d^2}{2}} + \varepsilon,\] 
 
 \noindent
-onde $d$ representa a distância entre os pontos $x$ e $o$, dada por $|x -o|$. Quanto mais perto $z$ está de $o$, maior o valor de $U$, sendo $U$ simétrica e de pico único. $\beta$ e $w$ são parâmetros da função utilidade, sendo $\beta$ o fator de ruído, que determina o peso da parcela determinística da função utilidade. $\varepsilon$ é a parcela estocástica, que representa erros distribuídos independentemente de conforme a distribuição logística. Poole afirma que teoricamente a distribuição normal para $\varepsilon$ seria mais adequada. No entanto, devido às limitações computacionais da época, Poole optou pela distribuição logística, que é mais simples do ponto de vista computacional e razoavelmente similar à função normal.
+onde $d$ representa a distância entre os pontos $x$ e $o$, dada por $|x -o|$. Quanto mais perto $z$ está de $o$, maior o valor de $U$, sendo $U$ simétrica e de pico único. $\beta$ e $w$ são parâmetros da função utilidade, sendo $\beta$ o fator de ruído, que determina o peso da parcela determinística da função utilidade. $\varepsilon$ é a parcela estocástica, que representa erros distribuídos independentemente conforme a distribuição logística. Poole afirma que teoricamente a distribuição normal para $\varepsilon$ seria mais adequada. No entanto, devido às limitações computacionais da época, Poole optou pela distribuição logística, que é mais simples do ponto de vista computacional e razoavelmente similar à função normal.
 
 No \nominate temos então três grupos de parâmetros: pontos ideias dos parlamentares (um $x$ para cada parlamentar), pontos ideais das opções das votações envolvidas (um $o_n$ e um $o_y$ para cada votação) e os parâmetros da função utilidade ($\beta$ e $w$). O objetivo do \nominate é encontrar os valores de todos esses parâmetros para que se possa desenhar o mapa espacial de votações.
 
@@ -355,7 +355,7 @@ Izumi~\cite{izumi2016senado} elabora mapas espaciais de votações para o Senado
 
 O segundo pressuposto questionado da função utilidade é o de que os erros são independentes e identicamente distribuídos entre os legisladores e as votações. Argumentos contrários a esse pressuposto: 1) existem partidos mais coesos que outros (o PT, por exemplo, costuma ser bem mais coeso que outros partidos); 2) migrações de parlamentares entre partidos e migrações de partidos para dentro ou fora da base governista podem alterar a variação de erros ao longo do tempo;  3) em determinados contextos o voto estratégico pode prevalecer sobre o voto sincero. Interessante notar aqui como os argumentos 1) e 2) são características que diferenciam o estudo do legislativo brasileiro do legislativo norte-americano.
 
-Embasado por esses questionamentos, Izumi prefere adotar o Optimal Classification, pois este não se sustenta sobre pressupostos da função utilidade ou da distribuição de erros. Dessa forma, aplicando o OC a seis legislaturas do Senado (48ª a 53ª), Izumi encontra taxas de classificação correta entre 90,7\% e 98,5\%. Já em termos de APRE, as taxas encontradas são entre 50\% e 94\%. Embora o trabalho de Izumi se aplique ao Senado, cabe notar aqui que todos seus argumentos também se aplicariam à Câmara dos Deputados.
+Embasado por esses questionamentos, Izumi prefere adotar o Optimal Classification, pois este não se sustenta sobre pressupostos da função utilidade ou da distribuição de erros. Dessa forma, aplicando o OC a seis legislaturas do Senado (da 48ª à 53ª), Izumi encontra taxas de classificação correta entre 90,7\% e 98,5\%. Já em termos de APRE, as taxas encontradas são entre 50\% e 94\%. Embora o trabalho de Izumi se aplique ao Senado, cabe notar aqui que todos seus argumentos também se aplicariam à Câmara dos Deputados.
 
 Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao OC. Como disse Poole~\cite{poole2000oc}, as únicas premissas para a aplicação do OC são 1) o espaço de escolha é euclideano; e 2) preferências são simétricas e de pico-único. Como o próprio Izumi disse, a simetria é uma premissa que pode ser questionada na prática, e essa não somente para o caso brasileiro.
 
@@ -383,6 +383,8 @@ Já para Heckman e Snyder~\cite{heckman-snyder1997}, existem pelo menos cinco di
 
 Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo.
 
+\todo{E Izumi, oq eu diz sobre isso?}
+
 % leoni traduz "outcome" como "consequência política"
 
 \subsection*{Discussão}
@@ -402,7 +404,7 @@ Ou seja, mesmo sem o embasamento de uma teoria, o mapa de votações produzido p
 
 \section{Outros aspectos de nossa abordagem}
 
-Dizer que utilizamos o PCA e como modelamos nossa matriz de entrada conta apenas parte da história. Ao utilizar o PCA diversas outras pequenas decisões devem ser feitas. Nesta seção tratamos dessas decisões, assim como algumas variações do tipo de análise. Algumas dessas decisões são feitas em função das características do sistema político brasileiro, em contraste com o sistema político do EUA, usalmente abordado na literatura.
+Dizer que utilizamos o ACP e como modelamos nossa matriz de entrada conta apenas parte da história. Ao utilizar o ACP diversas outras pequenas decisões devem ser feitas. Nesta seção tratamos dessas decisões, assim como algumas variações do tipo de análise. Algumas dessas decisões são feitas em função das características do sistema político brasileiro, em contraste com o sistema político do EUA, usalmente abordado na literatura.
 
 \subsection*{Análise por partido}
 
@@ -423,13 +425,15 @@ Esta análise é útil para analisar afinidades partidárias e coalizões em amb
 
 Todos os métodos de análise de votações legislativas encontrados na literatura revisada descartam ausências e abstenções antes de iniciar a análise, considerando explicita- ou implicitamente que tais atitudes não trazem informação acerca das preferências políticas do legislador, e notando que tais situações representam a minoria dos casos. Por exemplo, Heckman e Snyder notam que as abstenções representam menos de 1\% dos votos para câmara e senado estadounidenses, e as assumem aleatórias em relação a resultados das votações e a preferências dos parlamentares \cite[p.40]{heckman-snyder1997}.
 
-Já 53a legislatura da Câmara dos Deputados brasileira (período de 2003 a 2006) soma para votações nominais abertas cerca de 6\% entre abstenções e obstruções, e as ausências são próximas de 49\%. Propõe-se que o comportamento observado de ausentar-se ou abster-se de uma votação traz sim informação acerca das preferências do parlamentar que se deseja estimar, e por isso essa informação não deve ser descartada na análise.
+Já 53a legislatura da Câmara dos Deputados brasileira (período de 2003 a 2006) soma para votações nominais abertas cerca de 6\% entre abstenções e obstruções, e as ausências são próximas de 49\% \todo{citar fonte}. Propõe-se que o comportamento observado de ausentar-se ou abster-se de uma votação traz sim informação acerca das preferências do parlamentar que se deseja estimar, e por isso essa informação não deve ser descartada na análise.
 
 No modelo proposto, ausência, abstenção e obstrução são modeladas através do valor 0. Em relação à alternativa de descartar estas situações, que serão referidas genericamente como votos ``nulos'', esta modelagem introduz um viés no sentido oposto ao voto médio dos que realmente votaram. Ou seja, supondo sem perda de generalidade que o voto da maioria é sempre SIM, o voto médio dos que votaram será sempre maior que zero, e se o parlamentar faz voto nulo sua preferência nesta votação será modelada como sendo ligeiramente oposta ao SIM (pois seu voto é numericamente menor do que a média), mas não tão oposta quanto se o parlamentar tivesse efetivamente votado NÃO.
 
 Este viés pode parecer arbitrário, porém esta abordagem é consistente tanto com a ideia de que um voto nulo representaria uma indiferença do parlamentar quanto aos resultados SIM e NÃO (o voto nulo é euclidianamente equidistante das duas alternativas) quanto da ideia de que ao não votar o parlamentar pode ter uma preferência contrária àquela que se imagina que será aprovada na votação, como em um ``boicote'' pessoal (ou em grupo) à votação. Em outras palavras, um parlamentar teria maior tendência de comparecer e não se abster nem obstruir a votação em propostas nas quais ele esteja inclinado a votar com a maioria. Se estas hipóteses são arbitrárias, pode-se dizer que são pelo menos tão arbitrárias quanto a alternativa de considerar que um voto nulo equivale a um parlamentar com preferência igual à preferência média da casa. Nossos resultados sugerem que de fato a forma proposta de modelagem melhora os índices de classificação correta.
 
 No caso da análise por partidos, ao excluir votos nulos do cálculo da média na equação \ref{eq:voto-partido} estaria-se buscando considerar que a opinião ``do partido'' é composta apenas pela opinião daqueles que votaram ou SIM ou NÃO. Outra opção é excluir apenas as ausências, se os dados permitirem discriminar esta opção. Os resultados aqui apresentados não excluem estes votos, para que a análise reflita o fato de que uma abstenção ou mesmo uma ausência não são equivalentes a concordar com a opinião geral do partido. Além disso a análise fica mais simples, já que não há necessidade de tratamento especial de partidos que tenham estado por exemplo cem porcento ausentes em uma dada votação.
+
+
 
 \subsection*{Tratamento de votações unânimes}
 
@@ -470,7 +474,7 @@ PCA de 2011 foi rotacionado de $\theta$ = 160º. \\
 
 FIGURA: Explicando rotações dos mapas de votações \\
 
-\Leo{hum, agora pra continuar tenho que copiar várias fórmulas to texto original, do qual não achei o .tex}.
+\Leo{continuar com base no texto original do Saulo}.
 
 %%%%%%%%
 
@@ -505,9 +509,9 @@ Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos na dist
 
 \Leo{Problematizando o preditor}:
 
-Problema da taxa de classificação correta no PCA: para modelar as votações, mapeando opções em valores numéricos, tudo bem. Mas o cálculo da taxa de classificação correta depende do mapeamento inverso, dado um valor entre -1 e 1 definir uma das opções (\yea, \nay ou ABSTENÇÃO). Definir os valores limiares desse mapeamento inverso é arbitrário, sendo que essa escolha arbitrária pode alterar drasticamente os valores obtidos. 
+Problema da taxa de classificação correta na ACP: para modelar as votações, mapeando opções em valores numéricos, tudo bem. Mas o cálculo da taxa de classificação correta depende do mapeamento inverso, dado um valor entre -1 e 1 definir uma das opções (\yea, \nay ou ABSTENÇÃO). Definir os valores limiares desse mapeamento inverso é arbitrário, sendo que essa escolha arbitrária pode alterar drasticamente os valores obtidos. 
 
-Em vez de se valer da taxa de correta classificação, uma medida melhor para avaliar o resultado do mapa espacial gerada pela ACP é o porcentual da variância dos dados explicados pelas dimensões utilizadas no mapa. No entanto, essa medida tem a desvantagem de não ser diretamente comparável com outros métodos.
+Em vez de se valer da taxa de correta classificação, outra medida para avaliar o resultado do mapa espacial gerada pela ACP é o porcentual da variância dos dados explicados pelas dimensões utilizadas no mapa. No entanto, essa medida tem a desvantagem de não ser diretamente comparável com outros métodos.
 
 
 \section{Discussão}
