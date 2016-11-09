@@ -3,6 +3,7 @@
 \usepackage[brazil]{babel}
 \usepackage{amsmath}
 \usepackage{cite}
+\usepackage{textcomp}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{xcolor}
@@ -457,7 +458,7 @@ Citar Izumi
 
 Para o analista político é interessante visualizar como a conjuntura de alianças parlamentares se altera ao longo do tempo. Daí a necessidade de algoritmos que possibilitem a comparação entre mapas de votações de períodos distintos. Por conta dessa necessidade, desenvolvemos um algoritmo próprio de orientação e escalonamento de um conjunto de mapas de votações.
 
-O objetivo de nosso algoritmo para análise temporal não é possibilitar a comparação entre as posições de um parlamentar ao longo do tempo, pois os eixos e posições se alteram em seus significados de um período para o outro. O que pretendemos é que se possa comparar as distâncias relativas dos parlamentares entre si ao longo do tempo. Dessa forma é possível verificar nos mapas de votação, por exemplo, o afastamento e aproximação entre partido ao longo do tempo. Na Figura~\ref{fig:fhc2-lula1} temos um exemplo de alteração de posições relativas com profundo significado político. \\
+O objetivo de nosso algoritmo para análise temporal não é possibilitar a comparação entre as posições de um parlamentar ao longo do tempo, pois os eixos e posições se alteram em seus significados de um período para o outro. O que pretendemos é que se possa comparar as distâncias relativas dos parlamentares entre si ao longo do tempo. Dessa forma é possível verificar nos mapas de votação, por exemplo, o afastamento e aproximação entre partidos ao longo do tempo. Na Figura~\ref{fig:fhc2-lula1} temos um exemplo de alteração de posições relativas com profundo significado político. \\
 
 \begin{figure}[h]
   \centering
@@ -468,18 +469,53 @@ O objetivo de nosso algoritmo para análise temporal não é possibilitar a comp
 
 O problema está no fato de que mesmo que pouco se altere entre as posições relativas dos parlamentares de um período para o outro (i.e. parlamentares continuaram votando com as mesmas alianças), um mesmo parlamentar pode ocupar posições totalmente diferentes nos diferentes mapas produzidos pela ACP. Até mesmo para exatamente o mesmo conjunto de votações, detalhes de precisão de cálculos devido a utilização de diferentes máquinas podem resultar em mapas rotacionados um em relação ao outro.
 
-Para melhor visualizar as mudanças nestas posições relativas é conveniente rotacionar o resultado de uma das análises em torno da origem, de tal forma que seja minimizada alguma medida das "distâncias" percorridas pelos partidos entre os períodos. A Figura~\ref{fig:rotacoes} ilustra esta idéia, em que o resultado da
-PCA de 2011 foi rotacionado de $\theta$ = 160º. \\
+Para melhor visualizar as mudanças nestas posições relativas é conveniente rotacionar o resultado de uma das análises em torno da origem, de tal forma que seja minimizada alguma medida das "distâncias" percorridas pelos partidos entre os períodos. A Figura~\ref{fig:rotacoes} ilustra essa ideia, em que o resultado da
+ACP de 2011 foi rotacionado em 160º. \\
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{figs/rotacoes.pdf}
+  \caption{(a) Um resultado hipotético da análise de componentes principais para o ano de 2010 envolvendo três partidos. (b) Superposto ao primeiro, um resultado para o ano seguinte. (c) O mesmo resultado anterior, porém rotacionado de 160\textdegree{} para minimizar a movimentação dos partidos na animação entre um ano e outro. (d) Detalhe para um dos partidos.}
+  \label{fig:rotacoes}
+\end{figure}
+
+Temos aqui um problema de otimização, em que buscamos o ângulo $\theta$ que minimiza uma função objetivo $E(\theta)$ que forneça uma medida das distâncias percorridas pelos parlamentares no plano. A função objetivo escolhida é a soma das distâncias quadradas percorridas pelos parlamentares. Ao utilizar o quadrado das distâncias, de forma a penalizar mais as distâncias muito grandes. Temos então:
+
+\begin{equation}
+E(\theta)=\sum_{k\in\{parlamentares\}} D_{k}^{2}\label{eq:e_theta}
+\end{equation}
+
+Caso a intenção seja trabalhar o mapa de votações de partidos, recomendamos a ponderação da distância percorrida pelo partido utilizando a quantidade de parlamentares no partido, conforme a Equação~\ref{eq:e_theta_partidos}. Nota-se nesse caso a analogia desta função objetivo com a definição de energia: para um conjunto de bolas $k$ massa $M_{k}$ que iriam do ponto $(p_{k1})$ ao ponto $(p_{k2})$ em um tempo $\Delta t$ (o tempo da animação), estamos buscando o ângulo $\theta$ que minimiza a energia envolvida
+neste movimento. 
+
+\begin{equation}
+E(\theta)=\sum_{k\in\{partidos\}}M_{k}\cdot D_{k}^{2}\label{eq:e_theta_partidos}
+\end{equation}
+
+Em vez da analogia com energia, poderíamos utilizar a analogia com a quantidade de movimento, para isso usando as distâncias não quadráticas. Porém, essa outra abordagem tem mais chance de resultar
+em partidos ``caminhando longas distâncias''.
+
+Da definição de $E(\theta)$ para partidos, chegamos à seguinte fórmula para $\theta$\footnote{Para uma demonstração completa, ver \url{https://github.com/radar-parlamentar/radar/raw/master/doc/algoritmo_rotacao.pdf}.}
+
+\begin{equation}
+\theta=\arctan\frac{\sum_{k}M_{k}D_{k1}D_{k2}\sin\alpha_{k}}{\sum_{k}M_{k}D_{k1}D_{k2}\cos\alpha_{k}}+C\pi
+\label{eq:theta}
+\end{equation}
+
+onde $C=0\mathrm{\, ou}\,1$, um dos casos correspondendo ao mínimo e o outro ao máximo. Para o mapa de parlamentares, basta considerar $M_{k} = 1$.
+
+Para encontrar a solução basta calcular $E(\theta)$ para os $\theta$ que satisfazem (\ref{eq:theta}) e verificar qual delas corresponde ao mínimo. Se durante o cálculo o denominador do argumento do arco-tangente for nulo, então o mínimo está em $\frac{\pi}{2}$ ou $\frac{3\pi}{2}$.
+
+O mesmo procedimento deve ser repetido espelhando-se um dos eixos (por exemplo multiplicando todas as coordenadas $x$ por -1), já que o sentido dos eixos que resulta da ACP é arbitrário. Assim o problema se resume à avaliação de $E(\theta)$ em 4 casos (espelhado e não-espelhado, cada um com dois valores de $\theta$), e escolha do caso que resultar no mínimo.
+
+O resultado desse algoritmo pode ser exemplificado pela Figura~\ref{fig:fhc2-lula1}, com a ressalva de que o algoritmo de rotação é aplicado ao mapa de parlamnetares e que os partidos visualizados são meramente os centroides dos parlamentares que os compõe.
 
 
-FIGURA: Explicando rotações dos mapas de votações \\
 
-\Leo{continuar com base no texto original do Saulo}.
-
-%%%%%%%%
+\%\%\%\%\%\%\%\%\\
 
 
-Efeito de extremistas na visualização temporal: um extremista de um período afeta a visualização de outros períodos (deixando parlamentares muito concentrados). Procede ???
+Questões de escala entre períodos...? Efeito de extremistas na visualização temporal: um extremista de um período afeta a visualização de outros períodos (deixando parlamentares muito concentrados). Procede ???
 
 \Leo{Comparar em linhas gerais nosso método de análise temporal com o D-NOMINATE (dynamic nominate).}
 
