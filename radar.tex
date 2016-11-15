@@ -360,8 +360,6 @@ Embasado por esses questionamentos, Izumi prefere adotar o Optimal Classificatio
 
 Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao OC. Como disse Poole~\cite{poole2000oc}, as únicas premissas para a aplicação do OC são 1) o espaço de escolha é euclideano; e 2) preferências são simétricas e de pico-único. Como o próprio Izumi disse, a simetria é uma premissa que pode ser questionada na prática, e essa não somente para o caso brasileiro.
 
-\Leo{Com as considerações do Izumi, talvez não seja mais tão interessante comparar o PCA com o nominate... será q faz sentido comparar com o OC } \Saulo{Pode até ser, desde que tenha o pacote no R. Mas aí não vai ter muita graça, o OC é como o nome diz classificação ótima, eu acho que qualquer algoritmo vai perder para ele na comparação de classificação, se ele permitir usar os dados de abstenções/obstruções/ausências como nós usamos na PCA.}
-
 \subsection*{Modelos lineares de Heckman e Snyder}
 
 Muitos trabalhos consideram modelos lineares para a análise de votações nominais menos adequados do que os modelos não lineares, como o \nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, demonstram rigorosamente a equivalência de modelos lineares com os resultados obtidos por Poole, tendo como principal vantagem a simplicidade e eficiência computacional dos métodos lineares.
@@ -533,7 +531,17 @@ Heckman encontra uma alta correção entre as coordenadas de um legislador ao lo
 \section{Resultados}
 \label{sec:resultados}
 
-\ins{Mostrar resultados de indicadores e gráficos.}
+\ins{Explicar critério de seleção de casas/períodos analisados.}
+
+\ins{Justificar comparação com wnominate}
+
+\ins{minvotes=20 lop=0.025}
+
+\ins{Mostrar gráficos dos resultados}
+
+\ins{Mostrar tabela com indicadores dos resultados PCA vs wnominate}
+
+\Leo{Indicar qual das casas explicita voto ausente. Acho q é só cdep. Se for o caso, deveríamos descartar esses votos pra análise ficar mais similar a de outras casas?}
 
 As análises foram feitas no software de estatística \textbf{R} \footnote{O código dos scripts utilizado está disponível em \url{https://github.com/leonardofl/radar_parlamentar} sob licensa \emph{AGPL v3}} Como referência para \emph{benchmarking} foi adotado o algoritmo WNOMINATE, através do pacote \emph{wnominate} para \textbf{R} \footnote{O pacote wnominate pode ser encontrado na \emph{Comprehensive R Archive Network}, no endereço  \url{http://CRAN.R-project.org/package=wnominate}}.
 
