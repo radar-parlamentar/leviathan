@@ -539,7 +539,65 @@ Heckman encontra uma alta correção entre as coordenadas de um legislador ao lo
 
 \ins{Mostrar gráficos dos resultados}
 
-\ins{Mostrar tabela com indicadores dos resultados PCA vs wnominate}
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.7]{figs/partidos.png}
+  \caption{Legenda com as cores dos partidos presentes nos gráficos ACP.}
+  \label{fig:partidos}
+\end{figure}
+
+\Leo{Problema: muitos partidos, poucas cores... comentar sobre isso. Talvez tentar variar a forma também}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{figs/cdep2007-2010.png}
+  \caption{Gráfico ACP gerado para votações da Câmara dos Deputados entre 2007 e 2010.}
+  \label{fig:cdep2007-2010}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{figs/cdep2011-2014.png}
+  \caption{Gráfico ACP gerado para votações da Câmara dos Deputados entre 2011 e 2014.}
+  \label{fig:cdep2011-2014}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{figs/sen2007-2010.png}
+  \caption{Gráfico ACP gerado para votações do Senado entre 2007 e 2010.}
+  \label{fig:cdep2007-2010}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{figs/sen2011-2014.png}
+  \caption{Gráfico ACP gerado para votações do Senado entre 2011 e 2014.}
+  \label{fig:cdep2011-2014}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{figs/cmsp2013-2016.png}
+  \caption{Gráfico ACP gerado para votações da Câmara Municipal de São Paulo entre 2013 e 2016.}
+  \label{fig:cmsp2013-2016}
+\end{figure}
+
+\ins{Mostrar tabela com indicadores dos resultados PCA vs wnominate\\}
+
+\begin{tabular}{l | c c | c c | c c | c c} 
+Análise & \multicolumn{4}{c|}{Classificação Correta (\%)} & \multicolumn{4}{|c}{APRE (\%)} \\ 
+\hline 
+& \multicolumn{2}{c|}{ACP} & \multicolumn{2}{|c|}{\wnominate} & \multicolumn{2}{|c|}{ACP} & \multicolumn{2}{c}{\wnominate} \\ 
+\hline 
+& 1D & 2D & 1D & 2D & 1D & 2D & 1D & 2D \\ 
+\hline 
+cdep2007-2010 & 92 & 93 & • & • & 46 & 50 & • & • \\ 
+cdep2011-2014 & 87 & 89 & • & • & 28 & 40 & • & • \\ 
+sen2007-2010  & 91 & 92 & • & • & 60 & 65 & • & • \\ 
+sen2011-2014  & 87 & 88 & • & • & 34 & 42 & • & • \\ 
+cmsp2013-2016 & 93 & 94 & • & • & 61 & 69 & • & • \\ 
+\end{tabular} 
 
 \Leo{Indicar qual das casas explicita voto ausente. Acho q é só cdep. Se for o caso, deveríamos descartar esses votos pra análise ficar mais similar a de outras casas?}
 
