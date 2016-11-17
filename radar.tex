@@ -585,19 +585,37 @@ Heckman encontra uma alta correção entre as coordenadas de um legislador ao lo
 
 \ins{Mostrar tabela com indicadores dos resultados PCA vs wnominate\\}
 
+\Leo{Objetivo não é quem é melhor, mas mostrar resultados da ACP e ter indicadores do wnominate como referência}
+
 \begin{tabular}{l | c c | c c | c c | c c} 
-Análise & \multicolumn{4}{c|}{Classificação Correta (\%)} & \multicolumn{4}{|c}{APRE (\%)} \\ 
+\itshape Análise & \multicolumn{4}{c|}{\itshape Classificação Correta (\%)} & \multicolumn{4}{|c}{\itshape APRE (\%)} \\ 
 \hline 
-& \multicolumn{2}{c|}{ACP} & \multicolumn{2}{|c|}{\wnominate} & \multicolumn{2}{|c|}{ACP} & \multicolumn{2}{c}{\wnominate} \\ 
+& \multicolumn{2}{c|}{\itshape ACP} & \multicolumn{2}{|c|}{\itshape \wnominate} & \multicolumn{2}{|c|}{\itshape ACP} & \multicolumn{2}{c}{\itshape \wnominate} \\ 
 \hline 
-& 1D & 2D & 1D & 2D & 1D & 2D & 1D & 2D \\ 
+& \itshape 1D & \itshape 2D & \itshape 1D & \itshape 2D & \itshape 1D & \itshape 2D & \itshape 1D & \itshape 2D \\ 
 \hline 
-cdep2007-2010 & 92 & 93 & • & • & 46 & 50 & • & • \\ 
-cdep2011-2014 & 87 & 89 & • & • & 28 & 40 & • & • \\ 
-sen2007-2010  & 91 & 92 & • & • & 60 & 65 & • & • \\ 
-sen2011-2014  & 87 & 88 & • & • & 34 & 42 & • & • \\ 
-cmsp2013-2016 & 93 & 94 & • & • & 61 & 69 & • & • \\ 
+cdep2007-2010 & 92 & 93 & 91 & 92 & 46 & 50 & 55 & 62 \\ 
+cdep2011-2014 & 87 & 89 & 87 & 89 & 28 & 40 & 42 & 52 \\ 
+sen2007-2010  & 91 & 92 & 92 & 93 & 60 & 65 & 67 & 74 \\ 
+sen2011-2014  & 87 & 88 & 87 & 90 & 34 & 42 & 46 & 56 \\ 
+cmsp2013-2016 & 93 & 94 & 96 & 97 & 61 & 69 & 77 & 83 \\ 
 \end{tabular} 
+
+\Leo{APRE parece melhor do wnominate, mas pode ser efeito de lop}
+
+\begin{table}
+\centering
+\begin{tabular}{l c c}
+\itshape Análise & \itshape ACP & \itshape \wnominate \\
+\hline
+cdep2007-2010 & 1,17 & 75,21 \\ 
+cdep2011-2014 & 0,54 & 58,06 \\ 
+sen2007-2010  & 0,01 & 2,52  \\ 
+sen2011-2014  & 0,02 & 3,17  \\ 
+cmsp2013-2016 & 0,03 & 9,66  \\ 
+\end{tabular} 
+\caption{Tempos de execução em segundos.}
+\end{table}
 
 \Leo{Indicar qual das casas explicita voto ausente. Acho q é só cdep. Se for o caso, deveríamos descartar esses votos pra análise ficar mais similar a de outras casas?}
 
