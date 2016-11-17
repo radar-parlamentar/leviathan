@@ -583,6 +583,8 @@ Os mapas espaciais de votações produzidos com a ACP são exibidos nas Figuras~
 
 As medidas de adequação produzidas pela ACP são exibias na Tabela~\ref{tab:fit}. Nessa mesma tabela, pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Nessas tabelas utilizamos a seguinte abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
 
+\Leo{Verificar se é mesmo as votações unânimes que estamos descartando. Talvez tentar não descartá-las (como eu acho que é o que acontece no Radar)?}
+
 \todo{Mostrar porcentagem da variação explicada pela ACP}
 
 \begin{table}
@@ -627,7 +629,7 @@ Uma importante diferenciação realizada pelas execuções da ACP e do \wnominat
 
 \Leo{Indicar qual das casas explicita voto ausente. Acho q é só cdep. Se for o caso, deveríamos descartar esses votos pra análise ficar mais similar a de outras casas?}
 
-As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. 
+As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. O sistema operacional utilizado é o ArchLinux com kernel Linux  versão ``4.7.2-1-ARCH \#1 SMP PREEMPT Sat Aug 20 23:02:56 CEST 2016'' para arquitetura x86\_64.
 
 
 
