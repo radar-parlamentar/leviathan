@@ -574,12 +574,16 @@ Os mapas espaciais de votações produzidos com a ACP são exibidos nas Figuras~
   \label{fig:sen2011-2014}
 \end{figure}
 
+\todo{rotacionar mapa senado}
+
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1]{figs/cmsp2013-2016.png}
   \caption{Gráfico ACP gerado para votações da Câmara Municipal de São Paulo entre 2013 e 2016.}
   \label{fig:cmsp2013-2016}
 \end{figure}
+
+\todo{atualizar cmsp}
 
 As medidas de adequação produzidas pela ACP são exibias na Tabela~\ref{tab:fit}. Nessa mesma tabela, pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Nessas tabelas utilizamos a seguinte abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
 
@@ -596,11 +600,11 @@ As medidas de adequação produzidas pela ACP são exibias na Tabela~\ref{tab:fi
 \hline 
 & \itshape 1D & \itshape 2D & \itshape 1D & \itshape 2D & \itshape 1D & \itshape 2D & \itshape 1D & \itshape 2D \\ 
 \hline 
-cdep2007-2010 & 92 & 93 & 91 & 92 & 46 & 50 & 55 & 62 \\ 
-cdep2011-2014 & 87 & 89 & 87 & 89 & 28 & 40 & 42 & 52 \\ 
-sen2007-2010  & 91 & 92 & 92 & 93 & 60 & 65 & 67 & 74 \\ 
-sen2011-2014  & 87 & 88 & 87 & 90 & 34 & 42 & 46 & 56 \\ 
-cmsp2013-2016 & 93 & 94 & 96 & 97 & 61 & 69 & 77 & 83 \\ 
+cdep2007-2010 & 93 & 93 & 91 & 92 & 45 & 49 & 55 & 62 \\ 
+cdep2011-2014 & 88 & 90 & 87 & 89 & 27 & 37 & 42 & 52 \\ 
+sen2007-2010  & 89 & 96 & 92 & 93 & 24 & 62 & 67 & 74 \\ 
+sen2011-2014  & 88 & 93 & 87 & 90 & 25 & 40 & 46 & 56 \\ 
+cmsp2013-2016 & 94 & 96 & 96 & 97 & 58 & 70 & 77 & 83 \\ 
 \end{tabular} 
 \caption{Medidas de adequação produzidas pela ACP e pelo \wnominate nas casas legislativas e períodos analisados.}
 \label{tab:fit}
@@ -612,40 +616,73 @@ cmsp2013-2016 & 93 & 94 & 96 & 97 & 61 & 69 & 77 & 83 \\
 \begin{tabular}{l c c}
 \itshape Análise & \itshape ACP & \itshape \wnominate \\
 \hline
-cdep2007-2010 & 1,17 & 75,21 \\ 
-cdep2011-2014 & 0,54 & 58,06 \\ 
-sen2007-2010  & 0,01 & 2,52  \\ 
-sen2011-2014  & 0,02 & 3,17  \\ 
-cmsp2013-2016 & 0,03 & 9,66  \\ 
+cdep2007-2010 & 1,26 $\pm$ 0,02 & 75,21 \\ 
+cdep2011-2014 & 0,67 $\pm$ 0,03 & 58,06 \\ 
+sen2007-2010  & 0,03 $\pm$ 0,01 & 2,52  \\ 
+sen2011-2014  & 0,03 $\pm$ 0,00 & 3,17  \\ 
+cmsp2013-2016 & 0,02 $\pm$ 0,00 & 9,66  \\ 
 \end{tabular} 
-\caption{Tempos de execução em segundos.}
+\caption{Tempos de execução, apresentando médias e desvios padrão em segundos, calculados com base em 10 execuções.}
 \label{tab:tempos}
 \end{table}
 
+\todo{média e desvio padrão do \wnominate}
+
 Este artigo não objetiva realizar uma comparação direta entre a ACP e \wnominate. Os valores produzidos pelo \wnominate foram colocados apenas para que o leitor tenha alguma referência para avaliar os resultados que encontramos para a ACP. Dessa forma, o \wnominate foi escolhido meramente por sua proeminência entre os métodos de produção de mapas espaciais, mesmo critério utilizado por Leoni~\cite{leoni02cdep}.
 
-Uma importante diferenciação realizada pelas execuções da ACP e do \wnominate, é que no \wnominate escolhemos a opção padrão da biblioteca em utilizar os parâmetros \textsf{minvotes=20} e \textsf{lop=0.025}. Isso significa que o algoritmo descarta parlamentares ausentes em pelo menos 20 votações e descarta as votações nas quais menos de 2,5\% dos deputados votou com a minoria. Já na execução da ACP descartamos apenas as votações unânimes. Uma justificativa parcial para essas decisões, é de que utilizar \textsf{minvotes=0} e \textsf{lop=0.0} para o \wnominate deixa o algoritmo muito demorado. \Leo{quanto?}. Por outro lado, utilizar \textsf{minvotes=20} e \textsf{lop=0.025} para a ACP resultou em mapas espaciais de difícil leitura quanto ao significado político. Para se ter uma ideia, nem a polarização PT vs PSDB era possível enxergar. \Leo{Mostrar um desses gráficos?}
+Uma importante diferenciação realizada pelas execuções da ACP e do \wnominate, é que no \wnominate escolhemos a opção padrão da biblioteca em utilizar os parâmetros \textsf{minvotes=20} e \textsf{lop=0.025}. Isso significa que o algoritmo descarta parlamentares ausentes em pelo menos 20 votações e descarta as votações nas quais menos de 2,5\% dos deputados votou com a minoria. Já na execução da ACP não descartamos nenhum voto para a análise. Uma discussão sobre a escolha desses valores é realizada na próxima seção.
 
+\todo{porcentagem da variação explicada pelas dimensões da ACP}
 
 \Leo{Indicar qual das casas explicita voto ausente. Acho q é só cdep. Se for o caso, deveríamos descartar esses votos pra análise ficar mais similar a de outras casas?}
 
 As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. O sistema operacional utilizado é o ArchLinux com kernel Linux  versão ``4.7.2-1-ARCH \#1 SMP PREEMPT Sat Aug 20 23:02:56 CEST 2016'' para arquitetura x86\_64.
 
+\Leo{Falar que usamos o pacote wnominate do Poole.}
 
+\Leo{Falar que wnominate joga fora os votos nulos, e o PCA não.}
 
-
-
+\Leo{No mesmo computador, sempre os mesmos resultados (exceto tempo). Mas em máquinas diferentes, o resultado pode variar}
 
 \section{Discussão}
 \label{sec:discussao}
 
+Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos na distribuição do mapa espacial que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. These findindgs illustrate the ``reasonableness'' of estimates obtained from our model. Vamos na mesma linha... mostrar que nossos mapas obtidos fazem sentido do ponto de vista político.
+
 \ins{Comparar pros e contras dos algoritmos, e contextualizar (ferramenta web, características brasil, vantagens políticas de análise mais transparente e simples etc.)}
+
+Pelos valores apresentados na Tabela~\ref{tab:fit}, podemos observar uma tendência de que a classificação correta na ACP seja ligeiramente melhor que a mesma taxa no \wnominate, enquanto que na APRE observamos a tendência de que seja melhor no \wnominate. Contudo, embora os algoritmos tenham importância nos resultados obtidos, observamos que esses indicadores também são influenciados pelos parâmetros \textsf{minvotes} e \textsf{lop}. Pela Tabela~\ref{tab:variando-lop}, que mostra resultados para a legislatura 2011-2014 da Câmara dos Deputados utilizando a ACP, observamos que quanto mais votações excluímos da análise, seja por \textsf{minvotes} ou \textsf{lop}, mais a taxa de classificação correta piora e mais a APRE melhora.
+
+
+\begin{table}
+\centering
+\begin{tabular}{c c c c c c}
+\textsf{minvotes} & \textsf{lop} & \multicolumn{2}{c}{\itshape Classificação Correta (\%)} & \multicolumn{2}{c}{\itshape APRE (\%)} \\
+ & & \itshape 1D & \itshape 2D & \itshape 1D & \itshape 2D \\
+\hline
+0 & -1     & 88 & 90 & 27 & 37 \\
+0 &  0     & 87 & 89 & 28 & 40\\
+20 & 0.025 & 85 & 88 & 33 & 45\\
+\end{tabular} 
+\caption{Resultados obtidos utilizando-se a ACP para a legislatura 2011-2014 da Câmara dos Deputados. \textsf{lop=0} indica que apenas as votações unânimes foram descartadas, enquanto que \textsf{lop=-1} não descarta nenhuma votação.}
+\label{tab:variando-lop}
+\end{table}
 
 \Leo{APRE parece melhor do wnominate, mas pode ser efeito de lop}
 
-Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos na distribuição do mapa espacial que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. These findindgs illustrate the ``reasonableness'' of estimates obtained from our model. Vamos na mesma linha... mostrar que nossos mapas obtidos fazem sentido do ponto de vista político.
+Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} são: 1) Aparentemente o \wnominate não converge com \textsf{minvotes=0} e \textsf{lop=0.0}. Em nossas execuções, meia-hora não foi suficiente para as análises das legislaturas do senado (sen2007-2010 e sen2011-2014). 2) Utilizar \textsf{minvotes=20} e \textsf{lop=0.025} para a ACP resultou em mapas espaciais sem significado político aparente, causando a impressão de um mapa construído aleatoriamente, conforme pode-se verificar na Figura~\ref{fig:mapa-ruim}. Nesse mapa, nem mesmo a polarização PT vs PSDB é possível de se identificar.
 
-...
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{figs/mapa-ruim.png}
+  \caption{Mapa espacial produzido para a Câmara dos Deputados na legislatura 2011-2014 utilizando a ACP com parâmetros \textsf{minvotes=20} e \textsf{lop=0.025}. Não há aparente significado político nesse mapa.}
+  \label{fig:mapa-ruim}
+\end{figure}
+
+
+\todo{Análise dimensionalidade}
+
+\Leo{pela tabela, o senado parece ser mais afetado pela dimensionalidade. Uma coincidência interessante é que o senado é tb o único a ser sensivelmente afetado quanto ao aspecto do mapa quando da mudança de lop de -1 para 0}
 
 \Leo{Problematizando o preditor}:
 
