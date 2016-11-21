@@ -29,29 +29,52 @@ analisar('cdep2007-2010', 'Câmara dos Deputados 2007 - 2010')
 Classificacao Correta:    1D: 92.51 % 	 2D: 93.03 %
 APRE:                     1D: 0.454 2D: 0.492
 Tempos: 1.276 1.275 1.277 1.235 1.232 1.262 1.279 1.246 1.236 1.234
-Média e desvio padrão: 1.2552 0.02044396
+Média e desvio padrão: 1.26, 0.02
 
 analisar('cdep2011-2014', 'Câmara dos Deputados 2011 - 2014') 
 Classificacao Correta:    1D: 88.22 % 	 2D: 89.84 %
 APRE:                     1D: 0.268 2D: 0.369
 Tempos: 0.657 0.681 0.626 0.673 0.678 0.662 0.679 0.656 0.715 0.719
-Média e desvio padrão: 0.6746 0.0275971
+Média e desvio padrão: 0.67, 0.03
 
 analisar('sen2007-2010', 'Senado 2007 - 2010')
 Classificacao Correta:    1D: 89.43 % 	 2D: 95.93 %
 APRE:                     1D: 0.024 2D: 0.624
 Tempos: 0.025 0.025 0.024 0.024 0.024 0.061 0.021 0.025 0.026 0.022
-Média e desvio padrão: 0.0277 0.01179501
+Média e desvio padrão: 0.03, 0.01
 
 analisar('sen2011-2014', 'Senado 2011 - 2014') 
 Classificacao Correta:    1D: 88.18 % 	 2D: 92.78 %
 APRE:                     1D: 0.025 2D: 0.404
 Tempos: 0.032 0.031 0.031 0.033 0.028 0.032 0.034 0.028 0.038 0.029
-Média e desvio padrão: 0.0316 0.003025815
+Média e desvio padrão: 0.03, 0.00
 
 analisar('cmsp2013-2016', 'Câmara Municipal de São Paulo 2013 - 2016') 
 Classificacao Correta:    1D: 93.97 % 	 2D: 95.65 %
 APRE:                     1D: 0.581 2D: 0.698
 Tempos: 0.025 0.022 0.025 0.025 0.022 0.024 0.025 0.024 0.026 0.025
-Média e desvio padrão: 0.0243 0.001337494
+Média e desvio padrão: 0.02, 0.00
+
+=======================================
+wnominate
+
+analisar('cdep2007-2010') 
+Tempos: 71.965, 68.821, 68.029, 68.614, 68.192, 71.976, 69.98, 72.15, 71.016, 71.312
+Média e desvio padrão: 70.21, 1.67
+
+analisar('cdep2011-2014') 
+Tempos: 52.448, 51.667, 56.08, 55.795, 55.948, 55.067, 51.344, 54.888, 52.97, 55.561
+Média e desvio padrão: 54.18, 1.87
+
+analisar('sen2007-2010')
+Tempos: 2.112, 2.154, 2.202, 2.19, 2.201, 2.177, 2.35, 2.264, 2.184, 2.334
+Média e desvio padrão: 2.22, 0.08
+
+analisar('sen2011-2014') 
+Tempos: 3.385, 3.446, 3.174, 3.259, 3.275, 3.201, 3.312, 3.154, 3.281, 3.214
+Média e desvio padrão: 3.27, 0.09
+
+analisar('cmsp2013-2016') 
+Tempos: 10.312, 10.629, 9.532, 10.248, 9.698, 9.429, 11.26, 12.284, 10.372, 9.77
+Média e desvio padrão: 10.35, 0.88
 

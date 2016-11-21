@@ -402,6 +402,7 @@ Ou seja, mesmo sem o embasamento de uma teoria, o mapa de votações produzido p
 
 
 \section{Outros aspectos de nossa abordagem}
+\label{sec:aspectos}
 
 Dizer que utilizamos o ACP e como modelamos nossa matriz de entrada conta apenas parte da história. Ao utilizar o ACP diversas outras pequenas decisões devem ser feitas. Nesta seção tratamos dessas decisões, assim como algumas variações do tipo de análise. Algumas dessas decisões são feitas em função das características do sistema político brasileiro, em contraste com o sistema político do EUA, usalmente abordado na literatura.
 
@@ -531,11 +532,11 @@ Heckman encontra uma alta correção entre as coordenadas de um legislador ao lo
 \section{Resultados}
 \label{sec:resultados}
 
-Nesta seção apresentaremos os resultados que a ACP fornece quando aplicados a casas legislativas brasileiras. Os dados utilizados são os dados abertos provenientes das respectivas casas legislativas. Realizamos análises sobre votações das casas de nosso conhecimento que disponibilizam abertamente os dados de votações nominais. São essas casas: Câmara dos Deputados, Senado e Câmara Municipal de São Paulo.
+Nesta seção apresentaremos os resultados que a ACP fornece quando aplicada a casas legislativas brasileiras. Os dados utilizados são os dados abertos provenientes das respectivas casas legislativas. Realizamos análises sobre votações das casas que, ao nosso conhecimento, disponibilizam abertamente os dados de votações nominais. São essas casas: Câmara dos Deputados, Senado e Câmara Municipal de São Paulo.
 
-Seguindo o mesmo procedimento adotado por Izumi~\cite{izumi2016senado} e Leoni~\cite{leoni02cdep}, adotamos a legislatura completa como unidade de análise. Para privilegiar o uso de legislaturas completas, para a Câmara dos Deputados e para o Senado, escolhemos as legislaturas 2007-2010 e 2011-2014. Assim iremos mostrar o uso da ACP em diferentes casas e em diferentes momentos do tempo. Para a Câmara Municipal de São Paulo, devido a restrição de dados fornecidos, escolhemos a legislatura 2013-2016. Apesar de não se tratar de uma legislatura completa, isso é amenizado pelos fatos de que já nos encontramos no fim da legislatura e de que estamos utilizando dados atualizados.
+Seguindo o mesmo procedimento adotado por Izumi~\cite{izumi2016senado} e Leoni~\cite{leoni02cdep}, adotamos a legislatura completa como unidade de análise. Para privilegiar o uso de legislaturas completas, para a Câmara dos Deputados e para o Senado, escolhemos as legislaturas 2007-2010 e 2011-2014. Assim iremos mostrar o uso da ACP em diferentes casas e em diferentes momentos do tempo. Para a Câmara Municipal de São Paulo, devido a restrição de dados fornecidos, escolhemos a legislatura 2013-2016. Apesar de não se tratar de uma legislatura completa, essa discrepância é amenizada pelos fatos de que já nos encontramos no fim da legislatura e de que estamos utilizando dados atualizados.
 
-A relação de partidos presentes nos mapas espaciais produzidos é exibido na Figura~\ref{fig:partidos}. Para a distinção entre os partidos, temos aqui o problema da grande quantidade de partidos no Brasil. As cores escolhidas são relativamente arbitrárias. Para os principais partidos procurou-se utilizar as cores que representam os partidos, mas isso não foi aplicado a todos os partidos. \Leo{Tentar usar formas geométricas também?}
+A relação de partidos presentes nos mapas espaciais produzidos é exibido na Figura~\ref{fig:partidos}. A grande quantidade de partidos no Brasil causa uma dificuldade para diferenciá-los no mapa. As cores escolhidas são relativamente arbitrárias. Para os principais partidos procurou-se utilizar as cores que representam esses partidos (vermelho para PT e azul para PSDB), mas isso não foi aplicado a todos os partidos, uma vez que as cores se repetem entre partidos. \Leo{Tentar usar formas geométricas também?}
 
 \begin{figure}[h]
   \centering
@@ -544,7 +545,7 @@ A relação de partidos presentes nos mapas espaciais produzidos é exibido na F
   \label{fig:partidos}
 \end{figure}
 
-Os mapas espaciais de votações produzidos com a ACP são exibidos nas Figuras~\ref{fig:cdep2007-2010}, \ref{fig:cdep2011-2014}, \ref{fig:sen2007-2010}, \ref{fig:sen2011-2014} e \ref{fig:cmsp2013-2016}.
+Os mapas espaciais de votações produzidos pela ACP são exibidos nas Figuras~\ref{fig:cdep2007-2010}, \ref{fig:cdep2011-2014}, \ref{fig:sen2007-2010}, \ref{fig:sen2011-2014} e \ref{fig:cmsp2013-2016}.
 
 \begin{figure}[h]
   \centering
@@ -581,13 +582,9 @@ Os mapas espaciais de votações produzidos com a ACP são exibidos nas Figuras~
   \label{fig:cmsp2013-2016}
 \end{figure}
 
-\todo{atualizar cmsp}
+\todo{atualizar dados cmsp}
 
-As medidas de adequação produzidas pela ACP são exibias na Tabela~\ref{tab:fit}. Nessa mesma tabela, pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Nessas tabelas utilizamos a seguinte abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
-
-\Leo{Verificar se é mesmo as votações unânimes que estamos descartando. Talvez tentar não descartá-las (como eu acho que é o que acontece no Radar)?}
-
-\todo{Mostrar porcentagem da variação explicada pela ACP}
+As medidas de adequação produzidas pela ACP são exibias na Tabela~\ref{tab:fit}. Nessa mesma tabela pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Por fim, na Tabela~\ref{tab:variacao-explicada-acp}apresentamos a porcentagem de variação dos dados explicadas por cada uma das dimensões principais da ACP. Nessas tabelas utilizamos as seguintes abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
 
 \begin{table}
 \centering
@@ -608,29 +605,46 @@ cmsp2013-2016 & 94 & 96 & 96 & 97 & 58 & 70 & 77 & 83 \\
 \label{tab:fit}
 \end{table}
 
-
 \begin{table}
 \centering
 \begin{tabular}{l c c}
 \itshape Análise & \itshape ACP & \itshape \wnominate \\
 \hline
-cdep2007-2010 & 1,26 $\pm$ 0,02 & 75,21 \\ 
-cdep2011-2014 & 0,67 $\pm$ 0,03 & 58,06 \\ 
-sen2007-2010  & 0,03 $\pm$ 0,01 & 2,52  \\ 
-sen2011-2014  & 0,03 $\pm$ 0,00 & 3,17  \\ 
-cmsp2013-2016 & 0,02 $\pm$ 0,00 & 9,66  \\ 
+cdep2007-2010 & 1,26 $\pm$ 0,02 & 70,21 $\pm$ 1,67 \\ 
+cdep2011-2014 & 0,67 $\pm$ 0,03 & 54,18 $\pm$ 1,87 \\ 
+sen2007-2010  & 0,03 $\pm$ 0,01 & 2,22 $\pm$ 0,08  \\ 
+sen2011-2014  & 0,03 $\pm$ 0,00 & 3,27 $\pm$ 0,09  \\ 
+cmsp2013-2016 & 0,02 $\pm$ 0,00 & 10,35 $\pm$ 0,88  \\ 
 \end{tabular} 
 \caption{Tempos de execução, apresentando médias e desvios padrão em segundos, calculados com base em 10 execuções.}
 \label{tab:tempos}
 \end{table}
 
-\todo{média e desvio padrão do \wnominate}
+
+\begin{table}
+\centering
+\begin{tabular}{l c c c}
+\itshape Análise & \itshape 1D & \itshape 2D & \itshape 1D + 2D \\
+\hline
+cdep2007-2010 & 59 & 11 & 70  \\ 
+cdep2011-2014 & 21 & 10 & 31  \\ 
+sen2007-2010  & 13 &  8 & 21  \\ 
+sen2011-2014  & 14 &  8 & 22  \\ 
+cmsp2013-2016 & 55 & 11 & 66  \\ 
+\end{tabular} 
+\caption{Porcentagem da variação nos dados explicadas pelas dimensões da ACP.}
+\label{tab:variacao-explicada-acp}
+\end{table}
+
+\todo{vish, esses números (Tablea~\ref{tab:variacao-explicada-acp}) parecem meio baixos}.
+
 
 Este artigo não objetiva realizar uma comparação direta entre a ACP e \wnominate. Os valores produzidos pelo \wnominate foram colocados apenas para que o leitor tenha alguma referência para avaliar os resultados que encontramos para a ACP. Dessa forma, o \wnominate foi escolhido meramente por sua proeminência entre os métodos de produção de mapas espaciais, mesmo critério utilizado por Leoni~\cite{leoni02cdep}.
 
 Uma importante diferenciação realizada pelas execuções da ACP e do \wnominate, é que no \wnominate escolhemos a opção padrão da biblioteca em utilizar os parâmetros \textsf{minvotes=20} e \textsf{lop=0.025}. Isso significa que o algoritmo descarta parlamentares ausentes em pelo menos 20 votações e descarta as votações nas quais menos de 2,5\% dos deputados votou com a minoria. Já na execução da ACP não descartamos nenhum voto para a análise. Uma discussão sobre a escolha desses valores é realizada na próxima seção.
 
-\todo{porcentagem da variação explicada pelas dimensões da ACP}
+
+
 
 \Leo{Indicar qual das casas explicita voto ausente. Acho q é só cdep. Se for o caso, deveríamos descartar esses votos pra análise ficar mais similar a de outras casas?}
 
@@ -677,7 +691,7 @@ Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} s
   \label{fig:mapa-ruim}
 \end{figure}
 
-\todo{Análise temporal... utilizar mapas do senado pra demonstrar intuitivamente o algoritmo de rotação.}
+\todo{quantidade de votações e parlamentares excluídos no wnominate}
 
 \todo{Análise dimensionalidade}
 
@@ -689,6 +703,20 @@ Problema da taxa de classificação correta na ACP: para modelar as votações, 
 
 Em vez de se valer da taxa de correta classificação, outra medida para avaliar o resultado do mapa espacial gerada pela ACP é o porcentual da variância dos dados explicados pelas dimensões utilizadas no mapa. No entanto, essa medida tem a desvantagem de não ser diretamente comparável com outros métodos.
 
+\subsection*{Análise intertemporal}
+
+Observa-se pelas Figuras~\ref{fig:cdep2007-2010} e \ref{fig:cdep2011-2014} que os dois mapas possuem a mesma orientação, ou seja, a polarização entre os principais partidos se mantém na mesma distribuição espacial: PT na região inferior esquerda e PSDB na região direita. Também é possível observar um afastamento médio do PMDB em relação a base governista. 
+
+\todo{verificar esplhamento}
+
+No entanto, a ACP não garante essa orientação entre mapas de períodos diferentes. Pode-se observar nas Figuras~\ref{fig:sen2007-2010} e \ref{fig:sen2011-2014} que uma melhor comparação entre os mapas é possível ao se espelhar verticalmente a segunda figura, como podemos ver na Figura~\ref{fig:sen-rotacao}. É esse processo de espelhamento, ou rotação, que ocorre quando da aplicação do algoritmo de análise intertemporal apresentado na Seção~\ref{sec:aspectos}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{figs/sen-rotacao.png}
+  \caption{Gráficos ACP gerados para duas legislaturas do Senado, sendo o segundo mapa espelhado verticalmente para se aumentar a semelhança entre os dois mapas e assim facilitar a análise intertemporal.}
+  \label{fig:sen-rotacao}
+\end{figure}
 
 \section{Conclusões}
 \label{sec:conclusoes}
