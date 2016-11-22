@@ -532,13 +532,13 @@ Heckman encontra uma alta correção entre as coordenadas de um legislador ao lo
 
 Nesta seção apresentaremos os resultados que a ACP fornece quando aplicada a casas legislativas brasileiras. Os dados utilizados são os dados abertos provenientes das respectivas casas legislativas. Realizamos análises sobre votações das casas que, ao nosso conhecimento, disponibilizam abertamente os dados de votações nominais. São essas casas: Câmara dos Deputados, Senado e Câmara Municipal de São Paulo.
 
-Seguindo o mesmo procedimento adotado por Izumi~\cite{izumi2016senado} e Leoni~\cite{leoni02cdep}, adotamos a legislatura completa como unidade de análise. Para privilegiar o uso de legislaturas completas, para a Câmara dos Deputados e para o Senado, escolhemos as legislaturas 2007-2010 e 2011-2014. Assim iremos mostrar o uso da ACP em diferentes casas e em diferentes momentos do tempo. Para a Câmara Municipal de São Paulo, devido a restrição de dados fornecidos, escolhemos a legislatura 2013-2016. Apesar de não se tratar de uma legislatura completa, essa discrepância é amenizada pelos fatos de que já nos encontramos no fim da legislatura e de que estamos utilizando dados atualizados.
+Seguindo o mesmo procedimento adotado por Izumi~\cite{izumi2016senado} e Leoni~\cite{leoni02cdep}, adotamos a legislatura completa como unidade de análise. Para privilegiar o uso de legislaturas completas, para a Câmara dos Deputados e para o Senado, escolhemos as legislaturas 2007-2010 e 2011-2014. Assim iremos mostrar o uso da ACP em diferentes casas e em diferentes momentos do tempo. Para a Câmara Municipal de São Paulo, devido a restrição de dados fornecidos, escolhemos a legislatura 2013-2016. 
 
-A relação de partidos presentes nos mapas espaciais produzidos é exibido na Figura~\ref{fig:partidos}. A grande quantidade de partidos no Brasil causa uma dificuldade para diferenciá-los no mapa. As cores escolhidas são relativamente arbitrárias. Para os principais partidos procurou-se utilizar as cores que representam esses partidos (vermelho para PT e azul para PSDB), mas isso não foi aplicado a todos os partidos, uma vez que as cores se repetem entre partidos. \Leo{Tentar usar formas geométricas também?}
+A relação de partidos presentes nos mapas espaciais produzidos é exibido na Figura~\ref{fig:partidos}. A grande quantidade de partidos no Brasil causa uma dificuldade para diferenciá-los no mapa. Por isso, além de cores utilizamos também formas geométricas para ajudar a distinguir os partidos. Embora algumas cores tenham relação com as cores oficial dos respectivos partidos, isso não é um padrão aplicável a todos os partidos, justamente pela grande quantidade de partidos.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=0.7]{figs/partidos.png}
+  \includegraphics[scale=0.8]{figs/partidos.png}
   \caption{Legenda com as cores dos partidos presentes nos gráficos ACP.}
   \label{fig:partidos}
 \end{figure}
@@ -547,35 +547,35 @@ Os mapas espaciais de votações produzidos pela ACP são exibidos nas Figuras~\
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1]{figs/cdep2007-2010.png}
+  \includegraphics[scale=0.9]{figs/cdep2007-2010.png}
   \caption{Gráfico ACP gerado para votações da Câmara dos Deputados entre 2007 e 2010.}
   \label{fig:cdep2007-2010}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1]{figs/cdep2011-2014.png}
+  \includegraphics[scale=0.9]{figs/cdep2011-2014.png}
   \caption{Gráfico ACP gerado para votações da Câmara dos Deputados entre 2011 e 2014.}
   \label{fig:cdep2011-2014}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1]{figs/sen2007-2010.png}
+  \includegraphics[scale=0.9]{figs/sen2007-2010.png}
   \caption{Gráfico ACP gerado para votações do Senado entre 2007 e 2010.}
   \label{fig:sen2007-2010}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1]{figs/sen2011-2014.png}
+  \includegraphics[scale=0.9]{figs/sen2011-2014.png}
   \caption{Gráfico ACP gerado para votações do Senado entre 2011 e 2014.}
   \label{fig:sen2011-2014}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1]{figs/cmsp2013-2016.png}
+  \includegraphics[scale=0.9]{figs/cmsp2013-2016.png}
   \caption{Gráfico ACP gerado para votações da Câmara Municipal de São Paulo entre 2013 e 2016.}
   \label{fig:cmsp2013-2016}
 \end{figure}
@@ -676,7 +676,7 @@ Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} s
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1]{figs/mapa-ruim.png}
+  \includegraphics[scale=0.7]{figs/mapa-ruim.png}
   \caption{Mapa espacial produzido para a Câmara dos Deputados na legislatura 2011-2014 utilizando a ACP com parâmetros \textsf{minvotes=20} e \textsf{lop=0.025}. Não há aparente significado político nesse mapa.}
   \label{fig:mapa-ruim}
 \end{figure}
@@ -699,7 +699,7 @@ No entanto, a ACP não garante essa orientação entre mapas de períodos difere
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1]{figs/sen-rotacao.png}
+  \includegraphics[scale=0.7]{figs/sen-rotacao.png}
   \caption{Gráficos ACP gerados para duas legislaturas do Senado, sendo o segundo mapa espelhado verticalmente para se aumentar a semelhança entre os dois mapas e assim facilitar a análise intertemporal.}
   \label{fig:sen-rotacao}
 \end{figure}

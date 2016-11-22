@@ -1,0 +1,33 @@
+c(Sem partido, PT, PMDB, PSDB, PSD, DEM, PFL, PP, PR, PSB, PDT, PTB, SD, PSC, PROS, 
+         c(19, 19, 19,   19,   19,  19,  19,  15, 17, 18,  15,  15,  15, 15,  17,   
+
+PCdoB, PPS, PRB, PV, PMN, PEN, PTdoB, PHS, PRP, PSL, PSOL, PRTB, PSDC, PTC, PPL, PAN, REDE)
+15,    17,  19,  17, 17,  18,  17,    15,  18,  18,  19,   18,   15,   17,  17,  18,  18)
+
+Sem partido, PT,      PMDB,    PSDB,    PSD,     DEM,     PFL,     PP,      PR,      PSB, 
+#000000,     #FF0000, #FF5B00, #0059AB, #80c341, #002664, #002664, #203487, #110274, #ff0066, 
+
+PDT,     PTB,     SD,      PSC,     PROS,    PCdoB,   PPS,     PRB,     PV,      PMN,     
+#6c85b1, #1f1a17, #f95800, #25b84a, #f7931e, #da251c, #ffff66, #990099, #00CC00, #D51500, 
+
+PEN,     PTdoB,   PHS,     PRP,     PSL,     PSOL,    PRTB,    PSDC,    PTC,     PPL,     PAN,     REDE)
+#00ffff, #990099, #cc00cc, #ffff66, #999966, #FFFF00, #312dc1, #ffff6b, #0066ff, #004607, #cc00cc, #1db10c
+
+Grupos por cor:
+preto;        Sem partido, PTB, PPL, PSL*
+vermelho;     PT, PCdoB, PMN, PSB*
+laranja;      PMDB, SD, PROS, PRTB
+azul claro;   PSDB, PDT, PTC, PEN*
+verde;        PSD, PSC, PV, REDE
+azul escuro;  DEM, PFL, PP, PR
+roxo;         PRB*, PHS*, PTdoB*, PAN*
+amarelo;      PSOL, PSDC, PPS*, PRP*
+* mudaram de cor
+
+
+preciso de 8 cores
+
+19 círculo
+15 quadrado
+17 triângulo
+18 losango
