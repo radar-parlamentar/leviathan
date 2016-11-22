@@ -582,6 +582,8 @@ Os mapas espaciais de votações produzidos pela ACP são exibidos nas Figuras~\
 
 \todo{atualizar dados cmsp}
 
+\Leo{O recesso parlamentar da cmsp se inicia em 15 de dezembro. Então talvez valha a pena esperar essa data, assim garantimos que temos os dados da legislatura completa.}
+
 As medidas de adequação produzidas pela ACP são exibias na Tabela~\ref{tab:fit}. Nessa mesma tabela pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Por fim, na Tabela~\ref{tab:variacao-explicada-acp}apresentamos a porcentagem de variação dos dados explicadas por cada uma das dimensões principais da ACP. Nessas tabelas utilizamos as seguintes abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
 
 \begin{table}
@@ -634,25 +636,15 @@ cmsp2013-2016 & 41 &  8 & 6 & 4 & 3 & 49  \\
 \label{tab:variacao-explicada-acp}
 \end{table}
 
-\todo{vish, esses números (Tablea~\ref{tab:variacao-explicada-acp}) parecem meio baixos}.
-
-
 Este artigo não objetiva realizar uma comparação direta entre a ACP e \wnominate. Os valores produzidos pelo \wnominate foram colocados apenas para que o leitor tenha alguma referência para avaliar os resultados que encontramos para a ACP. Dessa forma, o \wnominate foi escolhido meramente por sua proeminência entre os métodos de produção de mapas espaciais, mesmo critério utilizado por Leoni~\cite{leoni02cdep}.
 
 Uma importante diferenciação realizada pelas execuções da ACP e do \wnominate, é que no \wnominate escolhemos a opção padrão da biblioteca em utilizar os parâmetros \textsf{minvotes=20} e \textsf{lop=0.025}. Isso significa que o algoritmo descarta parlamentares ausentes em pelo menos 20 votações e descarta as votações nas quais menos de 2,5\% dos deputados votou com a minoria. Já na execução da ACP não descartamos nenhum voto para a análise. Uma discussão sobre a escolha desses valores é realizada na próxima seção.
 
+As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole.
 
+Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. O sistema operacional utilizado foi o ArchLinux com kernel Linux  versão ``4.7.2-1-ARCH \#1 SMP PREEMPT Sat Aug 20 23:02:56 CEST 2016'' para arquitetura x86\_64. 
 
-
-\Leo{Indicar qual das casas explicita voto ausente. Acho q é só cdep. Se for o caso, deveríamos descartar esses votos pra análise ficar mais similar a de outras casas?}
-
-As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. O sistema operacional utilizado é o ArchLinux com kernel Linux  versão ``4.7.2-1-ARCH \#1 SMP PREEMPT Sat Aug 20 23:02:56 CEST 2016'' para arquitetura x86\_64.
-
-\Leo{Falar que usamos o pacote wnominate do Poole.}
-
-\Leo{Falar que wnominate joga fora os votos nulos, e o PCA não.}
-
-\Leo{No mesmo computador, sempre os mesmos resultados (exceto tempo). Mas em máquinas diferentes, o resultado pode variar}
+O registro do hardware e sistema operacional é importante, pois para um mesmo conjunto de dados, mapas diferentes podem ser produzidos pela ACP em computadores diferentes, principalmente no que diz respeito à orientação do mapa. Essa diferenças acontecem principalmente devido a diferenças no tratamento dado a números de ponto flutuante em arquiteturas diferentes.
 
 \section{Discussão}
 \label{sec:discussao}
