@@ -380,9 +380,7 @@ A primeira dimensão presente nos mapas de votações do legislativo americano e
 
 Já para Heckman e Snyder~\cite{heckman-snyder1997}, existem pelo menos cinco dimensões significativas. Essas dimensões a mais podem não fazer tanta diferença na taxa global de sucesso de classificação, mas são decisivas em algumas votações específicas, por representarem substantivamente assuntos específicos. Exemplos de tais assuntos: direitos civis e eleitorais, agricultura, ajuda internacional, gasto militar, teto da dívida, água, aborto e reforma do congresso.
 
-Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo.
-
-\todo{E Izumi, oq eu diz sobre isso?}
+Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo em termos da taxa de classificação correta e da APRE. Izumi~\cite{izumi2016senado}, utilizando os mesmos critérios aplicados ao OC, também conclui pela unidimensionalidade do espaço legislativo do Senado brasileiro.
 
 % leoni traduz "outcome" como "consequência política"
 
@@ -623,14 +621,14 @@ cmsp2013-2016 & 0,02 $\pm$ 0,00 & 10,35 $\pm$ 0,88  \\
 
 \begin{table}
 \centering
-\begin{tabular}{l c c c}
-\itshape Análise & \itshape 1D & \itshape 2D & \itshape 1D + 2D \\
+\begin{tabular}{l c c c c c | c}
+\itshape Análise & \itshape 1D & \itshape 2D & \itshape 3D & \itshape 4D & \itshape 5D & \itshape 1D + 2D \\
 \hline
-cdep2007-2010 & 59 & 11 & 70  \\ 
-cdep2011-2014 & 21 & 10 & 31  \\ 
-sen2007-2010  & 13 &  8 & 21  \\ 
-sen2011-2014  & 14 &  8 & 22  \\ 
-cmsp2013-2016 & 55 & 11 & 66  \\ 
+cdep2007-2010 & 33 &  6 & 3 & 2 & 2 & 39  \\ 
+cdep2011-2014 & 18 &  8 & 5 & 3 & 3 & 26  \\ 
+sen2007-2010  & 27 & 17 & 6 & 4 & 3 & 44  \\ 
+sen2011-2014  & 24 & 13 & 7 & 3 & 3 & 37  \\ 
+cmsp2013-2016 & 41 &  8 & 6 & 4 & 3 & 49  \\ 
 \end{tabular} 
 \caption{Porcentagem da variação nos dados explicadas pelas dimensões da ACP.}
 \label{tab:variacao-explicada-acp}
@@ -693,8 +691,6 @@ Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} s
 
 \todo{quantidade de votações e parlamentares excluídos no wnominate}
 
-\todo{Análise dimensionalidade}
-
 \Leo{pela tabela, o senado parece ser mais afetado pela dimensionalidade. Uma coincidência interessante é que o senado é tb o único a ser sensivelmente afetado quanto ao aspecto do mapa quando da mudança de lop de -1 para 0}
 
 \Leo{Problematizando o preditor}:
@@ -707,8 +703,6 @@ Em vez de se valer da taxa de correta classificação, outra medida para avaliar
 
 Observa-se pelas Figuras~\ref{fig:cdep2007-2010} e \ref{fig:cdep2011-2014} que os dois mapas possuem a mesma orientação, ou seja, a polarização entre os principais partidos se mantém na mesma distribuição espacial: PT na região inferior esquerda e PSDB na região direita. Também é possível observar um afastamento médio do PMDB em relação a base governista. 
 
-\todo{verificar esplhamento}
-
 No entanto, a ACP não garante essa orientação entre mapas de períodos diferentes. Pode-se observar nas Figuras~\ref{fig:sen2007-2010} e \ref{fig:sen2011-2014} que uma melhor comparação entre os mapas é possível ao se espelhar verticalmente a segunda figura, como podemos ver na Figura~\ref{fig:sen-rotacao}. É esse processo de espelhamento, ou rotação, que ocorre quando da aplicação do algoritmo de análise intertemporal apresentado na Seção~\ref{sec:aspectos}.
 
 \begin{figure}[h]
@@ -717,6 +711,16 @@ No entanto, a ACP não garante essa orientação entre mapas de períodos difere
   \caption{Gráficos ACP gerados para duas legislaturas do Senado, sendo o segundo mapa espelhado verticalmente para se aumentar a semelhança entre os dois mapas e assim facilitar a análise intertemporal.}
   \label{fig:sen-rotacao}
 \end{figure}
+
+\subsection*{Análise de dimensionalidade}
+
+Pelos números da Tabela~\ref{tab:variacao-explicada-acp}, observamos que a explicação acrescentada pela segunda dimensão não é desprezível, principalmente nas legislaturas do senado. Também observamos que em alguns casos, a explicação acrescentada pela terceira dimensão também possui poder explicativo quando comparado com a explicação fornecida pelas outras dimensões, caso no qual se destaca a legislatura cdep2011-2014. Temos ainda que mesmo que a partir da terceira dimensão pouco se acrescente, a utilização das duas primeiras dimensões possui poder explicativo modesto, com valores encontrados indo de 26\% a 49\%. 
+
+Essa análise sobre os números apresentados pela Tabela~\ref{tab:variacao-explicada-acp} levam a um entendimento de que o legislativo brasileiro opera em uma realidade multidimensional. Ou pelo menos de que idealmente os mapas espaciais de votações deveriam ser construídos com mais dimensões para que diferenças significativas entre os parlamentares fossem visualizadas. 
+
+Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegam a mesma conclusão. Diferentemente, eles concluem pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença ocorre pois eles utilizam a taxa de classificação correta e a APRE como critérios para determinar a dimensionalidade do espaço legislativo.
+
+\todo{Tentar mostrar um mapa em 3 dimensões??!!!}
 
 \section{Conclusões}
 \label{sec:conclusoes}
