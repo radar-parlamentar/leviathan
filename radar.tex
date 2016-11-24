@@ -67,7 +67,7 @@
 \newcommand\nominate{NOMINATE\xspace}
 \newcommand\wnominate{W-NOMINATE\xspace}
 
-\title{Análise de Votações Legislativas Utilizando Componentes Principais}
+\title{Análise de votações nominais do legislativo brasileiro utilizando componentes principais}
 \author{}
 \date{}
 
@@ -105,129 +105,8 @@ Dessa forma, o objetivo deste artigo é \emph{apresentar e avaliar uma abordagem
 
 São contribuições deste artigo: apresentação didática e detalhada dos principais trabalhos da literatura sobre modelos espaciais de votações parlamentares; apresentação da nossa abordagem utilizando a ACP aplicada ao legislativo brasileiro; apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar para que outros pesquisadores possam avançar em pesquisas futuras sobre análise quantitativa de votações parlamentares.
 
-Este artigo está organizado da seguinte forma: na Seção~\ref{sec:formulacao} introduzimos o uso da ACP e nossa modelagem de votações legislativas; na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:aspectos} apresentamos o detalhamento de nossa abordagem, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos como é realizada a avaliação do modelo, que é apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos, e discutida na Seção~\ref{sec:discussao}. Por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
+Este artigo está organizado da seguinte forma: na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:acp} apresentamos nossa abordagem para a elaboração de mapas espaciais de votação, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos como é realizada a avaliação do modelo, que é apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos, e discutida na Seção~\ref{sec:discussao}. Por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
 
-
-\section{A ACP para análise de votações nominais}
-\label{sec:formulacao}
-
-Considera-se uma casa legislativa com $M$ membros (parlamentares) e $N$ votações nominais de interesse. O voto $x_{ij}$ de um parlamentar $j$ em uma votação $i$ será modelado por um valor numérico como segue:
-\[
-   x_{ij} = \left\{ 
-     \begin{array}{l l}
-        1 & \text{, se parlamentar votou \emph{sim}} \\
-       -1 & \text{, se parlamentar votou \emph{não}} \\
-        0 & \text{, em qualquer outro caso} 
-     \end{array} \right.
-\]
-Os outros casos além do sim e do não podem consistir em abstenção, obstrução ou ausência do parlamentar, ou situação em que este não esteja exercendo o mandato na data em que a votação ocorreu. Todos esses casos representam uma impossibilidade de verificar a opinião do parlamentar sobre a votação, e por isso são modelados por um valor euclidianamente equidistante das duas opções.
-
-Normalmente a análise de componentes principais não é adequada para variáveis categóricas, porém neste caso as categorias podem ser claramente representadas em um eixo cartesiano com dois extremos: SIM e NÃO. O valor de $x_{ij}$ pode ser interpretado como um estimador para um ponto de utilidade máxima $\xi_{ij}$ do legislador $j$ face à decisão $i$ situado em uma escala contínua de valores deste eixo, tal que quando $\xi_{ij} > 0$ o legislador tende a preferir o SIM, e com mais convicção ou maior importância dada à questão quanto mais distante do zero, e analogamente para $\xi_{ij} < 0$ e a opção NÃO. Ora, o comportamento observado que é o voto, por sua natureza categórica, não permite dizer o grau de importância dada ou a convicção com que o parlamentar decidiu por uma ou outra opção, mas é razoável supor que os $x_{ij}$ tal como definidos acima forneçam um estimador para os $\xi_{ij}$.
-
-Fica definida a matriz de votações $\mathbf{X}$:
-\medskip{}
-\[
-  \mathbf{X} = \qquad \bbordermatrix{~  & \tikzmark{harrowleft} 1 & ~ & j & ~
-                        & M\tikzmark{harrowright}  \cr
-                    \tikzmark{varrowtop} 
-                    1 & x_{11} & \ldots & x_{1j} & \ldots & x_{1M} \cr
-                    ~ & \vdots & \ddots & \vdots & \ddots & \vdots \cr
-                    i & x_{i1} & \ldots & x_{ij} & \ldots & x_{iM} \cr
-                    ~ & \vdots & \ddots & \vdots & \ddots & \vdots \cr
-                    \tikzmark{varrowbottom}
-                    N & x_{N1} & \ldots & x_{NM} & \ldots & x_{NM} \cr
-                    }
-\]
-\tikz[overlay,remember picture] {
-  \draw[->] ([yshift=3ex]harrowleft) -- ([yshift=3ex]harrowright)
-            node[midway,above] {\scriptsize membros};
-  \draw[->] ([yshift=1.5ex,xshift=-2ex]varrowtop) -- ([xshift=-2ex]varrowbottom)
-            node[near end,left] {\scriptsize votações};
-}
-
-Por definição esta matriz contém apenas os valores -1, 0 e 1. Para realizar a análise de componentes principais, define-se a matriz centralizada $\mathbf{X^{*}}$, subtraindo de cada entrada a média da linha:
-
-\begin{equation}
-  x_{ij}^{*} = x_{ij} - \left< x_{ij} \right>_j 
-  \label{eq:x-estrela}
-\end{equation}
-onde $\left< \,\cdot\, \right>_j = \frac{1}{M}\sum_{j=1}^{M} \cdot\,$ denota a média nos $j$.
-
-Define-se a matriz de centralização $\mathbf{C}$ por:
-
-\[
-  \begin{array}{r r r r}
-    ~ & c_{ij} = \left< x_{ij} \right>_{j} & ~ & i=1..N;\;j=1..M \\
-  \end{array}
-\]
-de forma que:
-\[
-  \mathbf{X^{*}} = \mathbf{X} - \mathbf{C}
-\]
-
-A variância (amostral) var$(i)$ de cada votação, ou dimensão é:
-
-\[
-\mathrm{var}(i) = \frac{\sum_{j=1}^M \left( x_{ij} - \left< x_{ij} \right>_j \right)^2 }{M-1}
-= \frac{M}{M-1}\left(\left< {x_{ij}}^{2} \right>_{j} - \left< x_{ij}^{~}\right>_{j}^{2} \right)
-\]
-
-\begin{equation}
-\mathrm{var}(i) = \frac{M}{M-1}\left<{x_{ij}^{*}}^{2}\right>_{j}
-\label{eq:variancia}
-\end{equation}
-
-A análise de componentes principais consiste em uma rotação de base \textbf{R} deste espaço vetorial tal que os dados (centralizados) transformados $\mathbf{\Gamma} = \mathbf{R}\cdot \mathbf{X^{*}}$ concentram a máxima variância possível na primeira dimensão, a segunda dimensão possui a máxima variância possível sob a restrição de ser ortogonal à primeira, e assim sucessivamente. A cada vetor da nova base é dado o nome de \emph{componente principal}, os valores de $\mathbf{R}$ são chamados \emph{pesos} (ou \emph{loadings}) e as coordenadas obtidas em $\mathbf{\Gamma}$ são chamadas de \emph{scores}.
-
-% A execução é tipicamente muito rápida, com complexidade $O(mn^2)$ onde $m>n$ são as dimensões da matriz de dados, utilizando a notação \emph{big-Oh}~\cite{golub-vanloan}. 
-
-Como a matriz de rotação $\mathbf{R}$ é ortonormal, sua inversa é igual à transposta $\mathbf{R}^{t}$, e tem-se $\mathbf{X^{*}} = \mathbf{R}^t \cdot \mathbf{\Gamma}$.
-
-Se forem mantidos apenas os $d \leq N$ primeiros componentes principais, a parte relevante da matriz de rotação, que chamaremos de $\mathbf{R}_{(d)}$, e da matriz de scores, $\mathbf{\Gamma}_{(d)}$, terão apenas $d$ linhas, e $\mathbf{R}_{(d)}^{t}\cdot \mathbf{\Gamma}_{(d)}$ será a melhor aproximação de $\mathbf{X^{*}}$ que pode ser obtida com um modelo linear deste tipo com $d$ dimensões, onde ``a melhor aproximação'' se refere à minimização da soma dos quadrados das diferenças das entradas\footnote{Em outras palavras, o modelo minimiza a norma de Frobenius da matriz de votações.}.
-
-Utilizando uma nomenclatura usual em análise de votações legislativas, as coordenadas de cada parlamentar $j$ retidas em $\mathbf{\Gamma_{(d)}}$ podem ser entendidas como o \emph{ponto ideal} do parlamentar no espaço $d$-dimensional de preferências políticas.
-
-Exemplificando para o caso comum em que $d=2$, a equação $\mathbf{X^{*}} \approx \mathbf{R}_{(2)}^{t} \cdot \mathbf{\Gamma}_{(2)}$ foi reescrita abaixo:
-\[
-  \bbordermatrix{~  & ~ & ~ & ~_\text{membros} \cr
-                ~ & x^{*}_{11} & \ldots & x^{*}_{1M}   \cr
-                ~ & \vdots & \ddots & \vdots  \cr
-                ~_\text{vot.} & x^{*}_{N1} & \ldots & x^{*}_{NM}   \cr
-                } \approx
-  \bbordermatrix{~  & ~ & ~_\text{C.P.} \cr
-                ~ & R_{11} & R_{21}   \cr
-                ~ & \vdots & \vdots  \cr
-                ~_\text{vot.} & R_{1N} & R_{2N} \cr
-                } \cdot
-  \bbordermatrix{~  & ~ & ~ & ~_\text{membros} \cr
-                ~ & \gamma_{11} & \ldots & \gamma_{1M}   \cr
-                ~_\text{C.P.} & \gamma_{21} & \ldots & \gamma_{2M}   \cr
-                }
-\]
-
-
-\subsection*{Centralização e Normalização}
-
-Em diversos contextos em que se aplica a ACP é comum realizar a \emph{centralização} (subtraindo de cada entrada o valor médio da linha) e a \emph{normalização} (multiplicando cada entrada por um fator de escala igual ao inverso da variância da linha, de forma a obter variância unitária para todas as direções da base original) de $\mathbf{X}$ antes de proceder à análise.
-
-O algoritmo de determinação das componentes por SVD não é baseado na variância em si, e sim na soma dos quadrados. Para variáveis centralizadas as duas quantidades são proporcionais (vide equação \ref{eq:variancia}), por isso a centralização é recomendável para variáveis que não possam ser supostas de média zero. No caso de votações legislativas a centralização introduz $N$ parâmetros ao modelo (através dos valores L.I. da matriz $\mathbf{C}$), que podem ser interpretados como sendo relacionados aos tamanhos da maioria e minoria de cada votação.
-
-Já a normalização é em geral recomendável quando as componentes originais possuem unidades de medida distintas, para evitar que dimensões com variâncias numericamente grandes predominem artificialmente. Como todas as votações possuem a mesma ``escala'', não se faz necessária a normalização. De fato, para o caso de uma votação quase unânime o fator de escala (1/variância) seria muito alto, pois a variância de uma votação quase unânime é baixa, e esta votação receberia um peso maior na composição das componentes principais apenas por ter sido menos acirrada.
-
-Estas considerações sugerem a adoção da centralização, mas não da normalização, na análise de votações utilizando ACP.
-
-\subsection*{Escolha do Número de Dimensões \emph{d}}
-
-O modelo será tanto mais preciso na classificação correta das votações quanto maior for o número de dimensões retidas $d \leq N$. Porém está claro que um modelo simples é mais útil: analisar cada uma do total de $N$ dimensões seria tão trabalhoso quanto analisar individualmente cada uma das $N$ votações (e tão completo quanto). O objetivo é simplificar, retendo o essencial da informação.
-
-Uma forma de quantificar a informação retida (ou perdida) ao considerar apenas $d$ dimensões é observar qual é a fração $\nu_d \leq 1$ da variância total explicada:
-
-\[
-\nu_d = \frac{\sum_{i=1}^{d}\frac{M}{M-1} \left< {\gamma_{ij}}^{2} \right>_j } {\sum_{i=1}^N \mathrm{var}(i)}
-\]
-onde o numerador é a soma da variância das $d$ primeiras componentes principais, e o denominador é a variância total da matriz de votações.
-
-Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adotar $d$ tal que se fosse adotado $d+1$ o ganho em $\nu_d$ seria pequeno. Dito isso, o critério é arbitrário, e deve depender do objetivo da análise. Para uma visualização do aspecto geral de distribuição dos parlamentares é prático utilizar $d=2$, já que assim a visualização no plano é muito mais simples. Seja qual for, a escolha deve vir acompanhada do valor de $\nu_d$ correspondente, afim de que se possa ter uma idéia de quanta informação está sendo desconsiderada.
 
 
 \section{Revisão da literatura}
@@ -371,12 +250,128 @@ Embora o uso de suposições para a elaboração de teorias seja comum e necess�
 Ou seja, mesmo sem o embasamento de uma teoria, o mapa de votações produzido pela ACP é útil. E justamente por não estar baseado em uma teoria forte, pode-se dizer que esse mapa não tem a validade limitada por suposições que podem não ser verdadeiras no caso concreto. \Saulo{Em suma, entendo o que você quer dizer aqui, mas acho que não está correto dizer dessa forma. Existe uma teoria por trás sim. Nossas suposições são similares as de Heckman e Snyder. Na minha opinião a força deste tipo de modelo é que as suposições são simples, e o modelo é fácil de interpretar, fácil de reproduzir, e dá resultados parecidos com os outros modelos, então se o objetivo é informar o público mais amplo este modelo é suficiente, e até, pela simplicidade, preferível.}
 
 
+\section{A ACP para análise de votações nominais}
+\label{sec:acp}
+
+Nesta seção apresentaremos nossa abordagem completa de análise quantitativa de votações nominais para a elaboração de mapas espaciais de votação. Algumas das decisões de modelagem apresentadas levam em conta características do legislativo brasileiro, o que diferencia nossa análise de outros trabalhos da literatura que usualmente focam no legislativo dos EUA.
+
+Considera-se uma casa legislativa com $M$ membros (parlamentares) e $N$ votações nominais de interesse. O voto $x_{ij}$ de um parlamentar $j$ em uma votação $i$ será modelado por um valor numérico como segue:
+\[
+   x_{ij} = \left\{ 
+     \begin{array}{l l}
+        1 & \text{, se parlamentar votou \emph{sim}} \\
+       -1 & \text{, se parlamentar votou \emph{não}} \\
+        0 & \text{, em qualquer outro caso} 
+     \end{array} \right.
+\]
+Os outros casos além do sim e do não podem consistir em abstenção, obstrução ou ausência do parlamentar, ou situação em que este não esteja exercendo o mandato na data em que a votação ocorreu. Todos esses casos representam uma impossibilidade de verificar a opinião do parlamentar sobre a votação, e por isso são modelados por um valor euclidianamente equidistante das duas opções.
+
+Normalmente a análise de componentes principais não é adequada para variáveis categóricas, porém neste caso as categorias podem ser claramente representadas em um eixo cartesiano com dois extremos: SIM e NÃO. O valor de $x_{ij}$ pode ser interpretado como um estimador para um ponto de utilidade máxima $\xi_{ij}$ do legislador $j$ face à decisão $i$ situado em uma escala contínua de valores deste eixo, tal que quando $\xi_{ij} > 0$ o legislador tende a preferir o SIM, e com mais convicção ou maior importância dada à questão quanto mais distante do zero, e analogamente para $\xi_{ij} < 0$ e a opção NÃO. Ora, o comportamento observado que é o voto, por sua natureza categórica, não permite dizer o grau de importância dada ou a convicção com que o parlamentar decidiu por uma ou outra opção, mas é razoável supor que os $x_{ij}$ tal como definidos acima forneçam um estimador para os $\xi_{ij}$.
+
+Fica definida a matriz de votações $\mathbf{X}$:
+\medskip{}
+\[
+  \mathbf{X} = \qquad \bbordermatrix{~  & \tikzmark{harrowleft} 1 & ~ & j & ~
+                        & M\tikzmark{harrowright}  \cr
+                    \tikzmark{varrowtop} 
+                    1 & x_{11} & \ldots & x_{1j} & \ldots & x_{1M} \cr
+                    ~ & \vdots & \ddots & \vdots & \ddots & \vdots \cr
+                    i & x_{i1} & \ldots & x_{ij} & \ldots & x_{iM} \cr
+                    ~ & \vdots & \ddots & \vdots & \ddots & \vdots \cr
+                    \tikzmark{varrowbottom}
+                    N & x_{N1} & \ldots & x_{NM} & \ldots & x_{NM} \cr
+                    }
+\]
+\tikz[overlay,remember picture] {
+  \draw[->] ([yshift=3ex]harrowleft) -- ([yshift=3ex]harrowright)
+            node[midway,above] {\scriptsize membros};
+  \draw[->] ([yshift=1.5ex,xshift=-2ex]varrowtop) -- ([xshift=-2ex]varrowbottom)
+            node[near end,left] {\scriptsize votações};
+}
+
+Por definição esta matriz contém apenas os valores -1, 0 e 1. Para realizar a análise de componentes principais, define-se a matriz centralizada $\mathbf{X^{*}}$, subtraindo de cada entrada a média da linha:
+
+\begin{equation}
+  x_{ij}^{*} = x_{ij} - \left< x_{ij} \right>_j 
+  \label{eq:x-estrela}
+\end{equation}
+onde $\left< \,\cdot\, \right>_j = \frac{1}{M}\sum_{j=1}^{M} \cdot\,$ denota a média nos $j$.
+
+Define-se a matriz de centralização $\mathbf{C}$ por:
+
+\[
+  \begin{array}{r r r r}
+    ~ & c_{ij} = \left< x_{ij} \right>_{j} & ~ & i=1..N;\;j=1..M \\
+  \end{array}
+\]
+de forma que:
+\[
+  \mathbf{X^{*}} = \mathbf{X} - \mathbf{C}
+\]
+
+A variância (amostral) var$(i)$ de cada votação, ou dimensão é:
+
+\[
+\mathrm{var}(i) = \frac{\sum_{j=1}^M \left( x_{ij} - \left< x_{ij} \right>_j \right)^2 }{M-1}
+= \frac{M}{M-1}\left(\left< {x_{ij}}^{2} \right>_{j} - \left< x_{ij}^{~}\right>_{j}^{2} \right)
+\]
+
+\begin{equation}
+\mathrm{var}(i) = \frac{M}{M-1}\left<{x_{ij}^{*}}^{2}\right>_{j}
+\label{eq:variancia}
+\end{equation}
+
+A análise de componentes principais consiste em uma rotação de base \textbf{R} deste espaço vetorial tal que os dados (centralizados) transformados $\mathbf{\Gamma} = \mathbf{R}\cdot \mathbf{X^{*}}$ concentram a máxima variância possível na primeira dimensão, a segunda dimensão possui a máxima variância possível sob a restrição de ser ortogonal à primeira, e assim sucessivamente. A cada vetor da nova base é dado o nome de \emph{componente principal}, os valores de $\mathbf{R}$ são chamados \emph{pesos} (ou \emph{loadings}) e as coordenadas obtidas em $\mathbf{\Gamma}$ são chamadas de \emph{scores}.
+
+% A execução é tipicamente muito rápida, com complexidade $O(mn^2)$ onde $m>n$ são as dimensões da matriz de dados, utilizando a notação \emph{big-Oh}~\cite{golub-vanloan}. 
+
+Como a matriz de rotação $\mathbf{R}$ é ortonormal, sua inversa é igual à transposta $\mathbf{R}^{t}$, e tem-se $\mathbf{X^{*}} = \mathbf{R}^t \cdot \mathbf{\Gamma}$.
+
+Se forem mantidos apenas os $d \leq N$ primeiros componentes principais, a parte relevante da matriz de rotação, que chamaremos de $\mathbf{R}_{(d)}$, e da matriz de scores, $\mathbf{\Gamma}_{(d)}$, terão apenas $d$ linhas, e $\mathbf{R}_{(d)}^{t}\cdot \mathbf{\Gamma}_{(d)}$ será a melhor aproximação de $\mathbf{X^{*}}$ que pode ser obtida com um modelo linear deste tipo com $d$ dimensões, onde ``a melhor aproximação'' se refere à minimização da soma dos quadrados das diferenças das entradas\footnote{Em outras palavras, o modelo minimiza a norma de Frobenius da matriz de votações.}.
+
+Utilizando uma nomenclatura usual em análise de votações legislativas, as coordenadas de cada parlamentar $j$ retidas em $\mathbf{\Gamma_{(d)}}$ podem ser entendidas como o \emph{ponto ideal} do parlamentar no espaço $d$-dimensional de preferências políticas.
+
+Exemplificando para o caso comum em que $d=2$, a equação $\mathbf{X^{*}} \approx \mathbf{R}_{(2)}^{t} \cdot \mathbf{\Gamma}_{(2)}$ foi reescrita abaixo:
+\[
+  \bbordermatrix{~  & ~ & ~ & ~_\text{membros} \cr
+                ~ & x^{*}_{11} & \ldots & x^{*}_{1M}   \cr
+                ~ & \vdots & \ddots & \vdots  \cr
+                ~_\text{vot.} & x^{*}_{N1} & \ldots & x^{*}_{NM}   \cr
+                } \approx
+  \bbordermatrix{~  & ~ & ~_\text{C.P.} \cr
+                ~ & R_{11} & R_{21}   \cr
+                ~ & \vdots & \vdots  \cr
+                ~_\text{vot.} & R_{1N} & R_{2N} \cr
+                } \cdot
+  \bbordermatrix{~  & ~ & ~ & ~_\text{membros} \cr
+                ~ & \gamma_{11} & \ldots & \gamma_{1M}   \cr
+                ~_\text{C.P.} & \gamma_{21} & \ldots & \gamma_{2M}   \cr
+                }
+\]
 
 
-\section{Outros aspectos de nossa abordagem}
-\label{sec:aspectos}
+\subsection*{Centralização e Normalização}
 
-Dizer que utilizamos o ACP e como modelamos nossa matriz de entrada conta apenas parte da história. Ao utilizar o ACP diversas outras pequenas decisões devem ser feitas. Nesta seção tratamos dessas decisões, assim como algumas variações do tipo de análise. Algumas dessas decisões são feitas em função das características do sistema político brasileiro, em contraste com o sistema político do EUA, usalmente abordado na literatura.
+Em diversos contextos em que se aplica a ACP é comum realizar a \emph{centralização} (subtraindo de cada entrada o valor médio da linha) e a \emph{normalização} (multiplicando cada entrada por um fator de escala igual ao inverso da variância da linha, de forma a obter variância unitária para todas as direções da base original) de $\mathbf{X}$ antes de proceder à análise.
+
+O algoritmo de determinação das componentes por SVD não é baseado na variância em si, e sim na soma dos quadrados. Para variáveis centralizadas as duas quantidades são proporcionais (vide equação \ref{eq:variancia}), por isso a centralização é recomendável para variáveis que não possam ser supostas de média zero. No caso de votações legislativas a centralização introduz $N$ parâmetros ao modelo (através dos valores L.I. da matriz $\mathbf{C}$), que podem ser interpretados como sendo relacionados aos tamanhos da maioria e minoria de cada votação.
+
+Já a normalização é em geral recomendável quando as componentes originais possuem unidades de medida distintas, para evitar que dimensões com variâncias numericamente grandes predominem artificialmente. Como todas as votações possuem a mesma ``escala'', não se faz necessária a normalização. De fato, para o caso de uma votação quase unânime o fator de escala (1/variância) seria muito alto, pois a variância de uma votação quase unânime é baixa, e esta votação receberia um peso maior na composição das componentes principais apenas por ter sido menos acirrada.
+
+Estas considerações sugerem a adoção da centralização, mas não da normalização, na análise de votações utilizando ACP.
+
+\subsection*{Escolha do Número de Dimensões \emph{d}}
+
+O modelo será tanto mais preciso na classificação correta das votações quanto maior for o número de dimensões retidas $d \leq N$. Porém está claro que um modelo simples é mais útil: analisar cada uma do total de $N$ dimensões seria tão trabalhoso quanto analisar individualmente cada uma das $N$ votações (e tão completo quanto). O objetivo é simplificar, retendo o essencial da informação.
+
+Uma forma de quantificar a informação retida (ou perdida) ao considerar apenas $d$ dimensões é observar qual é a fração $\nu_d \leq 1$ da variância total explicada:
+
+\[
+\nu_d = \frac{\sum_{i=1}^{d}\frac{M}{M-1} \left< {\gamma_{ij}}^{2} \right>_j } {\sum_{i=1}^N \mathrm{var}(i)}
+\]
+onde o numerador é a soma da variância das $d$ primeiras componentes principais, e o denominador é a variância total da matriz de votações.
+
+Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adotar $d$ tal que se fosse adotado $d+1$ o ganho em $\nu_d$ seria pequeno. Dito isso, o critério é arbitrário, e deve depender do objetivo da análise. Para uma visualização do aspecto geral de distribuição dos parlamentares é prático utilizar $d=2$, já que assim a visualização no plano é muito mais simples. Seja qual for, a escolha deve vir acompanhada do valor de $\nu_d$ correspondente, afim de que se possa ter uma idéia de quanta informação está sendo desconsiderada.
 
 \subsection*{Análise por partido}
 
@@ -391,7 +386,23 @@ onde $j \in k$ denota que o parlamentar $j$ pertence ao partido $k$, e $|k|$ é 
 
 Esta análise é útil para analisar afinidades partidárias e coalizões em ambientes com vários partidos, como é tipicamente o caso das casas legislativas no Brasil.
 
-\ins{No Radar Parlamentar, porém, não aplicamos essa técnica, pois para esse software optamos pela coexistência de partidos e parlamentares individuais no mesmo mapa especial. O método proposto acima é válido, mas seu resultado não possui relação direta com o resultado da análise por parlamentar. Assim sendo, no Radar Parlamentar os partidos são posicionados no centroide das posições ocupadas por seus parlamentares. Segue fórmula da hora...}
+No Radar Parlamentar, porém, não aplicamos essa técnica, pois para esse software optamos pela coexistência de partidos e parlamentares individuais no mesmo mapa especial. O método proposto acima é válido, mas seu resultado não possui relação direta com o resultado da análise por parlamentar. Assim sendo, no Radar Parlamentar os partidos são posicionados no centroide das posições ocupadas por seus parlamentares. Ou seja, a posição de um partido $P$ com $k$ parlamentares $p_1, ..., p_k$ se dá por:
+
+\begin{equation}
+  x_{P} = \frac{\sum_{i=1}^{k}{x_{p_i}}}{k}
+  \label{eq:partido-centroide}
+\end{equation}
+
+No Radar Parlamentar também optamos por diferenciar os partidos em função do tamanho da bancada de cada partido no período analisado. Para isso, cada circunferência representando um partido possui o raio proporcional à raiz quadrada do tamanho da bancada no período.
+
+A Figura~\ref{fig:centroide} permite visualizar o resultado do posicionamento do partido pelo centroide de seus parlamentares, assim como observar o efeito do tamanho das circunferências representando os partidos.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.37]{figs/centroide.png}
+  \caption{Nos mapas espaciais justapostos é possível observar o resultado do posicionamento de três partidos em função de seus centroides: PT (vermelho), PSDB (azul) e PMDB (laranja). No período analisado, PT, PSDB e PMDB contaram com 14, 13 e 21 senadores respectivamente, o que afeta o tamanho das circunferências representando os partidos.}
+  \label{fig:centroide}
+\end{figure}
 
 \subsection*{Tratamento de valores faltantes}
 
@@ -683,7 +694,7 @@ Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se
 
 Observa-se pelas Figuras~\ref{fig:cdep2007-2010} e \ref{fig:cdep2011-2014} que os dois mapas possuem a mesma orientação, ou seja, a polarização entre os principais partidos se mantém na mesma distribuição espacial: PT na região inferior esquerda e PSDB na região direita. 
 
-No entanto, a ACP não garante essa orientação entre mapas de períodos diferentes. Pode-se observar nas Figuras~\ref{fig:sen2007-2010} e \ref{fig:sen2011-2014} que uma melhor comparação entre os mapas é possível ao se espelhar verticalmente a segunda figura, como podemos ver na Figura~\ref{fig:sen-rotacao}. É esse processo de espelhamento, ou rotação, que ocorre quando da aplicação do algoritmo de análise intertemporal apresentado na Seção~\ref{sec:aspectos}.
+No entanto, a ACP não garante essa orientação entre mapas de períodos diferentes. Pode-se observar nas Figuras~\ref{fig:sen2007-2010} e \ref{fig:sen2011-2014} que uma melhor comparação entre os mapas é possível ao se espelhar verticalmente a segunda figura, como podemos ver na Figura~\ref{fig:sen-rotacao}. É esse processo de espelhamento, ou rotação, que ocorre quando da aplicação do algoritmo de análise intertemporal apresentado na Seção~\ref{sec:acp}.
 
 \begin{figure}[h!]
   \centering
