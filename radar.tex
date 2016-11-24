@@ -116,7 +116,7 @@ Os objetivos deste trabalho são:
 Este artigo está organizado da seguinte forma: ...
 
 
-\section{O modelo ACP para análise de votações nominais}
+\section{A ACP para análise de votações nominais}
 \label{sec:formulacao}
 
 Considera-se uma casa legislativa com $M$ membros (parlamentares) e $N$ votações nominais de interesse. O voto $x_{ij}$ de um parlamentar $j$ em uma votação $i$ será modelado por um valor numérico como segue:
@@ -187,9 +187,7 @@ A variância (amostral) var$(i)$ de cada votação, ou dimensão é:
 
 A análise de componentes principais consiste em uma rotação de base \textbf{R} deste espaço vetorial tal que os dados (centralizados) transformados $\mathbf{\Gamma} = \mathbf{R}\cdot \mathbf{X^{*}}$ concentram a máxima variância possível na primeira dimensão, a segunda dimensão possui a máxima variância possível sob a restrição de ser ortogonal à primeira, e assim sucessivamente. A cada vetor da nova base é dado o nome de \emph{componente principal}, os valores de $\mathbf{R}$ são chamados \emph{pesos} (ou \emph{loadings}) e as coordenadas obtidas em $\mathbf{\Gamma}$ são chamadas de \emph{scores}.
 
-
-///////////////
- A execução é tipicamente muito rápida, com complexidade $O(mn^2)$ onde $m>n$ são as dimensões da matriz de dados, utilizando a notação \emph{big-Oh}~\cite{golub-vanloan}. Neste trabalho foi utilizada a função \emph{prcomp} do R e a execução para $m\approx n \approx 400$ leva menos de 2 segundos em um computador pessoal com processador de 2,4 GHz.
+% A execução é tipicamente muito rápida, com complexidade $O(mn^2)$ onde $m>n$ são as dimensões da matriz de dados, utilizando a notação \emph{big-Oh}~\cite{golub-vanloan}. 
 
 Como a matriz de rotação $\mathbf{R}$ é ortonormal, sua inversa é igual à transposta $\mathbf{R}^{t}$, e tem-se $\mathbf{X^{*}} = \mathbf{R}^t \cdot \mathbf{\Gamma}$.
 
@@ -225,22 +223,6 @@ O algoritmo de determinação das componentes por SVD não é baseado na variân
 Já a normalização é em geral recomendável quando as componentes originais possuem unidades de medida distintas, para evitar que dimensões com variâncias numericamente grandes predominem artificialmente. Como todas as votações possuem a mesma ``escala'', não se faz necessária a normalização. De fato, para o caso de uma votação quase unânime o fator de escala (1/variância) seria muito alto, pois a variância de uma votação quase unânime é baixa, e esta votação receberia um peso maior na composição das componentes principais apenas por ter sido menos acirrada.
 
 Estas considerações sugerem a adoção da centralização, mas não da normalização, na análise de votações utilizando ACP.
-
-\subsection*{Preditor}
-
-Para o modelo de classificação, define-se a matriz $\mathbf{\widehat{X}}$:
-
-\begin{equation}
-  \widehat{\mathbf{X}} = \mathbf{R}_{(d)}^{t} \cdot \mathbf{\Gamma}_{(d)} + \mathbf{C}
-\end{equation}
-
-$\widehat{\mathbf{X}}$ possui valores em $\mathbb{R}$ que se aproximam dos valores discretos da matriz de votos original $\mathbf{X}$.
-
-Para $\widehat{x}_{ij} > 0$ o modelo prevê que o parlamentar $j$ vota SIM na votação $i$; para $\widehat{x}_{ij} < 0$ o modelo prevê voto NÃO; e para $\widehat{x}_{ij} = 0$ o modelo prevê um voto arbitrário (para facilitar a reprodutibilidade dos resultados foi adotado SIM nestes casos).
-
-Este modelo prevê apenas votos SIM ou NÃO, ou seja, não prevê a possibilidade de abstenções, obstruções ou ausências.
-
-\Leo{Sugestão: esse conceito de preditor não é fundamental em si para a elaboração do mapa de votações. Então eu deixaria para apresentar esse conceito mais próximo da seção de avaliação dos resultados, sendo esse preditor um artifício mais para podermos avaliar os resultados. Além disso, acho que cabe alguma discussão sobre a arbitrariedade da fórmula do preditor (conforme comentei na Seção~\ref{sec:resultados}).}
 
 \subsection*{Escolha do Número de Dimensões \emph{d}}
 
@@ -522,17 +504,28 @@ Heckman encontra uma alta correção entre as coordenadas de um legislador ao lo
 
 \Leo{Falar do recuro de zoom do radar}
 
-\section{Medidas de Adequação (Fitness)}
-\label{sec:metodo}
+\section{Medidas de Avaliação do Modelo}
+\label{sec:avaliacao}
 
-\ins{Aqui, explicar os indicadores e tal: taxa de classificação correta, apre e variância.}
+As principais medidas de avaliação de modelos de construção de mapas espaciais de votações são a taxa de classificação correta e a APRE. Conforme já foi explicado em detalhes na Seção~\ref{sec:revbib}, a taxa de classificação correta fornece a proporção de votos corretamente previstos pelo modelo. Já a APRE mede a redução no erro que o modelo proposto traz em relação ao modelo ingênuo que prevê que todo parlamentar vota com a maioria.
 
-\Leo{Problematizando o preditor}:
+No entanto, para a aplicar essas medidas a ACP, precisamos definir um \emph{preditor}. A ACP por si só não define um ``valor esperado'' para o voto de um dado parlamentar em uma dada votação. Por isso, a definição do preditor utilizado e aqui apresentado é de nossa autoria.
 
-Problema da taxa de classificação correta na ACP: para modelar as votações, mapeando opções em valores numéricos, tudo bem. Mas o cálculo da taxa de classificação correta depende do mapeamento inverso, dado um valor entre -1 e 1 definir uma das opções (\yea, \nay ou ABSTENÇÃO). Definir os valores limiares desse mapeamento inverso é arbitrário, sendo que essa escolha arbitrária pode alterar drasticamente os valores obtidos. 
+Seja a matriz $\mathbf{\widehat{X}}$, tal que:
 
-Em vez de se valer da taxa de correta classificação, outra medida para avaliar o resultado do mapa espacial gerada pela ACP é o porcentual da variância dos dados explicados pelas dimensões utilizadas no mapa. No entanto, essa medida tem a desvantagem de não ser diretamente comparável com outros métodos.
+\begin{equation}
+  \widehat{\mathbf{X}} = \mathbf{R}_{(d)}^{t} \cdot \mathbf{\Gamma}_{(d)} + \mathbf{C}
+\end{equation}
 
+$\widehat{\mathbf{X}}$ possui valores em $\mathbb{R}$ que se aproximam dos valores discretos da matriz de votos original $\mathbf{X}$.
+
+Para $\widehat{x}_{ij} > 0$ o preditor prevê que o parlamentar $j$ vota SIM na votação $i$; para $\widehat{x}_{ij} < 0$ o modelo prevê voto NÃO; e para $\widehat{x}_{ij} = 0$ o modelo prevê um voto arbitrário (para facilitar a reprodutibilidade dos resultados foi adotado SIM nestes casos). Este modelo prevê apenas votos \yea ou \nay, ou seja, não prevê a possibilidade de abstenções, obstruções ou ausências.
+
+É claro que a definição de tal preditor depende de limiares arbitrários que mapeiam os valores reais de $\widehat{x}_{ij}$ para os valores discretos que representam opções em uma votação (\yea ou \nay). Então um problema dessa avaliação é que a escolha de outros limiares ou outros mapeamentos possíveis poderiam produzir resultados bem diferentes. Um exemplo seria associar uma faixa de valores de $\widehat{x}_{ij}$ à abstenção.
+
+Por isso apresentaremos também como medida de avaliação do modelo a porcentagem da variância retida pelas dimensões da ACP. Quanto maior é a variância retida em uma dimensão, mais essa dimensão é explicativa do fenômeno estudado. Uma desvantagem dessa medida é não ser diretamente comparável com outros métodos.
+
+\Leo{Saulo, talvez você queria explicar melhor o que é a proporção da variância retida pelas componentes principais.}
 
 \section{Resultados}
 \label{sec:resultados}
@@ -647,7 +640,7 @@ Este artigo não objetiva realizar uma comparação direta entre a ACP e \wnomin
 
 Para a execução do \wnominate utilizamos as opções padrões de \textsf{minvotes=20} e \textsf{lop=0.025}. Isso significa que o algoritmo descarta parlamentares ausentes em pelo menos 20 votações e descarta as votações nas quais menos de 2,5\% dos deputados votou com a minoria\footnote{``lop'' é abreviação de \emph{lopsided}.}. Já na execução da ACP não descartamos nenhum voto para a análise. Uma discussão sobre a escolha desses valores é realizada na próxima seção.
 
-As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole.
+As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole. Já para o cálculo da ACP, utilizamos a função \textsf{prcomp}, nativamente disponível no R.
 
 Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. O sistema operacional utilizado foi o ArchLinux com kernel Linux  versão ``4.7.2-1-ARCH \#1 SMP PREEMPT Sat Aug 20 23:02:56 CEST 2016'' para arquitetura x86\_64. 
 
