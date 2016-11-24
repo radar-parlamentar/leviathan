@@ -77,9 +77,7 @@
 
 \begin{abstract}
 
-A literatura sobre análise quantitativa de votações nominais em casas legislativas é bem extensa e relativamente antiga. No entanto, poucos são os trabalhos que se debruçam sobre a aplicação de tais métodos nas casas legislativas brasileiras. Este artigo trás uma revisão de métodos de análise de votações legislativas nominais e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Apresentaremos também nossa abordagem para o tratamento de abstenções e sobre a realização de análises agregadas por partido, temas pouco explorados na literatura, que normalmente foca em análises de casas legislativas dos Estados Unidos. 
-
-São apresentados gráficos bidimensionais de algumas legislaturas do Congresso Americano e da Câmara dos Deputados e Senado brasileiros, por parlamentar e agrupados por partido, e comparados os resultados do modelo ACP com os do conhecido modelo WNOMINATE. O modelo ACP além de ser mais simples, computacionalmente mais rápido e de mais fácil interpretação, apresentou métricas de adequação (fitness) melhores para as casas legislativas brasileiras.\Saulo{este último, a confirmar!}
+A literatura sobre análise quantitativa de votações nominais em casas legislativas é bem extensa e relativamente antiga. No entanto, poucos são os trabalhos que se debruçam sobre a aplicação de tais métodos nas casas legislativas brasileiras. Este artigo trás uma revisão de métodos de análise de votações legislativas nominais e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Apresentaremos também nossa abordagem para o tratamento de abstenções e sobre a realização de análises agregadas por partido, temas pouco explorados na literatura devido a pouca relevância no contexto de casas legislativas dos Estados Unidos. A avaliação do modelo é apresentada com medições comparadas ao \wnominate.
 \end{abstract}
 
 \section{Introdução}
@@ -90,30 +88,24 @@ São apresentados gráficos bidimensionais de algumas legislaturas do Congresso 
 %questão
 %solução, avaliação
 
-\Leo{deixar pra ajeitar a coesão da introdução por último}
+Modelos espaciais para análise de votações no âmbito legislativo existem pelo menos desde 1957, com Downs~\cite{downs1957}, e se tornaram mais numerosos e mais utilizados a partir da década de 1980, com o aumento da disponibilidade e redução de custo de processamento computacional e com a proposição em 1985 do famoso algoritmo NOMINATE por Poole e Rosenthal~\cite{poole1985nominate}, até hoje o mais conhecido e utilizado. 
 
-Modelos espaciais para análise de votações no âmbito legislativo existem pelo menos desde 1957, com Downs~\cite{downs1957}, e se tornaram mais numerosos e mais utilizados a partir da década de 1980, com o aumento da disponibilidade e redução de custo de processamento computacional e com a proposição em 1985 do famoso algoritmo NOMINATE por Poole e Rosenthal~\cite{poole1985nominate}, até hoje o mais conhecido e utilizado. O objetivo destes modelos de escalonamento dimensional é representar os parlamentares ou partidos em um espaço geométrico com algumas poucas dimensões (frequentemente uma ou duas) de tal forma que o comportamento de cada um nas votações seja em grande parte explicado por sua posição (coordenadas) neste espaço, sendo que esta posição, também chamada ``ponto ideal'' do legislador ou partido, é estimada a partir dos votos observados nas votações.
+O objetivo desses modelos de escalonamento dimensional é representar os parlamentares em um espaço geométrico com algumas poucas dimensões (frequentemente uma ou duas) de tal forma que o comportamento de cada um nas votações seja em grande parte explicado por sua posição nesse espaço. Essa posição do legislador é também chamada de ``ponto ideal'' e é estimada a partir dos votos observados nas votações nominais.
 
-Existe uma literatura relativamente ampla sobre o assunto focando no Congresso Americano ou outras entidades estadounidenses como a suprema corte, inclusive comparando a performance de diferentes modelos 
+Existe uma literatura relativamente ampla sobre o assunto focando no Congresso Americano ou outras entidades estadounidenses como a suprema corte, inclusive comparando o desempenho de diferentes modelos 
 %\cite{poole1985nominate}man-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
 \cite{poole-rosenthal2000,clinton2004ideal},
 mas são poucos os estudos de votações em entidades brasileiras. Um exemplo é Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02cdep}.
 
-\ins{A ACP é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados}~\cite{DataMining2003}, \ins{e algoritmos de determinação de componentes principais através de decomposição em valores singulares (SVD) são amplamente disponíveis em softwares e bibliotecas de matemática e estatística.}
+A Análise de Componentes Principais (ACP) é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados~\cite{DataMining2003}, estando amplamente disponível em softwares e bibliotecas de matemática e estatística. Com redução dimensional queremos dizer que algoritmos são aplicados a informações n-dimensionais (ex: atuação de vários parlamentares em várias votações) sendo simplificadas em informações com menos dimensões (duas no caso dos mapas de votações por nós construídos). A redução de dimensões funciona como se enxergássemos apenas a ``sombra'' de determinado fenômeno. Embora seja uma informação simplificada e não completa, boa parte das vezes pode ser suficiente para melhorar o nosso entendimento sobre o fenômeno estudado, principalmente ao considerar que a informação original, n-dimensional, é de difícil assimilação devido a sua complexidade inerente.
 
-\Leo{Falar que implementamos o ACP no Radar Parlamentar.}
+A ACP é utilizada pelo aplicativo Radar Parlamentar\footnote{\url{http://radarparlamentar.polignu.org/}} para a elaboração de mapas espaciais de votações do legislativo brasileiro. Mas para que essa aplicação seja possível, não basta simplesmente ``usar a ACP''. Uma série de decisões devem ser tomadas, tais como a modelagem dos dados que servirá de entrada ao algoritmo da ACP, o que fazer com abstenções, como considerar não só parlamentares mas também partidos, como comparar mapas de períodos diferentes, como tratar a mudança de partido de um legislador etc.
 
-Os objetivos deste trabalho são:
+Dessa forma, o objetivo deste artigo é \emph{apresentar e avaliar uma abordagem completa para a elaboração de mapas de votações espaciais para o legislativo brasileiro}. A abordagem aqui apresentada é basicamente a mesma utilizada pelo software Radar Parlamentar, porém com alguns ajustes menores para a apresentação impressa, sem os recursos interativos da web.
 
-\begin{itemize}
-\item Contextualizar o uso da ACP no histórico da literatura de análise quantitativa de votações nominais em casa legislativas.
-\item Apresentar nossa abordagem do uso da ACP no contexto brasileiro, com o devido preenchimento de algumas lacunas da literatura.
-\item Mostrar os resultados da aplicação de nossa abordagem para a ACP nas casas legislativas federais do Brasil.
-\end{itemize}
+São contribuições deste artigo: apresentação didática e detalhada dos principais trabalhos da literatura sobre modelos espaciais de votações parlamentares; apresentação da nossa abordagem utilizando a ACP aplicada ao legislativo brasileiro; apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar para que outros pesquisadores possam avançar em pesquisas futuras sobre análise quantitativa de votações parlamentares.
 
-\Leo{Talvez não tentar vender o ``algoritmo PCA'', mas o Radar como uma solução completa para a visualização de mapas espaciais de votações do legislativo brasileiro... que inclui o uso do PCA, cuidados para a análise temporal, controle de escala, função de zoom, agregação por partidos, tratamento de abstenções etc etc}
-
-Este artigo está organizado da seguinte forma: ...
+Este artigo está organizado da seguinte forma: na Seção~\ref{sec:formulacao} introduzimos o uso da ACP e nossa modelagem de votações legislativas; na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:aspectos} apresentamos o detalhamento de nossa abordagem, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos como é realizada a avaliação do modelo, que é apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos, e discutida na Seção~\ref{sec:discussao}. Por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
 
 
 \section{A ACP para análise de votações nominais}
@@ -500,7 +492,7 @@ Questões de escala entre períodos...? Efeito de extremistas na visualização 
 
 Heckman encontra uma alta correção entre as coordenadas de um legislador ao longo do tempo (e não são apenas para as duas primeiras coordenadas... chega-se a até 6 ou 8 fatores com correlação ao longo do tempo). Mas duvido que no caso brasileiro essas correlações seriam altas.
 
-\section*{Questões de escala}
+\subsection*{Questões de escala}
 
 \Leo{Falar do recuro de zoom do radar}
 
