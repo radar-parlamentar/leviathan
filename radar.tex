@@ -527,6 +527,13 @@ Heckman encontra uma alta correção entre as coordenadas de um legislador ao lo
 
 \ins{Aqui, explicar os indicadores e tal: taxa de classificação correta, apre e variância.}
 
+\Leo{Problematizando o preditor}:
+
+Problema da taxa de classificação correta na ACP: para modelar as votações, mapeando opções em valores numéricos, tudo bem. Mas o cálculo da taxa de classificação correta depende do mapeamento inverso, dado um valor entre -1 e 1 definir uma das opções (\yea, \nay ou ABSTENÇÃO). Definir os valores limiares desse mapeamento inverso é arbitrário, sendo que essa escolha arbitrária pode alterar drasticamente os valores obtidos. 
+
+Em vez de se valer da taxa de correta classificação, outra medida para avaliar o resultado do mapa espacial gerada pela ACP é o porcentual da variância dos dados explicados pelas dimensões utilizadas no mapa. No entanto, essa medida tem a desvantagem de não ser diretamente comparável com outros métodos.
+
+
 \section{Resultados}
 \label{sec:resultados}
 
@@ -649,11 +656,13 @@ O registro do hardware e sistema operacional é importante, pois para um mesmo c
 \section{Discussão}
 \label{sec:discussao}
 
-Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos na distribuição do mapa espacial que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. These findindgs illustrate the ``reasonableness'' of estimates obtained from our model. Vamos na mesma linha... mostrar que nossos mapas obtidos fazem sentido do ponto de vista político.
+Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos nos mapas espaciais por eles produzidos que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. Segundo eles, isso ilustra a ``razoabilidade'' dos mapas produzidos pelo modelo proposto. 
 
-\ins{Comparar pros e contras dos algoritmos, e contextualizar (ferramenta web, características brasil, vantagens políticas de análise mais transparente e simples etc.)}
+De forma similar, a ``razoabilidade'' de nossos resultados pode ser defendida por certos padrões políticos identificados, sendo o principal a polarização PT-PSDB, presente nos cinco mapas. Da mesma forma, o considerável espalhamento do PMDB nas casas federais poderia ser esperado.
 
-Pelos valores apresentados na Tabela~\ref{tab:fit}, podemos observar uma tendência de que a classificação correta na ACP seja ligeiramente melhor que a mesma taxa no \wnominate, enquanto que na APRE observamos a tendência de que seja melhor no \wnominate. Contudo, embora os algoritmos tenham importância nos resultados obtidos, observamos que esses indicadores também são influenciados pelos parâmetros \textsf{minvotes} e \textsf{lop}. Pela Tabela~\ref{tab:variando-lop}, que mostra resultados para a legislatura 2011-2014 da Câmara dos Deputados utilizando a ACP, observamos que quanto mais votações excluímos da análise, seja por \textsf{minvotes} ou \textsf{lop}, mais a taxa de classificação correta piora e mais a APRE melhora.
+Mas ao mesmo tempo em que os mapas confirmam padrões já esperados, também evidenciam outros comportamentos interessantes, mas não tão óbvios. Um deles é o relativo afastamento que se pode perceber do PMDB em relação ao PT na Câmara dos Deputados, quando se compara as legislaturas 2007-2010 e 2011-2014. Isso ilustra o processo de enfraquecimento da base parlamentar do governo do PT ocorrida ao longo do tempo \todo{conforme discorrido por X [citação de algum cientista político]}.
+
+Pelos valores apresentados na Tabela~\ref{tab:fit}, podemos observar a tendência de que a classificação correta na ACP seja ligeiramente melhor que a mesma taxa no \wnominate, enquanto que a APRE seja melhor no \wnominate. Contudo, embora os algoritmos tenham importância nos resultados obtidos, observamos que esses indicadores também são influenciados pelos parâmetros \textsf{minvotes} e \textsf{lop}. Pela Tabela~\ref{tab:variando-lop}, que mostra resultados para a legislatura 2011-2014 da Câmara dos Deputados utilizando a ACP, observamos que quanto mais votações excluímos da análise, seja por \textsf{minvotes} ou \textsf{lop}, mais a taxa de classificação correta piora e mais a APRE melhora.
 
 
 \begin{table}
@@ -670,9 +679,7 @@ Pelos valores apresentados na Tabela~\ref{tab:fit}, podemos observar uma tendên
 \label{tab:variando-lop}
 \end{table}
 
-\Leo{APRE parece melhor do wnominate, mas pode ser efeito de lop}
-
-Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} são: 1) Aparentemente o \wnominate não converge com \textsf{minvotes=0} e \textsf{lop=0.0}. Em nossas execuções, meia-hora não foi suficiente para as análises das legislaturas do senado (sen2007-2010 e sen2011-2014). 2) Utilizar \textsf{minvotes=20} e \textsf{lop=0.025} para a ACP resultou em mapas espaciais sem significado político aparente, causando a impressão de um mapa construído aleatoriamente, conforme pode-se verificar na Figura~\ref{fig:mapa-ruim}. Nesse mapa, nem mesmo a polarização PT vs PSDB é possível de se identificar.
+Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} são: 1) Aparentemente o \wnominate não converge com \textsf{minvotes=0} e \textsf{lop=0.0}. Em nossas execuções, meia-hora não foi suficiente para as análises das legislaturas do senado (sen2007-2010 e sen2011-2014). 2) Utilizar \textsf{minvotes=20} e \textsf{lop=0.025} para a ACP resultou em mapas espaciais sem significado político aparente, causando a impressão de um mapa construído aleatoriamente, conforme pode-se verificar na Figura~\ref{fig:mapa-ruim}. Nesse mapa, nem mesmo a polarização PT-PSDB é possível de se identificar.
 
 \begin{figure}[h!]
   \centering
@@ -681,21 +688,15 @@ Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} s
   \label{fig:mapa-ruim}
 \end{figure}
 
-\todo{quantidade de votações e parlamentares excluídos no wnominate}
+Para o mapa apresentado na Figura~\ref{fig:mapa-ruim}, os parâmetros utilizados resultam em 87 de 808 legisladores descartados e 115 de 382 votações excluídas. Esses valores provavelmente são bem maiores do que cientistas políticos poderiam esperar de análise sobre o congresso americano \todo{citar algo?}. 
 
-\Leo{pela tabela, o senado parece ser mais afetado pela dimensionalidade. Uma coincidência interessante é que o senado é tb o único a ser sensivelmente afetado quanto ao aspecto do mapa quando da mudança de lop de -1 para 0}
+Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se a tese defendida por Heckman e Snyder~\cite{heckman-snyder1997}: a de que modelos lineares são bem mais eficientes. Em nosso caso, encontramos que a ACP foi até 517 vezes mais rápida que o \wnominate, o que ocorreu para a Câmara Municipal de São Paulo. É interessante também notar na Tabela~\ref{tab:tempos} que os desvios padrão são relativamente pequenos, tanto para a ACP quanto para o \wnominate, o que evidencia uma boa previsibilidade quanto ao tempo de execução para ambos os algoritmos.
 
-\todo{comentar tempo de execução... confirmando Hackman}
-
-\Leo{Problematizando o preditor}:
-
-Problema da taxa de classificação correta na ACP: para modelar as votações, mapeando opções em valores numéricos, tudo bem. Mas o cálculo da taxa de classificação correta depende do mapeamento inverso, dado um valor entre -1 e 1 definir uma das opções (\yea, \nay ou ABSTENÇÃO). Definir os valores limiares desse mapeamento inverso é arbitrário, sendo que essa escolha arbitrária pode alterar drasticamente os valores obtidos. 
-
-Em vez de se valer da taxa de correta classificação, outra medida para avaliar o resultado do mapa espacial gerada pela ACP é o porcentual da variância dos dados explicados pelas dimensões utilizadas no mapa. No entanto, essa medida tem a desvantagem de não ser diretamente comparável com outros métodos.
+\Leo{Aqui talvez o Saulo queira encerrar com mais algumas palavras sobre a ACP, como sobre a simplicidade e transparência da ACP e a fácil interpretação do mapa produzido.}
 
 \subsection*{Análise intertemporal}
 
-Observa-se pelas Figuras~\ref{fig:cdep2007-2010} e \ref{fig:cdep2011-2014} que os dois mapas possuem a mesma orientação, ou seja, a polarização entre os principais partidos se mantém na mesma distribuição espacial: PT na região inferior esquerda e PSDB na região direita. Também é possível observar um afastamento médio do PMDB em relação a base governista. 
+Observa-se pelas Figuras~\ref{fig:cdep2007-2010} e \ref{fig:cdep2011-2014} que os dois mapas possuem a mesma orientação, ou seja, a polarização entre os principais partidos se mantém na mesma distribuição espacial: PT na região inferior esquerda e PSDB na região direita. 
 
 No entanto, a ACP não garante essa orientação entre mapas de períodos diferentes. Pode-se observar nas Figuras~\ref{fig:sen2007-2010} e \ref{fig:sen2011-2014} que uma melhor comparação entre os mapas é possível ao se espelhar verticalmente a segunda figura, como podemos ver na Figura~\ref{fig:sen-rotacao}. É esse processo de espelhamento, ou rotação, que ocorre quando da aplicação do algoritmo de análise intertemporal apresentado na Seção~\ref{sec:aspectos}.
 
