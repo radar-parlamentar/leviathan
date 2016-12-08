@@ -95,7 +95,7 @@ O objetivo desses modelos de escalonamento dimensional é representar os parlame
 Existe uma literatura relativamente ampla sobre o assunto focando no Congresso Americano ou outras entidades estadounidenses como a suprema corte, inclusive comparando o desempenho de diferentes modelos 
 %\cite{poole1985nominate}man-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
 \cite{poole-rosenthal2000,clinton2004ideal},
-mas são poucos os estudos de votações em entidades brasileiras. Um exemplo é Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02cdep}.
+mas são poucos os estudos de votações em entidades brasileiras. Um exemplo é o estudo de Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02cdep}.
 
 A Análise de Componentes Principais (ACP) é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados~\cite{DataMining2003}, estando amplamente disponível em softwares e bibliotecas de matemática e estatística. Com redução dimensional queremos dizer que algoritmos são aplicados a informações n-dimensionais (ex: atuação de vários parlamentares em várias votações) sendo simplificadas em informações com menos dimensões (duas no caso dos mapas de votações por nós construídos). A redução de dimensões funciona como se enxergássemos apenas a ``sombra'' de determinado fenômeno. Embora seja uma informação simplificada e não completa, boa parte das vezes pode ser suficiente para melhorar o nosso entendimento sobre o fenômeno estudado, principalmente ao considerar que a informação original, n-dimensional, é de difícil assimilação devido a sua complexidade inerente.
 
@@ -103,7 +103,7 @@ A ACP é utilizada pelo aplicativo Radar Parlamentar\footnote{\url{http://radarp
 
 Dessa forma, o objetivo deste artigo é \emph{apresentar e avaliar uma abordagem completa para a elaboração de mapas de votações espaciais para o legislativo brasileiro}. A abordagem aqui apresentada é basicamente a mesma utilizada pelo software Radar Parlamentar, porém com alguns ajustes menores para a apresentação impressa, sem os recursos interativos da web.
 
-São contribuições deste artigo: apresentação didática e detalhada dos principais trabalhos da literatura sobre modelos espaciais de votações parlamentares; apresentação da nossa abordagem utilizando a ACP aplicada ao legislativo brasileiro; apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar para que outros pesquisadores possam avançar em pesquisas futuras sobre análise quantitativa de votações parlamentares.
+São contribuições deste artigo: 1) apresentação didática e detalhada dos principais trabalhos da literatura sobre modelos espaciais de votações parlamentares; 2) apresentação da nossa abordagem utilizando a ACP aplicada ao legislativo brasileiro; 3) apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar para que outros pesquisadores possam avançar em pesquisas futuras sobre análise quantitativa de votações parlamentares.
 
 Este artigo está organizado da seguinte forma: na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:acp} apresentamos nossa abordagem para a elaboração de mapas espaciais de votação, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos como é realizada a avaliação do modelo, que é apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos, e discutida na Seção~\ref{sec:discussao}. Por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
 
@@ -118,13 +118,11 @@ Métodos de escalamento multidimensional analisam similaridades entre elementos 
 
 A aplicação de modelos multidimensionais em economia está relacionada com a elaboração de modelos de escolhas racionais, nos quais consumidores manifestam preferências sobre produtos. Esses mesmos princípios passaram a ser usados nas ciências políticas. Já na década de 70, Davis et al.~\cite{davis1970electoral} modelam matematicamente o processo no qual eleitores escolhem candidatos. Para cada candidato o cidadão avalia as posições dos candidatos em diferentes assuntos, o que fornece uma localização dos candidatos em um espaço multidimensional. A escolha feita pelo cidadão é função da localização dos candidatos e dele próprio nesse espaço. 
 
-\todo{revisar uso de ``et al.'' i.e.: não citar autor como se fosse o único quando há mais autores}
-
 Seguimos agora com a descrição de modelos multidimensionais voltados mais especificamente à elaboração de mapas espaciais de votações no âmbito de casas legislativas.
 
 \subsection*{Keith Poole: optimal classification e \nominate}
 
-Os trabalhos mais proeminentes publicados sobre a construção de mapas espaciais de votações são os de Keith Poole. Apresentaremos na sequência conceitos básicos utilizados por Poole na construção dos mapas especiais e os procedimentos utilizados para a construção dos mapas. Todos esses conceitos e procedimentos estão descritos detalhadamente no livro de Poole sobre modelos espaciais de votações~\cite{poole2005book}.
+Os trabalhos mais proeminentes publicados sobre a construção de mapas espaciais de votações são os de Keith Poole. Apresentaremos na sequência conceitos básicos e procedimentos utilizados por Poole na construção dos mapas espaciais. Todos esses conceitos e procedimentos estão descritos detalhadamente no livro de Poole sobre modelos espaciais de votações~\cite{poole2005book}.
 
 O primeiro conceito é do que seria uma \emph{votação perfeita}. Considere um mapa espacial de votações onde cada ponto representa um parlamentar e cada linha representa uma votação, de forma que pontos de um lado da linha representam parlamentares que votaram \yea, enquanto que os pontos do outro lado da linha representam parlamentares que votaram \nay. Para uma pequena quantidade de votações pode ser possível uma construção perfeita de tal mapa, como, por exemplo, podemos observar na Figura~\ref{fig:mapa-classificacao-perfeita}.
 
@@ -137,7 +135,7 @@ O primeiro conceito é do que seria uma \emph{votação perfeita}. Considere um 
 
 No exemplo fornecido, podemos ver pelo mapa que o parlamentar $p1$ votou \yea na votação $v1$ e \nay para a votação $v2$. Já $p2$ votou \yea para $v1$ e \yea para $v2$. Por fim, $p3$ votou \nay para $v1$ e \yea para $v2$. Como a partir do mapa descrevemos perfeitamente o comportamento dos parlamentares, dizemos que trata-se de uma votação perfeita.
 
-Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso é importante entender que o mapa de votações não é necessariamente construído de forma a descrever perfeitamente o comportamento dos parlamentares. Todo mapa gera distorções, e todo tipo de mapa procurar amenizar algum tipo de distorção. Em mapas de votações, uma ``distorção'' a ser amenizada é a quantidade de classificações incorretas presentes no mapa.
+Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso é importante entender que o mapa de votações não é necessariamente construído de forma a descrever perfeitamente o comportamento dos parlamentares. Todo mapa gera distorções, e todo tipo de mapa procura amenizar algum tipo de distorção. Em mapas de votações, uma ``distorção'' a ser amenizada é a quantidade de classificações incorretas presentes no mapa.
 
 Na concepção dos trabalhos de Poole, considera-se que em um mapa de votações cada parlamentar possui seu \emph{ponto ideal} no espaço. Nesse mesmo espaço, uma votação também possui pontos associados às suas possíveis opções (\yea e \nay). As retas que representam as votações na Figura~\ref{fig:mapa-classificacao-perfeita} são construídas em função dos pontos que representam suas respectivas votações. Dessa forma, a estimativa do comportamento de um parlamentar numa dada votação é função de relações entre seu ponto ideal e a representação espacial da votação. 
 
@@ -159,11 +157,11 @@ Após a construção do mapa podemos observar que normalmente alguns parlamentar
 
 Para a utilização do OC, não é preciso premissas sobre a distribuição da função utilidade. Apenas considerar que ela é simétrica e de pico-único. Embora o conceito de função utilidade não apareça diretamente na aplicação do algoritmo, ele é importante para explicar os erros de classificação, no sentido de que há uma certa probabilidade de que o legislador vote na opção contrária do que o mapa de votações indica.
 
-Como exemplo de aplicação, Poole~\cite{poole2005book} mostra os resultados do OC quando aplicado à votação de revogação das leis do milho na Casa dos Comuns do parlamento inglês em 1846. Nessa situação, o algoritmo apresentou uma taxa de classificação correta de 95,2\% para os 430 parlamentares que votaram nessa matéria. Já em outro estudo~\cite{poole-rosenthal2000}, analisando da 80ª à 104ª legislatura do senado dos EUA, Poole obteve taxas de classificação correta para duas dimensões que vão de 85,8\% a 91,3\%.
+Como exemplo de aplicação, Poole~\cite{poole2005book} mostra os resultados do OC quando aplicado à votação de revogação das leis do milho na Casa dos Comuns do parlamento inglês em 1846. Nessa situação, o algoritmo apresentou uma taxa de classificação correta de 95,2\% para os 430 parlamentares que votaram nessa matéria. Já em outro estudo~\cite{poole-rosenthal2000}, analisando da 80ª à 104ª legislatura do senado dos EUA, Poole e Rosenthal obtiveram taxas de classificação correta para duas dimensões que vão de 85,8\% a 91,3\%.
 
 O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui na verdade uma família de algoritmos com ligeiras variações entre si. Diferentemente do OC, o \nominate produz posições exatas dos pontos ideais de parlamentares e votações, podendo-se assim atribuir distâncias entre esses pontos. 
 
-No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos~\cite{clinton2004ideal} são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
+No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é a de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos~\cite{clinton2004ideal} são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
 
 \todo{Fazer figura ilustrativa de função exponencial vs função quadrática.}
 
@@ -174,7 +172,7 @@ A função utilidade utilizada pelo \nominate~\cite{poole1985nominate} é
 \[ U(x,o) = \beta * e^{\frac{-w^2*d^2}{2}} + \varepsilon,\] 
 
 \noindent
-onde $d$ representa a distância entre os pontos $x$ e $o$, dada por $|x -o|$. Quanto mais perto $z$ está de $o$, maior o valor de $U$, sendo $U$ simétrica e de pico único. $\beta$ e $w$ são parâmetros da função utilidade, sendo $\beta$ o fator de ruído, que determina o peso da parcela determinística da função utilidade. $\varepsilon$ é a parcela estocástica, que representa erros distribuídos independentemente conforme a distribuição logística. Poole afirma que teoricamente a distribuição normal para $\varepsilon$ seria mais adequada. No entanto, devido às limitações computacionais da época, Poole optou pela distribuição logística, que é mais simples do ponto de vista computacional e razoavelmente similar à função normal.
+onde $d$ representa a distância entre os pontos $x$ e $o$. Quanto mais perto $x$ está de $o$, maior o valor de $U$, sendo $U$ simétrica e de pico único. $\beta$ e $w$ são parâmetros da função utilidade, sendo $\beta$ o fator de ruído, que determina o peso da parcela determinística da função utilidade. $\varepsilon$ é a parcela estocástica, que representa erros distribuídos independentemente conforme a distribuição logística. Poole afirma que teoricamente a distribuição normal para $\varepsilon$ seria mais adequada. No entanto, devido às limitações computacionais da época, Poole optou pela distribuição logística, que é mais simples do ponto de vista computacional e razoavelmente similar à distribuição normal.
 
 No \nominate temos então três grupos de parâmetros: pontos ideias dos parlamentares (um $x$ para cada parlamentar), pontos ideais das opções das votações envolvidas (um $o_n$ e um $o_y$ para cada votação) e os parâmetros da função utilidade ($\beta$ e $w$). O objetivo do \nominate é encontrar os valores de todos esses parâmetros para que se possa desenhar o mapa espacial de votações.
 
@@ -189,7 +187,7 @@ Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do map
 %center the matrix of squared distances, and (4) perform an eigenvalue–
 %eigenvector decomposition of the double-centered matrix.
 
-Analisando 172 votações realizadas por 440 parlamentares na 85ª legislatura do congresso dos EUA, Poole~\cite{poole1985nominate} obtém uma taxa de classificação correta de 78,9\% utilizando o \nominate com apenas uma dimensão.
+Analisando 172 votações realizadas por 440 parlamentares na 85ª legislatura do congresso dos EUA, Poole e Rosenthal~\cite{poole1985nominate} obtêm uma taxa de classificação correta de 78,9\% utilizando o \nominate com apenas uma dimensão.
 
 \subsection*{Formas de se avaliar os resultados produzidos}
 
@@ -197,7 +195,7 @@ Para avaliar os resultados de um modelo espacial de votações podemos usar a ta
 
 No entanto, o problema é que modelos extremamente ingênuos podem obter boas taxas de classificação correta. Exemplo: o modelo pode prever que todos os parlamentares votam na opção vencedora. Dessa forma, numa votação em que 90\% dos legisladores votaram com a maioria, o modelo ingênuo teria apenas 10\% de erro. Por isso, utiliza-se também a PRE (redução proporcional do erro)~\cite{leoni02cdep}, que mede em quantos porcentos o erro foi reduzido do modelo ingênuo para o modelo avaliado. Ou seja,
 
-\[PRE = \frac{\textrm{votos da minoria} * \textrm{erros do modelo}}{\textrm{votos da minoria}}.\]
+\[PRE = \frac{\textrm{votos da minoria} - \textrm{erros do modelo}}{\textrm{votos da minoria}}.\]
 
 A fórmula da PRE considera apenas uma votação. Para se avaliar um conjunto de votações, se utiliza a APRE (redução proporcional do erro agregado)~\cite{leoni02cdep}, onde a quantidade de votos na minoria e a quantidade de erros são consideradas para todas as votações.
 
@@ -233,7 +231,7 @@ A primeira dimensão presente nos mapas de votações do legislativo americano e
 
 Já para Heckman e Snyder~\cite{heckman-snyder1997}, existem pelo menos cinco dimensões significativas. Essas dimensões a mais podem não fazer tanta diferença na taxa global de sucesso de classificação, mas são decisivas em algumas votações específicas, por representarem substantivamente assuntos específicos. Exemplos de tais assuntos: direitos civis e eleitorais, agricultura, ajuda internacional, gasto militar, teto da dívida, água, aborto e reforma do congresso.
 
-Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo em termos da taxa de classificação correta e da APRE. Izumi~\cite{izumi2016senado}, utilizando os mesmos critérios aplicados ao OC, também conclui pela unidimensionalidade do espaço legislativo do Senado brasileiro.
+Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo em termos da taxa de classificação correta e da APRE. Izumi~\cite{izumi2016senado}, utilizando os mesmos critérios de Leoni, mas aplicados ao OC, também conclui pela unidimensionalidade do espaço legislativo do Senado brasileiro.
 
 % leoni traduz "outcome" como "consequência política"
 
