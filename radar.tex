@@ -141,9 +141,14 @@ Na concepção dos trabalhos de Poole, considera-se que em um mapa de votações
 
 Dados os pontos ideias associados a parlamentares e votações, uma primeira abordagem simplista para determinar o voto do parlamentar em uma votação seria dizer que o parlamentar vota deterministicamente na opção mais próxima de seu ponto ideal. Mas em vez disso, Poole utiliza o conceito de \emph{função utilidade}, que atribui a cada ponto no espaço um valor. Quanto mais alto esse valor, maior é a \emph{probabilidade} de que o parlamentar vote na opção associada a esse ponto do espaço. 
 
-Duas premissas importantes são usualmente aplicadas às funções utilidade: 1) as funções são de pico único (i.e., possuem apenas um ponto de valor máximo), sendo esse pico localizado no ponto ideal do parlamentar; 2) a função é simétrica, ou seja, o parlamentar é indiferente a duas opções igualmente distantes de seu ponto ideal.
+Duas premissas importantes são usualmente aplicadas às funções utilidade: 1) as funções são de pico único (i.e., possuem apenas um ponto de valor máximo), sendo esse pico localizado no ponto ideal do parlamentar; 2) a função é simétrica, ou seja, o parlamentar é indiferente a duas opções igualmente distantes de seu ponto ideal. Uma função utilidade com essas características é ilustrada na Figura~\ref{fig:funcao_utilidade}.
 
-\todo{Fazer figura ilustrativa}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.6]{figs/funcao_utilidade.png}
+  \caption{Exemplo de função utilidade simétrica e de pico único. O eixo $x$ representa um espaço unidimensional de preferências políticas, enquanto que o eixo $y$ representa o valor da função utilidade correspondente a um dado $x$.}
+  \label{fig:funcao_utilidade}
+\end{figure}
 
 A função utilidade possui uma parcela determinística e também uma parcela estocástica, que possibilita a modelagem de \emph{erros de votação}. Um erro de votação seria a ideia de que o parlamentar não votou de acordo com suas preferências políticas. Um erro pode ter acontecido no sentido de que o parlamentar pode ter avaliado erroneamente a localização espacial das opções de uma dada votação. Mas o erro pode refletir também o fato de que fatores subjacentes não captados pelo modelo foram decisivos na determinação da opção escolhida.
 
@@ -161,9 +166,14 @@ Como exemplo de aplicação, Poole~\cite{poole2005book} mostra os resultados do 
 
 O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui na verdade uma família de algoritmos com ligeiras variações entre si. Diferentemente do OC, o \nominate produz posições exatas dos pontos ideais de parlamentares e votações, podendo-se assim atribuir distâncias entre esses pontos. 
 
-No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é a de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos~\cite{clinton2004ideal} são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas.
+No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é a de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos~\cite{clinton2004ideal} são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas. Essa diferença pode ser melhor entendida pelos gráficos da Figura~\ref{fig:exponencial_quadratica}.
 
-\todo{Fazer figura ilustrativa de função exponencial vs função quadrática.}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.6]{figs/exponencial_quadratica.png}
+  \caption{Ilustração gráfica da diferença entre uma função exponencial e uma função quadrática.}
+  \label{fig:exponencial_quadratica}
+\end{figure}
 
 Agora vamos detalhar a função utilidade utilizada no \nominate~\cite{poole1985nominate}. Considere a localização $x$ de um parlamentar e a localização $o$ de uma opção de uma votação. Essas localizações são pontos em um espaço multi-dimensional, onde cada dimensão representa preferências sobre um determinado tema político. Para uma votação temos $o_y$, a localização da opção \yea, e $o_n$, a localização da opção \nay. 
 
