@@ -440,11 +440,9 @@ Mas pelo menos sobre votações unânimes isso tem a parte ruim de deixar o mapa
 
 Nossa abordagem: quando o parlamentar troca de partido, se torna um novo parlamentar. Desvantagem: parlamentar estava no partido A no período 1 e foi para o partido B no período 2. Na matriz de votação que engloba os períodos 1 e 2, a linha do parlamentar no partido A estará cheias de direita à esquerda e a linha do parlamentar no partido B estará cheias de zeros à esquerda.
 
-Citar Izumi
+\todo{Citar Izumi}
 
 \subsection*{Análise temporal}
-
-\Leo{analista político... existe esse termo? hehe}
 
 Para o analista político é interessante visualizar como a conjuntura de alianças parlamentares se altera ao longo do tempo. Daí a necessidade de algoritmos que possibilitem a comparação entre mapas de votações de períodos distintos. Por conta dessa necessidade, desenvolvemos um algoritmo próprio de orientação e escalonamento de um conjunto de mapas de votações.
 
@@ -664,7 +662,7 @@ Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos nos map
 
 De forma similar, a ``razoabilidade'' de nossos resultados pode ser defendida por certos padrões políticos identificados, sendo o principal a polarização PT-PSDB, presente nos cinco mapas. Da mesma forma, o considerável espalhamento do PMDB nas casas federais poderia ser esperado.
 
-Mas ao mesmo tempo em que os mapas confirmam padrões já esperados, também evidenciam outros comportamentos interessantes, mas não tão óbvios. Um deles é o relativo afastamento que se pode perceber do PMDB em relação ao PT na Câmara dos Deputados, quando se compara as legislaturas 2007-2010 e 2011-2014. Isso ilustra o processo de enfraquecimento da base parlamentar do governo do PT ocorrida ao longo do tempo \todo{conforme discorrido por X [citação de algum cientista político]}.
+Mas ao mesmo tempo em que os mapas confirmam padrões já esperados, também evidenciam outros comportamentos interessantes, mas não tão óbvios. Um deles é o relativo afastamento que se pode perceber do PMDB em relação ao PT na Câmara dos Deputados, quando se compara as legislaturas 2007-2010 e 2011-2014. Isso parece ilustrar um processo de enfraquecimento da base parlamentar do governo do PT ao longo do tempo, o que parece fazer sentido considerando o impeachment de Dilma Rousseff.
 
 Pelos valores apresentados na Tabela~\ref{tab:fit}, podemos observar a tendência de que a classificação correta na ACP seja ligeiramente melhor que a mesma taxa no \wnominate, enquanto que a APRE seja melhor no \wnominate. Contudo, embora os algoritmos tenham importância nos resultados obtidos, observamos que esses indicadores também são influenciados pelos parâmetros \textsf{minvotes} e \textsf{lop}. Pela Tabela~\ref{tab:variando-lop}, que mostra resultados para a legislatura 2011-2014 da Câmara dos Deputados utilizando a ACP, observamos que quanto mais votações excluímos da análise, seja por \textsf{minvotes} ou \textsf{lop}, mais a taxa de classificação correta piora e mais a APRE melhora.
 
@@ -692,7 +690,7 @@ Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} s
   \label{fig:mapa-ruim}
 \end{figure}
 
-Para o mapa apresentado na Figura~\ref{fig:mapa-ruim}, os parâmetros utilizados resultam em 87 de 808 legisladores descartados e 115 de 382 votações excluídas. Esses valores provavelmente são bem maiores do que cientistas políticos poderiam esperar de análise sobre o congresso americano \todo{citar algo?}. 
+Para o mapa apresentado na Figura~\ref{fig:mapa-ruim}, os parâmetros utilizados resultam em 87 de 808 (10\%) legisladores descartados e 115 de 382 (30\%) votações excluídas. Esses valores provavelmente são bem maiores do que cientistas políticos poderiam esperar em análises sobre o congresso americano, considerando que, utilizando também \textsf{lop=0.025}, Poole descartou 10\% das votações da 85ª legislatura do congresso americano~\cite{poole1985nominate}. Além disso, segundo um levantamento realizado por Roller e Stamm~\cite{roller2014attendance}, em média um senador americano falta a 2,5\% das votações, enquanto que apenas dois senadores faltaram mais do que 10\% das vezes, sendo um desses devido a um derrame. 
 
 Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se a tese defendida por Heckman e Snyder~\cite{heckman-snyder1997}: a de que modelos lineares são bem mais eficientes. Em nosso caso, encontramos que a ACP foi até 517 vezes mais rápida que o \wnominate, o que ocorreu para a Câmara Municipal de São Paulo. É interessante também notar na Tabela~\ref{tab:tempos} que os desvios padrão são relativamente pequenos, tanto para a ACP quanto para o \wnominate, o que evidencia uma boa previsibilidade quanto ao tempo de execução para ambos os algoritmos.
 
