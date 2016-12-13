@@ -188,14 +188,7 @@ No \nominate temos então três grupos de parâmetros: pontos ideias dos parlame
 
 Dada uma configuração inicial de pontos ideias de legisladores e opções de votações, o \nominate aplica sucessivamente os três seguintes passos: 1) estima-se os parâmetros da função utilidade com base nos parâmetros dos legisladores e das votações; 2) estima-se os parâmetros dos legisladores com base nos parâmetros das votações e da função utilidade; 3) estima-se os parâmetros das votações com base nos parâmetros dos legisladores e da função utilidade. Cada um desses passos possui seu próprio algoritmo com suas complexidades. Os três passos são repetidos até a convergência, que é quando o refinamento para de ter efeito e os mesmos valores são produzidos.
 
-Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do mapa de votações a ser refinada. Poole define essa configuração inicial pelo seguinte processo: 1) constrói-se uma matriz de concordância entre parlamentares; 2) transforma-se os valores de concordância em distâncias quadráticas; 3) centraliza-se duplamente a matriz de distâncias quadráticas; 4) realiza-se sobre essa matriz uma decomposição de autovetores-autovalores. \Leo{O que comentar sobre esse processo maluco? Alguma relação com o PCA?} \Saulo{Total relação, o Nominate usa uma PCA como chute inicial. É disso que se está falando aqui.}
-
-% Texto original do parágrafo acima:
-%The best method I have found to get good starting values for the legisla-
-%tors is to (1) compute the legislator-by-legislator matrix of agreement scores,
-%(2) transform the agreement score matrix into squared distances, (3) double-
-%center the matrix of squared distances, and (4) perform an eigenvalue–
-%eigenvector decomposition of the double-centered matrix.
+Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do mapa de votações a ser refinada. Poole define essa configuração inicial por meio da análise de componentes principais.
 
 Analisando 172 votações realizadas por 440 parlamentares na 85ª legislatura do congresso dos EUA, Poole e Rosenthal~\cite{poole1985nominate} obtêm uma taxa de classificação correta de 78,9\% utilizando o \nominate com apenas uma dimensão.
 
