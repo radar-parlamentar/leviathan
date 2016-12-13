@@ -166,14 +166,18 @@ Como exemplo de aplicação, Poole~\cite{poole2005book} mostra os resultados do 
 
 O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui na verdade uma família de algoritmos com ligeiras variações entre si. Diferentemente do OC, o \nominate produz posições exatas dos pontos ideais de parlamentares e votações, podendo-se assim atribuir distâncias entre esses pontos. 
 
-No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é a de que a função utilidade é exponencial. Outra opção utilizada em outros trabalhos~\cite{clinton2004ideal} são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Com funções exponencias, as opção cada vez mais longe se tornam cada vez mais indistinguíveis, enquanto que na exponencial elas se tornam cada vez pior avaliadas. Essa diferença pode ser melhor entendida pelos gráficos da Figura~\ref{fig:exponencial_quadratica}.
+No \nominate temos algumas premissas a mais sobre as funções utilidade. A mais importante é a de que a função utilidade é gaussiana (também chamada de ``exponencial''). Outra opção utilizada em outros trabalhos~\cite{clinton2004ideal} são funções quadráticas. Essa diferença diz respeito a como o parlamentar vai se comportar em relação a opções cada vez mais longes de seu ponto ideal. Essa diferença pode ser visualizada nos gráficos da Figura~\ref{fig:gaussiana_quadratica}. 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[scale=0.6]{figs/exponencial_quadratica.png}
-  \caption{Ilustração gráfica da diferença entre uma função exponencial e uma função quadrática.}
-  \label{fig:exponencial_quadratica}
+  \includegraphics[scale=0.6]{figs/gaussiana_quadratica.png}
+  \caption{Ilustração gráfica da diferença entre uma função gaussiana e uma função quadrática.}
+  \label{fig:gaussiana_quadratica}
 \end{figure}
+
+Com funções gaussianas, as opções cada vez mais longes do ponto ideal se tornam cada vez mais indistinguíveis. Por exemplo: numa reforma do congresso, um parlamentar pode achar que uma casa legislativa com mais de 100 membros torne o debate inviável. Dessa forma, propostas de casas com 800 ou 1400 membros são igualmente ruins para o parlamentar, pois ambas já passaram do ponto aceitável.
+
+Já para funções quadráticas, conforme as opções se distanciam do ponto ideal, elas se tornam cada vez pior avaliadas. Por exemplo, um parlamentar que é contra o aumento de impostos vai achar que um aumento de 100\% é inaceitável, mas mesmo assim achará um aumento de 200\% ainda pior.
 
 Agora vamos detalhar a função utilidade utilizada no \nominate~\cite{poole1985nominate}. Considere a localização $x$ de um parlamentar e a localização $o$ de uma opção de uma votação. Essas localizações são pontos em um espaço multi-dimensional, onde cada dimensão representa preferências sobre um determinado tema político. Para uma votação temos $o_y$, a localização da opção \yea, e $o_n$, a localização da opção \nay. 
 
