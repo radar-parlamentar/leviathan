@@ -588,8 +588,6 @@ Os mapas espaciais de votações produzidos pela ACP são exibidos nas Figuras~\
   \label{fig:cmsp2013-2016}
 \end{figure}
 
-\todo{Atualizar dados cmsp. O recesso parlamentar da cmsp se inicia em 15 de dezembro. Então talvez valha a pena esperar essa data, assim garantimos que temos os dados da legislatura completa.}
-
 As medidas de adequação produzidas pela ACP são exibias na Tabela~\ref{tab:fit}. Nessa mesma tabela pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Por fim, na Tabela~\ref{tab:variacao-explicada-acp} apresentamos a porcentagem de variância retida por cada uma das dimensões principais da ACP. Nessas tabelas utilizamos as seguintes abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
 
 \begin{table}
@@ -605,7 +603,7 @@ cdep2007-2010 & 93 & 93 & 91 & 92 & 45 & 49 & 55 & 62 \\
 cdep2011-2014 & 88 & 90 & 87 & 89 & 27 & 37 & 42 & 52 \\ 
 sen2007-2010  & 89 & 96 & 92 & 93 & 24 & 62 & 67 & 74 \\ 
 sen2011-2014  & 88 & 93 & 87 & 90 & 25 & 40 & 46 & 56 \\ 
-cmsp2013-2016 & 94 & 96 & 96 & 97 & 58 & 70 & 77 & 83 \\ 
+cmsp2013-2016 & 96 & 96 & 96 & 97 & 68 & 71 & 78 & 84 \\ 
 \end{tabular} 
 \caption{Medidas de adequação produzidas pela ACP e pelo \wnominate nas casas legislativas e períodos analisados.}
 \label{tab:fit}
@@ -620,7 +618,7 @@ cdep2007-2010 & 1,26 $\pm$ 0,02 & 70,21 $\pm$ 1,67 \\
 cdep2011-2014 & 0,67 $\pm$ 0,03 & 54,18 $\pm$ 1,87 \\ 
 sen2007-2010  & 0,03 $\pm$ 0,01 & 2,22 $\pm$ 0,08  \\ 
 sen2011-2014  & 0,03 $\pm$ 0,00 & 3,27 $\pm$ 0,09  \\ 
-cmsp2013-2016 & 0,02 $\pm$ 0,00 & 10,35 $\pm$ 0,88  \\ 
+cmsp2013-2016 & 0,02 $\pm$ 0,00 & 7,17 $\pm$ 0,32  \\ 
 \end{tabular} 
 \caption{Tempos de execução, apresentando médias e desvios padrão em segundos, calculados com base em 10 execuções.}
 \label{tab:tempos}
@@ -636,7 +634,7 @@ cdep2007-2010 & 33 &  6 & 3 & 2 & 2 & 39  \\
 cdep2011-2014 & 18 &  8 & 5 & 3 & 3 & 26  \\ 
 sen2007-2010  & 27 & 17 & 6 & 4 & 3 & 44  \\ 
 sen2011-2014  & 24 & 13 & 7 & 3 & 3 & 37  \\ 
-cmsp2013-2016 & 41 &  8 & 6 & 4 & 3 & 49  \\ 
+cmsp2013-2016 & 43 &  7 & 5 & 4 & 3 & 50  \\ 
 \end{tabular} 
 \caption{Porcentagem da variância retida pelas dimensões da ACP.}
 \label{tab:variacao-explicada-acp}
@@ -648,9 +646,9 @@ Para a execução do \wnominate utilizamos as opções padrões de \textsf{minvo
 
 As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole. Já para o cálculo da ACP, utilizamos a função \textsf{prcomp}, nativamente disponível no R.
 
-Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. O sistema operacional utilizado foi o ArchLinux com kernel Linux  versão ``4.7.2-1-ARCH \#1 SMP PREEMPT Sat Aug 20 23:02:56 CEST 2016'' para arquitetura x86\_64. 
+Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. O sistema operacional utilizado foi o ArchLinux com kernel Linux arquitetura x86\_64 e versão 4.7.2 para o processamento dos dados da Câmara dos Deputados e do Senado e versão 4.8.13 para o processamento dos dados da Câmara Municipal de São Paulo. 
 
-O registro do hardware e sistema operacional é importante, pois para um mesmo conjunto de dados, mapas diferentes podem ser produzidos pela ACP em computadores diferentes, principalmente no que diz respeito à orientação do mapa. Essas diferenças acontecem principalmente devido a diferenças no tratamento dado a números de ponto flutuante em arquiteturas diferentes.
+O registro do hardware e sistema operacional é relevante, pois para um mesmo conjunto de dados, mapas diferentes podem ser produzidos pela ACP em computadores diferentes, principalmente no que diz respeito à orientação do mapa. Essas diferenças acontecem principalmente devido a diferenças no tratamento dado a números de ponto flutuante em arquiteturas diferentes.
 
 \section{Discussão}
 \label{sec:discussao}
@@ -689,7 +687,7 @@ Uma justificativa parcial para as escolhas de \textsf{minvotes} e \textsf{lop} s
 
 Para o mapa apresentado na Figura~\ref{fig:mapa-ruim}, os parâmetros utilizados resultam em 87 de 808 (10\%) legisladores descartados e 115 de 382 (30\%) votações excluídas. Esses valores provavelmente são bem maiores do que cientistas políticos poderiam esperar em análises sobre o congresso americano, considerando que, utilizando também \textsf{lop=0.025}, Poole descartou 10\% das votações da 85ª legislatura do congresso americano~\cite{poole1985nominate}. Além disso, segundo um levantamento realizado por Roller e Stamm~\cite{roller2014attendance}, em média um senador americano falta a 2,5\% das votações, enquanto que apenas dois senadores faltaram mais do que 10\% das vezes, sendo um desses devido a um derrame. 
 
-Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se a tese defendida por Heckman e Snyder~\cite{heckman-snyder1997}: a de que modelos lineares são bem mais eficientes. Em nosso caso, encontramos que a ACP foi até 517 vezes mais rápida que o \wnominate, o que ocorreu para a Câmara Municipal de São Paulo. É interessante também notar na Tabela~\ref{tab:tempos} que os desvios padrão são relativamente pequenos, tanto para a ACP quanto para o \wnominate, o que evidencia uma boa previsibilidade quanto ao tempo de execução para ambos os algoritmos.
+Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se a tese defendida por Heckman e Snyder~\cite{heckman-snyder1997}: a de que modelos lineares são bem mais eficientes. Em nosso caso, encontramos que a ACP foi até 358 vezes mais rápida que o \wnominate, o que ocorreu para a Câmara Municipal de São Paulo. É interessante também notar na Tabela~\ref{tab:tempos} que os desvios padrão são relativamente pequenos, tanto para a ACP quanto para o \wnominate, o que evidencia uma boa previsibilidade quanto ao tempo de execução para ambos os algoritmos.
 
 \Leo{Aqui talvez o Saulo queira encerrar com mais algumas palavras sobre a ACP, como sobre a simplicidade e transparência da ACP e a fácil interpretação do mapa produzido.}
 
@@ -708,7 +706,7 @@ No entanto, a ACP não garante essa orientação entre mapas de períodos difere
 
 \subsection*{Análise de dimensionalidade}
 
-Pelos números da Tabela~\ref{tab:variacao-explicada-acp}, observamos que a explicação acrescentada pela segunda dimensão não é desprezível, principalmente nas legislaturas do senado. Também observamos que em alguns casos, a explicação acrescentada pela terceira dimensão também possui poder explicativo quando comparado com a explicação fornecida pelas outras dimensões, caso no qual se destaca a legislatura cdep2011-2014. Temos ainda que mesmo que a partir da terceira dimensão pouco se acrescente, a utilização das duas primeiras dimensões possui poder explicativo modesto, com valores encontrados indo de 26\% a 49\%. 
+Pelos números da Tabela~\ref{tab:variacao-explicada-acp}, observamos que a explicação acrescentada pela segunda dimensão não é desprezível, principalmente nas legislaturas do senado. Também observamos que em alguns casos, a explicação acrescentada pela terceira dimensão possui poder explicativo considerável quando comparado com a explicação fornecida pelas outras dimensões, caso no qual se destaca a legislatura cdep2011-2014. Temos ainda que mesmo que a partir da terceira dimensão pouco se acrescente, a utilização das duas primeiras dimensões possui poder explicativo modesto, com valores encontrados indo de 26\% a 50\%. 
 
 Essa análise sobre os números apresentados pela Tabela~\ref{tab:variacao-explicada-acp} levam a um entendimento de que o legislativo brasileiro opera em uma realidade multidimensional. Ou pelo menos de que idealmente os mapas espaciais de votações deveriam ser construídos com mais dimensões para que diferenças significativas entre os parlamentares fossem visualizadas. 
 
