@@ -226,7 +226,7 @@ Para Heckman e Snyder, a decisão de se votar \yea ou \nay em uma votação é m
 
 A função utilidade de Heckman e Snyder, assim como a do NOMINATE, é incrementada com uma parcela de erros aleatórios. Considera-se que uma das fontes de erro seja a dificuldade para o parlamentar estimar o valor de cada característica. 
 
-Os autores utilizam diferentes métodos algébricos para estimar as preferências dos legisladores. Um dos métodos mais simples utilizados é justamente a Análise de Componentes Principais (ACP). \Leo{Elaborar relação entre o PCA e a função utilidade. No que o nosso uso aparentemente mais simples da PCA é diferente do uso aparentemente mais elaborado da PCA como feito por Heckman?}
+Os autores utilizam diferentes métodos algébricos para estimar as preferências dos legisladores. Um dos métodos mais simples utilizados é justamente a Análise de Componentes Principais (ACP). 
 
 \subsection*{Dimensionalidade dos mapas de votações}
 
@@ -242,18 +242,11 @@ Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que um
 
 % leoni traduz "outcome" como "consequência política"
 
-\subsection*{Discussão}
-
-\Leo{Oi Saulo, principalmente essa parte que eu queria ver oq vc acha... se oq tá escrito aí não é besteira =S}
-
-\Saulo{Leo, acho que você teve a sensação de que poderia ter um erro conceitual ao dizer nessa seção que a abordagem não tem uma teoria por trás. De fato, ao fazermos a PCA estamos assumindo de forma implícita as mesmas coisas basicamente que Heckman e Snyder. Nosso modelo é praticamente o mesmo que o deles, na verdade eu não sei se há alguma diferença além da tendência deles de dar mais ênfase a interpretação do significado das dimensões, enquanto nós nos preocupamos mais com a interpretação mais pragmática de estimar as distâncias entre parlamentares. Me parece que a hipótese de função de utilidade quadrática (de Heckman-Snyder) está relacionada ao fato de que a PCA minimiza distâncias euclidianas, ou seja, quadráticas. Ao fazermos uma "fotografia puramente algébrica" adotamos um algoritmo para fazer isso; o algoritmo que escolhemos não é o único possível. Diz-se que esta é a forma que mais minimiza a perda de informação, porém ao dizer isso pressupõe-se uma métrica; se usássemos outra métrica o resultado seria outro.}
+\subsection*{Relação entre nossa abordagem e os trabalhos relacionados}
 
 Como visto, os trabalhos em ciências políticas normalmente não buscam somente a elaboração de mapas espaciais de votações, mas também a elaboração de teorias e modelos que embasem esses mapas. Porém, toda teoria parte de algumas suposições, que no caso concreto podem ou não serem verdadeiras. Davis et al.~\cite{davis1970electoral}, por exemplo, pressupõe que todos os eleitores avaliam os candidatos sob o prisma dos mesmo assuntos. Poole, tanto no OC quanto no \nominate, pressupõe funções utilidade simétricas e de pico único. Já no \nominate, temos ainda que considerar que erros são independentes e identicamente distribuídos. Mesmo Heckman e Snyder~\cite{heckman-snyder1997}, que utilizam modelos lineares, se apoiam fortemente em modelos de escolha discretas, considerando que o legislador modela suas preferências de forma multidimensional e aplica uma função utilidade quadrática sobre esses valores para tomar sua decisão.
 
-Embora o uso de suposições para a elaboração de teorias seja comum e necessário, podemos aqui ponderar sobre uma vantagem da utilização da ACP para a elaboração dos mapas de votações. Como trata-se de uma abordagem puramente algébrica, sem uma teoria por trás, podemos entender o gráfico gerado pela ACP como uma fotografia do comportamento dos parlamentares em um determinado período. Essa fotografia não é perfeita, há uma perda de informação, mas que pode ser medida como veremos mais a frente. Essa fotografia não traz consigo explicações sobre o processo de decisão ou do porquê dos resultados, mas possibilita a um analista político que faça considerações sobre a conjuntura política de uma determinada casa legislativa em um determinado período, ajudando o analista a chegar a possíveis conclusões.
-
-Ou seja, mesmo sem o embasamento de uma teoria, o mapa de votações produzido pela ACP é útil. E justamente por não estar baseado em uma teoria forte, pode-se dizer que esse mapa não tem a validade limitada por suposições que podem não ser verdadeiras no caso concreto. \Saulo{Em suma, entendo o que você quer dizer aqui, mas acho que não está correto dizer dessa forma. Existe uma teoria por trás sim. Nossas suposições são similares as de Heckman e Snyder. Na minha opinião a força deste tipo de modelo é que as suposições são simples, e o modelo é fácil de interpretar, fácil de reproduzir, e dá resultados parecidos com os outros modelos, então se o objetivo é informar o público mais amplo este modelo é suficiente, e até, pela simplicidade, preferível.}
-
+Nossa abordagem para a análise do espaço de votações é muito similar ao modelo de Heckman e Snyder, utilizando inclusive a análise de componentes principais. No entanto, pode-se considerar que há alguma diferenciação sutil. Não assumimos explicitamente algumas condições, como funções utilidade quadráticas ou que o parlamentar avalie as proposições sempre de acordo com o mesmo conjunto de características. Preferimos também focar no significado das distâncias entre os parlamentares no mapa espacial, sem valorizar possíveis significados das dimensões dos mapas produzidos. Dessa forma, acreditamos que nosso modelo tenha uma interpretação simples e intuitiva, de forma que nossa abordagem seja suficientemente útil e prática no apoio a análises conjunturais realizadas por analistas políticos. Além disso, nosso modelo possui medidas de avaliação similares ao consagrado \wnominate, como veremos mais a frente.
 
 \section{A ACP para análise de votações nominais}
 \label{sec:acp}
@@ -505,10 +498,6 @@ Questões de escala entre períodos...? Efeito de extremistas na visualização 
 \Leo{Comparar em linhas gerais nosso método de análise temporal com o D-NOMINATE (dynamic nominate).}
 
 Heckman encontra uma alta correção entre as coordenadas de um legislador ao longo do tempo (e não são apenas para as duas primeiras coordenadas... chega-se a até 6 ou 8 fatores com correlação ao longo do tempo). Mas duvido que no caso brasileiro essas correlações seriam altas.
-
-\subsection*{Questões de escala}
-
-\Leo{Falar do recuro de zoom do radar}
 
 \section{Medidas de Avaliação do Modelo}
 \label{sec:avaliacao}
