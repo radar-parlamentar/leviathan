@@ -430,7 +430,9 @@ Mas pelo menos sobre votações unânimes isso tem a parte ruim de deixar o mapa
 
 Em nossa abordagem, quando um parlamentar troca de partido, ele se torna um novo parlamentar em nosso modelo. Consideremos que temos um parlamentar $p_1$ nas votações $v_1, ..., v_k$, e que esse parlamentar troca de partido após a votação $v_k$. Então no modelo surge um novo parlamentar $p_2$, que vota nas votações $v_{k+1}, ..., v_n$. A desvantagem dessa estratégia é que o modelo interpreta que $p_1$ é um parlamentar que se absteve nas votações $v_{k+1}, ..., v_n$, enquanto que $p_2$ é um parlamentar que absteve nas votações $v_1, ..., v_k$. Isso faz com que parlamentares que tenham trocado de partido tendam a se aproximar mais da posição ideal daqueles que abstiveram em todas as votações, o que pode vir a gerar interpretações precipitadas do mapa caso o leitor não tenha ciência dessa decisão de modelagem.
 
-\todo{Citar Izumi}
+A estratégia por nós adotada é a mesma de Poole e Rosenthal~\cite{poole2007ideology}. Porém outras opções são possíveis. Leoni~\cite{leoni02cdep} adota um único ponto ideal para um parlamentar que troque de partido, ou seja, a mudança de partido não impacta o resultado do mapa espacial. Já Izumi~\cite{izumi2016senado}, utiliza o modelo de mudança de coalizão, no qual o parlamentar é representado por dois pontos ideais no mapa espacial apenas se a mudança partidária consiste em uma mudança de coalização, ou seja, se o parlamentar foi da base governista para a oposição ou vice-versa. Izumi defende que o modelo de mudança de coalização é o mais flexível e com maior sustentação teórica. 
+
+Em nossos mapas espaciais de votações, o partido dos parlamentares é destacado por meio das cores dos pontos que representam os parlamentares. Essa é uma estratégia incomum na literatura. Nesse contexto, em que a representação do partido se destaca no mapa, não julgamos adequado representar por um mesmo ponto votos dados sob por diferentes partidos. Essa consideração é nossa justificativa para ter adotado a estratégia de considerar que a migração partidária gera um novo parlamentar no modelo.
 
 \subsection*{Análise temporal}
 
