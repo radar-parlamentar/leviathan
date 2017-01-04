@@ -428,7 +428,7 @@ Mas pelo menos sobre votações unânimes isso tem a parte ruim de deixar o mapa
 
 \subsection*{Lidando com migração partidária}
 
-Nossa abordagem: quando o parlamentar troca de partido, se torna um novo parlamentar. Desvantagem: parlamentar estava no partido A no período 1 e foi para o partido B no período 2. Na matriz de votação que engloba os períodos 1 e 2, a linha do parlamentar no partido A estará cheias de direita à esquerda e a linha do parlamentar no partido B estará cheias de zeros à esquerda.
+Em nossa abordagem, quando um parlamentar troca de partido, ele se torna um novo parlamentar em nosso modelo. Consideremos que temos um parlamentar $p_1$ nas votações $v_1, ..., v_k$, e que esse parlamentar troca de partido após a votação $v_k$. Então no modelo surge um novo parlamentar $p_2$, que vota nas votações $v_{k+1}, ..., v_n$. A desvantagem dessa estratégia é que o modelo interpreta que $p_1$ é um parlamentar que se absteve nas votações $v_{k+1}, ..., v_n$, enquanto que $p_2$ é um parlamentar que absteve nas votações $v_1, ..., v_k$. Isso faz com que parlamentares que tenham trocado de partido tendam a se aproximar mais da posição ideal daqueles que abstiveram em todas as votações, o que pode vir a gerar interpretações precipitadas do mapa caso o leitor não tenha ciência dessa decisão de modelagem.
 
 \todo{Citar Izumi}
 
