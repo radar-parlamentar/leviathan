@@ -449,7 +449,7 @@ O objetivo de nosso algoritmo para análise temporal não é possibilitar a comp
 
 O problema está no fato de que mesmo que pouco se altere entre as posições relativas dos parlamentares de um período para o outro (i.e. parlamentares continuaram votando com as mesmas alianças), um mesmo parlamentar pode ocupar posições totalmente diferentes nos diferentes mapas produzidos pela ACP. Até mesmo para exatamente o mesmo conjunto de votações, detalhes de precisão de cálculos devido a utilização de diferentes máquinas podem resultar em mapas rotacionados um em relação ao outro.
 
-Para melhor visualizar as mudanças nestas posições relativas é conveniente rotacionar o resultado de uma das análises em torno da origem, de tal forma que seja minimizada alguma medida das "distâncias" percorridas pelos partidos entre os períodos. A Figura~\ref{fig:rotacoes} ilustra essa ideia, em que o resultado da
+Para melhor visualizar as mudanças nestas posições relativas é conveniente rotacionar o resultado de uma das análises em torno da origem, de tal forma que seja minimizada alguma medida das ``distâncias'' percorridas pelos partidos entre os períodos. A Figura~\ref{fig:rotacoes} ilustra essa ideia, em que o resultado da
 ACP de 2011 foi rotacionado em 160º. \\
 
 \begin{figure}[h]
@@ -488,18 +488,26 @@ Para encontrar a solução basta calcular $E(\theta)$ para os $\theta$ que satis
 
 O mesmo procedimento deve ser repetido espelhando-se um dos eixos (por exemplo multiplicando todas as coordenadas $x$ por -1), já que o sentido dos eixos que resulta da ACP é arbitrário. Assim o problema se resume à avaliação de $E(\theta)$ em 4 casos (espelhado e não-espelhado, cada um com dois valores de $\theta$), e escolha do caso que resultar no mínimo.
 
-O resultado desse algoritmo pode ser exemplificado pela Figura~\ref{fig:fhc2-lula1}, com a ressalva de que o algoritmo de rotação é aplicado ao mapa de parlamnetares e que os partidos visualizados são meramente os centroides dos parlamentares que os compõe.
+O resultado desse algoritmo pode ser exemplificado pela Figura~\ref{fig:fhc2-lula1}, com a ressalva de que o algoritmo de rotação é aplicado ao mapa de parlamentares e que os partidos visualizados são meramente os centroides dos parlamentares que os compõe.
 
+\Leo{Questões de escala entre períodos...? Efeito de extremistas na visualização temporal: um extremista de um período afeta a visualização de outros períodos (deixando parlamentares muito concentrados). Procede ???}
+
+Poole e Rosenthal também criaram modelos para análise inter-temporal. Baseado no \wnominate, eles criaram o DW-NOMINATE~\cite{poole2001dnomiante}, i.e., o \wnominate dinâmico. Nesse modelo, o ponto ideal de um legislador deixa de ser um ponto e passa a ser uma função linear que representa a posição do parlamentar ao longo do tempo. Ou seja, a posição do legislador $i$, na dimensão $k$, na legislatura $t$ ($t=1,...,T$) é:
+
+\begin{equation}
+x_{ikt} = x_{ik0} + x_{ik1}t,
+\label{eq:dwnominate}
+\end{equation}
+
+onde $x_{ik0}$ e $x_{ik1}$ são constantes para o legislador $i$ na dimensão $k$.
+
+McCarty~\cite{mccarty2011measuring} explica que no modelo dinâmico dois parlamentares, digamos $p_1$ e $p_2$, que não coexistem na mesma legislatura podem ser comparados indiretamente por meio de algum outro parlamentar, $p_3$, que participe tanto da legislatura de $p_1$, quanto da legislatura de $p_2$. McCarty também faz ressalvas sobre a pertinência dessas comparações, uma vez que a agenda política e os debates em pauta se alteram ao longo do tempo.
 
 
 \%\%\%\%\%\%\%\%\\
 
 
-Questões de escala entre períodos...? Efeito de extremistas na visualização temporal: um extremista de um período afeta a visualização de outros períodos (deixando parlamentares muito concentrados). Procede ???
-
-\Leo{Comparar em linhas gerais nosso método de análise temporal com o D-NOMINATE (dynamic nominate).}
-
-Heckman encontra uma alta correção entre as coordenadas de um legislador ao longo do tempo (e não são apenas para as duas primeiras coordenadas... chega-se a até 6 ou 8 fatores com correlação ao longo do tempo). Mas duvido que no caso brasileiro essas correlações seriam altas.
+Heckman encontra uma alta correlação entre as coordenadas de um legislador ao longo do tempo (e não são apenas para as duas primeiras coordenadas... chega-se a até 6 ou 8 fatores com correlação ao longo do tempo). Mas duvido que no caso brasileiro essas correlações seriam altas.
 
 \section{Medidas de Avaliação do Modelo}
 \label{sec:avaliacao}
