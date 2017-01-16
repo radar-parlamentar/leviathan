@@ -101,11 +101,11 @@ A Análise de Componentes Principais (ACP) é o método estatístico mais popula
 
 A ACP é utilizada pelo aplicativo Radar Parlamentar\footnote{\url{http://radarparlamentar.polignu.org/}} para a elaboração de mapas espaciais de votações do legislativo brasileiro. Mas para que essa aplicação seja possível, não basta simplesmente ``usar a ACP''. Uma série de decisões devem ser tomadas, tais como a modelagem dos dados que servirá de entrada ao algoritmo da ACP, o que fazer com abstenções, como considerar não só parlamentares mas também partidos, como comparar mapas de períodos diferentes, como tratar a mudança de partido de um legislador etc.
 
-Dessa forma, o objetivo deste artigo é \emph{apresentar e avaliar uma abordagem completa para a elaboração de mapas de votações espaciais para o legislativo brasileiro}. A abordagem aqui apresentada é basicamente a mesma utilizada pelo software Radar Parlamentar, porém com alguns ajustes menores para a apresentação impressa, sem os recursos interativos da web.
+Dessa forma, o objetivo deste artigo é \emph{apresentar e avaliar uma abordagem completa para a elaboração de mapas espaciais de votações para o legislativo brasileiro}. A abordagem aqui apresentada é basicamente a mesma utilizada pelo software Radar Parlamentar, porém com alguns ajustes para a apresentação impressa, sem os recursos interativos da web.
 
-São contribuições deste artigo: 1) apresentação didática e detalhada dos principais trabalhos da literatura sobre modelos espaciais de votações parlamentares; 2) apresentação da nossa abordagem utilizando a ACP aplicada ao legislativo brasileiro; 3) apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate; 4) uma interpretação que entende o espaço de votações do legislativo brasileiro como multidimensional, diferentemente do que defendem outros trabalhos. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar para que outros pesquisadores possam avançar em pesquisas futuras sobre análise quantitativa de votações parlamentares.
+São contribuições deste artigo: 1) apresentação didática e detalhada dos principais conceitos e trabalhos da literatura sobre modelos espaciais de votações parlamentares; 2) apresentação da nossa abordagem utilizando a ACP aplicada ao legislativo brasileiro; 3) apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate; 4) uma interpretação que entende o espaço de votações do legislativo brasileiro como multidimensional, diferentemente do que defendem outros trabalhos. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar\footnote{\url{http://radarparlamentar.polignu.org/dados/downloads/}} para que outros pesquisadores possam mais facilmente avançar em pesquisas futuras sobre análise quantitativa de votações parlamentares.
 
-Este artigo está organizado da seguinte forma: na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:acp} apresentamos nossa abordagem para a elaboração de mapas espaciais de votação, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos como é realizada a avaliação do modelo, que é apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos, e discutida na Seção~\ref{sec:discussao}. Por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
+Este artigo está organizado da seguinte forma: na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:acp} apresentamos nossa abordagem para a elaboração de mapas espaciais de votações, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos o método de avaliação do modelo, sendo a avaliação apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos; a discussão dos resultados é feita na Seção~\ref{sec:discussao}; por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
 
 
 
@@ -120,7 +120,7 @@ A aplicação de modelos multidimensionais em economia está relacionada com a e
 
 Seguimos agora com a descrição de modelos multidimensionais voltados mais especificamente à elaboração de mapas espaciais de votações no âmbito de casas legislativas.
 
-\subsection*{Keith Poole: optimal classification e \nominate}
+\subsection{Keith Poole: optimal classification e \nominate}
 
 Os trabalhos mais proeminentes publicados sobre a construção de mapas espaciais de votações são os de Keith Poole. Apresentaremos na sequência conceitos básicos e procedimentos utilizados por Poole na construção dos mapas espaciais. Todos esses conceitos e procedimentos estão descritos detalhadamente no livro de Poole sobre modelos espaciais de votações~\cite{poole2005book}.
 
@@ -196,7 +196,7 @@ Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do map
 
 Analisando 172 votações realizadas por 440 parlamentares na 85ª legislatura do congresso dos EUA, Poole e Rosenthal~\cite{poole1985nominate} obtêm uma taxa de classificação correta de 78,9\% utilizando o \nominate com apenas uma dimensão.
 
-\subsection*{Formas de se avaliar os resultados produzidos}
+\subsection{Formas de se avaliar os resultados produzidos}
 
 Para avaliar os resultados de um modelo espacial de votações podemos usar a taxa de classificação correta, que nos informa a porcentagem de acertos e erros do modelo. Sendo $U$ a função utilidade, se os parâmetros obtidos pelo modelo definem que $U(\textrm{SIM}) > U(\textrm{NÃO})$ pra um determinado parlamentar em uma determinada votação, temos um acerto caso o parlamentar realmente tenha votado \yea naquela votação ou um erro se na realidade o parlamentar votou \nay.
 
@@ -206,7 +206,7 @@ No entanto, o problema é que modelos extremamente ingênuos podem obter boas ta
 
 A fórmula da PRE considera apenas uma votação. Para se avaliar um conjunto de votações, se utiliza a APRE (redução proporcional do erro agregado)~\cite{leoni02cdep}, onde a quantidade de votos na minoria e a quantidade de erros são consideradas para todas as votações.
 
-\subsection*{Aplicações no congresso brasileiro}
+\subsection{Aplicações no congresso brasileiro}
 
 Aplicando o \wnominate, uma das variações do \nominate, à Câmara dos Deputados, Leoni~\cite{leoni02cdep} encontra taxas de classificação correta de 86,4\% e 90,4\% para as 49ª e 50ª legislaturas respectivamente. Já em termos de APRE, as taxas encontradas são de 52,3\% e 64,8\% para as mesmas legislaturas.
 
@@ -218,7 +218,7 @@ Embasado por esses questionamentos, Izumi prefere adotar o Optimal Classificatio
 
 Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao OC. Como disse Poole~\cite{poole2000oc}, as únicas premissas para a aplicação do OC são 1) o espaço de escolha é euclideano; e 2) preferências são simétricas e de pico-único. Como o próprio Izumi disse, a simetria é uma premissa que pode ser questionada na prática, e essa não somente para o caso brasileiro.
 
-\subsection*{Modelos lineares de Heckman e Snyder}
+\subsection{Modelos lineares de Heckman e Snyder}
 
 Muitos trabalhos consideram modelos lineares para a análise de votações nominais menos adequados do que os modelos não lineares, como o \nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, demonstram rigorosamente a equivalência de modelos lineares com os resultados obtidos por Poole, tendo como principal vantagem a simplicidade e eficiência computacional dos métodos lineares.
 
@@ -228,7 +228,7 @@ A função utilidade de Heckman e Snyder, assim como a do NOMINATE, é increment
 
 Os autores utilizam diferentes métodos algébricos para estimar as preferências dos legisladores. Um dos métodos mais simples utilizados é justamente a Análise de Componentes Principais (ACP). 
 
-\subsection*{Dimensionalidade dos mapas de votações}
+\subsection{Dimensionalidade dos mapas de votações}
 
 Um debate existente na literatura é sobre a quantidade de dimensões necessárias para representar um mapa espacial de votações. De acordo com McCarty~\cite{mccarty2011measuring}, essa é uma polêmica sem conclusão definitiva.
 
@@ -242,7 +242,7 @@ Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que um
 
 % leoni traduz "outcome" como "consequência política"
 
-\subsection*{Relação entre nossa abordagem e os trabalhos relacionados}
+\subsection{Relação entre nossa abordagem e os trabalhos relacionados}
 
 Como visto, os trabalhos em ciências políticas normalmente não buscam somente a elaboração de mapas espaciais de votações, mas também a elaboração de teorias e modelos que embasem esses mapas. Porém, toda teoria parte de algumas suposições, que no caso concreto podem ou não serem verdadeiras. Davis et al.~\cite{davis1970electoral}, por exemplo, pressupõe que todos os eleitores avaliam os candidatos sob o prisma dos mesmo assuntos. Poole, tanto no OC quanto no \nominate, pressupõe funções utilidade simétricas e de pico único. Já no \nominate, temos ainda que considerar que erros são independentes e identicamente distribuídos. Mesmo Heckman e Snyder~\cite{heckman-snyder1997}, que utilizam modelos lineares, se apoiam fortemente em modelos de escolha discretas, considerando que o legislador modela suas preferências de forma multidimensional e aplica uma função utilidade quadrática sobre esses valores para tomar sua decisão.
 
@@ -251,20 +251,20 @@ Nossa abordagem para a análise do espaço de votações é muito similar ao mod
 \section{A ACP para análise de votações nominais}
 \label{sec:acp}
 
-Nesta seção apresentaremos nossa abordagem completa de análise quantitativa de votações nominais para a elaboração de mapas espaciais de votação. Algumas das decisões de modelagem apresentadas levam em conta características do legislativo brasileiro, o que diferencia nossa análise de outros trabalhos da literatura que usualmente focam no legislativo dos EUA.
+Nesta seção apresentamos nossa abordagem de análise quantitativa de votações nominais para a elaboração de mapas espaciais de votações. Algumas das decisões de modelagem apresentadas levam em conta características do legislativo brasileiro, o que diferencia nossa análise de outros trabalhos da literatura que usualmente focam no legislativo dos EUA. Comparando-se aos trabalhos conhecidos que focam no legislativo brasileiro, nos diferenciamos pelo método utilizado, utilizando a Análise de Componentes Principais em vez dos algoritmos propostos por Keith Poole.
 
-Considera-se uma casa legislativa com $M$ membros (parlamentares) e $N$ votações nominais de interesse. O voto $x_{ij}$ de um parlamentar $j$ em uma votação $i$ será modelado por um valor numérico como segue:
+Considere uma casa legislativa com $M$ parlamentares e $N$ votações nominais. O voto $x_{ij}$ de um parlamentar $j$ em uma votação $i$ será modelado por um valor numérico como segue:
 \[
    x_{ij} = \left\{ 
      \begin{array}{l l}
-        1 & \text{, se parlamentar votou \emph{sim}} \\
-       -1 & \text{, se parlamentar votou \emph{não}} \\
-        0 & \text{, em qualquer outro caso} 
+        1 & \text{, se parlamentar votou \yea} \\
+       -1 & \text{, se parlamentar votou \nay} \\
+        0 & \text{, em qualquer outro caso.} 
      \end{array} \right.
 \]
-Os outros casos além do sim e do não podem consistir em abstenção, obstrução ou ausência do parlamentar, ou situação em que este não esteja exercendo o mandato na data em que a votação ocorreu. Todos esses casos representam uma impossibilidade de verificar a opinião do parlamentar sobre a votação, e por isso são modelados por um valor euclidianamente equidistante das duas opções.
+Os outros casos além do \yea e do \nay podem consistir em abstenção, obstrução ou ausência do parlamentar, ou situação em que esse não esteja exercendo o mandato na data em que a votação ocorreu. Todos esses casos representam uma impossibilidade de verificar a opinião do parlamentar sobre a votação, e por isso são modelados por um valor euclidianamente equidistante das duas outras opções.
 
-Normalmente a análise de componentes principais não é adequada para variáveis categóricas, porém neste caso as categorias podem ser claramente representadas em um eixo cartesiano com dois extremos: SIM e NÃO. O valor de $x_{ij}$ pode ser interpretado como um estimador para um ponto de utilidade máxima $\xi_{ij}$ do legislador $j$ face à decisão $i$ situado em uma escala contínua de valores deste eixo, tal que quando $\xi_{ij} > 0$ o legislador tende a preferir o SIM, e com mais convicção ou maior importância dada à questão quanto mais distante do zero, e analogamente para $\xi_{ij} < 0$ e a opção NÃO. Ora, o comportamento observado que é o voto, por sua natureza categórica, não permite dizer o grau de importância dada ou a convicção com que o parlamentar decidiu por uma ou outra opção, mas é razoável supor que os $x_{ij}$ tal como definidos acima forneçam um estimador para os $\xi_{ij}$.
+Normalmente a análise de componentes principais não é adequada para variáveis categóricas, porém neste caso as categorias podem ser claramente representadas em um eixo cartesiano com dois extremos: SIM e NÃO. O valor de $x_{ij}$ pode ser interpretado como um estimador para o valor real $U_{ij}$ da função utilidade do legislador $j$ face à decisão $i$, tal que quando $U_{ij} > 0$ o legislador tende a preferir \yea. Quanto  quanto mais $U_{ij}$ está distante do zero, mais convicção ou mais importância é dada à questão. Analogamente, quanto mais negativo é $U_{ij}$, mais o legislador prefere a opção \nay. Ora, o comportamento observado que é o voto, por sua natureza categórica, não permite dizer o grau de importância dada ou a convicção com que o parlamentar decidiu por uma ou outra opção, mas é razoável supor que os $x_{ij}$ tal como definidos acima forneçam um estimador para os $U_{ij}$.
 
 Fica definida a matriz de votações $\mathbf{X}$:
 \medskip{}
@@ -287,7 +287,7 @@ Fica definida a matriz de votações $\mathbf{X}$:
             node[near end,left] {\scriptsize votações};
 }
 
-Por definição esta matriz contém apenas os valores -1, 0 e 1. Para realizar a análise de componentes principais, define-se a matriz centralizada $\mathbf{X^{*}}$, subtraindo de cada entrada a média da linha:
+Por definição essa matriz contém apenas os valores -1, 0 e 1. Para realizar a análise de componentes principais, define-se a matriz centralizada $\mathbf{X^{*}}$, subtraindo de cada entrada a média da linha:
 
 \begin{equation}
   x_{ij}^{*} = x_{ij} - \left< x_{ij} \right>_j 
@@ -319,17 +319,21 @@ A variância (amostral) var$(i)$ de cada votação, ou dimensão é:
 \label{eq:variancia}
 \end{equation}
 
-A análise de componentes principais consiste em uma rotação de base \textbf{R} deste espaço vetorial tal que os dados (centralizados) transformados $\mathbf{\Gamma} = \mathbf{R}\cdot \mathbf{X^{*}}$ concentram a máxima variância possível na primeira dimensão, a segunda dimensão possui a máxima variância possível sob a restrição de ser ortogonal à primeira, e assim sucessivamente. A cada vetor da nova base é dado o nome de \emph{componente principal}, os valores de $\mathbf{R}$ são chamados \emph{pesos} (ou \emph{loadings}) e as coordenadas obtidas em $\mathbf{\Gamma}$ são chamadas de \emph{scores}.
+A análise de componentes principais consiste em uma transformação linear que transforma a matriz $\mathbf{X^{*}}$ na matriz de \emph{scores} $\mathbf{Y}$ por meio de uma matriz de rotação \textbf{R}, de forma que  $\mathbf{Y} = \mathbf{R}\cdot \mathbf{X^{*}}$ concentra a máxima variância possível na primeira dimensão, a segunda maior variância na segunda dimensão sob a restrição de que a segunda dimensão seja ortogonal à primeira, e assim sucessivamente. A ACP fornece o algoritmo que encontra $\mathbf{Y}$ e $\mathbf{R}$ dado $\mathbf{X}$ e as restrições sobre $\mathbf{Y}$ explicadas. 
+
+%A cada vetor da nova base é dado o nome de \emph{componente principal}, os valores de $\mathbf{R}$ são chamados \emph{pesos} (ou \emph{loadings}) e as coordenadas obtidas em $\mathbf{Y}$ são chamadas de \emph{scores}.
 
 % A execução é tipicamente muito rápida, com complexidade $O(mn^2)$ onde $m>n$ são as dimensões da matriz de dados, utilizando a notação \emph{big-Oh}~\cite{golub-vanloan}. 
 
-Como a matriz de rotação $\mathbf{R}$ é ortonormal, sua inversa é igual à transposta $\mathbf{R}^{t}$, e tem-se $\mathbf{X^{*}} = \mathbf{R}^t \cdot \mathbf{\Gamma}$.
+Como a matriz de rotação $\mathbf{R}$ é ortonormal, sua inversa é igual à transposta $\mathbf{R}^{t}$, e tem-se $\mathbf{X^{*}} = \mathbf{R}^t \cdot \mathbf{Y}$, ou seja, podemos restaurar os valores de $\mathbf{X^{*}}$ a partir de $\mathbf{R}$ e $\mathbf{Y}$.
 
-Se forem mantidos apenas os $d \leq N$ primeiros componentes principais, a parte relevante da matriz de rotação, que chamaremos de $\mathbf{R}_{(d)}$, e da matriz de scores, $\mathbf{\Gamma}_{(d)}$, terão apenas $d$ linhas, e $\mathbf{R}_{(d)}^{t}\cdot \mathbf{\Gamma}_{(d)}$ será a melhor aproximação de $\mathbf{X^{*}}$ que pode ser obtida com um modelo linear deste tipo com $d$ dimensões, onde ``a melhor aproximação'' se refere à minimização da soma dos quadrados das diferenças das entradas\footnote{Em outras palavras, o modelo minimiza a norma de Frobenius da matriz de votações.}.
+Se forem mantidos apenas as $d \leq N$ primeiras componentes principais, a parte relevante da matriz de rotação, que chamaremos de $\mathbf{R}_{(d)}$, e da matriz de scores, $\mathbf{Y}_{(d)}$, terão apenas $d$ linhas, e $\mathbf{R}_{(d)}^{t}\cdot \mathbf{Y}_{(d)}$ será a melhor aproximação de $\mathbf{X^{*}}$ que pode ser obtida com um modelo linear deste tipo com $d$ dimensões, onde ``a melhor aproximação'' se refere à minimização da soma dos quadrados das diferenças das entradas.
 
-Utilizando uma nomenclatura usual em análise de votações legislativas, as coordenadas de cada parlamentar $j$ retidas em $\mathbf{\Gamma_{(d)}}$ podem ser entendidas como o \emph{ponto ideal} do parlamentar no espaço $d$-dimensional de preferências políticas.
+%\footnote{Em outras palavras, o modelo minimiza a norma de Frobenius da matriz de votações.}.
 
-Exemplificando para o caso comum em que $d=2$, a equação $\mathbf{X^{*}} \approx \mathbf{R}_{(2)}^{t} \cdot \mathbf{\Gamma}_{(2)}$ foi reescrita abaixo:
+Utilizando uma nomenclatura usual em análise de votações legislativas, as coordenadas de cada parlamentar $j$ retidas em $\mathbf{Y_{(d)}}$ podem ser entendidas como o \emph{ponto ideal} do parlamentar no espaço $d$-dimensional de preferências políticas.
+
+Exemplificando para o caso comum em que $d=2$, a equação $\mathbf{X^{*}} \approx \mathbf{R}_{(2)}^{t} \cdot \mathbf{Y}_{(2)}$ foi reescrita abaixo:
 \[
   \bbordermatrix{~  & ~ & ~ & ~_\text{membros} \cr
                 ~ & x^{*}_{11} & \ldots & x^{*}_{1M}   \cr
@@ -342,13 +346,13 @@ Exemplificando para o caso comum em que $d=2$, a equação $\mathbf{X^{*}} \appr
                 ~_\text{vot.} & R_{1N} & R_{2N} \cr
                 } \cdot
   \bbordermatrix{~  & ~ & ~ & ~_\text{membros} \cr
-                ~ & \gamma_{11} & \ldots & \gamma_{1M}   \cr
-                ~_\text{C.P.} & \gamma_{21} & \ldots & \gamma_{2M}   \cr
+                ~ & y_{11} & \ldots & y_{1M}   \cr
+                ~_\text{C.P.} & y_{21} & \ldots & y_{2M}   \cr
                 }
 \]
 
 
-\subsection*{Centralização e Normalização}
+\subsection{Centralização e Normalização}
 
 Em diversos contextos em que se aplica a ACP é comum realizar a \emph{centralização} (subtraindo de cada entrada o valor médio da linha) e a \emph{normalização} (multiplicando cada entrada por um fator de escala igual ao inverso da variância da linha, de forma a obter variância unitária para todas as direções da base original) de $\mathbf{X}$ antes de proceder à análise.
 
@@ -358,7 +362,7 @@ Já a normalização é em geral recomendável quando as componentes originais p
 
 Estas considerações sugerem a adoção da centralização, mas não da normalização, na análise de votações utilizando ACP.
 
-\subsection*{Escolha do Número de Dimensões \emph{d}}
+\subsection{Escolha do Número de Dimensões \emph{d}}
 
 O modelo será tanto mais preciso na classificação correta das votações quanto maior for o número de dimensões retidas $d \leq N$. Porém está claro que um modelo simples é mais útil: analisar cada uma do total de $N$ dimensões seria tão trabalhoso quanto analisar individualmente cada uma das $N$ votações (e tão completo quanto). O objetivo é simplificar, retendo o essencial da informação.
 
@@ -371,7 +375,7 @@ onde o numerador é a soma da variância das $d$ primeiras componentes principai
 
 Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adotar $d$ tal que se fosse adotado $d+1$ o ganho em $\nu_d$ seria pequeno. Dito isso, o critério é arbitrário, e deve depender do objetivo da análise. Para uma visualização do aspecto geral de distribuição dos parlamentares é prático utilizar $d=2$, já que assim a visualização no plano é muito mais simples. Seja qual for, a escolha deve vir acompanhada do valor de $\nu_d$ correspondente, afim de que se possa ter uma idéia de quanta informação está sendo desconsiderada.
 
-\subsection*{Análise por partido}
+\subsection{Análise por partido}
 
 No modelo apresentado, nada impede que os valores de $\mathbf{X}$ possuam valores reais, situados por exemplo no intervalo [-1;1], em vez de apenas os valores discretos \{-1;0;1\}. Esta observação permite uma extensão direta do modelo para analisar os parlamentares agregados por partido em vez de considerá-los individualmente, bastando considerar o voto médio do partido em cada votação antes de iniciar a análise.
 
@@ -402,7 +406,7 @@ A Figura~\ref{fig:centroide} permite visualizar o resultado do posicionamento do
   \label{fig:centroide}
 \end{figure}
 
-\subsection*{Tratamento de valores faltantes}
+\subsection{Tratamento de valores faltantes}
 
 Todos os métodos de análise de votações legislativas encontrados na literatura revisada descartam ausências e abstenções antes de iniciar a análise, considerando explicita- ou implicitamente que tais atitudes não trazem informação acerca das preferências políticas do legislador, e notando que tais situações representam a minoria dos casos. Por exemplo, Heckman e Snyder notam que as abstenções representam menos de 1\% dos votos para câmara e senado estadounidenses, e as assumem aleatórias em relação a resultados das votações e a preferências dos parlamentares \cite[p.40]{heckman-snyder1997}.
 
@@ -416,7 +420,7 @@ No caso da análise por partidos, ao excluir votos nulos do cálculo da média n
 
 
 
-\subsection*{Tratamento de votações unânimes}
+\subsection{Tratamento de votações unânimes}
 
 E tb de parlamentares que faltam bastante.
 
@@ -426,7 +430,7 @@ Mas pelo menos sobre votações unânimes isso tem a parte ruim de deixar o mapa
 
 \nominate faz uns cortes pra não pegar todo mundo.
 
-\subsection*{Lidando com migração partidária}
+\subsection{Lidando com migração partidária}
 
 Em nossa abordagem, quando um parlamentar troca de partido, ele se torna um novo parlamentar em nosso modelo. Consideremos que temos um parlamentar $p_1$ nas votações $v_1, ..., v_k$, e que esse parlamentar troca de partido após a votação $v_k$. Então no modelo surge um novo parlamentar $p_2$, que vota nas votações $v_{k+1}, ..., v_n$. A desvantagem dessa estratégia é que o modelo interpreta que $p_1$ é um parlamentar que se absteve nas votações $v_{k+1}, ..., v_n$, enquanto que $p_2$ é um parlamentar que absteve nas votações $v_1, ..., v_k$. Isso faz com que parlamentares que tenham trocado de partido tendam a se aproximar mais da posição ideal daqueles que abstiveram em todas as votações, o que pode vir a gerar interpretações precipitadas do mapa caso o leitor não tenha ciência dessa decisão de modelagem.
 
@@ -434,7 +438,7 @@ A estratégia por nós adotada é a mesma de Poole e Rosenthal~\cite{poole2007id
 
 Em nossos mapas espaciais de votações, o partido dos parlamentares é destacado por meio das cores dos pontos que representam os parlamentares. Essa é uma estratégia incomum na literatura. Nesse contexto, em que a representação do partido se destaca no mapa, não julgamos adequado representar por um mesmo ponto votos dados sob por diferentes partidos. Essa consideração é nossa justificativa para ter adotado a estratégia de considerar que a migração partidária gera um novo parlamentar no modelo.
 
-\subsection*{Análise temporal}
+\subsection{Análise temporal}
 
 Para o analista político é interessante visualizar como a conjuntura de alianças parlamentares se altera ao longo do tempo. Daí a necessidade de algoritmos que possibilitem a comparação entre mapas de votações de períodos distintos. Por conta dessa necessidade, desenvolvemos um algoritmo próprio de orientação e escalonamento de um conjunto de mapas de votações.
 
@@ -531,7 +535,7 @@ Tomemos um exemplo para melhor esclarecer a utilização da porcentagem da vari�
 \section{Resultados}
 \label{sec:resultados}
 
-Nesta seção apresentaremos os resultados que a ACP fornece quando aplicada a casas legislativas brasileiras. Os dados utilizados são os dados abertos provenientes das respectivas casas legislativas. Realizamos análises sobre votações das casas que, ao nosso conhecimento, disponibilizam abertamente os dados de votações nominais. São essas casas: Câmara dos Deputados, Senado e Câmara Municipal de São Paulo\footnote{O banco de dados completo com as votações sobre as quais trabalhamos pode ser acessado em \url{http://radarparlamentar.polignu.org/dados/downloads/}.}.
+Nesta seção apresentaremos os resultados que a ACP fornece quando aplicada a casas legislativas brasileiras. Os dados utilizados são os dados abertos provenientes das respectivas casas legislativas. Realizamos análises sobre votações das casas que, ao nosso conhecimento, disponibilizam abertamente os dados de votações nominais. São essas casas: Câmara dos Deputados, Senado e Câmara Municipal de São Paulo.
 
 Seguindo o mesmo procedimento adotado por Izumi~\cite{izumi2016senado} e Leoni~\cite{leoni02cdep}, adotamos a legislatura completa como unidade de análise. Assim, para a Câmara dos Deputados e para o Senado escolhemos as legislaturas 2007-2010 e 2011-2014. Dessa forma iremos mostrar o uso da ACP em diferentes casas e em diferentes momentos do tempo. Para a Câmara Municipal de São Paulo, devido a restrição de dados fornecidos, escolhemos a legislatura 2013-2016. 
 
@@ -686,7 +690,7 @@ Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se
 
 \Leo{Aqui talvez o Saulo queira encerrar com mais algumas palavras sobre a ACP, como sobre a simplicidade e transparência da ACP e a fácil interpretação do mapa produzido.}
 
-\subsection*{Análise intertemporal}
+\subsection{Análise intertemporal}
 
 Observa-se pelas Figuras~\ref{fig:cdep2007-2010} e \ref{fig:cdep2011-2014} que os dois mapas possuem a mesma orientação, ou seja, a polarização entre os principais partidos se mantém na mesma distribuição espacial: PT na região inferior esquerda e PSDB na região direita. 
 
@@ -699,7 +703,7 @@ No entanto, a ACP não garante essa orientação entre mapas de períodos difere
   \label{fig:sen-rotacao}
 \end{figure}
 
-\subsection*{Análise de dimensionalidade}
+\subsection{Análise de dimensionalidade}
 
 Pelos números da Tabela~\ref{tab:variacao-explicada-acp}, observamos que a explicação acrescentada pela segunda dimensão não é desprezível, principalmente nas legislaturas do senado. Também observamos que em alguns casos, a explicação acrescentada pela terceira dimensão possui poder explicativo considerável quando comparado com a explicação fornecida pelas outras dimensões, caso no qual se destaca a legislatura cdep2011-2014. Temos ainda que mesmo que a partir da terceira dimensão pouco se acrescente, a utilização das duas primeiras dimensões possui poder explicativo modesto, com valores encontrados indo de 26\% a 50\%. 
 
