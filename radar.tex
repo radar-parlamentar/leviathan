@@ -103,7 +103,7 @@ A ACP é utilizada pelo aplicativo Radar Parlamentar\footnote{\url{http://radarp
 
 Dessa forma, o objetivo deste artigo é \emph{apresentar e avaliar uma abordagem completa para a elaboração de mapas de votações espaciais para o legislativo brasileiro}. A abordagem aqui apresentada é basicamente a mesma utilizada pelo software Radar Parlamentar, porém com alguns ajustes menores para a apresentação impressa, sem os recursos interativos da web.
 
-São contribuições deste artigo: 1) apresentação didática e detalhada dos principais trabalhos da literatura sobre modelos espaciais de votações parlamentares; 2) apresentação da nossa abordagem utilizando a ACP aplicada ao legislativo brasileiro; 3) apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar para que outros pesquisadores possam avançar em pesquisas futuras sobre análise quantitativa de votações parlamentares.
+São contribuições deste artigo: 1) apresentação didática e detalhada dos principais trabalhos da literatura sobre modelos espaciais de votações parlamentares; 2) apresentação da nossa abordagem utilizando a ACP aplicada ao legislativo brasileiro; 3) apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate; 4) uma interpretação que entende o espaço de votações do legislativo brasileiro como multidimensional, diferentemente do que defendem outros trabalhos. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar para que outros pesquisadores possam avançar em pesquisas futuras sobre análise quantitativa de votações parlamentares.
 
 Este artigo está organizado da seguinte forma: na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:acp} apresentamos nossa abordagem para a elaboração de mapas espaciais de votação, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos como é realizada a avaliação do modelo, que é apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos, e discutida na Seção~\ref{sec:discussao}. Por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
 
@@ -524,9 +524,9 @@ Para $\widehat{x}_{ij} > 0$ o preditor prevê que o parlamentar $j$ vota SIM na 
 
 É claro que a definição de tal preditor depende de limiares arbitrários que mapeiam os valores reais de $\widehat{x}_{ij}$ para os valores discretos que representam opções em uma votação (\yea ou \nay). Então um problema dessa avaliação é que a escolha de outros limiares ou outros mapeamentos possíveis poderiam produzir resultados bem diferentes. Um exemplo seria associar uma faixa de valores de $\widehat{x}_{ij}$ à abstenção.
 
-Por isso apresentaremos também como medida de avaliação do modelo a porcentagem da variância retida pelas dimensões da ACP. Quanto maior é a variância retida em uma dimensão, mais essa dimensão é explicativa do fenômeno estudado. Uma desvantagem dessa medida é não ser diretamente comparável com outros métodos.
+Dados os problemas da utilização de medidas de avaliação baseadas no preditor, utilizaremos também outra abordagem de avaliação comumente aplicada à análise de componentes principais. Trata-se da avaliação da \emph{porcentagem da variância explicada pelas componentes principais}~\cite{DataMining2003}. Sobre cada componente principal há uma certa variância dos dados. A primeira componente possui uma variância maior do que a variância da segunda componente, que por sua vez possui uma variância maior do que a variância da terceira componente, e assim por diante. Quanto maior for a variância retida nas primeiras dimensões, mais explicativa são aquelas dimensões. 
 
-\Leo{Saulo, talvez você queria explicar melhor o que é a proporção da variância retida pelas componentes principais.}
+Tomemos um exemplo para melhor esclarecer a utilização da porcentagem da variância explicada pelas componentes principais. Consideremos que na primeira componente a variância seja 2, na segunda componente seja 1, na terceira 0.2 e na quarta 0.1. Nesse caso, dizemos que as duas primeiras componentes explicam juntas 90,9\% da variância. Ou seja, nesse caso um conjunto de dados de uma realidade quadridimensional pode ser bem explicado por um modelo bidimensional.
 
 \section{Resultados}
 \label{sec:resultados}
@@ -705,9 +705,9 @@ Pelos números da Tabela~\ref{tab:variacao-explicada-acp}, observamos que a expl
 
 Essa análise sobre os números apresentados pela Tabela~\ref{tab:variacao-explicada-acp} levam a um entendimento de que o legislativo brasileiro opera em uma realidade multidimensional. Ou pelo menos de que idealmente os mapas espaciais de votações deveriam ser construídos com mais dimensões para que diferenças significativas entre os parlamentares fossem visualizadas. 
 
-Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegam a mesma conclusão. Diferentemente, eles concluem pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença ocorre pois eles utilizam a taxa de classificação correta e a APRE como critérios para determinar a dimensionalidade do espaço legislativo.
+A ideia de que uma dimensionalidade maior seria mais adequada é corroborada pela referência de que uma proporção de mais de 90\% da variância retida pelas componentes principais selecionadas é considerado um bom resultado~\cite{DataMining2003}. Oras, esse limiar de 90\% está muito acima dos resultados encontrados.
 
-\todo{Tentar mostrar um mapa em 3 dimensões??!!!}
+Porém, Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegam a mesma conclusão. Diferentemente, eles concluem pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença ocorre pois eles utilizam a taxa de classificação correta e a APRE como critérios para determinar a dimensionalidade do espaço legislativo.
 
 \section{Conclusões}
 \label{sec:conclusoes}
