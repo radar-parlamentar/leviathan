@@ -425,7 +425,7 @@ No caso da análise por partidos, ao excluir votos nulos do cálculo da média n
 
 \subsection{Tratamento de votações unânimes}
 
-Os algoritmos de Poole estabelecem um corte para descartar da análise votações unânimes e quase unânimes. Esse corte parte da ideia de que votações quase unânimes não revelam diferenças entre os parlamentares, e por isso não agregam à análise. No entanto, a maior vantagem para a exclusão das votações unânimes e quase unânimes está em acelerar a convergência do \nominate. Como ainda veremos neste artigo, a não exclusão dessas votações pode até mesmo impedir a convergência do algoritmo.
+Os algoritmos de Poole estabelecem um corte para descartar da análise votações unânimes e quase unânimes. Esse corte parte da ideia de que votações quase unânimes não revelam diferenças entre os parlamentares, e por isso não agregam à análise. No entanto, a maior vantagem para a exclusão das votações unânimes e quase unânimes está em acelerar a convergência do \nominate. Como ainda veremos na Seção~\ref{sec:resultados}, a não exclusão dessas votações pode até mesmo impedir a convergência do algoritmo.
 
 Por outro lado, a inclusão das votações unânimes e quase unânimes na ACP não eleva gravemente o tempo de execução. Assim sendo, em nossa abordagem não excluímos votações unânimes ou quase-unânimes. As variâncias e covariâncias se ocuparão de, objetivamente, definir se aquela informação está entre as mais relevantes ou não para aparecer no resultado final.
 
@@ -435,11 +435,11 @@ Em nossa abordagem, quando um parlamentar troca de partido, ele se torna um novo
 
 A estratégia por nós adotada é a mesma de Poole e Rosenthal~\cite{poole2007ideology}. Porém outras opções são possíveis. Leoni~\cite{leoni02cdep} adota um único ponto ideal para um parlamentar que troque de partido, ou seja, a mudança de partido não impacta o resultado do mapa espacial. Já Izumi~\cite{izumi2016senado}, utiliza o modelo de mudança de coalizão, no qual o parlamentar é representado por dois pontos ideais no mapa espacial apenas se a mudança partidária consiste em uma mudança de coalização, ou seja, se o parlamentar foi da base governista para a oposição ou vice-versa. Izumi defende que o modelo de mudança de coalização é o mais flexível e com maior sustentação teórica. 
 
-Em nossos mapas espaciais de votações, o partido dos parlamentares é destacado por meio das cores dos pontos que representam os parlamentares. Essa é uma estratégia incomum na literatura. Nesse contexto, em que a representação do partido se destaca no mapa, não julgamos adequado representar por um mesmo ponto votos dados sob por diferentes partidos. Essa consideração é nossa justificativa para ter adotado a estratégia de considerar que a migração partidária gera um novo parlamentar no modelo.
+Em nossos mapas espaciais de votações, o partido dos parlamentares é destacado por meio das cores dos pontos que representam os parlamentares. Essa é uma estratégia incomum na literatura. Nesse contexto, em que a representação do partido se destaca no mapa, não julgamos adequado representar por um mesmo ponto votos dados sob diferentes siglas partidárias. Essa consideração é nossa justificativa para ter adotado a estratégia de considerar que a migração partidária gera um novo parlamentar no modelo.
 
 \subsection{Análise temporal}
 
-Para o analista político é interessante visualizar como a conjuntura de alianças parlamentares se altera ao longo do tempo. Daí a necessidade de algoritmos que possibilitem a comparação entre mapas de votações de períodos distintos. Por conta dessa necessidade, desenvolvemos um algoritmo próprio de orientação e escalonamento de um conjunto de mapas de votações.
+Para o analista político é interessante visualizar como a conjuntura de alianças parlamentares se altera ao longo do tempo. Daí a necessidade de algoritmos que possibilitem a comparação entre mapas de votações de períodos distintos. Por conta dessa necessidade, desenvolvemos um algoritmo próprio de orientação de um conjunto de mapas de votações.
 
 O objetivo de nosso algoritmo para análise temporal não é possibilitar a comparação entre as posições de um parlamentar ao longo do tempo, pois os eixos e posições se alteram em seus significados de um período para o outro. O que pretendemos é que se possa comparar as distâncias relativas dos parlamentares entre si ao longo do tempo. Dessa forma é possível verificar nos mapas de votação, por exemplo, o afastamento e aproximação entre partidos ao longo do tempo. Na Figura~\ref{fig:fhc2-lula1} temos um exemplo de alteração de posições relativas com profundo significado político. \\
 
@@ -462,13 +462,13 @@ ACP de 2011 foi rotacionado em 160º. \\
   \label{fig:rotacoes}
 \end{figure}
 
-Temos aqui um problema de otimização, em que buscamos o ângulo $\theta$ que minimiza uma função objetivo $E(\theta)$ que forneça uma medida das distâncias percorridas pelos parlamentares no plano. A função objetivo escolhida é a soma das distâncias quadradas percorridas pelos parlamentares. Ao utilizar o quadrado das distâncias, de forma a penalizar mais as distâncias muito grandes. Temos então:
+Temos aqui um problema de otimização, em que buscamos o ângulo $\theta$ que minimiza uma função objetivo $E(\theta)$ que forneça uma medida das distâncias percorridas pelos parlamentares no plano. A função objetivo escolhida é a soma das distâncias quadradas percorridas pelos parlamentares. Ao utilizar o quadrado das distâncias, penalizamos mais as distâncias muito grandes. Temos então:
 
 \begin{equation}
 E(\theta)=\sum_{k\in\{parlamentares\}} D_{k}^{2}\label{eq:e_theta}
 \end{equation}
 
-Caso a intenção seja trabalhar o mapa de votações de partidos, recomendamos a ponderação da distância percorrida pelo partido utilizando a quantidade de parlamentares no partido, conforme a Equação~\ref{eq:e_theta_partidos}. Nota-se nesse caso a analogia desta função objetivo com a definição de energia: para um conjunto de bolas $k$ massa $M_{k}$ que iriam do ponto $(p_{k1})$ ao ponto $(p_{k2})$ em um tempo $\Delta t$ (o tempo da animação), estamos buscando o ângulo $\theta$ que minimiza a energia envolvida
+Caso a intenção seja trabalhar o mapa de votações de partidos, recomendamos a ponderação da distância percorrida pelo partido utilizando a quantidade de parlamentares no partido, conforme a Equação~\ref{eq:e_theta_partidos}. Nota-se nesse caso a analogia desta função objetivo com a definição de energia: para um conjunto de bolas $k$ com massa $M_{k}$ que iriam do ponto $p_{k1}$ ao ponto $p_{k2}$ em um tempo $\Delta t$ (o tempo da animação), estamos buscando o ângulo $\theta$ que minimiza a energia envolvida
 neste movimento. 
 
 \begin{equation}
@@ -493,7 +493,7 @@ O mesmo procedimento deve ser repetido espelhando-se um dos eixos (por exemplo m
 
 O resultado desse algoritmo pode ser exemplificado pela Figura~\ref{fig:fhc2-lula1}, com a ressalva de que o algoritmo de rotação é aplicado ao mapa de parlamentares e que os partidos visualizados são meramente os centroides dos parlamentares que os compõe.
 
-Poole e Rosenthal também criaram modelos para análise inter-temporal. Baseado no \wnominate, eles criaram o DW-NOMINATE~\cite{poole2001dnomiante}, i.e., o \wnominate dinâmico. Nesse modelo, o ponto ideal de um legislador deixa de ser um ponto e passa a ser uma função linear que representa a posição do parlamentar ao longo do tempo. Ou seja, a posição do legislador $i$, na dimensão $k$, na legislatura $t$ ($t=1,...,T$) é:
+Poole e Rosenthal também criaram modelos para análise intertemporal. Baseado no \wnominate, eles criaram o DW-NOMINATE~\cite{poole2001dnomiante}, i.e., o \wnominate dinâmico. Nesse modelo, o ponto ideal de um legislador deixa de ser um ponto e passa a ser uma função linear que representa a posição do parlamentar ao longo do tempo. Ou seja, a posição do legislador $i$, na dimensão $k$, na legislatura $t$ ($t=1,...,T$) é:
 
 \begin{equation}
 x_{ikt} = x_{ik0} + x_{ik1}t,
@@ -513,12 +513,12 @@ Diferentemente desses trabalhos~\cite{poole2001dnomiante, heckman-snyder1997}, n
 
 As principais medidas de avaliação de modelos de construção de mapas espaciais de votações são a taxa de classificação correta e a APRE. Conforme já foi explicado em detalhes na Seção~\ref{sec:revbib}, a taxa de classificação correta fornece a proporção de votos corretamente previstos pelo modelo. Já a APRE mede a redução no erro que o modelo proposto traz em relação ao modelo ingênuo que prevê que todo parlamentar vota com a maioria.
 
-No entanto, para a aplicar essas medidas a ACP, precisamos definir um \emph{preditor}. A ACP por si só não define um ``valor esperado'' para o voto de um dado parlamentar em uma dada votação. Por isso, a definição do preditor utilizado e aqui apresentado é de nossa autoria.
+No entanto, para a aplicar essas medidas à ACP, precisamos definir um \emph{preditor}. A ACP por si só não define um ``valor esperado'' para o voto de um dado parlamentar em uma dada votação. Por isso, a definição do preditor utilizado e aqui apresentado é de nossa autoria.
 
 Seja a matriz $\mathbf{\widehat{X}}$, tal que:
 
 \begin{equation}
-  \widehat{\mathbf{X}} = \mathbf{R}_{(d)}^{t} \cdot \mathbf{\Gamma}_{(d)} + \mathbf{C}
+  \widehat{\mathbf{X}} = \mathbf{R}_{(d)}^{t} \cdot \mathbf{Y}_{(d)} + \mathbf{C}
 \end{equation}
 
 $\widehat{\mathbf{X}}$ possui valores em $\mathbb{R}$ que se aproximam dos valores discretos da matriz de votos original $\mathbf{X}$.
@@ -530,6 +530,8 @@ Para $\widehat{x}_{ij} > 0$ o preditor prevê que o parlamentar $j$ vota SIM na 
 Dados os problemas da utilização de medidas de avaliação baseadas no preditor, utilizaremos também outra abordagem de avaliação comumente aplicada à análise de componentes principais. Trata-se da avaliação da \emph{porcentagem da variância explicada pelas componentes principais}~\cite{DataMining2003}. Sobre cada componente principal há uma certa variância dos dados. A primeira componente possui uma variância maior do que a variância da segunda componente, que por sua vez possui uma variância maior do que a variância da terceira componente, e assim por diante. Quanto maior for a variância retida nas primeiras dimensões, mais explicativa são aquelas dimensões. A porcentagem da variância explicada por $d$ dimensões é dada por $\nu_d$ na Equação~\ref{eq:porcentagem-variancia}.
 
 Tomemos um exemplo para melhor esclarecer a utilização da porcentagem da variância explicada pelas componentes principais. Consideremos que na primeira componente a variância seja 2, na segunda componente seja 1, na terceira 0.2 e na quarta 0.1. Nesse caso, dizemos que as duas primeiras componentes explicam juntas 90,9\% da variância. Ou seja, nesse caso um conjunto de dados de uma realidade quadridimensional pode ser bem explicado por um modelo bidimensional.
+
+A principal desvantagem da utilização da porcentagem da variância explicada para a avaliação do modelo é que esse valor não é comparável com outras abordagens, como o \nominate.
 
 \section{Resultados}
 \label{sec:resultados}
@@ -543,11 +545,11 @@ A relação de partidos presentes nos mapas espaciais produzidos é exibido na F
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.8]{figs/partidos.png}
-  \caption{Legenda com as cores dos partidos presentes nos gráficos ACP.}
+  \caption{Legenda de partidos presentes nos gráficos ACP.}
   \label{fig:partidos}
 \end{figure}
 
-O recurso de utilizar formas geométricas para distinguir partidos foi utilizado neste artigo, mas não no Radar Parlamentar. Como numa aplicação web dispomos de recursos interativos, optamos no Radar Parlamentar por destacar membros de um partido definido pelo usuário quando o usuário interage com o nome do partido.
+O recurso de utilizar formas geométricas para distinguir partidos foi utilizado neste artigo, mas não no software do Radar Parlamentar. Como numa aplicação web dispomos de recursos interativos, optamos no Radar Parlamentar por destacar membros de um partido definido pelo usuário quando o usuário interage com o nome do partido.
 
 Os mapas espaciais de votações produzidos pela ACP são exibidos nas Figuras~\ref{fig:cdep2007-2010}, \ref{fig:cdep2011-2014}, \ref{fig:sen2007-2010}, \ref{fig:sen2011-2014} e \ref{fig:cmsp2013-2016}.
 
@@ -586,7 +588,7 @@ Os mapas espaciais de votações produzidos pela ACP são exibidos nas Figuras~\
   \label{fig:cmsp2013-2016}
 \end{figure}
 
-As medidas de adequação produzidas pela ACP são exibias na Tabela~\ref{tab:fit}. Nessa mesma tabela pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Por fim, na Tabela~\ref{tab:variacao-explicada-acp} apresentamos a porcentagem de variância retida por cada uma das dimensões principais da ACP. Nessas tabelas utilizamos as seguintes abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
+As medidas de adequação produzidas pela ACP são exibidas na Tabela~\ref{tab:fit}. Nessa mesma tabela pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Por fim, na Tabela~\ref{tab:variacao-explicada-acp} apresentamos a porcentagem de variância retida por cada uma das dimensões principais da ACP. Nessas tabelas utilizamos as seguintes abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
 
 \begin{table}
 \centering
@@ -640,7 +642,7 @@ cmsp2013-2016 & 43 &  7 & 5 & 4 & 3 & 50  \\
 
 Este artigo não objetiva realizar uma comparação direta entre a ACP e \wnominate. Os valores produzidos pelo \wnominate foram colocados apenas para que o leitor tenha alguma referência para avaliar os resultados que encontramos para a ACP. Dessa forma, o \wnominate foi escolhido meramente por sua proeminência entre os métodos de produção de mapas espaciais de votações, mesmo critério utilizado por Leoni~\cite{leoni02cdep}.
 
-Para a execução do \wnominate utilizamos as opções padrões de \textsf{minvotes=20} e \textsf{lop=0.025}. Isso significa que o algoritmo descarta parlamentares ausentes em pelo menos 20 votações e descarta as votações nas quais menos de 2,5\% dos deputados votou com a minoria\footnote{``lop'' é abreviação de \emph{lopsided}.}. Já na execução da ACP não descartamos nenhum voto para a análise. Uma discussão sobre a escolha desses valores é realizada na próxima seção.
+Para a execução do \wnominate utilizamos as opções padrões de \textsf{minvotes=20} e \textsf{lop=0.025}. Isso significa que o algoritmo descarta parlamentares ausentes em pelo menos 20 votações e descarta as votações nas quais menos de 2,5\% dos deputados votou com a minoria\footnote{``lop'' é abreviação de \emph{lopsided}, e é a medida de ``assimetria'' em uma votação.}. Já na execução da ACP não descartamos nenhum voto para a análise. Uma discussão sobre a escolha desses valores é realizada na próxima seção.
 
 As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole. Já para o cálculo da ACP, utilizamos a função \textsf{prcomp}, nativamente disponível no R.
 
@@ -687,8 +689,6 @@ Para o mapa apresentado na Figura~\ref{fig:mapa-ruim}, os parâmetros utilizados
 
 Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se a tese defendida por Heckman e Snyder~\cite{heckman-snyder1997}: a de que modelos lineares são bem mais eficientes. Em nosso caso, encontramos que a ACP foi até 358 vezes mais rápida que o \wnominate, o que ocorreu para a Câmara Municipal de São Paulo. É interessante também notar na Tabela~\ref{tab:tempos} que os desvios padrão são relativamente pequenos, tanto para a ACP quanto para o \wnominate, o que evidencia uma boa previsibilidade quanto ao tempo de execução para ambos os algoritmos.
 
-\Leo{Aqui talvez o Saulo queira encerrar com mais algumas palavras sobre a ACP, como sobre a simplicidade e transparência da ACP e a fácil interpretação do mapa produzido.}
-
 \subsection{Análise intertemporal}
 
 Observa-se pelas Figuras~\ref{fig:cdep2007-2010} e \ref{fig:cdep2011-2014} que os dois mapas possuem a mesma orientação, ou seja, a polarização entre os principais partidos se mantém na mesma distribuição espacial: PT na região inferior esquerda e PSDB na região direita. 
@@ -718,6 +718,8 @@ Porém, Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegam a me
 \ins{resultados
  coisas pra melhorar / investigar
  ex: modelagem de partidos q não votam em alguma votação; suplentes; troca de parlamentares análise de sensibilidade }
+
+\Leo{Aqui talvez o Saulo queira encerrar com mais algumas palavras sobre a ACP, como sobre a simplicidade e transparência da ACP e a fácil interpretação do mapa produzido.}
 
 
 \bibliography{refs}{}
