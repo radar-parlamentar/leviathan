@@ -362,15 +362,17 @@ Já a normalização é em geral recomendável quando as componentes originais p
 
 Estas considerações sugerem a adoção da centralização, mas não da normalização, na análise de votações utilizando ACP.
 
-\subsection{Escolha do Número de Dimensões \emph{d}}
+\subsection{Escolha do número de dimensões \emph{d}}
 
 O modelo será tanto mais preciso na classificação correta das votações quanto maior for o número de dimensões retidas $d \leq N$. Porém está claro que um modelo simples é mais útil: analisar cada uma do total de $N$ dimensões seria tão trabalhoso quanto analisar individualmente cada uma das $N$ votações (e tão completo quanto). O objetivo é simplificar, retendo o essencial da informação.
 
 Uma forma de quantificar a informação retida (ou perdida) ao considerar apenas $d$ dimensões é observar qual é a fração $\nu_d \leq 1$ da variância total explicada:
 
-\[
+\begin{equation}
 \nu_d = \frac{\sum_{i=1}^{d}\frac{M}{M-1} \left< {\gamma_{ij}}^{2} \right>_j } {\sum_{i=1}^N \mathrm{var}(i)}
-\]
+\label{eq:porcentagem-variancia}
+\end{equation}
+
 onde o numerador é a soma da variância das $d$ primeiras componentes principais, e o denominador é a variância total da matriz de votações.
 
 Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adotar $d$ tal que se fosse adotado $d+1$ o ganho em $\nu_d$ seria pequeno. Dito isso, o critério é arbitrário, e deve depender do objetivo da análise. Para uma visualização do aspecto geral de distribuição dos parlamentares é prático utilizar $d=2$, já que assim a visualização no plano é muito mais simples. Seja qual for, a escolha deve vir acompanhada do valor de $\nu_d$ correspondente, afim de que se possa ter uma idéia de quanta informação está sendo desconsiderada.
@@ -384,11 +386,11 @@ O voto médio do partido $k$ na votação $i$ é definido por:
   x_{ik} = \frac{1}{|k|}\sum_{j\in k} x_{ij}
   \label{eq:voto-partido}
 \end{equation}
-onde $j \in k$ denota que o parlamentar $j$ pertence ao partido $k$, e $|k|$ é o número de parlamentares do partido $k$ considerados.
+onde $j \in k$ denota os parlamentares pertencentes ao partido $k$, e $|k|$ é o número de parlamentares do partido $k$.
 
-Esta análise é útil para analisar afinidades partidárias e coalizões em ambientes com vários partidos, como é tipicamente o caso das casas legislativas no Brasil.
+Essa análise é útil para analisar afinidades partidárias e coalizões em ambientes com vários partidos, como é tipicamente o caso das casas legislativas no Brasil.
 
-No Radar Parlamentar, porém, não aplicamos essa técnica, pois para esse software optamos pela coexistência de partidos e parlamentares individuais no mesmo mapa especial. O método proposto acima é válido, mas seu resultado não possui relação direta com o resultado da análise por parlamentar. Assim sendo, no Radar Parlamentar os partidos são posicionados no centroide das posições ocupadas por seus parlamentares. Ou seja, a posição de um partido $P$ com $k$ parlamentares $p_1, ..., p_k$ se dá por:
+No Radar Parlamentar, porém, não aplicamos essa técnica, pois para esse software optamos pela coexistência de partidos e parlamentares no mesmo mapa especial. O método proposto acima é válido, mas seu resultado não possui relação direta com o resultado da análise por parlamentar. Assim sendo, no Radar Parlamentar cada partido é posicionado no centroide das posições ocupadas por seus parlamentares. Ou seja, a posição de um partido $P$ com $k$ parlamentares $p_1, ..., p_k$ se dá por:
 
 \begin{equation}
   x_{P} = \frac{\sum_{i=1}^{k}{x_{p_i}}}{k}
@@ -408,27 +410,24 @@ A Figura~\ref{fig:centroide} permite visualizar o resultado do posicionamento do
 
 \subsection{Tratamento de valores faltantes}
 
-Todos os métodos de análise de votações legislativas encontrados na literatura revisada descartam ausências e abstenções antes de iniciar a análise, considerando explicita- ou implicitamente que tais atitudes não trazem informação acerca das preferências políticas do legislador, e notando que tais situações representam a minoria dos casos. Por exemplo, Heckman e Snyder notam que as abstenções representam menos de 1\% dos votos para câmara e senado estadounidenses, e as assumem aleatórias em relação a resultados das votações e a preferências dos parlamentares \cite[p.40]{heckman-snyder1997}.
+Todos os métodos de análise de votações legislativas encontrados na literatura revisada descartam ausências e abstenções antes de iniciar a análise, considerando explicita- ou implicitamente que tais atitudes não trazem informação acerca das preferências políticas do legislador, e notando que tais situações representam a minoria dos casos. Por exemplo, Heckman e Snyder notam que as abstenções representam menos de 1\% dos votos para câmara e senado estadounidenses, e as assumem aleatórias em relação a resultados das votações e a preferências dos parlamentares \cite{heckman-snyder1997}.
 
 Já na legislatura da Câmara dos Deputados brasileira no período de 2011 a 2014, temos cerca de 5\% entre abstenções e obstruções dentro do universo de votos dados, enquanto que ausências são cerca de 36\% dentre o total possível de votos a serem dados. Esses valores foram estimados com base nos dados abertos da Câmara. Propõe-se então que o comportamento observado de ausentar-se ou abster-se de uma votação traz sim informação acerca das preferências do parlamentar que se deseja estimar, e por isso essa informação não deve ser descartada na análise.
 
-No modelo proposto, ausência, abstenção e obstrução são modeladas através do valor 0. Em relação à alternativa de descartar estas situações, que serão referidas genericamente como votos ``nulos'', esta modelagem introduz um viés no sentido oposto ao voto médio dos que realmente votaram. Ou seja, supondo sem perda de generalidade que o voto da maioria é sempre SIM, o voto médio dos que votaram será sempre maior que zero, e se o parlamentar faz voto nulo sua preferência nesta votação será modelada como sendo ligeiramente oposta ao SIM (pois seu voto é numericamente menor do que a média), mas não tão oposta quanto se o parlamentar tivesse efetivamente votado NÃO.
+No modelo proposto, ausência, abstenção e obstrução são modeladas através do valor 0. Em relação à alternativa de descartar essas situações, que serão referidas genericamente como votos ``nulos'', esta modelagem introduz um viés no sentido oposto ao voto médio dos que realmente votaram. Ou seja, supondo sem perda de generalidade que o voto da maioria é sempre SIM, o voto médio dos que votaram será sempre maior que zero, e se o parlamentar faz voto nulo sua preferência nesta votação será modelada como sendo ligeiramente oposta ao SIM (pois seu voto é numericamente menor do que a média), mas não tão oposta quanto se o parlamentar tivesse efetivamente votado NÃO.
 
-Este viés pode parecer arbitrário, porém esta abordagem é consistente tanto com a ideia de que um voto nulo representaria uma indiferença do parlamentar quanto aos resultados SIM e NÃO (o voto nulo é euclidianamente equidistante das duas alternativas) quanto da ideia de que ao não votar o parlamentar pode ter uma preferência contrária àquela que se imagina que será aprovada na votação, como em um ``boicote'' pessoal (ou em grupo) à votação. Em outras palavras, um parlamentar teria maior tendência de comparecer e não se abster nem obstruir a votação em propostas nas quais ele esteja inclinado a votar com a maioria. Se estas hipóteses são arbitrárias, pode-se dizer que são pelo menos tão arbitrárias quanto a alternativa de considerar que um voto nulo equivale a um parlamentar com preferência igual à preferência média da casa. Nossos resultados sugerem que de fato a forma proposta de modelagem melhora os índices de classificação correta.
+Este viés pode parecer arbitrário, porém essa abordagem é consistente tanto com a ideia de que um voto nulo representaria uma indiferença do parlamentar quanto aos resultados SIM e NÃO (o voto nulo é euclidianamente equidistante das duas alternativas) quanto da ideia de que ao não votar o parlamentar pode ter uma preferência contrária àquela que se imagina que será aprovada na votação, como em um boicote à votação. Em outras palavras, um parlamentar teria maior tendência de comparecer e não se abster nem obstruir a votação em propostas nas quais ele esteja inclinado a votar com a maioria. Se estas hipóteses são arbitrárias, pode-se dizer que são pelo menos tão arbitrárias quanto a alternativa de considerar que um voto nulo equivale a um parlamentar com preferência igual à preferência média da casa. 
 
-No caso da análise por partidos, ao excluir votos nulos do cálculo da média na equação \ref{eq:voto-partido} estaria-se buscando considerar que a opinião ``do partido'' é composta apenas pela opinião daqueles que votaram ou SIM ou NÃO. Outra opção é excluir apenas as ausências, se os dados permitirem discriminar esta opção. Os resultados aqui apresentados não excluem estes votos, para que a análise reflita o fato de que uma abstenção ou mesmo uma ausência não são equivalentes a concordar com a opinião geral do partido. Além disso a análise fica mais simples, já que não há necessidade de tratamento especial de partidos que tenham estado por exemplo cem porcento ausentes em uma dada votação.
+%Nossos resultados sugerem que de fato a forma proposta de modelagem melhora os índices de classificação correta.
+% por outro lado pior a APRE...
 
-
+No caso da análise por partidos, ao excluir votos nulos do cálculo da média na equação \ref{eq:voto-partido} estaria-se buscando considerar que a opinião ``do partido'' é composta apenas pela opinião daqueles que votaram ou SIM ou NÃO. Outra opção é excluir apenas as ausências, se os dados permitirem discriminar esta opção. Os resultados aqui apresentados não excluem esses votos, para que a análise reflita o fato de que uma abstenção ou mesmo uma ausência não são equivalentes a concordar com a opinião geral do partido. Além disso a análise fica mais simples, já que não há necessidade de tratamento especial de partidos que tenham estado por exemplo cem porcento ausentes em uma dada votação.
 
 \subsection{Tratamento de votações unânimes}
 
-E tb de parlamentares que faltam bastante.
+Os algoritmos de Poole estabelecem um corte para descartar da análise votações unânimes ou quase unânimes. Esse corte parte da ideia de que votações quase unânimes não revelam diferenças entre os parlamentares, e por isso não agregam à análise.
 
-Acho que no caso, simplesmente não consideramos esses problemas e usamos todo mundo.
-
-Mas pelo menos sobre votações unânimes isso tem a parte ruim de deixar o mapa mais embolado e difícil de ler. Por outro lado, ajuda a mostrar a realidade de que na prática, apesar das diferenças, eles não são tão diferentes assim.
-
-\nominate faz uns cortes pra não pegar todo mundo.
+Por outro lado, caso não se descarte nenhuma votação, quanto mais votações unânimes ou quase unânimes existirem, mais os parlamentares estarão concentrados no mapa. Isso pode não ajudar a revelar as diferenças entre os parlamentares, mas pode ajudar a revelar que talvez eles não sejam tão diferentes assim, o que consideramos uma análise útil. Por isso, em nossa abordagem não há descarte de votações unânimes ou quase unânimes.
 
 \subsection{Lidando com migração partidária}
 
@@ -528,7 +527,7 @@ Para $\widehat{x}_{ij} > 0$ o preditor prevê que o parlamentar $j$ vota SIM na 
 
 É claro que a definição de tal preditor depende de limiares arbitrários que mapeiam os valores reais de $\widehat{x}_{ij}$ para os valores discretos que representam opções em uma votação (\yea ou \nay). Então um problema dessa avaliação é que a escolha de outros limiares ou outros mapeamentos possíveis poderiam produzir resultados bem diferentes. Um exemplo seria associar uma faixa de valores de $\widehat{x}_{ij}$ à abstenção.
 
-Dados os problemas da utilização de medidas de avaliação baseadas no preditor, utilizaremos também outra abordagem de avaliação comumente aplicada à análise de componentes principais. Trata-se da avaliação da \emph{porcentagem da variância explicada pelas componentes principais}~\cite{DataMining2003}. Sobre cada componente principal há uma certa variância dos dados. A primeira componente possui uma variância maior do que a variância da segunda componente, que por sua vez possui uma variância maior do que a variância da terceira componente, e assim por diante. Quanto maior for a variância retida nas primeiras dimensões, mais explicativa são aquelas dimensões. 
+Dados os problemas da utilização de medidas de avaliação baseadas no preditor, utilizaremos também outra abordagem de avaliação comumente aplicada à análise de componentes principais. Trata-se da avaliação da \emph{porcentagem da variância explicada pelas componentes principais}~\cite{DataMining2003}. Sobre cada componente principal há uma certa variância dos dados. A primeira componente possui uma variância maior do que a variância da segunda componente, que por sua vez possui uma variância maior do que a variância da terceira componente, e assim por diante. Quanto maior for a variância retida nas primeiras dimensões, mais explicativa são aquelas dimensões. A porcentagem da variância explicada por $d$ dimensões é dada por $\nu_d$ na Equação~\ref{eq:porcentagem-variancia}.
 
 Tomemos um exemplo para melhor esclarecer a utilização da porcentagem da variância explicada pelas componentes principais. Consideremos que na primeira componente a variância seja 2, na segunda componente seja 1, na terceira 0.2 e na quarta 0.1. Nesse caso, dizemos que as duas primeiras componentes explicam juntas 90,9\% da variância. Ou seja, nesse caso um conjunto de dados de uma realidade quadridimensional pode ser bem explicado por um modelo bidimensional.
 
