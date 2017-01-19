@@ -10,6 +10,8 @@
 \usepackage{tikz}
 \usepackage{hyperref}
 \usepackage{xspace}
+\usepackage[font={footnotesize}]{caption}
+
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -350,6 +352,33 @@ Exemplificando para o caso comum em que $d=2$, a equação $\mathbf{X^{*}} \appr
                 ~_\text{C.P.} & y_{21} & \ldots & y_{2M}   \cr
                 }
 \]
+
+A Figura~\ref{fig:projecao_cp1} mostra um exemplo no qual temos dados originalmente descritos em duas dimensões em função de uma base composta por um vetor no eixo $x$ e outro vetor no eixo $y$. A ACP, nesse caso, reduz a dimensionalidade da informação, escolhendo um único vetor para descrever os dados. Esse vetor é apoiado sobre a reta CP1 e é chamado de \emph{primeira componente principal}. Dessa forma, os dados passam a ser descritos por valores relacionados às projeções dos pontos sobre a reta CP1. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.7]{figs/projecao_cp1.png}
+  \caption{Redução de dimensionalidade, na qual dados antes explicados por duas dimensões ($x$ e $y$) passam a ser explicados por valores em apenas uma dimensão (CP1).}
+  \label{fig:projecao_cp1}
+\end{figure}
+
+Ainda na Figura~\ref{fig:projecao_cp1}, o segmento de reta vermelho destaca o trecho de CP1 sobre o qual incidem as projeções dos pontos. O tamanho desse segmento está relacionado com a variância dos dados sobre a dimensão definida por CP1, sendo que a reta CP1 foi escolhida pela ACP justamente por fornecer a maior variância possível dos dados em uma dimensão. Se escolhermos qualquer outra reta pra definir uma nova dimensão, como $r2$ na Figura~\ref{fig:projecao_r2}, teremos uma variância menor do que a variância dos dados sobre CP1.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.7]{figs/projecao_r2.png}
+  \caption{Nesse exemplo uma dimensão qualquer (definida pela linha $r2$) é escolhida para reduzir a dimensionalidade da informação. No entanto, essa escolha não fornece uma variância para os dados tão grande quanto a fornecida pela dimensão definida por CP1 na Figura~\ref{fig:projecao_cp1}.}
+  \label{fig:projecao_r2}
+\end{figure}
+
+O interesse em obter a dimensão que provê a maior variância possível se deve ao fato de ser essa maior variância que fornece uma melhor distinção entre os pontos. Observe que pelas projeções dos pontos sobre CP1 (Figura~\ref{fig:projecao_cp1}) podemos entender melhor a diferença entre pontos do que por suas projeções sobre $r2$ (Figura~\ref{fig:projecao_r2}). Utilizando um mapa espacial de votações produzido pela ACP, como o da Figura~\ref{fig:cps}, é perceptível como a variância dos dados sobre a primeira componente principal (CP1) é maior do que a variância sobre a segunda componente principal (CP2). Na Figura~\ref{fig:cps} também é possível observar que as duas componentes principais são ortogonais (perpendiculares) entre si.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.7]{figs/cps.png}
+  \caption{Mapa espacial de votações no qual se destacam, em vermelho, os comprimentos utilizados das componentes principais para a representação dos dados.}
+  \label{fig:cps}
+\end{figure}
 
 
 \subsection{Centralização e Normalização}
