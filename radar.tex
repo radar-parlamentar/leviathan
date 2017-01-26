@@ -344,7 +344,7 @@ A Figura~\ref{fig:projecao_cp1} mostra um exemplo no qual temos dados originalme
   \label{fig:projecao_cp1}
 \end{figure}
 
-Ainda na Figura~\ref{fig:projecao_cp1}, o segmento de reta vermelho destaca o trecho de CP1 sobre o qual incidem as projeções dos pontos. \ugh{O tamanho desse segmento está relacionado com a variância} dos dados sobre a dimensão definida por CP1, sendo que a reta CP1 foi escolhida pela ACP justamente por fornecer a maior variância possível dos dados em uma dimensão. Se escolhermos qualquer outra reta pra definir uma nova dimensão, como $r2$ na Figura~\ref{fig:projecao_r2}, teremos uma variância menor do que a variância dos dados sobre CP1.\Saulo{Léo, será que essas retas vermelhas não vão causar confusão, ao misturar conceito de variância com conceito de diferença entre o valor máximo e o valor mínimo dos dados? Sei que é uma tentativa de simplificar a explicação, mas acho que o risco é muito grande de transmitir um conceito errado. Eu tiraria a linha vermelha. Quem estiver lendo e não souber o que é variância que procure no google. Com essa atitude acho que contribuiríamos mais. Outra coisa que me ocorreu, essa revista Leviathan não tem problema com cores? Em geral é bom manter o mínimo possível de páginas com cores.}
+A reta $CP1$ é escolhida como componente principal na Figura~\ref{fig:projecao_cp1} por ser a dimensão que fornece a maior variância possível para os dados projetados em uma dimensão. Se escolhermos qualquer outra reta pra definir uma nova dimensão, como $r2$ na Figura~\ref{fig:projecao_r2}, teremos uma variância menor do que a variância dos dados sobre CP1.
 
 \begin{figure}[h]
   \centering
@@ -353,12 +353,12 @@ Ainda na Figura~\ref{fig:projecao_cp1}, o segmento de reta vermelho destaca o tr
   \label{fig:projecao_r2}
 \end{figure}
 
-O interesse em obter a dimensão que provê a maior variância possível se deve ao fato de ser essa maior variância que fornece uma melhor distinção entre os pontos. Observe que pelas projeções dos pontos sobre CP1 (Figura~\ref{fig:projecao_cp1}) podemos entender melhor a diferença entre pontos do que por suas projeções sobre $r2$ (Figura~\ref{fig:projecao_r2}). Utilizando um mapa espacial de votações produzido pela ACP, como o da Figura~\ref{fig:cps}, é perceptível como a variância dos dados sobre a primeira componente principal (CP1) é maior do que a variância sobre a segunda componente principal (CP2). Na Figura~\ref{fig:cps} também é possível observar que as duas componentes principais são ortogonais (perpendiculares) entre si.
+O interesse em se obter a dimensão que provê a maior variância possível se deve ao fato de ser essa maior variância que fornece uma melhor distinção entre os pontos. Observe que pelas projeções dos pontos sobre CP1 (Figura~\ref{fig:projecao_cp1}) podemos entender melhor a diferença entre pontos do que por suas projeções sobre $r2$ (Figura~\ref{fig:projecao_r2}). Utilizando um mapa espacial de votações produzido pela ACP, como o da Figura~\ref{fig:cps}, é perceptível como a variância dos dados sobre a primeira componente principal (CP1) é maior do que a variância sobre a segunda componente principal (CP2). Na Figura~\ref{fig:cps} também é possível observar que as duas componentes principais são ortogonais (perpendiculares) entre si.
 
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.7]{figs/cps.png}
-  \caption{Mapa espacial de votações no qual se destacam, em vermelho, os comprimentos utilizados das componentes principais para a representação dos dados.}
+  \caption{Mapa espacial de votações no qual percebe-se uma maior variância dos dados sobre CP1 do que sobre CP2.}
   \label{fig:cps}
 \end{figure}
 
