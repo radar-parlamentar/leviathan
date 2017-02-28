@@ -311,7 +311,7 @@ A análise de componentes principais consiste em uma transformação linear que 
 
 Como a matriz de rotação $\mathbf{R}$ é ortonormal, sua inversa é igual à transposta $\mathbf{R}^{t}$, e tem-se $\mathbf{X^{*}} = \mathbf{R}^t \cdot \mathbf{Y}$, ou seja, podemos restaurar os valores de $\mathbf{X^{*}}$ a partir de $\mathbf{R}$ e $\mathbf{Y}$.
 
-Se forem mantidos apenas as $d \leq N$ primeiras componentes principais, a parte relevante da matriz de rotação, que chamaremos de $\mathbf{R}_{(d)}$, terá apenas $d$ colunas, enquanto que a matriz de scores, $\mathbf{Y}_{(d)}$, terá apenas $d$ linhas. $\mathbf{R}_{(d)}^{t}\cdot \mathbf{Y}_{(d)}$ será então a melhor aproximação de $\mathbf{X^{*}}$ que pode ser obtida com um modelo linear deste tipo com $d$ dimensões, onde ``a melhor aproximação'' se refere à minimização da soma dos quadrados das diferenças das entradas. \Leo{Saulo, revisar o diff desse parágrafo, por favor. Além disso, o que se quer dizer com ``diferença das entradas''? Seria a diferença entre $\mathbf{X^{*}}$ e $\mathbf{R}_{(d)}^{t}\cdot \mathbf{Y}_{(d)}$ ?}.
+Se forem mantidos apenas as $d \leq N$ primeiras componentes principais, a parte relevante da matriz de rotação, que chamaremos de $\mathbf{R}_{(d)}$, terá apenas $d$ colunas, enquanto que a matriz de scores, $\mathbf{Y}_{(d)}$, terá apenas $d$ linhas. $\mathbf{R}_{(d)}^{t}\cdot \mathbf{Y}_{(d)}$ será então a melhor aproximação de $\mathbf{X^{*}}$ que pode ser obtida com um modelo linear deste tipo com $d$ dimensões, onde ``a melhor aproximação'' se refere à minimização da soma dos quadrados das diferenças dos valores entre as duas matrizes.
 
 %\footnote{Em outras palavras, o modelo minimiza a norma de Frobenius da matriz de votações.}.
 
@@ -385,7 +385,7 @@ Uma forma de quantificar a informação retida (ou perdida) ao considerar apenas
 \label{eq:porcentagem-variancia}
 \end{equation}
 
-\Leo{Saulo, tá certo o Y na fórmula, neh?} onde o numerador é a soma da variância das $d$ primeiras componentes principais, e o denominador é a soma das variâncias das votações. A variância de uma votação já está definida na Equação~\ref{eq:variancia}.
+onde o numerador é a soma das variâncias das $d$ primeiras componentes principais ($y_{ij}$ são os elementos da matriz $\mathbf{Y_{(d)}}$), e o denominador é a soma das variâncias das votações. A variância de uma votação já está definida na Equação~\ref{eq:variancia}.
 
 Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adotar $d$ tal que se fosse adotado $d+1$ o ganho em $\nu_d$ seria pequeno. Dito isso, o critério é arbitrário, e deve depender do objetivo da análise. Para uma visualização do aspecto geral de distribuição dos parlamentares é prático utilizar $d=2$, já que assim a visualização no plano é muito mais simples. Seja qual for, a escolha deve vir acompanhada do valor de $\nu_d$ correspondente, afim de que se possa ter uma idéia de quanta informação está sendo desconsiderada.
 
@@ -409,7 +409,7 @@ No Radar Parlamentar, porém, não aplicamos essa técnica, pois para esse softw
   \label{eq:partido-centroide}
 \end{equation}
 
-sendo $y_{dj}$ a coordenada do parlamentar $j$ na dimensão $d$ \Leo{Saulo, revisar a reformulação dessa fórmula também, por favor}.
+sendo $y_{dj}$ a coordenada do parlamentar $j$ na dimensão $d$.
 
 No Radar Parlamentar também optamos por diferenciar os partidos em função do tamanho da bancada de cada partido no período analisado. Para isso, cada círculo representando um partido possui área proporcional ao tamanho da bancada no período.
 
@@ -561,7 +561,7 @@ Seja a matriz $\mathbf{\widehat{X}}$, tal que:
 
 $\widehat{\mathbf{X}}$ possui valores em $\mathbb{R}$ que se aproximam dos valores discretos da matriz de votos original $\mathbf{X}$.
 
-Para $\widehat{x}_{ij} > 0$ o preditor prevê que o parlamentar $i$ vota \yea na votação $j$ \Leo{Saulo, por favor conferir o diff dessa frase (a que passou)... os índices i e j estavam invertidos}; para $\widehat{x}_{ij} < 0$ o modelo prevê voto \nay; e para $\widehat{x}_{ij} = 0$ o modelo prevê um voto arbitrário (para facilitar a reprodutibilidade dos resultados foi adotado \yea nesses casos). Esse modelo prevê apenas votos \yea ou \nay, ou seja, não prevê a possibilidade de abstenções, obstruções ou ausências.
+Para $\widehat{x}_{ij} > 0$ o preditor prevê que o parlamentar $i$ vota \yea na votação $j$; para $\widehat{x}_{ij} < 0$ o modelo prevê voto \nay; e para $\widehat{x}_{ij} = 0$ o modelo prevê um voto arbitrário (para facilitar a reprodutibilidade dos resultados foi adotado \yea nesses casos). Esse modelo prevê apenas votos \yea ou \nay, ou seja, não prevê a possibilidade de abstenções, obstruções ou ausências.
 
 É claro que a definição de tal preditor depende de limiares arbitrários que mapeiam os valores reais de $\widehat{x}_{ij}$ para os valores discretos que representam opções em uma votação (\yea ou \nay). Então um problema dessa avaliação é que a escolha de outros limiares ou outros mapeamentos possíveis poderiam produzir resultados bem diferentes. Um exemplo seria associar uma faixa de valores de $\widehat{x}_{ij}$ à abstenção.
 
