@@ -309,7 +309,7 @@ A análise de componentes principais consiste em uma transformação linear que 
 
 Como a matriz de rotação $\mathbf{R}$ é ortonormal, sua inversa é igual à transposta $\mathbf{R}^{t}$, e tem-se $\mathbf{X^{*}} = \mathbf{R}^t \cdot \mathbf{Y}$, ou seja, podemos restaurar os valores de $\mathbf{X^{*}}$ a partir de $\mathbf{R}$ e $\mathbf{Y}$.
 
-Se forem mantidos apenas as $d \leq N$ primeiras componentes principais, a parte relevante da matriz de rotação, que chamaremos de $\mathbf{R}_{(d)}$, terá apenas $d$ colunas, enquanto que a matriz de scores, $\mathbf{Y}_{(d)}$, terá apenas $d$ linhas. $\mathbf{R}_{(d)}^{t}\cdot \mathbf{Y}_{(d)}$ será então a melhor aproximação de $\mathbf{X^{*}}$ que pode ser obtida com um modelo linear deste tipo com $d$ dimensões, onde ``a melhor aproximação'' se refere à minimização da soma dos quadrados das diferenças dos valores entre as duas matrizes.
+Se forem mantidos apenas as $d \leq N$ primeiras componentes principais, a parte relevante da matriz de rotação, que chamaremos de $\mathbf{R}_{(d)}$, terá apenas $d$ colunas, enquanto que a matriz de scores, $\mathbf{Y}_{(d)}$, terá apenas $d$ linhas. $\mathbf{R}_{(d)}^{t}\cdot \mathbf{Y}_{(d)}$ será então a melhor aproximação de $\mathbf{X^{*}}$ que pode ser obtida com um modelo linear deste tipo com $d$ dimensões, onde ``a melhor aproximação'' se refere à minimização da soma dos quadrados das diferenças dos valores entre as as matrizes $\mathbf{X^*}$ e $\mathbf{R}_{(d)}^{t}\cdot \mathbf{Y}_{(d)}$. \Leo{Dúvida... na Seção~\ref{sec:avaliacao_acp}, temos $\widehat{\mathbf{X}} = \mathbf{R}_{(d)}^{t} \cdot \mathbf{Y}_{(d)} + \mathbf{C}$, o que me dá a impressão de que a minimização seria das diferenças de $\mathbf{X^*}$ e $\widehat{\mathbf{X}}$. Só achei meio estranho não ter o $C$ aqui, mas tá certo né? Essa reflexão surgiu em parte porque talvez o texto ficasse mais simples se a matriz $\mathbf{R}_{(d)}^{t} \cdot \mathbf{Y}_{(d)}$ fosse batizada com algum nome... que seria algo tipo o $\widehat{\mathbf{X}}$. Que nome vc daria para $\mathbf{R}_{(d)}^{t} \cdot \mathbf{Y}_{(d)}$?}.
 
 %\footnote{Em outras palavras, o modelo minimiza a norma de Frobenius da matriz de votações.}.
 
@@ -379,7 +379,7 @@ O modelo será tanto mais preciso na classificação correta das votações quan
 Uma forma de quantificar a informação retida (ou perdida) ao considerar apenas $d$ dimensões é observar qual é a fração $\nu_d \leq 1$ da variância total explicada:
 
 \begin{equation}
-\nu_d = \frac{\sum_{i=1}^{d}\frac{M}{M-1} \left< {Y_{ij}}^{2} \right>_j } {\sum_{i=1}^N \mathrm{var}(i)}
+\nu_d = \frac{\sum_{i=1}^{d}\frac{M}{M-1} \left< {y_{ij}}^{2} \right>_j } {\sum_{i=1}^N \mathrm{var}(i)}
 \label{eq:porcentagem-variancia}
 \end{equation}
 
@@ -393,17 +393,17 @@ No modelo apresentado, nada impede que os valores de $\mathbf{X}$ possuam valore
 
 O voto médio do partido $P$ na votação $i$ é definido por:
 \begin{equation}
-  x_{iP} = \frac{1}{k}\sum_{j\in P} x_{ij}
+  x_{iP} = \frac{1}{|P|}\sum_{j\in P} x_{ij}
   \label{eq:voto-partido}
 \end{equation}
-onde $j \in P$ denota os parlamentares pertencentes ao partido $P$, $k$ é o número de parlamentares em $P$ e $x_{ij}$ é o voto do parlamentar $j$ na votação $i$.
+onde $j \in P$ denota os parlamentares pertencentes ao partido $P$, $|P|$ é o número de parlamentares em $P$ e $x_{ij}$ é o voto do parlamentar $j$ na votação $i$.
 
 Essa análise é útil para analisar afinidades partidárias e coalizões em ambientes com vários partidos, como é tipicamente o caso das casas legislativas no Brasil.
 
 No Radar Parlamentar, porém, não aplicamos essa técnica, pois para esse software optamos pela coexistência de partidos e parlamentares no mesmo mapa espacial. O método proposto acima é válido, mas seu resultado não possui relação direta com o resultado da análise por parlamentar. Assim sendo, no Radar Parlamentar cada partido é posicionado no centroide das posições ocupadas por seus parlamentares. Ou seja, a coordenada $y_{Pd}$ do partido $P$ na dimensão $d$ do mapa de votações se dá por:
 
 \begin{equation}
-  y_{Pd} = \frac{1}{k}\sum_{j\in P}{y_{dj}}
+  y_{Pd} = \frac{1}{|P|}\sum_{j\in P}{y_{dj}}
   \label{eq:partido-centroide}
 \end{equation}
 
@@ -548,6 +548,7 @@ A fórmula da PRE considera apenas uma votação. Para se avaliar um conjunto de
 \[APRE = \frac{\sum_{i=1}^{N}\left(\left(\textrm{votos da minoria}\right)_i-\left(\textrm{erros do modelo}\right)_i\right)}{\sum_{i=1}^{N}\left(\textrm{votos da minoria}\right)_i}\]
 
 \subsection{Aplicação à ACP}
+\label{sec:avaliacao_acp}
 
 Para aplicar essas medidas à ACP, precisamos definir um \emph{preditor}. A ACP por si só não define um ``valor esperado'' para o voto de um dado parlamentar em uma dada votação. Por isso, a definição do preditor utilizado e aqui apresentado é de nossa autoria.
 
