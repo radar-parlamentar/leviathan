@@ -1,11 +1,41 @@
-\documentclass[a4paper, 12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[brazil]{babel}
+\documentclass[
+	% -- opções da classe memoir --
+	article,			% indica que é um artigo acadêmico
+	11pt,				% tamanho da fonte
+	oneside,			% para impressão apenas no recto. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	sumario=tradicional,
+	oldfontcommands % para que \sf funcione
+	]{abntex2}
+
+% ---
+% Pacotes fundamentais do modelo de artigo abntex2
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+% ---
+
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[num]{abntex2cite}	% Citações padrão ABNT
+
+%\usepackage[brazil]{babel} % não aparece no modelo abtex2
 \usepackage{amsmath}
 \usepackage{cite}
 \usepackage{textcomp}
-\usepackage{graphicx}
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{hyperref}
@@ -69,18 +99,52 @@
 \newcommand\nominate{NOMINATE\xspace}
 \newcommand\wnominate{W-NOMINATE\xspace}
 
-\title{Análise de votações nominais do legislativo brasileiro utilizando componentes principais}
-\author{}
-\date{}
+\titulo{Análise de votações nominais do legislativo brasileiro utilizando componentes principais}
+\autor{}
+\local{}
+\data{}
+
+% ---
+% Altera as margens padrões
+% ---
+\setlrmarginsandblock{3cm}{3cm}{*}
+\setulmarginsandblock{3cm}{3cm}{*}
+\checkandfixthelayout
+% ---
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Espaçamento simples
+\SingleSpacing
 
 \begin{document}
  
+% Seleciona o idioma do documento (conforme pacotes do babel)
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
 \maketitle 
 
-\begin{abstract}
-
+\begin{resumoumacoluna}
 A literatura sobre análise quantitativa de votações nominais em casas legislativas é bem extensa e relativamente antiga. No entanto, poucos são os trabalhos que se debruçam sobre a aplicação de tais métodos nas casas legislativas brasileiras. Este artigo trás uma revisão de métodos de análise de votações legislativas nominais e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Apresentamos também nossa abordagem para o tratamento de abstenções e sobre a realização de análises agregadas por partido, temas pouco explorados na literatura devido a pouca relevância no contexto de casas legislativas dos Estados Unidos. A avaliação do modelo é apresentada com medições comparadas ao \wnominate.
-\end{abstract}
+ \vspace{\onelineskip}
+ 
+ \noindent
+ \textbf{Palavras-chave}: TODO.
+\end{resumoumacoluna}
+
+% começa elementos textuais
+\textual
 
 \section{Introdução}
 \label{sec:intro}
@@ -762,9 +826,11 @@ Além disso, outros aspectos que podem ser aprofundados em trabalhos futuros sã
 
 Análises dos resultados dos mapas em si, de um ponto de vista político e histórico, também não foram enfocadas neste trabalho, e sugere-se que sejam tema de trabalhos futuros.
 
-\Leo{Nas referências tá aparecendo ``fulando and ciclano''... deveria ser em português. Pesquisando na net, um jeito pra resolver isso seria alterando o estilo de citação (ieeetr). Mas vou deixar isso pra depois de verificar se o nosso target exige algum estilo específico.}
+% Observação sobre a bibliografia: achei estranho que mesmo com o abtex2cite continuasse aparecendo
+% a palavra inglesa "In" para referências do tipo inproceedings.
+% Mas parece que pela norma da ABNT é isso mesmo!
+% https://groups.google.com/forum/#!topic/abntex2/oH5za46RtyU
 
 \bibliography{refs}{}
-\bibliographystyle{ieeetr}
  
 \end{document}
