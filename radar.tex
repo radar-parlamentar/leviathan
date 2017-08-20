@@ -159,10 +159,10 @@ Modelos espaciais para análise de votações no âmbito legislativo existem pel
 
 O objetivo desses modelos de escalonamento dimensional é representar os parlamentares em um espaço geométrico com algumas poucas dimensões (frequentemente uma ou duas) de tal forma que o comportamento de cada parlamentar nas votações seja em grande parte explicado por sua posição nesse espaço. Essa posição do legislador é chamada de ``ponto ideal'' e é estimada a partir dos votos observados nas votações nominais.
 
-Existe uma literatura relativamente ampla sobre o assunto focando em entidades dos Estados Unidos, como o Congresso e a suprema corte, inclusive comparando o desempenho de diferentes modelos 
+Existe uma ampla literatura sobre o assunto focando em entidades dos Estados Unidos, como o Congresso e a suprema corte, inclusive comparando o desempenho de diferentes modelos 
 %\cite{poole1985nominate}man-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
 \cite{poole-rosenthal2000,clinton2004ideal}.
-No entanto, são poucos os estudos de votações em entidades brasileiras. Um exemplo é o estudo de Leoni, que analisou as votações da Câmara dos Deputados entre os anos 1991 e 1998 utilizando W-NOMINATE~\cite{leoni02cdep}.
+No entanto, há bem menos estudos sobre votações em entidades brasileiras. Exemplos que analisam a Câmara dos Deputados são os trabalhos de Leoni~\cite{leoni02cdep} e os de Zucco~\cite{zucco2011ideologia, zucco2011distinguishing}, enquanto que Izumi analisa votações do senado~\cite{izumi2016senado}. 
 
 A Análise de Componentes Principais (ACP) é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados~\cite{DataMining2003}, estando amplamente disponível em softwares e bibliotecas de matemática e estatística. Com redução dimensional entende-se que algoritmos são aplicados a informações n-dimensionais (ex: atuação de vários parlamentares em várias votações) sendo simplificadas em informações com menos dimensões (duas no caso dos mapas de votações por nós construídos). A redução de dimensões funciona como se enxergássemos apenas a ``sombra'' de determinado fenômeno. Embora seja uma informação simplificada e não completa, pode ser útil para melhorar o entendimento sobre o fenômeno estudado, principalmente ao considerar que a informação original, n-dimensional, é de difícil assimilação devido a sua complexidade inerente.
 
@@ -270,6 +270,12 @@ O segundo pressuposto questionado da função utilidade é o de que os erros sã
 Embasado por esses questionamentos, Izumi preferiu adotar o Optimal Classification, pois este não se sustenta sobre pressupostos da função utilidade ou da distribuição de erros. Dessa forma, aplicando o OC a seis legislaturas do Senado (da 48ª à 53ª), Izumi encontrou taxas de classificação correta entre 90,7\% e 98,5\%. Já em termos de APRE, as taxas encontradas são entre 50\% e 94\%. Embora o trabalho de Izumi se aplique ao Senado, todos seus argumentos também se aplicariam à Câmara dos Deputados.
 
 Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao OC. Como disse Poole~\cite{poole2000oc}, as únicas premissas para a aplicação do OC são 1) o espaço de escolha é euclideano; e 2) preferências são simétricas e de pico-único. Como o próprio Izumi disse, a simetria é uma premissa que pode ser questionada na prática, e essa não somente para o caso brasileiro.
+
+Zucco~\cite{zucco2011ideologia} utiliza uma variação do modelo de estimação de pontos ideais de Clinton et al.~\cite{clinton2004ideal}, incorporando resultados de \emph{surveys} de classificação ideológica de parlamentares respondidos pelos próprios parlamentares. Dessa forma, Zucco pretende não apenas desenhar os mapas de votações, mas também examinar o significado substantivo das posições dos parlamentares e partidos no mapa. O artigo conclui que a dicotomia \emph{situação vs oposição} predomina na estrutura das disputas políticas na Câmara dos Deputados.
+
+\todo{zucco2011distinguishing}
+
+
 
 \subsection{Modelos lineares de Heckman e Snyder}
 
@@ -452,6 +458,8 @@ onde o numerador é a soma das variâncias das $d$ primeiras componentes princip
 Quanto maior for $\nu_d$ mais preciso será o modelo. Uma prática comum é adotar $d$ tal que se fosse adotado $d+1$ o ganho em $\nu_d$ seria pequeno. Dito isso, o critério é arbitrário, e deve depender do objetivo da análise. Para uma visualização do aspecto geral de distribuição dos parlamentares é prático utilizar $d=2$, já que assim a visualização no plano é muito mais simples. Seja qual for, a escolha deve vir acompanhada do valor de $\nu_d$ correspondente, afim de que se possa ter uma idéia de quanta informação está sendo desconsiderada.
 
 \subsection{Análise por partido}
+
+\todo{Como zucco2011ideologia agrega partidos?}
 
 No modelo apresentado, nada impede que os valores de $\mathbf{X}$ possuam valores reais, situados por exemplo no intervalo [-1;1], em vez de apenas os valores discretos \{-1;0;1\}. Essa observação permite uma extensão direta do modelo para analisar os parlamentares agregados por partido em vez de considerá-los individualmente, bastando considerar o voto médio do partido em cada votação antes de iniciar a análise.
 
