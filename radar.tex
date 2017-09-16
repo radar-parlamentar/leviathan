@@ -259,6 +259,27 @@ Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do map
 
 Analisando 172 votações realizadas por 440 parlamentares na 85ª legislatura do congresso dos EUA, Poole e Rosenthal~\cite{poole1985nominate} obtêm uma taxa de classificação correta de 78,9\% utilizando o \nominate com apenas uma dimensão.
 
+\subsection{Modelos lineares de Heckman e Snyder}
+
+Muitos trabalhos consideram que para a análise de votações nominais os modelos lineares são menos adequados do que os modelos não lineares, como o \nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, justificam rigorosamente a aplicação de um modelo linear para a estimativa de preferências de legisladores, sendo essas preferências expressas em escolhas nas votações legislativas. Heckman e Snyder alegam que a aplicação do modelo linear formulado por eles encontra praticamente os mesmos pontos ideais que são encontrados pelo \nominate para os legisladores do congresso norte-americano, porém com maior eficiência computacional.
+
+Para Heckman e Snyder, a decisão de se votar \yea ou \nay em uma votação é modelada como o resultado de um processo de escolha racional no qual os legisladores usam suas preferências para ponderar sobre as características da votação. Assim, dizemos que uma opção (\yea ou \nay) é localizada em um espaço no qual cada dimensão seria uma característica da opção. Nesse caso, a função utilidade recebe um vetor no espaço de características e retorna um número real. Cada legislador teria sua própria função utilidade e escolheria a opção que resultasse no maior valor de sua função utilidade. Diferentemente do NOMINATE, temos aqui uma função utilidade quadrática.
+
+A função utilidade de Heckman e Snyder, assim como a do NOMINATE, é incrementada com uma parcela de erros aleatórios. Considera-se que uma das fontes de erro seja a dificuldade para o parlamentar estimar o valor de cada característica. 
+
+Os autores utilizam diferentes métodos algébricos para estimar as preferências dos legisladores. Um dos métodos mais simples utilizados é justamente a Análise de Componentes Principais (ACP). 
+
+\subsection{IDEAL, uma abordagem \emph{bayesiana}}
+
+\todo{Abordagem bayesiana, função utilidade quadrática, Markov chain Monte Carlo, vantagens teóricas, vantagens computacionais, modelo extensível.}
+
+\todo{O artigo de 2004 não cita o nome IDEAL... então fazer algo assim: Jackman etc desenvolveram método assim assado \cite{clinton2004ideal}. Esse método é chamado de IDEAL \cite{carroll2009comparing} }
+
+\todo{Pontos ideias estimados muito similares ao nominate (mais similar doq comparado à hackman). O processo iterativo do IDEAL é similar ao NOMINATE, mas usando algoritmos diferentes. A PCA também pode ser utilizada como valor inicial para o IDEAL. Clinton et al. falam que IDEAL tem vantagem de desempenho, mas não mostram medidas. Carroll fala que verificou propriedade e desempenho IDEAL vs NOMINATE e que não encontrou grandes diferenças, mas também não mostrou medidas de tempo de execução.}
+
+% carroll:
+% Our simulations reveal no clear advantage of one method over the other in producing estimates for any particular legislature size or number of votes taken. Further, neither estimator appears to more robust than the other in obtaining estimates from the data-generating process assumed by the other method.
+
 \subsection{Aplicações no congresso brasileiro}
 
 Aplicando o \wnominate, uma das variações do \nominate, à Câmara dos Deputados, Leoni~\cite{leoni02cdep} encontrou taxas de classificação correta de 86,4\% e 90,4\% para as 49ª e 50ª legislaturas, respectivamente. Já em termos de APRE (redução proporcional do erro agregado), as taxas encontradas foram de 52,3\% e 64,8\% para as mesmas legislaturas. A APRE é uma medida mais robusta de proporção de erros. Tanto a taxa de classificação correta, quanto a APRE são explicadas na Seção~\ref{sec:avaliacao}.
@@ -272,16 +293,6 @@ Embasado por esses questionamentos, Izumi preferiu adotar o Optimal Classificati
 Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao OC. Como disse Poole~\cite{poole2000oc}, as únicas premissas para a aplicação do OC são 1) o espaço de escolha é euclideano; e 2) preferências são simétricas e de pico-único. Como o próprio Izumi disse, a simetria é uma premissa que pode ser questionada na prática, e essa não somente para o caso brasileiro.
 
 Zucco e Lauderdale~\cite{zucco2011ideologia, zucco2011distinguishing} utilizam uma variação do modelo de estimação de pontos ideais de Clinton et al.~\cite{clinton2004ideal}, incorporando resultados de \emph{surveys} de classificação ideológica de parlamentares respondidos pelos próprios parlamentares. Dessa forma, esses autores pretendem não apenas desenhar os mapas de votações, mas também examinar o significado substantivo das posições dos parlamentares e partidos no mapa. Esses artigos concluem que a dicotomia \emph{situação vs oposição} predomina na estrutura das disputas políticas na Câmara dos Deputados.
-
-\subsection{Modelos lineares de Heckman e Snyder}
-
-Muitos trabalhos consideram que para a análise de votações nominais os modelos lineares são menos adequados do que os modelos não lineares, como o \nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, justificam rigorosamente a aplicação de um modelo linear para a estimativa de preferências de legisladores, sendo essas preferências expressas em escolhas nas votações legislativas. Heckman e Snyder alegam que a aplicação do modelo linear formulado por eles encontra praticamente os mesmos pontos ideais que são encontrados pelo \nominate para os legisladores do congresso norte-americano, porém com maior eficiência computacional.
-
-Para Heckman e Snyder, a decisão de se votar \yea ou \nay em uma votação é modelada como o resultado de um processo de escolha racional no qual os legisladores usam suas preferências para ponderar sobre as características da votação. Assim, dizemos que uma opção (\yea ou \nay) é localizada em um espaço no qual cada dimensão seria uma característica da opção. Nesse caso, a função utilidade recebe um vetor no espaço de características e retorna um número real. Cada legislador teria sua própria função utilidade e escolheria a opção que resultasse no maior valor de sua função utilidade. Diferentemente do NOMINATE, temos aqui uma função utilidade quadrática.
-
-A função utilidade de Heckman e Snyder, assim como a do NOMINATE, é incrementada com uma parcela de erros aleatórios. Considera-se que uma das fontes de erro seja a dificuldade para o parlamentar estimar o valor de cada característica. 
-
-Os autores utilizam diferentes métodos algébricos para estimar as preferências dos legisladores. Um dos métodos mais simples utilizados é justamente a Análise de Componentes Principais (ACP). 
 
 \subsection{Dimensionalidade dos mapas de votações}
 
