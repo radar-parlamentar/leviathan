@@ -271,14 +271,11 @@ Os autores utilizam diferentes métodos algébricos para estimar as preferência
 
 \subsection{IDEAL, uma abordagem \emph{bayesiana}}
 
-\todo{Abordagem bayesiana, função utilidade quadrática, Markov chain Monte Carlo, vantagens teóricas, vantagens computacionais, modelo extensível.}
+Clinton et al.~\cite{clinton2004ideal} apresentam uma abordagem \emph{bayesiana} para a estimação de modelos espaciais de votações nominais. Essa abordagem é chamada de IDEAL~\cite{carroll2009comparing}. A estatística \emph{bayesiana} difere da abordagem tradicional, também chamada de frequentista, ao considerar os parâmetros do modelo como variáveis aleatórias, e não valores fixos que são estimados (CITATION NEEDED). Clinton et al. alegam que os métodos estatísticos \emph{bayesianos} são mais adequados, tanto do ponto de vista teórico quanto computacional, para lidar com a grande quantidade de parâmetros existentes em modelos de votações nominais. Devido ao seu caráter \emph{bayesiano}, o IDEAL também possibilita a extensão da análise com incorporação de informação adicional e substantiva sobre as votações nominais e os legisladores, como por exemplo conhecimento prévio sobre a ideologia dos parlamentares ou as questões ideológicas envolvidas em determinada votação.
 
-\todo{O artigo de 2004 não cita o nome IDEAL... então fazer algo assim: Jackman etc desenvolveram método assim assado \cite{clinton2004ideal}. Esse método é chamado de IDEAL \cite{carroll2009comparing} }
+O IDEAL utiliza uma função utilidade quadrática e estima os pontos ideais com o método de Monte Carlo por Cadeia de Markov (CITATION NEEDED). Apesar das diferenças teóricas entre o IDEAL e \nominate, a estrutura algorítmica para a estimação dos pontos ideias é similar: parte-se de uma estimativa inicial, que pode também ser o resultado da ACP, e a cada passo o algoritmo estima um conjunto de parâmetros mantendo os outros conjuntos fixos, repetindo esses passos até que haja a convergência. Além disso, os pontos ideias dos legisladores obtidos pelo IDEAL são muito similares aos obtidos pelo W-NOMINATE, estando os resultados do IDEAL e do W-NOMINATE mais próximos entre si do que estão dos resultados da abordagem de Heckman e Snyder.
 
-\todo{Pontos ideias estimados muito similares ao nominate (mais similar doq comparado à hackman). O processo iterativo do IDEAL é similar ao NOMINATE, mas usando algoritmos diferentes. A PCA também pode ser utilizada como valor inicial para o IDEAL. Clinton et al. falam que IDEAL tem vantagem de desempenho, mas não mostram medidas. Carroll fala que verificou propriedade e desempenho IDEAL vs NOMINATE e que não encontrou grandes diferenças, mas também não mostrou medidas de tempo de execução.}
-
-% carroll:
-% Our simulations reveal no clear advantage of one method over the other in producing estimates for any particular legislature size or number of votes taken. Further, neither estimator appears to more robust than the other in obtaining estimates from the data-generating process assumed by the other method.
+Por fim, Clinton et al.~\cite{clinton2004ideal} alegam que o IDEAL possui vantagens computacionais, enquanto que Carroll etl al.~\cite{carroll2009comparing} alegam que não há clara vantagem em termos de desempenho ou robustez na comparação entre as abordagens. Contudo, nenhum desses estudos mostra os valores de tempos de execução para ambas as abordagens.
 
 \subsection{Aplicações no congresso brasileiro}
 
