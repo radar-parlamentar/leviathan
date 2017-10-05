@@ -516,9 +516,11 @@ No caso da análise por partidos, ao excluir votos nulos do cálculo da média n
 
 \subsection{Tratamento de votações unânimes}
 
-Os algoritmos de Poole estabelecem um corte para descartar da análise votações unânimes e quase unânimes. Esse corte parte da ideia de que votações quase unânimes não revelam diferenças entre os parlamentares, e por isso não agregam à análise. No entanto, a maior vantagem para a exclusão das votações unânimes e quase unânimes está em acelerar a convergência do \nominate (vide Seção~\ref{sec:resultados}).
+Os algoritmos de Poole estabelecem um corte para descartar da análise votações unânimes e quase unânimes. Esse corte parte da ideia de que votações quase unânimes não revelam diferenças entre os parlamentares, e por isso não agregam à análise. No entanto, a maior vantagem para a exclusão das votações unânimes e quase unânimes está em acelerar a convergência do \nominate (vide Seção~\ref{sec:discussao}).
 
 Por outro lado, a inclusão das votações unânimes e quase unânimes na ACP não eleva gravemente o tempo de execução. Assim sendo, em nossa abordagem não excluímos votações unânimes ou quase-unânimes. As variâncias e covariâncias se ocuparão de, objetivamente, definir se aquela informação está entre as mais relevantes ou não para aparecer no resultado final.
+
+Além disso, os resultados apresentados neste artigo (Seção~\ref{sec:discussao} e Figura~\ref{fig:mapa-ruim}) sugerem que a eliminação de votações unânimes e quase unânimes, conjuntamente com a exclusão de parlamentares com muitos votos nulos, pode até mesmo descaracterizar o significado político do mapa produzido.
 
 \subsection{Lidando com migração partidária}
 
