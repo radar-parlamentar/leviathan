@@ -319,7 +319,7 @@ Considere uma casa legislativa com $M$ parlamentares e $N$ votações nominais. 
         0 & \text{, em qualquer outro caso.} 
      \end{array} \right.
 \]
-Os outros casos além do \yea e do \nay podem consistir em abstenção, obstrução, ausência do parlamentar ou situação em que esse não esteja exercendo o mandato na data em que a votação ocorreu. Todos esses casos representam uma impossibilidade de verificar a opinião do parlamentar sobre a votação, e por isso são modelados por um valor euclidianamente equidistante das duas outras opções.
+Os outros casos além do \yea e do \nay podem consistir em abstenção, obstrução, ausência do parlamentar ou situação em que esse não esteja exercendo o mandato na data em que a votação ocorreu. Todos esses casos representam uma impossibilidade de verificar a opinião do parlamentar sobre a votação, e por isso são modelados por um valor euclidianamente equidistante das duas outras opções. Mais detalhes sobre essa decisão estão na Subseção~\ref{sec:valores_faltantes}.
 
 Normalmente a análise de componentes principais não é adequada para variáveis categóricas, porém neste caso as categorias podem ser claramente representadas em um eixo cartesiano com dois extremos: SIM e NÃO. O valor de $x_{ij}$ pode ser interpretado como um estimador para um ponto de utilidade máxima $U_{ij}$ do legislador $j$ face à decisão $i$, tal que quando $U_{ij} > 0$ o legislador tende a preferir \yea. Quanto mais $U_{ij}$ está distante do zero, mais convicção ou mais importância é dada à questão. Analogamente, quanto mais negativo é $U_{ij}$, mais o legislador prefere a opção \nay. Ora, o comportamento observado que é o voto, por sua natureza categórica, não permite dizer o grau de importância dada ou a convicção com que o parlamentar decidiu por uma ou outra opção, mas é razoável supor que os $x_{ij}$ tal como definidos acima fornecem um estimador para os $U_{ij}$.
 
@@ -498,6 +498,7 @@ Outro trabalho no contexto do legislativo brasileiro que representa os partidos 
 
 
 \subsection{Tratamento de valores faltantes}
+\label{sec:valores_faltantes}
 
 Todos os métodos de análise de votações legislativas encontrados na literatura revisada descartam ausências e abstenções antes de iniciar a análise, considerando explicita- ou implicitamente que tais atitudes não trazem informação acerca das preferências políticas do legislador, e notando que tais situações representam a minoria dos casos. Por exemplo, Heckman e Snyder notam que as abstenções representam menos de 1\% dos votos para câmara e senado estadounidenses, e as assumem aleatórias em relação aos resultados das votações e às preferências dos parlamentares \cite{heckman-snyder1997}.
 
