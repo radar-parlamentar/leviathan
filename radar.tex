@@ -136,7 +136,7 @@
 \maketitle 
 
 \begin{resumoumacoluna}
-A literatura sobre análise quantitativa de votações nominais em casas legislativas é bem extensa e relativamente antiga. No entanto, poucos são os trabalhos que se debruçam sobre a aplicação de tais métodos nas casas legislativas brasileiras. Este artigo trás uma revisão de métodos de análise de votações legislativas nominais e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Apresentamos também nossa abordagem para o tratamento de abstenções e sobre a realização de análises agregadas por partido, temas pouco explorados na literatura devido a pouca relevância no contexto de casas legislativas dos Estados Unidos. A avaliação do modelo é apresentada com medições comparadas ao \wnominate.
+Este artigo trás uma revisão de métodos de análise quantitativa de votações nominais em casas legislativas e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Apresentamos também nossa abordagem para o tratamento de abstenções e sobre a realização de análises agregadas por partido, temas pouco explorados na literatura devido a pouca relevância no contexto de casas legislativas dos Estados Unidos. A avaliação do modelo é apresentada com medições comparadas ao \wnominate.
 
 \vspace{\onelineskip}
 
@@ -159,18 +159,20 @@ Modelos espaciais para análise de votações no âmbito legislativo existem pel
 
 O objetivo desses modelos de escalonamento dimensional é representar os parlamentares em um espaço geométrico com algumas poucas dimensões (frequentemente uma ou duas) de tal forma que o comportamento de cada parlamentar nas votações seja em grande parte explicado por sua posição nesse espaço. Essa posição do legislador é chamada de ``ponto ideal'' e é estimada a partir dos votos observados nas votações nominais.
 
-Existe uma ampla literatura sobre o assunto focando em entidades dos Estados Unidos, como o Congresso e a suprema corte, inclusive comparando o desempenho de diferentes modelos 
+Existe uma ampla literatura sobre o assunto focando principalmente em entidades dos Estados Unidos, como o Congresso e a suprema corte, inclusive comparando o desempenho de diferentes modelos 
 %\cite{poole1985nominate}man-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
-\cite{poole-rosenthal2000,clinton2004ideal}.
-No entanto, há bem menos estudos sobre votações em entidades brasileiras. Exemplos que analisam a Câmara dos Deputados são os trabalhos de Leoni~\cite{leoni02cdep} e os de Zucco~\cite{zucco2011ideologia, zucco2011distinguishing}, enquanto que Izumi analisa votações do senado~\cite{izumi2016senado}. 
+\cite{poole-rosenthal2000,clinton2004ideal,carroll2009comparing}.
+Já no contexto brasileiro, exemplos que analisam a Câmara dos Deputados são os trabalhos de Leoni~\cite{leoni02cdep} e os de Zucco~\cite{zucco2011ideologia, zucco2011distinguishing}, enquanto que Izumi analisa votações do senado~\cite{izumi2016senado}. 
 
 A Análise de Componentes Principais (ACP) é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados~\cite{DataMining2003}, estando amplamente disponível em softwares e bibliotecas de matemática e estatística. Com redução dimensional entende-se que algoritmos são aplicados a informações n-dimensionais (ex: atuação de vários parlamentares em várias votações) sendo simplificadas em informações com menos dimensões (duas no caso dos mapas de votações por nós construídos). A redução de dimensões funciona como se enxergássemos apenas a ``sombra'' de determinado fenômeno. Embora seja uma informação simplificada e não completa, pode ser útil para melhorar o entendimento sobre o fenômeno estudado, principalmente ao considerar que a informação original, n-dimensional, é de difícil assimilação devido a sua complexidade inerente.
 
-A ACP é utilizada pelo aplicativo Radar Parlamentar\footnote{\url{http://radarparlamentar.polignu.org/}} para a elaboração de mapas espaciais de votações do legislativo brasileiro. Para isso, uma série de decisões devem ser tomadas, tais como a modelagem dos dados que serve de entrada ao algoritmo de ACP, o que fazer com abstenções, como considerar não só parlamentares mas também partidos, como comparar mapas de períodos diferentes, como tratar a mudança de partido de um legislador etc.
+A ACP é utilizada pelo aplicativo Radar Parlamentar\footnote{\url{http://radarparlamentar.polignu.org/}} para a elaboração de mapas espaciais de votações do legislativo brasileiro. Para isso, uma série de decisões de codificação devem ser tomadas, tais como a modelagem dos dados que serve de entrada ao algoritmo de ACP, o que fazer com abstenções, como considerar não só parlamentares mas também partidos, como comparar mapas de períodos diferentes, como tratar a mudança de partido de um legislador etc. 
 
-Dessa forma, o objetivo deste artigo é apresentar e avaliar uma abordagem completa para a elaboração de mapas espaciais de votações para o legislativo brasileiro. A abordagem aqui apresentada é basicamente a mesma utilizada pelo software Radar Parlamentar, porém com alguns ajustes para a apresentação impressa, sem os recursos interativos da web.
+Dessa forma, o objetivo deste artigo é apresentar e avaliar uma abordagem completa para a elaboração de mapas espaciais de votações para o legislativo brasileiro com base na Análise de Componentes Principais. A abordagem aqui apresentada é basicamente a mesma utilizada pelo software Radar Parlamentar, porém com alguns ajustes para a apresentação impressa, sem os recursos interativos da web.
 
-São contribuições deste artigo: 1) apresentação didática e detalhada dos principais conceitos e trabalhos da literatura sobre modelos espaciais de votações parlamentares; 2) apresentação de uma abordagem utilizando a ACP aplicada ao legislativo brasileiro; 3) apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate; 4) uma interpretação que entende o espaço de votações do legislativo brasileiro como multidimensional, diferentemente do que defendem outros trabalhos. Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar\footnote{\url{http://radarparlamentar.polignu.org/dados/downloads/}} para que outros pesquisadores possam mais facilmente avançar em pesquisas futuras sobre análises quantitativas de votações parlamentares.
+São contribuições deste artigo: 1) apresentação didática e detalhada dos principais conceitos e trabalhos da literatura sobre modelos espaciais de votações parlamentares; 2) apresentação de uma abordagem utilizando a ACP aplicada ao legislativo brasileiro contendo decisões específicas de codificação; 3) apresentação de medidas de avaliação de nosso modelo em comparação com o \wnominate.
+%4) uma interpretação que entende o espaço de votações do legislativo brasileiro como multidimensional, diferentemente do que defendem outros trabalhos. 
+Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar\footnote{\url{http://radarparlamentar.polignu.org/dados/downloads/}} para que outros pesquisadores possam mais facilmente avançar em pesquisas futuras sobre análises quantitativas de votações parlamentares.
 
 Este artigo está organizado da seguinte forma: na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:acp} apresentamos nossa abordagem para a elaboração de mapas espaciais de votações, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos o método de avaliação do modelo, sendo a avaliação apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos; a discussão dos resultados é feita na Seção~\ref{sec:discussao}; por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
 
@@ -294,8 +296,7 @@ Zucco e Lauderdale~\cite{zucco2011ideologia, zucco2011distinguishing} utilizam u
 \subsection{Dimensionalidade dos mapas de votações}
 
 Um debate existente na literatura é sobre a quantidade de dimensões necessárias para representar um mapa espacial de votações. De acordo com McCarty~\cite{mccarty2011measuring}, essa é uma polêmica sem conclusão definitiva.
-
-Segundo McCarty~\cite{mccarty2011measuring}, a utilização de uma segunda dimensão no D-NOMINATE\footnote{O D-NOMINATE, ou \emph{dynamic \nominate}, é uma variação do \nominate para a comparação intertemporal dos pontos ideais nos mapas de votações.} acrescenta um poder explicativo de apenas 4\% sobre o poder de explicação de 87\% já fornecido pela primeira dimensão. No entanto, de 1945 até a década de 60, questões raciais e de direitos civis fazem com que a segunda dimensão seja mais significativa. 
+A utilização de uma segunda dimensão no D-NOMINATE\footnote{O D-NOMINATE, ou \emph{dynamic \nominate}, é uma variação do \nominate para a comparação intertemporal dos pontos ideais nos mapas de votações.} acrescenta um poder explicativo de apenas 4\% sobre o poder de explicação de 87\% já fornecido pela primeira dimensão~\cite{mccarty2011measuring}. No entanto, de 1945 até a década de 60, questões raciais e de direitos civis fazem com que a segunda dimensão seja mais significativa para esse período. 
 
 A primeira dimensão presente nos mapas de votações do legislativo dos EUA estaria ligada ao espectro político-ideológico presente nesse país, possuindo uma escala que vai do extremo liberal ao extremo conservador. No período em que a segunda dimensão se torna significativa, evidencia-se também um padrão de votação que diferencia parlamentares do norte e do sul dos~EUA.  
 
@@ -644,7 +645,7 @@ Para $\widehat{x}_{ij} > 0$ o preditor prevê que o parlamentar $i$ vota \yea na
 
 Adicionalmente, reportamos também a \emph{porcentagem da variância explicada pelas componentes principais}~\cite{DataMining2003}. Quanto maior for a variância retida nas primeiras dimensões, mais explicativas são aquelas dimensões. A porcentagem da variância explicada por $d$ dimensões é dada por $\nu_d$, tal como definido na Equação~\ref{eq:porcentagem-variancia}.
 
-Embora seja uma medida bastante intuitiva do ponto de vista de quantidade de informação retida, a principal desvantagem da utilização da porcentagem da variância explicada para a avaliação do modelo é que esse valor não é comparável com outras abordagens, como o \nominate.
+Embora seja uma medida bastante intuitiva do ponto de vista de quantidade de informação retida, a principal desvantagem da utilização da porcentagem da variância explicada para a avaliação do modelo é que esse valor não é diretamente comparável com outras abordagens, como o \nominate.
 
 \section{Resultados}
 \label{sec:resultados}
@@ -819,7 +820,7 @@ Essa análise sobre os números apresentados pela Tabela~\ref{tab:variacao-expli
 
 A ideia de que uma dimensionalidade maior seria mais adequada é corroborada pela referência de que uma proporção de mais de 90\% da variância retida pelas componentes principais selecionadas é considerado um bom resultado~\cite{DataMining2003}. Ora, esse limiar de 90\% está muito acima dos resultados encontrados.
 
-Porém, Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegaram à mesma conclusão. Diferentemente, eles concluíram pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença ocorre porque eles utilizaram a taxa de classificação correta e a APRE como critérios para determinar a dimensionalidade do espaço legislativo.
+Porém, Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegaram à mesma conclusão. Diferentemente, eles concluíram pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença se deve principalmente ao critério utilizado. Leoni e Izumi se basearam na taxa de classificação correta e na APRE. Já neste artigo, nós nos baseamos na porcentagem da variância explicada pelas componentes principais, que é um critério natural quando se fala em ACP, o que não se pode dizer dos modelos utilizados pelos outros autores.
 
 \section{Conclusões}
 \label{sec:conclusoes}
@@ -830,7 +831,7 @@ Nossa abordagem foi comparada conceitualmente e quantitativamente com os princip
 
 Contudo, cabe aqui a ressalva de Poole~\cite{poole2005book}, de que para uma interpretação correta, o analista político que lê o mapa de votações necessita tanto do conhecimento sobre a conjuntura política do período retratado pelo mapa, quanto do conhecimento sobre o modelo que gera o mapa. Um aspecto em que isso fica evidente em nosso modelo é o tratamento de migração partidária, em que um mesmo parlamentar passa a ter mais de um ponto ideal no mapa de votações.
 
-Um resultado de destaque de nossas análises é a interpretação de que o espaço de votações do legislativo brasileiro seria multidimensional. Isso difere da interpretação de Leoni~\cite{leoni02cdep} e de Izumi~\cite{izumi2016senado}, que consideram o legislativo brasileiro como sendo unidimensional. Essa diferença se deve principalmente ao critério utilizado: ao passo que eles se basearam na taxa de classificação correta e na APRE, nós nos baseamos na porcentagem da variância explicada pelas componentes principais. 
+Um resultado interessante de nossas análises é a sugestão de que o espaço de votações do legislativo brasileiro seria multidimensional. Isso difere da interpretação de Leoni~\cite{leoni02cdep} e de Izumi~\cite{izumi2016senado}, que consideram o legislativo brasileiro como sendo unidimensional. Essa diferença se deve principalmente ao critério utilizado: ao passo que eles se basearam na taxa de classificação correta e na APRE, nós nos baseamos na porcentagem da variância explicada pelas componentes principais. 
 
 Além disso, é de se notar que nos trabalhos de Poole, origem dos algoritmos utilizados por Leoni e Izumi, interpreta-se o congresso norte-americano como uma realidade unidimensional, ao passo que o trabalho de Heckman e Snyder~\cite{heckman-snyder1997}, que também utiliza a ACP, interpretam esse mesmo congresso norte-americano como multidimensional. Ou seja, as diferenças nos critérios de dimensionalidade também afetam as interpretações sobre o congresso dos EUA.
 
