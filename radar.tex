@@ -834,11 +834,13 @@ Cabe ainda destacar que não é objetivo deste trabalho realizar a interpretaç�
 Neste artigo apresentamos em detalhes a abordagem utilizada pelo software Radar Parlamentar na produção de mapas espaciais de votações do legislativo brasileiro. Procurou-se apresentar nossa abordagem, os trabalhos relacionados e as relações entre o nosso e outros trabalhos de forma relativamente didática. Em um campo de estudo interdisciplinar localizado predominantemente nas ciências sociais, julgamos pertinente a existência de trabalhos como este, em que se detalham os conceitos matemáticos, para facilitar a recepção de novos pesquisadores ao campo de estudo de análise quantitativa de votações legislativas.
 
 Nossa abordagem foi comparada conceitualmente e quantitativamente com os principais trabalhos da área, de forma que as vantagens, desvantagens e limitações de nossa e outras abordagens são esclarecidos. Em particular, acreditamos que nosso modelo gera rapidamente mapas espaciais de votações de interpretação relativamente simples e que são úteis para analistas políticos.
-
+%
 Contudo, cabe aqui a ressalva de Poole~\cite{poole2005book}, de que para uma interpretação correta, o analista político que lê o mapa de votações necessita tanto do conhecimento sobre a conjuntura política do período retratado pelo mapa, quanto do conhecimento sobre o modelo que gera o mapa. Um aspecto em que isso fica evidente em nosso modelo é o tratamento de migração partidária, em que um mesmo parlamentar passa a ter mais de um ponto ideal no mapa de votações.
 
-Um resultado interessante de nossas análises é a sugestão de que o espaço de votações do legislativo brasileiro seria multidimensional. Isso difere da interpretação de Leoni~\cite{leoni02cdep} e de Izumi~\cite{izumi2016senado}, que consideram o legislativo brasileiro como sendo unidimensional. Essa diferença se deve principalmente ao critério utilizado: ao passo que eles se basearam na taxa de classificação correta e na APRE, nós nos baseamos na porcentagem da variância explicada pelas componentes principais. 
+Nossos resultados mostram que a execução da ACP é muito mais rápida do que a do \wnominate. Para além de um interessante benefício acadêmico, um rápido tempo de execução é um requisito importante para que o método possa ser incorporado a possibilidades de alta interatividade da web. Um exemplo é a funcionalidade do Radar Parlamentar que possibilita ao usuário gerar um mapa de votações que considera apenas votações relacionadas a um determinado conjunto de palavras-chaves.
 
+Um resultado interessante de nossas análises é a sugestão de que o espaço de votações do legislativo brasileiro seria multidimensional. Isso difere da interpretação de Leoni~\cite{leoni02cdep} e de Izumi~\cite{izumi2016senado}, que consideram o legislativo brasileiro como sendo unidimensional. Essa diferença se deve principalmente ao critério utilizado: ao passo que eles se basearam na taxa de classificação correta e na APRE, nós nos baseamos na porcentagem da variância explicada pelas componentes principais. 
+%
 Além disso, é de se notar que nos trabalhos de Poole, origem dos algoritmos utilizados por Leoni e Izumi, interpreta-se o congresso norte-americano como uma realidade unidimensional, ao passo que o trabalho de Heckman e Snyder~\cite{heckman-snyder1997}, que também utiliza a ACP, interpretam esse mesmo congresso norte-americano como multidimensional. Ou seja, as diferenças nos critérios de dimensionalidade também afetam as interpretações sobre o congresso dos EUA.
 %
 Dessa forma, estudos sobre a dimensionalidade de espaços políticos do legislativo são ainda uma fonte de debates. Uma possível abordagem para se aprofundar nesse assunto é a utilização de mapas espaciais com mais de duas dimensões.
@@ -856,6 +858,7 @@ Análises dos resultados dos mapas em si, de um ponto de vista político e hist�
 % Mas parece que pela norma da ABNT é isso mesmo!
 % https://groups.google.com/forum/#!topic/abntex2/oH5za46RtyU
 
+{\small
 \bibliography{refs}{}
- 
+ }
 \end{document}
