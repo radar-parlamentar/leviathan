@@ -755,6 +755,21 @@ cmsp2013-2016 & 43 &  7 & 5 & 4 & 3 & 50  \\
 \label{tab:variacao-explicada-acp}
 \end{table}
 
+\begin{table}
+\centering
+\begin{tabular}{l c c c c c | c}
+\itshape Análise & \itshape 1D & \itshape 2D & \itshape 3D & \itshape 4D & \itshape 5D & \itshape 1D + 2D \\
+\hline
+cdep2007-2010 & 27 & 4 & 2 & 2 & 2 & 31  \\ 
+cdep2011-2014 & 16 & 4 & 3 & 2 & 2 & 20  \\ 
+sen2007-2010  & 50 & 8 & 5 & 3 & 3 & 58  \\ 
+sen2011-2014  & 35 & 8 & 6 & 5 & 4 & 43  \\ 
+cmsp2013-2016 & 55 & 10 & 6 & 4 & 3 & 65  \\ 
+\end{tabular} 
+\caption{Porcentagem da variância retida pelas dimensões do \wnominate. \Leo{Tabela ainda não citada no texto}}
+\label{tab:variacao-explicada-wnominate}
+\end{table}
+
 As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole. Já para o cálculo da ACP, utilizamos a função \textsf{prcomp}, nativamente disponível no R.
 
 Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. É importante registrar que mapas ligeiramente diferentes podem ser produzidos pela ACP em computadores diferentes, principalmente no que diz respeito à orientação do mapa, que é arbitrária, e porque não há garantia de unicidade da solução da ACP no caso geral, isto é, pode haver mais de uma maneira possível de se escolher um eixo que maximiza a variância dos dados projetados.
