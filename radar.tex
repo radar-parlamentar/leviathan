@@ -703,7 +703,7 @@ Os mapas espaciais de votações produzidos pela ACP são exibidos nas Figuras~\
   \label{fig:cmsp2013-2016}
 \end{figure}
 
-As medidas de avaliação do modelo são exibidas na Tabela~\ref{tab:fit}. Nessa mesma tabela pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Por fim, na Tabela~\ref{tab:variacao-explicada-acp} apresentamos a porcentagem de variância retida por cada uma das dimensões principais da ACP. Nessas tabelas utilizamos as seguintes abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
+As medidas de avaliação do modelo são exibidas na Tabela~\ref{tab:fit}. Nessa mesma tabela pode-se comparar os resultados da ACP com os resultados produzidos pelo \wnominate. Já a Tabela~\ref{tab:tempos} mostra os tempos de execução para ambos os métodos. Por fim, na Tabela~\ref{tab:variacao-explicada-acp} apresentamos a porcentagem de variância retida por cada uma das dimensões principais da ACP, enquanto que na Tabela~\ref{tab:variacao-explicada-wnominate} apresentamos a porcentagem de variância retida pelas dimensões geradas pelo \wnominate. Nessas tabelas utilizamos as seguintes abreviações: \emph{cdep} para Câmara dos Deputados, \emph{sen} para Senado e \emph{cmsp} para Câmara Municipal de São Paulo.
 
 \begin{table}
 \centering
@@ -751,7 +751,7 @@ sen2007-2010  & 27 & 17 & 6 & 4 & 3 & 44  \\
 sen2011-2014  & 24 & 13 & 7 & 3 & 3 & 37  \\ 
 cmsp2013-2016 & 43 &  7 & 5 & 4 & 3 & 50  \\ 
 \end{tabular} 
-\caption{Porcentagem da variância retida pelas dimensões da ACP.}
+\caption{Porcentagens de variância retida pelas dimensões da ACP.}
 \label{tab:variacao-explicada-acp}
 \end{table}
 
@@ -766,7 +766,7 @@ sen2007-2010  & 50 & 8 & 5 & 3 & 3 & 58  \\
 sen2011-2014  & 35 & 8 & 6 & 5 & 4 & 43  \\ 
 cmsp2013-2016 & 55 & 10 & 6 & 4 & 3 & 65  \\ 
 \end{tabular} 
-\caption{Porcentagem da variância retida pelas dimensões do \wnominate. \Leo{Tabela ainda não citada no texto}}
+\caption{Porcentagens de variância retida pelas dimensões geradas pelo \wnominate.}
 \label{tab:variacao-explicada-wnominate}
 \end{table}
 
@@ -778,7 +778,6 @@ Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memóri
 \label{sec:discussao}
 
 Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos nos mapas espaciais por eles produzidos que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. Segundo eles, isso ilustra a ``razoabilidade'' dos mapas produzidos pelo modelo proposto. 
-
 De forma similar, a ``razoabilidade'' de nossos resultados pode ser defendida por certos padrões políticos identificados, sendo o principal a polarização PT-PSDB, presente nos cinco mapas. Da mesma forma, o considerável espalhamento do PMDB nas casas federais poderia ser esperado.
 
 Mas ao mesmo tempo em que os mapas confirmam padrões já esperados, também evidenciam outros comportamentos interessantes, mas não tão óbvios. Um deles é o relativo afastamento que se pode perceber do PMDB em relação ao PT na Câmara dos Deputados, quando se compara as legislaturas 2007-2010 e 2011-2014. Isso parece ilustrar um processo de enfraquecimento da base parlamentar do governo do PT ao longo do tempo, o que parece fazer sentido considerando o impeachment de Dilma Rousseff.
@@ -833,13 +832,15 @@ No entanto, a ACP não garante essa orientação entre mapas de períodos difere
 
 \subsection{Análise de dimensionalidade}
 
-Pelos números da Tabela~\ref{tab:variacao-explicada-acp}, observamos que a explicação acrescentada pela segunda dimensão não é desprezível, principalmente nas legislaturas do senado. Também observamos que em alguns casos, a explicação acrescentada pela terceira dimensão possui poder explicativo considerável quando comparado com a explicação fornecida pelas outras dimensões, caso no qual se destaca a legislatura cdep2011-2014. Temos ainda que mesmo que a partir da terceira dimensão pouco se acrescente, a utilização das duas primeiras dimensões possui poder explicativo modesto, com valores encontrados indo de 26\% a 50\%. 
+Pelos números da Tabela~\ref{tab:variacao-explicada-acp}, observamos que a explicação acrescentada pela segunda dimensão da ACP não é desprezível, principalmente nas legislaturas do senado. Também observamos que em alguns casos, a explicação acrescentada pela terceira dimensão possui poder explicativo considerável quando comparado com a explicação fornecida pelas outras dimensões, caso no qual se destaca a legislatura cdep2011-2014. Temos ainda que mesmo que a partir da terceira dimensão pouco se acrescente, a utilização das duas primeiras dimensões possui poder explicativo modesto, com valores encontrados indo de 26\% a 50\%. 
 
-Essa análise sobre os números apresentados pela Tabela~\ref{tab:variacao-explicada-acp} levam a um entendimento de que o legislativo brasileiro opera em uma realidade multidimensional. Ou pelo menos de que idealmente os mapas espaciais de votações deveriam ser construídos com mais dimensões para que outras diferenças significativas entre os parlamentares fossem visualizadas. 
+Se aplicarmos o mesmo critério, a porcentagem de variância retida pelas dimensões, para definir a dimensionalidade dos resultados do \wnominate, encontraremos resultados não muito distantes, conforme a Tabela~\ref{tab:variacao-explicada-wnominate}. Em particular, a comparação das Tabelas~\ref{tab:variacao-explicada-acp}~e~\ref{tab:variacao-explicada-wnominate} mostra que nenhum dos dois métodos garante uma maior concentração de variância nas primeiras dimensões.
+
+Essa análise sobre as Tabelas~\ref{tab:variacao-explicada-acp}~e~\ref{tab:variacao-explicada-wnominate} sugere um entendimento de que o legislativo brasileiro opera em uma realidade multidimensional. Ou pelo menos de que idealmente os mapas espaciais de votações deveriam ser construídos com mais dimensões para que outras diferenças significativas entre os parlamentares fossem visualizadas. 
 
 A ideia de que uma dimensionalidade maior seria mais adequada é corroborada pela referência de que uma proporção de mais de 90\% da variância retida pelas componentes principais selecionadas é considerado um bom resultado~\cite{DataMining2003}. Ora, esse limiar de 90\% está muito acima dos resultados encontrados.
 
-Porém, Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegaram à mesma conclusão. Diferentemente, eles concluíram pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença se deve principalmente ao critério utilizado. Leoni e Izumi se basearam na taxa de classificação correta e na APRE. Já neste artigo, nós nos baseamos na porcentagem da variância explicada pelas componentes principais, que é um critério natural quando se fala em ACP, o que não se pode dizer dos modelos utilizados pelos outros autores.
+Porém, Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegam à mesma conclusão. Diferentemente, eles concluem pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença se deve principalmente ao critério utilizado. Leoni e Izumi se basearam na taxa de classificação correta e na APRE. Já neste artigo, nós nos baseamos na porcentagem da variância explicada pelas componentes principais, que é um critério mais comum quando se fala em ACP.
 
 Cabe ainda destacar que não é objetivo deste trabalho realizar a interpretação substantiva das dimensões obtidas. Assim sendo, qualquer conclusão mais definitiva sobre uma possível dimensionalidade elevada do congresso brasileiro depende também de um trabalho mais qualitativo.
 
@@ -854,9 +855,9 @@ Contudo, cabe aqui a ressalva de Poole~\cite{poole2005book}, de que para uma int
 
 Nossos resultados mostram que a execução da ACP é muito mais rápida do que a do \wnominate. Para além de um interessante benefício acadêmico, um rápido tempo de execução é um requisito importante para que o método possa ser incorporado a possibilidades de alta interatividade da web. Um exemplo é a funcionalidade do Radar Parlamentar que possibilita ao usuário gerar um mapa de votações que considera apenas votações relacionadas a um determinado conjunto de palavras-chaves.
 
-Um resultado interessante de nossas análises é a sugestão de que o espaço de votações do legislativo brasileiro seria multidimensional. Isso difere da interpretação de Leoni~\cite{leoni02cdep} e de Izumi~\cite{izumi2016senado}, que consideram o legislativo brasileiro como sendo unidimensional. Essa diferença se deve principalmente ao critério utilizado: ao passo que eles se basearam na taxa de classificação correta e na APRE, nós nos baseamos na porcentagem da variância explicada pelas componentes principais. 
-%
-Além disso, é de se notar que nos trabalhos de Poole, origem dos algoritmos utilizados por Leoni e Izumi, interpreta-se o congresso norte-americano como uma realidade unidimensional, ao passo que o trabalho de Heckman e Snyder~\cite{heckman-snyder1997}, que também utiliza a ACP, interpretam esse mesmo congresso norte-americano como multidimensional. Ou seja, as diferenças nos critérios de dimensionalidade também afetam as interpretações sobre o congresso dos EUA.
+Um resultado interessante de nossas análises é a sugestão de que o espaço de votações do legislativo brasileiro seria multidimensional. Isso difere da interpretação de Leoni~\cite{leoni02cdep} e de Izumi~\cite{izumi2016senado}, que consideram o legislativo brasileiro como sendo unidimensional. Essa diferença se deve principalmente ao critério utilizado: ao passo que eles se basearam na taxa de classificação correta e na APRE, nós nos baseamos na porcentagem da variância explicada pelas dimensões.
+Além disso, é de se notar que a literatura também apresenta divergências sobre qual seria a dimensionalidade do congresso norte-americano. 
+%Além disso, é de se notar que nos trabalhos de Poole, origem dos algoritmos utilizados por Leoni e Izumi, interpreta-se o congresso norte-americano como uma realidade unidimensional, ao passo que o trabalho de Heckman e Snyder~\cite{heckman-snyder1997}, que também utiliza a ACP, interpretam esse mesmo congresso norte-americano como multidimensional. Ou seja, as diferenças nos critérios de dimensionalidade também afetam as interpretações sobre o congresso dos EUA.
 %
 Dessa forma, estudos sobre a dimensionalidade de espaços políticos do legislativo são ainda uma fonte de debates. Uma possível abordagem para se aprofundar nesse assunto é a utilização de mapas espaciais com mais de duas dimensões.
 
