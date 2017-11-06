@@ -205,7 +205,14 @@ Nesse exemplo, podemos ver pelo mapa que o parlamentar $p1$ votou \yea na votaç
 
 Mas conforme o número de votações e de parlamentares cresce, percebe-se que é impossível posicionar perfeitamente todos os pontos em relação a todas as retas. Por isso é importante entender que o mapa de votações não é necessariamente construído de forma a descrever perfeitamente o comportamento dos parlamentares. Todo mapa gera distorções, e todo tipo de mapa procura amenizar algum tipo de distorção. Em mapas de votações, uma ``distorção'' a ser amenizada é a quantidade de classificações incorretas presentes no mapa.
 
-Na concepção dos trabalhos de Poole, considera-se que em um mapa de votações cada parlamentar possui seu \emph{ponto ideal} no espaço. Nesse mesmo espaço, uma votação também possui pontos associados às suas possíveis opções (\yea e \nay). As retas na Figura~\ref{fig:mapa-classificacao-perfeita} são construídas em função dos pontos que representam suas respectivas votações. Dessa forma, a estimativa do comportamento de um parlamentar numa dada votação é função de relações entre seu ponto ideal e a representação espacial da votação. 
+Na concepção dos trabalhos de Poole, considera-se que em um mapa de votações cada parlamentar possui seu \emph{ponto ideal} no espaço. Nesse mesmo espaço, uma votação também possui pontos associados às suas possíveis opções (\yea e \nay). As retas na Figura~\ref{fig:mapa-classificacao-perfeita} são construídas em função dos pontos que representam suas respectivas votações. A Figura~\ref{fig:pontos-votacoes} explicita os pontos associados à votação $v1$: $v1y$ para a opção \yea e $v1n$ para \nay. Dessa forma, a estimativa do comportamento de um parlamentar numa dada votação é função de relações entre seu ponto ideal e a representação espacial da votação. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.7]{figs/pontos-votacoes.png}
+  \caption{Relação entre pontos representando opções de uma votação ($v1y$ e $v1n$) e a reta que representa a votação ($v1$).}
+  \label{fig:pontos-votacoes}
+\end{figure}
 
 Dados os pontos ideias associados a parlamentares e votações, uma primeira abordagem para determinar o voto do parlamentar em uma votação seria dizer que o parlamentar vota deterministicamente na opção mais próxima de seu ponto ideal. Para estabelecer essa relação entre ponto ideal e voto efetuado,  Poole utiliza o conceito de \emph{função utilidade}, que atribui a cada ponto no espaço um valor, de forma que quanto mais alto esse valor em um ponto do espaço, maior é a \emph{probabilidade} de que o parlamentar vote em uma opção associada a esse ponto.
 
