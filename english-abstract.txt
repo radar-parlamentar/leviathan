@@ -1,6 +1,0 @@
-
-Este artigo trás uma revisão de métodos de análise quantitativa de votações nominais em casas legislativas e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Apresentamos também nossa abordagem para o tratamento de abstenções e para análises agregadas por partido, temas pouco explorados na literatura devido a pouca relevância no contexto de casas legislativas dos Estados Unidos. A avaliação do modelo é apresentada com medidas comparadas ao \wnominate, um dos métodos mais conhecidos de análise de votações nominais das ciências políticas.
-
-This paper presents a review of methods for legislative roll call quantitative analysis and discusses the usage of principal components analysis (PCA) as a simple and effective method for legislative roll call analysis. We also present our approach for handling abstentions and for party aggregated analysis, which are topics not so explored in the literature due to the their low relevance in the United States legislative context. The model evaluation is presented with measures compared to the W-NOMINATE, one of the better known methods for roll call analysis in political sciences.
-
-
