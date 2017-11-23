@@ -30,7 +30,7 @@
 % ---
 
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\usepackage[num]{abntex2cite}	% Citações padrão ABNT
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
 
 %\usepackage[brazil]{babel} % não aparece no modelo abtex2
 \usepackage{amsmath}
@@ -42,6 +42,11 @@
 \usepackage{xspace}
 \usepackage[font={footnotesize}]{caption}
 \usepackage{gensymb}
+
+% citação entre parênteseses em vez colchetes
+\renewcommand\citeleft{(}
+\renewcommand\citeright{)}
+% TODO falta a vírgula separando nome autor do ano
 
 \hypersetup{
     colorlinks=true,
@@ -899,6 +904,6 @@ Agradecemos a toda a comunidade de contribuidores do Radar Parlamentar.
 % https://groups.google.com/forum/#!topic/abntex2/oH5za46RtyU
 
 {\small
-\bibliography{refs}{}
+\bibliography{refs}
  }
 \end{document}
