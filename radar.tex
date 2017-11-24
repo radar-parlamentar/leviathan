@@ -94,14 +94,16 @@
 
 %criar um novo estilo de cabeçalhos e rodapés
 \definecolor{darkred}{HTML}{c00000}
+\usetikzlibrary{shapes.geometric}
+\newcommand{\diam}[1]{\tikz\draw (0,0)node[shape aspect=1,draw,inner sep=2pt]{#1};}
 \makepagestyle{leviathan}
   %%cabeçalhos
   \makeevenhead{leviathan} %%pagina par
-     {} % esquerda
+     {\diam{\textbf{Leviathan} | Cadernos de Pesquisa Política}} % esquerda
      {} % centro
      {} % direita
   \makeoddhead{leviathan} %%pagina ímpar ou com oneside
-     {} % esquerda
+     {\diam{\textbf{Leviathan} | Cadernos de Pesquisa Política}} % esquerda
      {} % centro
      {} % direita
   \makeheadrule{leviathan}{\textwidth}{\normalrulethickness} %linha
