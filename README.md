@@ -1,4 +1,1 @@
-paper_radar
-===========
-
-nova versão do paper
+Análise de votações nominais do legislativo brasileiro utilizando componentes principais

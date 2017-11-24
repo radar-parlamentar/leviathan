@@ -1,69 +1,95 @@
+%% MODELO DE LATEX PARA TRABALHOS ACADÊMICOS
+%% INSTRUÇÕES GERAIS:
+%%    1. TODO O TEXTO NA FRENTE DO SIMBOLO '%' É COMENTÁRIO, ISTO É, ELE NÃO FAZ DIFERENÇA NO RESULTADO FINAL 
+%%    2. NESTE MODELO, VOCÊS SÓ PRECISAM EDITAR DAS LINHAS 114 A 132 (INFORMAÇÕES DE CAPA) E DAS LINHAS 188 EM DIANTE (CORPO DO TRABALHO). O RESTO SÃO CONFIGURAÇÕES DE FORMATAÇÃO QUE PROVAVELMENTE NÃO SERÁ PRECISO MODIFICAR.
+%%    3. MAIS INSTRUÇÕES DETALHADAS PODERÃO SER ENCONTRADAS NA PÁGINA profhelioh.wordpress.com. DÚVIDAS: heliohenrique@ufpr.br OU heliohenrique3@gmail.com
+
+% INFORMAÇÕES DA FONTE:
+%% abtex2-modelo-relatorio-tecnico.tex, v-1.7.1 laurocesar
+%% Copyright 2012-2013 by abnTeX2 group at http://abntex2.googlecode.com/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://abntex2.googlecode.com/
+%%
+%% This work consists of the files abntex2-modelo-relatorio-tecnico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Relatório Técnico/Acadêmico em conformidade com 
+% ABNT NBR 10719:2011 Informação e documentação - Relatório técnico e/ou
+% científico - Apresentação
+% ------------------------------------------------------------------------ 
+% ------------------------------------------------------------------------
+
 \documentclass[
-	% -- opções da classe memoir --
 	article,			% indica que é um artigo acadêmico
+	% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
-	oneside,			% para impressão apenas no recto. Oposto a twoside
+	% openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+    oneside,			% para impressão somente frente. Oposto a twoside (frente e verso)
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
 	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
 	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
 	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
-	%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
 	% -- opções do pacote babel --
 	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
 	brazil,				% o último idioma é o principal do documento
-	sumario=tradicional,
-	oldfontcommands % para que \sf funcione
 	]{abntex2}
 
+
 % ---
-% Pacotes fundamentais do modelo de artigo abntex2
+% PACOTES
 % ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{cmap}				% Mapear caracteres especiais no PDF
 \usepackage{lmodern}			% Usa a fonte Latin Modern
 \usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
 \usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
-\usepackage{nomencl} 			% Lista de simbolos
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{xspace}             % Espaço após comandos tipo \nominate
+\usepackage{amsmath}            % \text dentro de fórmulas
+\usepackage{amsfonts}           % \mathbb
+\usepackage{tikz}
+\usepackage{gensymb}
 \usepackage{microtype} 			% para melhorias de justificação
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{textcomp}
+\usepackage{xcolor}
 % ---
-
+% Pacotes de citações
+% ---
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
 \usepackage[alf]{abntex2cite}	% Citações padrão ABNT
 
-%\usepackage[brazil]{babel} % não aparece no modelo abtex2
-\usepackage{amsmath}
-\usepackage{cite}
-\usepackage{textcomp}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usepackage{hyperref}
-\usepackage{xspace}
-\usepackage[font={footnotesize}]{caption}
-\usepackage{gensymb}
 
-% citação entre parênteseses em vez colchetes
-\renewcommand\citeleft{(}
-\renewcommand\citeright{)}
-% TODO falta a vírgula separando nome autor do ano
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    citecolor=black,
-    filecolor=black,
-    urlcolor=black,
-}
 \newcommand{\tikzmark}[1]{\tikz[overlay, remember picture] \coordinate (#1);}
-
-% Macros for proof-reading
-\usepackage[normalem]{ulem} % for \sout
-%\newcommand{\ra}{$\rightarrow$}
-\newcommand{\ugh}[1]{\textcolor{red}{\uwave{#1}}} % please rephrase
-\newcommand{\ins}[1]{\textcolor{blue}{\uline{#1}}} % please insert
-\newcommand{\del}[1]{\textcolor{red}{\sout{#1}}} % please delete
-\newcommand{\chg}[2]{\textcolor{red}{\sout{#1}}{\ra}\textcolor{blue}{\uline{#2}}} % please change
 
 % bordermatrix with squared brackets:
 \usepackage{etoolbox}
@@ -72,32 +98,23 @@
 \patchcmd{\bbordermatrix}{\left(}{\left[}{}{}
 \patchcmd{\bbordermatrix}{\right)}{\right]}{}{}
 
-% Put edit comments in a really ugly standout display
-\usepackage{ifthen}
-\usepackage{amssymb}
-\newboolean{showcomments}
-\setboolean{showcomments}{true} % toggle to show or hide comments
-\ifthenelse{\boolean{showcomments}}
-  {\newcommand{\nb}[2]{
-    \fcolorbox{gray}{yellow}{\bfseries\sffamily\scriptsize#1}
-    {\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}
-   }
-   \newcommand{\version}{\emph{\scriptsize$-$working$-$}}
-  }
-  {\newcommand{\nb}[2]{}
-   \newcommand{\version}{}
-  }
 
-% General comment
-\newcommand\info[1]{\nb{Info}{#1}}
-
-% Single author comment
-\newcommand\todo[1]{\nb{ToDo}{#1}}
-\newcommand\Leo[1]{\nb{Leo}{#1}}
-\newcommand\Gui[1]{\nb{Gui}{#1}}
-\newcommand\Davi[1]{\nb{Davi}{#1}}
-\newcommand\Saulo[1]{\nb{Saulo}{\textcolor{blue}{#1}}}
-\newcommand\Ricardo[1]{\nb{Ricardo}{#1}}
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
 
 \newcommand\pca{Análise de Componentes Principais\xspace}
 \newcommand\nay{NÃO\xspace}
@@ -105,18 +122,39 @@
 \newcommand\nominate{NOMINATE\xspace}
 \newcommand\wnominate{W-NOMINATE\xspace}
 
-\titulo{Análise de votações nominais do legislativo brasileiro utilizando componentes principais}
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{}
 \autor{}
 \local{}
 \data{}
+% ---
 
 % ---
-% Altera as margens padrões
-% ---
-\setlrmarginsandblock{3cm}{3cm}{*}
-\setulmarginsandblock{3cm}{3cm}{*}
-\checkandfixthelayout
-% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{relatório técnico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
 
 % --- 
 % Espaçamentos entre linhas e parágrafos 
@@ -128,35 +166,48 @@
 % Controle do espaçamento entre um parágrafo e outro:
 \setlength{\parskip}{0.2cm}  % tente também \onelineskip
 
-% Espaçamento simples
-\SingleSpacing
+% ---
 
+% ----
+% Início do documento
+% ----
 \begin{document}
- 
-% Seleciona o idioma do documento (conforme pacotes do babel)
-\selectlanguage{brazil}
 
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing 
 
-\maketitle 
+%\maketitle 
 
-\vspace*{-3cm}
+\begin{center}
+{\huge
+Análise de votações nominais do legislativo brasileiro utilizando componentes principais
+}
+\end{center}
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+%\vspace*{-3cm}
 
 \begin{flushright}
 Leonardo Leite\footnote{Engenheiro de computação e mestre em Ciência da Computação, ambos pela Universidade de São Paulo (USP). É desenvolvedor de software no Serviço Federal de Processamento de Dados (Serpro). É também um dos desenvolvedores do Radar Parlamentar. E-mail: leofl@ime.usp.br.}, Saulo Trento\footnote{Graduado em Engenharia Elétrica pela Universidade de São Paulo e mestre em Energias do Século XXI pela École Polytechnique da França. MBA Setor Elétrico pela Fundação Getúlio Vargas. É engenheiro de proteção na ISA CTEEP, e voluntário da PoliGNU, onde atua no projeto Radar Parlamentar. E-mail: saulotrento@gmail.com.}
 \end{flushright}
 
-\begin{resumo}
+
+\begin{resumo} 
+\noindent
 Este artigo traz uma revisão de métodos de análise quantitativa de votações nominais em casas legislativas e discute a utilização da análise de componentes principais (ACP) como um método simples e eficaz para analisar votações nominais de casas legislativas. Apresentamos também nossa abordagem para o tratamento de abstenções e para análises agregadas por partido, temas pouco explorados na literatura devido a pouca relevância no contexto de casas legislativas dos Estados Unidos. A avaliação do modelo é apresentada com medidas comparadas ao \wnominate, um dos métodos mais conhecidos de análise de votações nominais das ciências políticas.
 
-\vspace{\onelineskip}
-
-\noindent
-\textbf{Palavras-chave}: mapa espacial de votações legislativas. análise quantitativa de votações. poder legislativo brasileiro. análise de componentes principais.
-\end{resumo}
+ \vspace{\onelineskip}
+    
+ \noindent
+ \textbf{Palavras-chaves}: mapa espacial de votações legislativas. análise quantitativa de votações. poder legislativo brasileiro. análise de componentes principais.
+\end{resumo} 
 
 \begin{resumo}[Abstract]
+\noindent
 This paper presents a review of methods for legislative roll call quantitative analysis and discusses the usage of principal components analysis (PCA) as a simple and effective method for legislative roll call analysis. We also present our approach for handling abstentions and for party aggregated analysis, which are topics not so explored in the literature due to the their low relevance in the United States legislative context. The model evaluation is presented with measures compared to the W-NOMINATE, one of the better known methods for roll call analysis in political sciences.
 
 \vspace{\onelineskip}
@@ -165,25 +216,28 @@ This paper presents a review of methods for legislative roll call quantitative a
 \textbf{Keywords}: spatial maps of parliamentary voting. roll calls quantitative analysis. Brazilian legislative power. principal component analysis. 
 \end{resumo}
 
-% começa elementos textuais
+% ---
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS  (necessário para incluir número nas páginas)
+% ----------------------------------------------------------
 \textual
 
-\section{Introdução}
-\label{sec:intro}
 
-%Contexto
-%Motivação / problema 
-%questão
-%solução, avaliação
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\section{Introdução} 
 
-Já em 1957, em seu artigo que explora o comportamento racional de governantes e cidadãos no regime democrático, Downs~\cite{downs1957} considera que partidos e eleitores podem ter ideologias mapeadas em um espectro visual indo da esquerda para a direita. A partir da década de 80, com a redução do custo de processamento computacional, visualizações mais sofisticadas focadas no comportamento legislativo surgiram com os chamados mapas espaciais de votações e com a proposição em 1985 do famoso algoritmo \nominate por Poole e Rosenthal~\cite{poole1985nominate}, até hoje o mais conhecido e utilizado. 
+Já em 1957, em seu artigo que explora o comportamento racional de governantes e cidadãos no regime democrático, \citeonline{downs1957} considera que partidos e eleitores podem ter ideologias mapeadas em um espectro visual indo da esquerda para a direita. A partir da década de 80, com a redução do custo de processamento computacional, visualizações mais sofisticadas focadas no comportamento legislativo surgiram com os chamados mapas espaciais de votações e com a proposição em 1985 do famoso algoritmo \nominate por \citeonline{poole1985nominate}, até hoje o mais conhecido e utilizado. 
 
 O objetivo desses modelos de escalonamento dimensional é representar os parlamentares em um espaço geométrico com algumas poucas dimensões\footnote{Um dado $n$-dimensional requer $n$ números reais para ser descrito. Um ponto em um mapa plano, por exemplo, é bidimensional porque pode ser descrito com um par de números reais.} (frequentemente uma ou duas) de tal forma que o comportamento de cada parlamentar nas votações seja em grande parte explicado por sua posição nesse espaço. Essa posição do legislador é chamada de ``ponto ideal'' e é estimada a partir dos votos observados nas votações nominais.
 
 Existe uma ampla literatura sobre o assunto focando principalmente em entidades dos Estados Unidos, como o Congresso e a Suprema Corte, inclusive comparando o desempenho de diferentes modelos 
 %\cite{poole1985nominate}man-snyder1997,mccarty-poole-rosenthal01,poole-rosenthal2000,clinton-jackman-rivers04}, 
 \cite{poole-rosenthal2000,clinton2004ideal,carroll2009comparing}.
-Já no contexto brasileiro, exemplos que analisam a Câmara dos Deputados são os trabalhos de Leoni~\cite{leoni02cdep} e os de Zucco~\cite{zucco2011ideologia, zucco2011distinguishing}, enquanto que Izumi analisa votações do senado~\cite{izumi2016senado}. 
+Já no contexto brasileiro, exemplos que analisam a Câmara dos Deputados são os trabalhos de \citeonline{leoni02cdep} e os de Zucco~\cite{zucco2011ideologia, zucco2011distinguishing}, enquanto que \citeonline{izumi2016senado} analisa votações do senado. 
 
 A Análise de Componentes Principais (ACP) é o método estatístico mais popular para redução dimensional de grandes conjuntos de dados~\cite{DataMining2003}, estando amplamente disponível em softwares e bibliotecas de matemática e estatística. Com redução dimensional entende-se que algoritmos são aplicados a informações n-dimensionais (ex: atuação de vários parlamentares em várias votações) sendo simplificadas em informações com menos dimensões (duas no caso dos mapas de votações por nós construídos). A redução de dimensões funciona como se enxergássemos apenas a ``sombra'' de determinado fenômeno. Embora seja uma informação simplificada e não completa, pode ser útil para melhorar o entendimento sobre o fenômeno estudado, principalmente ao considerar que a informação original, n-dimensional, é de difícil assimilação devido a sua complexidade inerente.
 
@@ -198,20 +252,18 @@ Além disso, disponibilizamos o banco de dados completo do Radar Parlamentar\foo
 
 Este artigo está organizado da seguinte forma: na Seção~\ref{sec:revbib} apresentamos em detalhes os principais trabalhos da literatura sobre modelos espaciais de votações parlamentares, dando destaque aos trabalhos de Keith Poole; na seção~\ref{sec:acp} apresentamos nossa abordagem para a elaboração de mapas espaciais de votações, levando em conta questões ligadas a realidade do legislativo brasileiro; na Seção~\ref{sec:avaliacao} explicamos o método de avaliação do modelo, sendo a avaliação apresentada na Seção~\ref{sec:resultados}, juntamente com os mapas espaciais produzidos; a discussão dos resultados é feita na Seção~\ref{sec:discussao}; por fim, nossas conclusões são apresentadas na Seção~\ref{sec:conclusoes}.
 
-
-
 \section{Revisão da literatura}
 \label{sec:revbib}
 
-Métodos de escalamento multidimensional analisam similaridades entre elementos de um conjunto, de forma a obter distâncias entre esses elementos em um espaço geométrico, possibilitando uma análise visual sobre os dados mais amigável que uma grande listagem de números~\cite{borg2005mds}. Trabalhos como os de Pearson~\cite{pearson1901} e Hotelling~\cite{hotelling1933} já consideram desde o início do século XX a aplicação dessas técnicas de escalamento multidimensional em áreas como economia, psicologia e educação.
+Métodos de escalamento multidimensional analisam similaridades entre elementos de um conjunto, de forma a obter distâncias entre esses elementos em um espaço geométrico, possibilitando uma análise visual sobre os dados mais amigável que uma grande listagem de números~\cite{borg2005mds}. Trabalhos como os de \citeonline{pearson1901} e \citeonline{hotelling1933} já consideram desde o início do século XX a aplicação dessas técnicas de escalamento multidimensional em áreas como economia, psicologia e educação.
 
-A aplicação de modelos multidimensionais em economia está relacionada com a elaboração de modelos de escolhas racionais, nos quais consumidores manifestam preferências sobre produtos. Esses mesmos princípios passaram a ser usados nas ciências políticas. Já na década de 70, Davis et al.~\cite{davis1970electoral} modelaram matematicamente o processo no qual eleitores escolhem candidatos. O cidadão avaliava as posições de cada candidato em diferentes assuntos, o que fornece as localizações dos candidatos em um espaço multidimensional. A escolha feita pelo cidadão é função da localização dos candidatos e de sua própria localização nesse espaço. 
+A aplicação de modelos multidimensionais em economia está relacionada com a elaboração de modelos de escolhas racionais, nos quais consumidores manifestam preferências sobre produtos. Esses mesmos princípios passaram a ser usados nas ciências políticas. Já na década de 70, \citeonline{davis1970electoral} modelaram matematicamente o processo no qual eleitores escolhem candidatos. O cidadão avaliava as posições de cada candidato em diferentes assuntos, o que fornece as localizações dos candidatos em um espaço multidimensional. A escolha feita pelo cidadão é função da localização dos candidatos e de sua própria localização nesse espaço. 
 
 Esse tipo de modelo multidimensional passou mais tarde a ser usado para a elaboração de mapas espaciais de votações no âmbito de casas legislativas.
 
 \subsection{Keith Poole: optimal classification e \nominate}
 
-Os trabalhos mais proeminentes publicados sobre a construção de mapas espaciais de votações são os de Keith Poole. Apresentamos na sequência conceitos básicos e procedimentos utilizados por Poole na construção dos mapas espaciais. Todos esses conceitos e procedimentos estão descritos detalhadamente no livro de Poole sobre modelos espaciais de votações~\cite{poole2005book}.
+Os trabalhos mais proeminentes publicados sobre a construção de mapas espaciais de votações são os de Keith Poole. Apresentamos na sequência conceitos básicos e procedimentos utilizados por Poole na construção dos mapas espaciais. Todos esses conceitos e procedimentos estão descritos detalhadamente no livro de \citeonline{poole2005book} sobre modelos espaciais de votações.
 
 O primeiro conceito é do que seria uma \emph{votação perfeita}. Considere um mapa espacial de votações onde cada ponto representa um parlamentar e cada linha representa uma votação, de forma que pontos de um lado da linha representam parlamentares que votaram \yea, enquanto que os pontos do outro lado da linha representam parlamentares que votaram \nay. Para uma pequena quantidade de votações pode ser possível uma construção perfeita de tal mapa, como, por exemplo, podemos observar na Figura~\ref{fig:mapa-classificacao-perfeita}.
 Nesse exemplo, podemos ver pelo mapa que o parlamentar $p1$ votou \yea na votação $v1$ e \nay para a votação $v2$. Já $p2$ votou \yea para $v1$ e \yea para $v2$. Por fim, $p3$ votou \nay para $v1$ e \yea para $v2$. Como a partir do mapa descrevemos perfeitamente o comportamento dos parlamentares, dizemos que trata-se de uma votação perfeita.
@@ -249,7 +301,7 @@ A função utilidade possui uma parcela determinística e também uma parcela es
 
 Dados os conceitos básicos apresentados (ponto ideal, função utilidade e erros de votação) vamos descrever agora os principais métodos de construção de mapas espaciais de votações elaborados por Poole. São eles o \emph{Optimal Classification} e o NOMINATE.
 
-O \emph{Optimal Classification} (OC) consiste em um processo iterativo\footnote{Um processo iterativo é aquele no qual um algoritmo é repetido várias vezes, sendo que depois de uma certa quantidade de repetições há uma \emph{convergência}, ou seja, o resultado não mais se altera com mais repetições do processo.} que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando-se os pontos que representam os parlamentares e movendo-se as linhas, que representam as votações. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados procuram garantir que a cada passo o erro nunca aumente. Para uma crítica a esse método, em que se demonstra que o OC nem sempre maximiza o número de classificações corretas, veja o trabalho de Tahk~\cite{tahk2006oc}.
+O \emph{Optimal Classification} (OC) consiste em um processo iterativo\footnote{Um processo iterativo é aquele no qual um algoritmo é repetido várias vezes, sendo que depois de uma certa quantidade de repetições há uma \emph{convergência}, ou seja, o resultado não mais se altera com mais repetições do processo.} que procura maximizar a proporção de classificações corretas em um mapa espacial de votações. Dada uma configuração inicial de um mapa de votações, primeiramente aplica-se um algoritmo que maximiza a classificação correta fixando-se os pontos que representam os parlamentares e movendo-se as linhas, que representam as votações. Em um segundo passo, fixa-se as linhas e move-se os pontos para maximizar a classificação correta. Esses dois passos são repetidos várias vezes até que o erro (proporção de classificações incorretas) estabilize. Os algoritmos empregados procuram garantir que a cada passo o erro nunca aumente. Para uma crítica a esse método, em que se demonstra que o OC nem sempre maximiza o número de classificações corretas, veja o trabalho de \citeonline{tahk2006oc}.
 
 O OC não define uma posição exata dos parlamentares no mapa de votações, assim como não define uma distância exata entre dois dados parlamentares. O que o OC fornece são regiões do espaço nas quais os parlamentares podem ser posicionados. Essas regiões são denominadas de politopos e representam padrões de opções escolhidas nas votações. Voltemos à Figura~\ref{fig:mapa-classificacao-perfeita}: note que se alterarmos ligeiramente a posição de um parlamentar, digamos $p1$, seu padrão de opções escolhidas não se altera. Esse padrão se mantêm enquanto o ponto ideal não atravessar uma das retas. Dessa forma, dizemos que a região do espaço delimitada pelas retas que mantêm o padrão de escolhas de $p1$ é o politopo de $p1$.
 
@@ -257,7 +309,7 @@ Após a construção do mapa podemos observar que normalmente alguns parlamentar
 
 Para a utilização do OC, não são necessárias premissas sobre a distribuição da função utilidade além da consideração de que ela é simétrica e de pico-único. Embora o conceito de função utilidade não apareça diretamente na aplicação do algoritmo, ele é importante para explicar os erros de classificação, no sentido de que há uma certa probabilidade de que o legislador vote na opção contrária do que o mapa de votações indica.
 
-Como exemplo de aplicação, Poole~\cite{poole2005book} mostra os resultados do OC quando aplicado à votação de revogação das leis do milho na Casa dos Comuns do parlamento inglês em 1846. Nessa situação, o algoritmo apresentou uma taxa de classificação correta de 95,2\% para os 430 parlamentares que votaram nessa matéria. Já em outro estudo~\cite{poole-rosenthal2000}, analisando da 80ª à 104ª legislatura do senado dos EUA, Poole e Rosenthal obtiveram taxas de classificação correta para duas dimensões que vão de 85,8\% a 91,3\%.
+Como exemplo de aplicação, \citeonline{poole2005book} mostra os resultados do OC quando aplicado à votação de revogação das leis do milho na Casa dos Comuns do parlamento inglês em 1846. Nessa situação, o algoritmo apresentou uma taxa de classificação correta de 95,2\% para os 430 parlamentares que votaram nessa matéria. Já em outro estudo, analisando da 80ª à 104ª legislatura do senado dos EUA, \citeonline{poole-rosenthal2000} obtiveram taxas de classificação correta para duas dimensões que vão de 85,8\% a 91,3\%.
 
 O outro método de construção de mapas espaciais de votações consagrado por Poole é o \nominate, que constitui uma família de algoritmos com ligeiras variações entre si. Diferentemente do OC, o \nominate produz posições exatas dos pontos ideais de parlamentares e votações, podendo-se assim atribuir distâncias entre esses pontos. 
 
@@ -287,11 +339,11 @@ Dada uma configuração inicial de pontos ideias de legisladores e opções de v
 
 Tanto o OC quanto o \nominate partem de uma \emph{configuração inicial} do mapa de votações a ser refinada. Poole define essa configuração inicial por meio da análise de componentes principais~\cite{poole2005book}.
 
-Analisando 172 votações realizadas por 440 parlamentares na 85ª legislatura do congresso dos EUA, Poole e Rosenthal~\cite{poole1985nominate} obtêm uma taxa de classificação correta de 78,9\% utilizando o \nominate com apenas uma dimensão.
+Analisando 172 votações realizadas por 440 parlamentares na 85ª legislatura do congresso dos EUA, \citeonline{poole1985nominate} obtêm uma taxa de classificação correta de 78,9\% utilizando o \nominate com apenas uma dimensão.
 
 \subsection{Modelos lineares de Heckman e Snyder}
 
-Muitos trabalhos consideram que para a análise de votações nominais os modelos lineares são menos adequados do que os modelos não lineares, como o \nominate de Poole. Heckman e Snyder~\cite{heckman-snyder1997}, porém, justificam rigorosamente a aplicação de um modelo linear para a estimativa de preferências de legisladores, sendo essas preferências expressas em escolhas nas votações legislativas. Heckman e Snyder alegam que a aplicação do modelo linear formulado por eles encontra praticamente os mesmos pontos ideais que são encontrados pelo \nominate para os legisladores do congresso norte-americano, porém com maior eficiência computacional.
+Muitos trabalhos consideram que para a análise de votações nominais os modelos lineares são menos adequados do que os modelos não lineares, como o \nominate de Poole. \citeonline{heckman-snyder1997}, porém, justificam rigorosamente a aplicação de um modelo linear para a estimativa de preferências de legisladores, sendo essas preferências expressas em escolhas nas votações legislativas. Heckman e Snyder alegam que a aplicação do modelo linear formulado por eles encontra praticamente os mesmos pontos ideais que são encontrados pelo \nominate para os legisladores do congresso norte-americano, porém com maior eficiência computacional.
 
 Para Heckman e Snyder, a decisão de se votar \yea ou \nay em uma votação é modelada como o resultado de um processo de escolha racional no qual os legisladores usam suas preferências para ponderar sobre as características da votação. Assim, dizemos que uma opção (\yea ou \nay) é localizada em um espaço no qual cada dimensão seria uma característica da opção. Nesse caso, a função utilidade recebe um vetor no espaço de características e retorna um número real. Cada legislador teria sua própria função utilidade e escolheria a opção que resultasse no maior valor de sua função utilidade. Diferentemente do NOMINATE, temos aqui uma função utilidade quadrática.
 
@@ -301,36 +353,36 @@ Os autores utilizam diferentes métodos algébricos para estimar as preferência
 
 \subsection{IDEAL, uma abordagem \emph{bayesiana}}
 
-Clinton et al.~\cite{clinton2004ideal} apresentam uma abordagem \emph{bayesiana} para a estimação de modelos espaciais de votações nominais. Essa abordagem é chamada de IDEAL~\cite{carroll2009comparing}. A estatística \emph{bayesiana} difere da abordagem tradicional, também chamada de frequentista, ao considerar os parâmetros do modelo como variáveis aleatórias e não valores fixos que são estimados~\cite{gelman2003bayesian}. Clinton et al.~\cite{clinton2004ideal}  alegam que os métodos estatísticos \emph{bayesianos} são mais adequados, tanto do ponto de vista teórico quanto computacional, para lidar com a grande quantidade de parâmetros existentes em modelos de votações nominais. Devido ao seu caráter \emph{bayesiano}, o IDEAL também possibilita a extensão da análise com incorporação de informação adicional e substantiva sobre as votações nominais e os legisladores, como por exemplo conhecimento prévio sobre a ideologia dos parlamentares ou as questões ideológicas envolvidas em determinada votação.
+\citeonline{clinton2004ideal} apresentam uma abordagem \emph{bayesiana} para a estimação de modelos espaciais de votações nominais. Essa abordagem é chamada de IDEAL~\cite{carroll2009comparing}. A estatística \emph{bayesiana} difere da abordagem tradicional, também chamada de frequentista, ao considerar os parâmetros do modelo como variáveis aleatórias e não valores fixos que são estimados~\cite{gelman2003bayesian}. \citeonline{clinton2004ideal}  alegam que os métodos estatísticos \emph{bayesianos} são mais adequados, tanto do ponto de vista teórico quanto computacional, para lidar com a grande quantidade de parâmetros existentes em modelos de votações nominais. Devido ao seu caráter \emph{bayesiano}, o IDEAL também possibilita a extensão da análise com incorporação de informação adicional e substantiva sobre as votações nominais e os legisladores, como por exemplo conhecimento prévio sobre a ideologia dos parlamentares ou as questões ideológicas envolvidas em determinada votação.
 
-O IDEAL utiliza uma função utilidade quadrática e estima os pontos ideais com o método de Monte Carlo via Cadeias de Markov~\cite{tierney1996mcmc}. A estrutura algorítmica do IDEAL para a estimação dos pontos ideias é similar à do \nominate: parte-se de uma estimativa inicial, que pode também ser o resultado da ACP, e a cada passo o algoritmo estima um conjunto de parâmetros mantendo os outros conjuntos fixos, repetindo esses passos até que haja a convergência. Além disso, nas comparações feitas por Carroll et al~\cite{carroll2009comparing}, os pontos ideias dos legisladores obtidos pelo IDEAL são muito similares aos obtidos pelo \nominate, estando os resultados do IDEAL e do \nominate mais próximos entre si do que estão dos resultados da abordagem de Heckman e Snyder.
+O IDEAL utiliza uma função utilidade quadrática e estima os pontos ideais com o método de Monte Carlo via Cadeias de Markov~\cite{tierney1996mcmc}. A estrutura algorítmica do IDEAL para a estimação dos pontos ideias é similar à do \nominate: parte-se de uma estimativa inicial, que pode também ser o resultado da ACP, e a cada passo o algoritmo estima um conjunto de parâmetros mantendo os outros conjuntos fixos, repetindo esses passos até que haja a convergência. Além disso, nas comparações feitas por \citeonline{carroll2009comparing}, os pontos ideias dos legisladores obtidos pelo IDEAL são muito similares aos obtidos pelo \nominate, estando os resultados do IDEAL e do \nominate mais próximos entre si do que estão dos resultados da abordagem de Heckman e Snyder.
 
-Por fim, Clinton et al.~\cite{clinton2004ideal} alegam que o IDEAL possui vantagens computacionais, enquanto que Carroll etl al.~\cite{carroll2009comparing} alegam que não há clara vantagem em termos de desempenho ou robustez na comparação entre as abordagens. Contudo, apesar desses estudos analisarem os pontos ideias obtidos, nenhum deles mostra valores de tempos de execução para ambas as abordagens. 
+Por fim, \citeonline{clinton2004ideal} alegam que o IDEAL possui vantagens computacionais, enquanto que \citeonline{carroll2009comparing} alegam que não há clara vantagem em termos de desempenho ou robustez na comparação entre as abordagens. Contudo, apesar desses estudos analisarem os pontos ideias obtidos, nenhum deles mostra valores de tempos de execução para ambas as abordagens. 
 
 \subsection{Aplicações no congresso brasileiro}
 
-Aplicando o \wnominate, uma das variações do \nominate, à Câmara dos Deputados, Leoni~\cite{leoni02cdep} encontrou taxas de classificação correta de 86,4\% e 90,4\% para as 49ª e 50ª legislaturas, respectivamente. Já em termos de APRE (redução proporcional do erro agregado), as taxas encontradas foram de 52,3\% e 64,8\% para as mesmas legislaturas. A APRE é uma medida mais robusta de proporção de erros. Tanto a taxa de classificação correta, quanto a APRE são explicadas na Seção~\ref{sec:avaliacao}.
+Aplicando o \wnominate, uma das variações do \nominate, à Câmara dos Deputados, \citeonline{leoni02cdep} encontrou taxas de classificação correta de 86,4\% e 90,4\% para as 49ª e 50ª legislaturas, respectivamente. Já em termos de APRE (redução proporcional do erro agregado), as taxas encontradas foram de 52,3\% e 64,8\% para as mesmas legislaturas. A APRE é uma medida mais robusta de proporção de erros. Tanto a taxa de classificação correta, quanto a APRE são explicadas na Seção~\ref{sec:avaliacao}.
 
-Izumi~\cite{izumi2016senado} elaborou mapas espaciais de votações para o Senado brasileiro. No entanto, ele argumenta que o \nominate pode não ser adequado por causa dos pressupostos envolvendo a função utilidade. O primeiro pressuposto questionado é a simetria da função utilidade, uma vez que, por exemplo, a redução em 5\% dos impostos pode ser algo muito mais importante para um parlamentar do que um aumento da mesma magnitude.
+\citeonline{izumi2016senado} elaborou mapas espaciais de votações para o Senado brasileiro. No entanto, ele argumenta que o \nominate pode não ser adequado por causa dos pressupostos envolvendo a função utilidade. O primeiro pressuposto questionado é a simetria da função utilidade, uma vez que, por exemplo, a redução em 5\% dos impostos pode ser algo muito mais importante para um parlamentar do que um aumento da mesma magnitude.
 
 O segundo pressuposto questionado da função utilidade é o de que os erros são independentes e identicamente distribuídos entre os legisladores e as votações. Argumentos de Izumi contrários a esse pressuposto: 1) existem partidos mais coesos que outros (por exemplo, o PT se mostrou mais coeso do que o PMDB nas câmaras federais ao longo da última década); 2) migrações de parlamentares entre partidos e migrações de partidos para dentro ou fora da base governista podem alterar a variação de erros ao longo do tempo;  3) em determinados contextos o voto estratégico pode prevalecer sobre o voto sincero. Interessante notar aqui como os argumentos 1 e 2 de Izumi abordam características que diferenciam o estudo do legislativo brasileiro do legislativo norte-americano.
 
 Embasado por esses questionamentos, Izumi preferiu adotar o Optimal Classification, pois este não se sustenta sobre pressupostos da função utilidade ou da distribuição de erros. Dessa forma, aplicando o OC a seis legislaturas do Senado (da 48ª à 53ª), Izumi encontrou taxas de classificação correta entre 90,7\% e 98,5\%. Já em termos de APRE, as taxas encontradas são entre 50\% e 94\%. Embora o trabalho de Izumi se aplique ao Senado, todos seus argumentos também se aplicariam à Câmara dos Deputados.
 
-Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao OC. Como disse Poole~\cite{poole2000oc}, as únicas premissas para a aplicação do OC são 1) o espaço de escolha é euclideano; e 2) preferências são simétricas e de pico-único. Como o próprio Izumi disse, a simetria é uma premissa que pode ser questionada na prática, e essa não somente para o caso brasileiro.
+Cabe notar que parte das críticas de Izumi ao \nominate se aplicam também ao OC. Como disse \citeonline{poole2000oc}, as únicas premissas para a aplicação do OC são 1) o espaço de escolha é euclideano; e 2) preferências são simétricas e de pico-único. Como o próprio Izumi disse, a simetria é uma premissa que pode ser questionada na prática, e essa não somente para o caso brasileiro.
 
-Zucco e Lauderdale~\cite{zucco2011ideologia, zucco2011distinguishing} utilizam uma variação do modelo de estimação de pontos ideais de Clinton et al.~\cite{clinton2004ideal}, incorporando resultados de \emph{surveys} de classificação ideológica de parlamentares respondidos pelos próprios parlamentares. Dessa forma, esses autores pretendem não apenas desenhar os mapas de votações, mas também examinar o significado substantivo das posições dos parlamentares e partidos no mapa. Esses artigos concluem que a dicotomia \emph{situação vs oposição}, mais do que o embate \emph{esquerda vs direita}, predomina na estrutura das disputas políticas na Câmara dos Deputados.
+Zucco e Lauderdale~\cite{zucco2011ideologia, zucco2011distinguishing} utilizam uma variação do modelo de estimação de pontos ideais de \citeonline{clinton2004ideal}, incorporando resultados de \emph{surveys} de classificação ideológica de parlamentares respondidos pelos próprios parlamentares. Dessa forma, esses autores pretendem não apenas desenhar os mapas de votações, mas também examinar o significado substantivo das posições dos parlamentares e partidos no mapa. Esses artigos concluem que a dicotomia \emph{situação vs oposição}, mais do que o embate \emph{esquerda vs direita}, predomina na estrutura das disputas políticas na Câmara dos Deputados.
 
 \subsection{Dimensionalidade dos mapas de votações}
 
-Um debate existente na literatura é sobre a quantidade de dimensões necessárias para representar um mapa espacial de votações. De acordo com McCarty~\cite{mccarty2011measuring}, essa é uma polêmica sem conclusão definitiva.
+Um debate existente na literatura é sobre a quantidade de dimensões necessárias para representar um mapa espacial de votações. De acordo com \citeonline{mccarty2011measuring}, essa é uma polêmica sem conclusão definitiva.
 A utilização de uma segunda dimensão no D-NOMINATE\footnote{O D-NOMINATE, ou \emph{dynamic \nominate}, é uma variação do \nominate para a comparação intertemporal dos pontos ideais nos mapas de votações.} acrescenta um poder explicativo de apenas 4\% sobre o poder de explicação de 83\% já fornecido pela primeira dimensão em termos de classificação correta para o Congresso dos EUA entre 1789 e 1986~\cite{mccarty2011measuring}. No entanto, de 1945 até a década de 60, questões raciais e de direitos civis fazem com que a segunda dimensão seja mais significativa para esse período. 
 
 A primeira dimensão presente nos mapas de votações do legislativo dos EUA estaria ligada ao espectro político-ideológico presente nesse país, possuindo uma escala que vai do extremo liberal ao extremo conservador. No período em que a segunda dimensão se torna significativa, evidencia-se também um padrão de votação que diferencia parlamentares do norte e do sul dos~EUA.  
 
-Já para Heckman e Snyder~\cite{heckman-snyder1997}, existem pelo menos cinco dimensões significativas para o Congresso dos EUA entre 1947 e 1988. Essas dimensões a mais podem não fazer tanta diferença na taxa global de classificação correta, mas são decisivas em algumas votações por representarem substantivamente assuntos específicos. Exemplos de tais assuntos são direitos civis e eleitorais, agricultura, ajuda internacional, gasto militar, teto da dívida, água, aborto e reforma do congresso. Heckman e Snyder definem a quantidade de dimensões significativas utilizando testes de hipótese chi-quadrado e um critério proposto por Cragg e Stephen~\cite{cragg1995factor} baseado no Critério de Informação Bayesiano (BIC). 
+Já para \citeonline{heckman-snyder1997}, existem pelo menos cinco dimensões significativas para o Congresso dos EUA entre 1947 e 1988. Essas dimensões a mais podem não fazer tanta diferença na taxa global de classificação correta, mas são decisivas em algumas votações por representarem substantivamente assuntos específicos. Exemplos de tais assuntos são direitos civis e eleitorais, agricultura, ajuda internacional, gasto militar, teto da dívida, água, aborto e reforma do congresso. Heckman e Snyder definem a quantidade de dimensões significativas utilizando testes de hipótese chi-quadrado e um critério proposto por \citeonline{cragg1995factor} baseado no Critério de Informação Bayesiano (BIC). 
 
-Utilizando o W-NOMINATE, Leoni~\cite{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados brasileira, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo em termos da taxa de classificação correta e da APRE. Izumi~\cite{izumi2016senado}, utilizando os mesmos critérios de Leoni, mas aplicados ao OC, também conclui pela unidimensionalidade do espaço legislativo do Senado brasileiro.
+Utilizando o W-NOMINATE, \citeonline{leoni02cdep} chegou à conclusão de que uma dimensão explica a maior parte das votações na Câmara dos Deputados brasileira, pois dimensões adicionais não melhoram significativamente a capacidade explicativa do modelo em termos da taxa de classificação correta e da APRE. \citeonline{izumi2016senado}, utilizando os mesmos critérios de Leoni, mas aplicados ao OC, também conclui pela unidimensionalidade do espaço legislativo do Senado brasileiro.
 
 % leoni traduz "outcome" como "consequência política"
 
@@ -463,7 +515,6 @@ O interesse em se obter a dimensão que provê a maior variância possível se d
   \label{fig:cps}
 \end{figure}
 
-
 \subsection{Centralização e Normalização}
 
 Em diversos contextos em que se aplica a ACP é comum realizar a \emph{centralização} e a \emph{normalização}  de $\mathbf{X}$ antes de proceder à análise. A centralização consiste em subtrair de cada entrada o valor médio da linha. Já a normalização é a multiplicação de cada entrada por um fator de escala igual ao inverso da variância da linha, de forma a obter variância unitária para todas as direções da base original.
@@ -523,13 +574,13 @@ A Figura~\ref{fig:centroide} permite visualizar o resultado do posicionamento do
   \label{fig:centroide}
 \end{figure}
 
-Outro trabalho no contexto do legislativo brasileiro que representa os partidos no mesmo mapa espacial de votações que os parlamentares é o artigo de Zuco e Lauderdale~\cite{zucco2011distinguishing}. Nesse artigo, em mapas construídos com o WNominate e com o estimador bayesiano não identificado, a posição do partido é a posição média de seus parlamentares, o que coincide com nossa abordagem. Já na abordagem defendida pelo próprio artigo, a chamada hierárquica, a posição dos parlamentares de um partido segue uma distribuição normal centrada na posição do partido. Já a posição dos partidos no eixo governista segue uma distribuição normal com $\mu = 0$ e $\sigma = 1$, enquanto que as posições no eixo ideológico estão relacionadas ao resultado do \emph{survey} realizado com os parlamentares. 
+Outro trabalho no contexto do legislativo brasileiro que representa os partidos no mesmo mapa espacial de votações que os parlamentares é o artigo de \citeonline{zucco2011distinguishing}. Nesse artigo, em mapas construídos com o WNominate e com o estimador bayesiano não identificado, a posição do partido é a posição média de seus parlamentares, o que coincide com nossa abordagem. Já na abordagem defendida pelo próprio artigo, a chamada hierárquica, a posição dos parlamentares de um partido segue uma distribuição normal centrada na posição do partido. Já a posição dos partidos no eixo governista segue uma distribuição normal com $\mu = 0$ e $\sigma = 1$, enquanto que as posições no eixo ideológico estão relacionadas ao resultado do \emph{survey} realizado com os parlamentares. 
 Apesar da influência do \emph{survey} nos resultados, em uma comparação visual com nossos mapas é perceptível uma coerência entre padrões de aglomeração de partidos produzidos por ambas as abordagens.
 
 \subsection{Tratamento de valores faltantes}
 \label{sec:valores_faltantes}
 
-Todos os métodos de análise de votações legislativas encontrados na literatura revisada descartam ausências e abstenções antes de iniciar a análise, considerando explicita- ou implicitamente que tais atitudes não trazem informação acerca das preferências políticas do legislador, e notando que tais situações representam a minoria dos casos. Por exemplo, Heckman e Snyder notam que as abstenções representam menos de 1\% dos votos para câmara e senado estadounidenses, e as assumem aleatórias em relação aos resultados das votações e às preferências dos parlamentares \cite{heckman-snyder1997}.
+Todos os métodos de análise de votações legislativas encontrados na literatura revisada descartam ausências e abstenções antes de iniciar a análise, considerando explicita- ou implicitamente que tais atitudes não trazem informação acerca das preferências políticas do legislador, e notando que tais situações representam a minoria dos casos. Por exemplo, \citeonline{heckman-snyder1997} notam que as abstenções representam menos de 1\% dos votos para câmara e senado estadounidenses, e as assumem aleatórias em relação aos resultados das votações e às preferências dos parlamentares.
 
 Já na legislatura da Câmara dos Deputados brasileira no período de 2011 a 2014, temos cerca de 5\% entre abstenções e obstruções dentro do universo de votos dados, enquanto que ausências são cerca de 36\% dentre o total possível de votos a serem dados. Esses valores foram estimados com base nos dados abertos da Câmara\footnote{\url{https://dadosabertos.camara.leg.br/}}. Propõe-se então que o comportamento observado de ausentar-se ou abster-se de uma votação traz sim informação acerca das preferências do parlamentar que se deseja estimar, e por isso essa informação não deve ser descartada na análise.
 
@@ -554,7 +605,7 @@ Além disso, os resultados apresentados neste artigo (Seção~\ref{sec:discussao
 
 Em nossa abordagem, quando um parlamentar troca de partido, ele é modelado como se fosse um novo parlamentar. Consideremos um parlamentar $p_1$ que tenha participado nas votações $v_1, ..., v_k$, e que troca de partido após a votação $v_k$. Então no modelo surge um novo parlamentar $p_2$, que vota nas votações $v_{k+1}, ..., v_n$. A desvantagem dessa estratégia é que o modelo interpreta que $p_1$ é um parlamentar que se absteve nas votações $v_{k+1}, ..., v_n$, enquanto que $p_2$ é um parlamentar que absteve nas votações $v_1, ..., v_k$. Isso introduz um erro no modelo, o que pode vir a gerar interpretações precipitadas do mapa caso o leitor não tenha ciência dessa decisão de modelagem.
 
-Essa estratégia é a mesma adotada por Poole e Rosenthal~\cite{poole2007ideology}. Porém outras opções são possíveis. Leoni~\cite{leoni02cdep} adota um único ponto ideal para um parlamentar que troque de partido, ou seja, a mudança de partido não impacta o resultado do mapa espacial. Já Izumi~\cite{izumi2016senado} utiliza o modelo de mudança de coalizão, no qual o parlamentar é representado por dois pontos ideais no mapa espacial apenas se a mudança partidária consiste em uma mudança de coalização, ou seja, se o parlamentar foi da base governista para a oposição ou vice-versa. Izumi defende que o modelo de mudança de coalização é o mais flexível e com maior sustentação teórica. 
+Essa estratégia é a mesma adotada por \citeonline{poole2007ideology}. Porém outras opções são possíveis. \citeonline{leoni02cdep} adota um único ponto ideal para um parlamentar que troque de partido, ou seja, a mudança de partido não impacta o resultado do mapa espacial. Já \citeonline{izumi2016senado} utiliza o modelo de mudança de coalizão, no qual o parlamentar é representado por dois pontos ideais no mapa espacial apenas se a mudança partidária consiste em uma mudança de coalização, ou seja, se o parlamentar foi da base governista para a oposição ou vice-versa. Izumi defende que o modelo de mudança de coalização é o mais flexível e com maior sustentação teórica. 
 
 Em nossos mapas espaciais de votações, o partido dos parlamentares é destacado por meio das cores dos pontos que representam os parlamentares. Essa é uma estratégia incomum na literatura. Nesse contexto, em que a representação do partido se destaca no mapa, não seria adequado representar por um mesmo ponto votos dados sob diferentes siglas partidárias. Essa consideração justifica a estratégia adotada em caso de migração partidária.
 
@@ -618,7 +669,7 @@ O mesmo procedimento deve ser repetido espelhando-se um dos eixos (por exemplo m
 
 O resultado desse algoritmo pode ser exemplificado pela Figura~\ref{fig:fhc2-lula1}, com a ressalva de que o algoritmo de rotação é aplicado ao mapa de parlamentares e que os partidos visualizados são meramente os centroides dos parlamentares que os compõe.
 
-Poole e Rosenthal também criaram modelos para análise intertemporal. Baseado no \wnominate, eles criaram o DW-NOMINATE~\cite{poole2001dnomiante}, i.e., o \wnominate dinâmico. Nesse modelo, o ponto ideal de um legislador deixa de ser um ponto e passa a ser uma função linear que representa a posição do parlamentar ao longo do tempo. Ou seja, a posição do legislador $j$, na dimensão $d$, na legislatura $t$ ($t=1,...,T$) é:
+\citeonline{poole2001dnomiante} também criaram modelos para análise intertemporal. Baseado no \wnominate, eles criaram o DW-NOMINATE, i.e., o \wnominate dinâmico. Nesse modelo, o ponto ideal de um legislador deixa de ser um ponto e passa a ser uma função linear que representa a posição do parlamentar ao longo do tempo. Ou seja, a posição do legislador $j$, na dimensão $d$, na legislatura $t$ ($t=1,...,T$) é:
 
 \begin{equation}
 x_{jdt} = x_{jd0} + x_{jd1}t,
@@ -627,8 +678,8 @@ x_{jdt} = x_{jd0} + x_{jd1}t,
 
 onde $x_{jd0}$ e $x_{jd1}$ são constantes para o legislador $j$ na dimensão $d$.
 
-McCarty~\cite{mccarty2011measuring} explica que no modelo dinâmico dois parlamentares, digamos $p_1$ e $p_2$, que não coexistem na mesma legislatura podem ser comparados indiretamente por meio de algum outro parlamentar, $p_3$, que participe tanto da legislatura de $p_1$, quanto da legislatura de $p_2$. McCarty também faz ressalvas sobre a pertinência dessas comparações, uma vez que a agenda política e os debates em pauta se alteram ao longo do tempo.
-Heckman e Snyder~\cite{heckman-snyder1997} também se preocupam com o deslocamento do ponto ideal ao longo do tempo. Eles chegam a encontrar altas correlações múltiplas ($>= 0,6$) entre as coordenadas de cada legislador ao longo do tempo, sendo essas altas correlações alcançadas para 6 ou 8 dimensões. 
+\citeonline{mccarty2011measuring} explica que no modelo dinâmico dois parlamentares, digamos $p_1$ e $p_2$, que não coexistem na mesma legislatura podem ser comparados indiretamente por meio de algum outro parlamentar, $p_3$, que participe tanto da legislatura de $p_1$, quanto da legislatura de $p_2$. McCarty também faz ressalvas sobre a pertinência dessas comparações, uma vez que a agenda política e os debates em pauta se alteram ao longo do tempo.
+\citeonline{heckman-snyder1997} também se preocupam com o deslocamento do ponto ideal ao longo do tempo. Eles chegam a encontrar altas correlações múltiplas ($>= 0,6$) entre as coordenadas de cada legislador ao longo do tempo, sendo essas altas correlações alcançadas para 6 ou 8 dimensões. 
 
 Diferentemente desses trabalhos~\cite{poole2001dnomiante, heckman-snyder1997}, nosso trabalho não enfoca a movimentação do ponto ideal pelo espaço do mapa, uma vez que o próprio espaço do mapa tem seu significado alterado ao longo do tempo. Em vez disso, conforme já explicado, esperamos que os leitores de nossos mapas foquem nas alterações de distâncias relativas entre parlamentares e partidos ao longo do tempo.
 
@@ -638,7 +689,6 @@ Diferentemente desses trabalhos~\cite{poole2001dnomiante, heckman-snyder1997}, n
 Em termos metodológicos, nossa abordagem para a análise do espaço de votações é muito similar ao modelo de Heckman e Snyder, utilizando inclusive a análise de componentes principais. Uma diferenciação sutil é que preferimos focar no significado das distâncias entre os parlamentares no mapa espacial, sem valorizar possíveis significados das dimensões dos mapas produzidos.
 
 Quanto ao escopo analisado, nosso trabalho utiliza dados do legislativo brasileiro, enquanto que Heckman e Snyder analisam o legislativo norte-americano. Já os trabalhos referenciados que abordam o legislativo brasileiro não utilizam a ACP. Dessa forma, nosso trabalho difere ao realizar comparações quantitativas entre a ACP e o \wnominate no âmbito do legislativo brasileiro.
-
 
 \section{Medidas de Avaliação do Modelo}
 \label{sec:avaliacao}
@@ -679,7 +729,7 @@ Adicionalmente, reportamos também a \emph{porcentagem da variância explicada p
 
 Os dados utilizados foram os dados abertos provenientes das respectivas casas legislativas\footnote{\url{https://dadosabertos.camara.leg.br/},\newline \url{http://dadosabertos.senado.leg.br/dataset/votaces-nominais} e\newline \url{http://www.camara.sp.gov.br/atividade-legislativa/sessao-plenaria/votacao-em-plenario/}}. Realizamos análises sobre votações das casas que, ao nosso conhecimento, disponibilizam abertamente os dados de votações nominais. São essas casas: Câmara dos Deputados, Senado e Câmara Municipal de São Paulo. Também realizamos comparações entre os resultados obtidas pela ACP e resultados obtidos com a utilização do \wnominate.  
 
-Seguindo o mesmo procedimento adotado por Izumi~\cite{izumi2016senado} e Leoni~\cite{leoni02cdep}, adotamos a legislatura completa como unidade de análise. Assim, para a Câmara dos Deputados e para o Senado escolhemos as legislaturas 2007-2010 e 2011-2014. Dessa forma mostramos o uso da ACP em diferentes casas e em diferentes momentos do tempo. Para a Câmara Municipal de São Paulo, devido a restrição de dados fornecidos, escolhemos apenas a legislatura 2013-2016. 
+Seguindo o mesmo procedimento adotado por \citeonline{izumi2016senado} e \citeonline{leoni02cdep}, adotamos a legislatura completa como unidade de análise. Assim, para a Câmara dos Deputados e para o Senado escolhemos as legislaturas 2007-2010 e 2011-2014. Dessa forma mostramos o uso da ACP em diferentes casas e em diferentes momentos do tempo. Para a Câmara Municipal de São Paulo, devido a restrição de dados fornecidos, escolhemos apenas a legislatura 2013-2016. 
 
 A relação de partidos presentes nos mapas espaciais produzidos é exibida na Figura~\ref{fig:partidos}. A grande quantidade de partidos no Brasil causa uma dificuldade para diferenciá-los no mapa. Por isso, além de cores utilizamos também formas geométricas para ajudar a distinguir os partidos. Embora algumas cores tenham relação com as cores oficiais dos respectivos partidos, isso não é um padrão aplicável a todos eles, justamente por se apresentarem em grande quantidade.
 
@@ -801,7 +851,7 @@ Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memóri
 \section{Discussão}
 \label{sec:discussao}
 
-Heckman e Snyder~\cite{heckman-snyder1997} encontram padrões políticos nos mapas espaciais por eles produzidos que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. Segundo eles, isso ilustra a ``razoabilidade'' dos mapas produzidos pelo modelo proposto. 
+\citeonline{heckman-snyder1997} encontram padrões políticos nos mapas espaciais por eles produzidos que são compatíveis com análises já feitas por cientistas políticos utilizando outros métodos. Segundo eles, isso ilustra a ``razoabilidade'' dos mapas produzidos pelo modelo proposto. 
 De forma similar, a ``razoabilidade'' de nossos resultados pode ser defendida por certos padrões políticos identificados, sendo o principal a polarização PT-PSDB, presente nos cinco mapas. Da mesma forma, o considerável espalhamento do PMDB nas casas federais poderia ser esperado.
 
 Mas ao mesmo tempo em que os mapas confirmam padrões já esperados, também evidenciam outros comportamentos interessantes, mas não tão óbvios. Um deles é o relativo afastamento que se pode perceber do PMDB em relação ao PT na Câmara dos Deputados, quando se compara as legislaturas 2007-2010 e 2011-2014. Isso parece ilustrar um processo de enfraquecimento da base parlamentar do governo do PT ao longo do tempo, o que parece fazer sentido considerando o impeachment de Dilma Rousseff.
@@ -837,9 +887,9 @@ Mesmo que votações quase-unânimes individualmente tenham pouca variância, se
   \label{fig:mapa-ruim}
 \end{figure}
 
-Para o mapa apresentado na Figura~\ref{fig:mapa-ruim}, os parâmetros utilizados resultam em 87 de 808 (10\%) legisladores descartados e 115 de 382 (30\%) votações excluídas. Esses valores provavelmente são bem maiores do que cientistas políticos poderiam esperar em análises sobre o congresso americano, considerando que, utilizando também \textsf{lop=0.025}, Poole descartou 10\% das votações da 85ª legislatura do congresso americano~\cite{poole1985nominate}. Além disso, segundo um levantamento realizado por Roller e Stamm~\cite{roller2014attendance}, em média um senador americano falta a 2,5\% das votações, enquanto que apenas dois senadores faltaram mais do que 10\% das vezes, sendo um desses devido a um derrame. 
+Para o mapa apresentado na Figura~\ref{fig:mapa-ruim}, os parâmetros utilizados resultam em 87 de 808 (10\%) legisladores descartados e 115 de 382 (30\%) votações excluídas. Esses valores provavelmente são bem maiores do que cientistas políticos poderiam esperar em análises sobre o congresso americano, considerando que, utilizando também \textsf{lop=0.025}, \citeonline{poole1985nominate} descartaram 10\% das votações da 85ª legislatura do congresso americano. Além disso, segundo um levantamento realizado por \citeonline{roller2014attendance}, em média um senador americano falta a 2,5\% das votações, enquanto que apenas dois senadores faltaram mais do que 10\% das vezes, sendo um desses devido a um derrame. 
 
-Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se a tese defendida por Heckman e Snyder~\cite{heckman-snyder1997}: a de que modelos lineares são bem mais rápidos. Os desvios padrão são pequenos, o que evidencia uma boa previsibilidade quanto ao tempo de execução para ambos os algoritmos.
+Sobre os tempos de execução, mostrados na Tabela~\ref{tab:tempos}, confirma-se a tese defendida por \citeonline{heckman-snyder1997}: a de que modelos lineares são bem mais rápidos. Os desvios padrão são pequenos, o que evidencia uma boa previsibilidade quanto ao tempo de execução para ambos os algoritmos.
 
 \subsection{Análise intertemporal}
 
@@ -864,7 +914,7 @@ Essa análise sobre as Tabelas~\ref{tab:variacao-explicada-acp}~e~\ref{tab:varia
 
 A ideia de que uma dimensionalidade maior seria mais adequada é corroborada pela referência de que uma proporção de mais de 90\% da variância retida pelas componentes principais selecionadas é considerado um bom resultado~\cite{DataMining2003}. Ora, esse limiar de 90\% está muito acima dos resultados encontrados.
 
-Porém, Leoni~\cite{leoni02cdep} e Izumi~\cite{izumi2016senado} não chegam à mesma conclusão. Diferentemente, eles concluem pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença se deve principalmente ao critério utilizado. Leoni e Izumi se basearam na taxa de classificação correta e na APRE. Já neste artigo, nós nos baseamos na porcentagem da variância explicada pelas componentes principais, que é um critério mais comum quando se fala em ACP.
+Porém, \citeonline{leoni02cdep} e \citeonline{izumi2016senado} não chegam à mesma conclusão. Diferentemente, eles concluem pela unidimensionalidade do espaço legislativo da Câmara dos Deputados e do Senado. Essa diferença se deve principalmente ao critério utilizado. Leoni e Izumi se basearam na taxa de classificação correta e na APRE. Já neste artigo, nós nos baseamos na porcentagem da variância explicada pelas componentes principais, que é um critério mais comum quando se fala em ACP.
 
 Cabe ainda destacar que não é objetivo deste trabalho realizar a interpretação substantiva das dimensões obtidas. Assim sendo, qualquer conclusão mais definitiva sobre uma possível dimensionalidade elevada do congresso brasileiro depende também de um trabalho mais qualitativo.
 
@@ -875,11 +925,11 @@ Neste artigo apresentamos em detalhes a abordagem utilizada pelo software Radar 
 
 Nossa abordagem foi comparada conceitualmente e quantitativamente com os principais trabalhos da área, de forma que as vantagens, desvantagens e limitações de nossa e outras abordagens são esclarecidas. Em particular, acreditamos que nosso modelo gera rapidamente mapas espaciais de votações de interpretação relativamente simples e que são úteis para analistas políticos.
 %
-Contudo, cabe aqui a ressalva de Poole~\cite{poole2005book}, de que para uma interpretação correta, o analista político que lê o mapa de votações necessita tanto do conhecimento sobre a conjuntura política do período retratado pelo mapa, quanto do conhecimento sobre o modelo que gera o mapa. Um aspecto em que isso fica evidente em nosso modelo é o tratamento de migração partidária, em que um mesmo parlamentar passa a ter mais de um ponto ideal no mapa de votações.
+Contudo, cabe aqui a ressalva de \citeonline{poole2005book}, de que para uma interpretação correta, o analista político que lê o mapa de votações necessita tanto do conhecimento sobre a conjuntura política do período retratado pelo mapa, quanto do conhecimento sobre o modelo que gera o mapa. Um aspecto em que isso fica evidente em nosso modelo é o tratamento de migração partidária, em que um mesmo parlamentar passa a ter mais de um ponto ideal no mapa de votações.
 
 Nossos resultados mostram que a execução da ACP é muito mais rápida do que a do \wnominate. Para além de um interessante benefício acadêmico, um rápido tempo de execução é um requisito importante para que o método possa ser incorporado a possibilidades de alta interatividade da web. Um exemplo é a funcionalidade do Radar Parlamentar que possibilita ao usuário gerar um mapa de votações que considera apenas votações relacionadas a um determinado conjunto de palavras-chaves.
 
-Um resultado interessante de nossas análises é a sugestão de que o espaço de votações do legislativo brasileiro seria multidimensional. Isso difere da interpretação de Leoni~\cite{leoni02cdep} e de Izumi~\cite{izumi2016senado}, que consideram o legislativo brasileiro como sendo unidimensional. Essa diferença se deve principalmente ao critério utilizado: ao passo que eles se basearam na taxa de classificação correta e na APRE, nós nos baseamos na porcentagem da variância explicada pelas dimensões.
+Um resultado interessante de nossas análises é a sugestão de que o espaço de votações do legislativo brasileiro seria multidimensional. Isso difere da interpretação de \citeonline{leoni02cdep} e de \citeonline{izumi2016senado}, que consideram o legislativo brasileiro como sendo unidimensional. Essa diferença se deve principalmente ao critério utilizado: ao passo que eles se basearam na taxa de classificação correta e na APRE, nós nos baseamos na porcentagem da variância explicada pelas dimensões.
 Além disso, é de se notar que a literatura também apresenta divergências sobre qual seria a dimensionalidade do congresso norte-americano. 
 %Além disso, é de se notar que nos trabalhos de Poole, origem dos algoritmos utilizados por Leoni e Izumi, interpreta-se o congresso norte-americano como uma realidade unidimensional, ao passo que o trabalho de Heckman e Snyder~\cite{heckman-snyder1997}, que também utiliza a ACP, interpretam esse mesmo congresso norte-americano como multidimensional. Ou seja, as diferenças nos critérios de dimensionalidade também afetam as interpretações sobre o congresso dos EUA.
 %
@@ -903,7 +953,17 @@ Agradecemos a toda a comunidade de contribuidores do Radar Parlamentar.
 % Mas parece que pela norma da ABNT é isso mesmo!
 % https://groups.google.com/forum/#!topic/abntex2/oH5za46RtyU
 
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
 {\small
-\bibliography{refs}
- }
+\bibliography{refs} 
+}
+
 \end{document}
