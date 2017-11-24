@@ -445,6 +445,7 @@ de forma que:
   \mathbf{X^{*}} = \mathbf{X} - \mathbf{C}
 \]
 
+\newpage
 A variância (amostral) var$(i)$ de cada votação, ou dimensão é:
 
 \[
@@ -643,7 +644,7 @@ E(\theta)=\sum_{k\in\{parlamentares\}} D_{k}^{2}
 
 onde $D_{k}$ é a distância percorrida pelo parlamentar $k$ entre os períodos analisados.
 
-Caso a intenção seja trabalhar o mapa de votações de partidos, recomendamos a ponderação da distância percorrida pela quantidade de parlamentares no partido, conforme a Equação~\ref{eq:e_theta_partidos}. Nota-se nesse caso a analogia dessa função objetivo com a definição de energia: para um conjunto de bolas $k$ com massa $M_{k}$ que iriam do ponto $p_{k1}$ ao ponto $p_{k2}$ em um tempo $\Delta t$, estamos buscando o ângulo $\theta$ que minimiza a energia envolvida nesse movimento. 
+Caso a intenção seja trabalhar o mapa de votações de partidos, recomendamos a ponderação da distância percorrida pela quantidade de parlamentares no partido, conforme a Equação~\ref{eq:e_theta_partidos}. Nota-se nesse caso a analogia dessa função objetivo com a definição de energia: para um conjunto de bolas $k$ com massa $M_{k}$ que iriam do ponto $p_{k1}$ ao ponto $p_{k2}$ em um tempo $\Delta t$, estamos buscando o ângulo $\theta$ que minimiza a energia envolvida~nesse~movimento. 
 
 \begin{equation}
 E(\theta)=\sum_{k\in\{partidos\}}M_{k}\cdot D_{k}^{2}
@@ -844,7 +845,8 @@ cmsp2013-2016 & 55 & 10 & 6 & 4 & 3 & 65  \\
 \label{tab:variacao-explicada-wnominate}
 \end{table}
 
-As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em \url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole. Já para o cálculo da ACP, utilizamos a função \textsf{prcomp}, nativamente disponível no R.
+\newpage
+As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em nosso repositório\footnote{\url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole. Já para o cálculo da ACP, utilizamos a função \textsf{prcomp}, nativamente disponível no R.
 
 Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. É importante registrar que mapas ligeiramente diferentes podem ser produzidos pela ACP em computadores diferentes, principalmente no que diz respeito à orientação do mapa, que é arbitrária, e porque não há garantia de unicidade da solução da ACP no caso geral, isto é, pode haver mais de uma maneira possível de se escolher um eixo que maximiza a variância dos dados projetados.
 
