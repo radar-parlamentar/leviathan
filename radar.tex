@@ -38,7 +38,7 @@
 	% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
 	% openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
-    oneside,			% para impressão somente frente. Oposto a twoside (frente e verso)
+    twoside,			% para impressão somente frente. Oposto a twoside (frente e verso)
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
 	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
@@ -101,11 +101,12 @@
   \makeevenhead{leviathan} %%pagina par
      {\diam{\textbf{Leviathan} | Cadernos de Pesquisa Política}} % esquerda
      {} % centro
-     {} % direita
+     {N. 12, pp.1-38, 2017} % direita
   \makeoddhead{leviathan} %%pagina ímpar ou com oneside
      {\diam{\textbf{Leviathan} | Cadernos de Pesquisa Política}} % esquerda
      {} % centro
      {} % direita
+%     {LEITE, L.; TRENTO, S. ``Análise de votações nominais do legislativo brasileiro utilizando componentes principais''.} % direita
   \makeheadrule{leviathan}{\textwidth}{\normalrulethickness} %linha
   %% rodapé
   \makeevenfoot{leviathan} %%pagina par
