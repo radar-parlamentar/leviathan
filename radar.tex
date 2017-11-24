@@ -72,12 +72,12 @@
 \usepackage{xspace}             % Espaço após comandos tipo \nominate
 \usepackage{amsmath}            % \text dentro de fórmulas
 \usepackage{amsfonts}           % \mathbb
-\usepackage{tikz}
 \usepackage{gensymb}
 \usepackage{microtype} 			% para melhorias de justificação
 \usepackage{nomencl} 			% Lista de simbolos
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{tikz}
 \usepackage[font={small,it}]{caption}
 % ---
 % Pacotes de citações
@@ -90,8 +90,34 @@
 % CONFIGURAÇÕES DE PACOTES
 % --- 
 
-% \captionsetup{justification=centering} % não ficou legal
+% page number
 
+%criar um novo estilo de cabeçalhos e rodapés
+\definecolor{darkred}{HTML}{c00000}
+\makepagestyle{leviathan}
+  %%cabeçalhos
+  \makeevenhead{leviathan} %%pagina par
+     {} % esquerda
+     {} % centro
+     {} % direita
+  \makeoddhead{leviathan} %%pagina ímpar ou com oneside
+     {} % esquerda
+     {} % centro
+     {} % direita
+  \makeheadrule{leviathan}{\textwidth}{\normalrulethickness} %linha
+  %% rodapé
+  \makeevenfoot{leviathan} %%pagina par
+     {} % esquerda
+     {\textcolor{darkred}{\thepage}} % centro
+     {} % direita
+  \makeoddfoot{leviathan} %%pagina ímpar ou com oneside
+     {} % esquerda
+     {\textcolor{darkred}{\thepage}} % centro
+     {} % direita
+
+
+
+% \captionsetup{justification=centering} % não ficou legal
 
 \newcommand{\tikzmark}[1]{\tikz[overlay, remember picture] \coordinate (#1);}
 
@@ -180,6 +206,7 @@
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing 
 
+
 %\maketitle 
 
 \begin{center}
@@ -191,7 +218,8 @@ Análise de votações nominais do legislativo brasileiro utilizando componentes
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
 % ----------------------------------------------------------
-% \pretextual
+%\pretextual
+
 
 %\vspace*{-3cm}
 
@@ -227,6 +255,9 @@ This paper presents a review of methods for legislative roll call quantitative a
 % ELEMENTOS TEXTUAIS  (necessário para incluir número nas páginas)
 % ----------------------------------------------------------
 \textual
+
+%usar o estilo de cabelho e rodapé criado:
+\pagestyle{leviathan}
 
 
 % ----------------------------------------------------------
