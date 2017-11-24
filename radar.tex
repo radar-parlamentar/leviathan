@@ -78,6 +78,7 @@
 \usepackage{nomencl} 			% Lista de simbolos
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage[font={small,it}]{caption}
 % ---
 % Pacotes de citações
 % ---
@@ -88,6 +89,9 @@
 % --- 
 % CONFIGURAÇÕES DE PACOTES
 % --- 
+
+% \captionsetup{justification=centering} % não ficou legal
+
 
 \newcommand{\tikzmark}[1]{\tikz[overlay, remember picture] \coordinate (#1);}
 
@@ -939,7 +943,7 @@ Dessa forma, estudos sobre a dimensionalidade de espaços políticos do legislat
 
 Outro resultado relevante que apresentamos foi a sensibilidade das análises em função dos parâmetros que determinam o descarte de votações unânimes e quase unânimes e o descarte de parlamentares com muitos votos nulos. Em particular, mostramos que para a Câmara dos Deputados na legislatura 2011-2014 utilizando-se a ACP com parâmetros $minvotes=20$ e $lop=0.025$ obtemos um mapa de votações sem aparente significado político. A escolha de valores para esses parâmetros é um aspecto no qual a análise do legislativo brasileiro pode deferir da análise de outros legislativos, uma vez que no legislativo brasileiro as ausências/abstenções/obstruções parecem possuir maior relevância política em comparação aos EUA.
 
-A análise apresentada neste artigo focou na comparação entre a ACP e o \wnominate. Mas devido à existência de muitos métodos possíveis para a construção de mapas espaciais de votações, muitas outras comparações podem ainda ser feitas. Alguns dos alvos de comparação seriam as variações do \nominate (DW-NOMINATE~\cite{poole2001dnomiante}, Alpha-Nominate\cite{carroll2013alpha}, etc.), o IDEAL~\cite{clinton2004ideal}, o modelo  IRT (Item Response Theory)~\cite{linden2013irt}, e até mesmo variações da ACP especializadas em dados categóricos~\cite{landgraf2015logisticpca}.
+A análise apresentada neste artigo focou na comparação entre a ACP e o \wnominate. Mas devido à existência de muitos métodos possíveis para a construção de mapas espaciais de votações, muitas outras comparações podem ainda ser feitas. Alguns dos alvos de comparação seriam as variações do \nominate (DW-NOMINATE~\cite{poole2001dnomiante}, Alpha-Nominate~\cite{carroll2013alpha}, etc.), o IDEAL~\cite{clinton2004ideal}, o modelo  IRT (Item Response Theory)~\cite{linden2013irt}, e até mesmo variações da ACP especializadas em dados categóricos~\cite{landgraf2015logisticpca}.
 
 Outros aspectos que podem ser aprofundados em trabalhos futuros são a modelagem da participação de suplentes, maior aprofundamento sobre a utilização da abstenção na modelagem, e análise de sensibilidade para identificar as votações que mais distinguem os parlamentares. 
 %
