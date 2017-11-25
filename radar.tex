@@ -96,17 +96,17 @@
 \definecolor{darkred}{HTML}{c00000}
 \usetikzlibrary{shapes.geometric}
 \newcommand{\diam}[1]{\tikz\draw (0,0)node[draw=darkred,fill=darkred,shape aspect=1,draw,inner ysep=5.25pt,inner xsep=15.5pt]{#1};}
+\newcommand{\diaminvisible}[1]{\tikz\draw (0,0)node[draw=white,shape aspect=1,draw,inner ysep=5.25pt,inner xsep=8pt]{#1};}
 \makepagestyle{leviathan}
   %%cabeçalhos
   \makeevenhead{leviathan} %%pagina par
-     {\diam{\textcolor{white}{\small \textbf{Leviathan |} \textsf{\footnotesize Cadernos de Pesquisa Política}}}} % esquerda
+     {\diam{\textcolor{white}{\small \textbf{Leviathan |} \textsf{\footnotesize Cadernos de Pesquisa Política}}} {\diaminvisible{\scriptsize N. 12, pp.1--38, 2017}}} % esquerda
      {} % centro
-     {N. 12, pp.1-38, 2017} % direita
+     {} % direita
   \makeoddhead{leviathan} %%pagina ímpar ou com oneside
      {\diam{\textcolor{white}{\small \textbf{Leviathan |} \textsf{\footnotesize Cadernos de Pesquisa Política}}}} % esquerda
      {} % centro
-     {} % direita
-%     {LEITE, L.; TRENTO, S. ``Análise de votações nominais do legislativo brasileiro utilizando componentes principais''.} % direita
+     {\tiny LEITE, L.; TRENTO, S. ``Análise de votações nominais \\ do legislativo brasileiro utilizando componentes principais''.} % direita
   \makeheadrule{leviathan}{\textwidth}{\normalrulethickness} %linha
   %% rodapé
   \makeevenfoot{leviathan} %%pagina par
