@@ -84,19 +84,24 @@
 % ---
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
 \usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+\usepackage[margin=3cm]{geometry}
 
 
 % --- 
 % CONFIGURAÇÕES DE PACOTES
 % --- 
 
+% sans serif
 \renewcommand{\familydefault}{\sfdefault}
+\setlength{\headsep}{1.2cm} 
+
+% margem
 
 % page number
 %criar um novo estilo de cabeçalhos e rodapés
 \definecolor{darkred}{HTML}{c00000}
 \usetikzlibrary{shapes.geometric}
-\newcommand{\diam}[1]{\tikz\draw (0,0)node[draw=darkred,fill=darkred,shape aspect=1,draw,inner ysep=5.25pt,inner xsep=15.5pt]{#1};}
+\newcommand{\diam}[1]{\tikz\draw (0,0)node[draw=darkred,fill=darkred,shape aspect=1,draw,inner ysep=5.25pt,inner xsep=14pt]{#1};}
 \newcommand{\diaminvisible}[1]{\tikz\draw (0,0)node[draw=white,shape aspect=1,draw,inner ysep=5.25pt,inner xsep=8pt]{#1};}
 \makepagestyle{leviathan}
   %%cabeçalhos
@@ -108,7 +113,7 @@
      {\diam{\textcolor{white}{\small \textbf{Leviathan |} \textsf{\footnotesize Cadernos de Pesquisa Política}}}} % esquerda
      {} % centro
      {\tiny LEITE, L.; TRENTO, S. ``Análise de votações nominais \\ do legislativo brasileiro utilizando componentes principais''.} % direita
-  \makeheadrule{leviathan}{\textwidth}{\normalrulethickness} %linha
+%  \makeheadrule{leviathan}{\textwidth}{\normalrulethickness} %linha
   %% rodapé
   \makeevenfoot{leviathan} %%pagina par
      {} % esquerda
