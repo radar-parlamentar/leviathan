@@ -106,7 +106,7 @@
 \makepagestyle{leviathan}
   %%cabeçalhos
   \makeevenhead{leviathan} %%pagina par
-     {\diam{\textcolor{white}{\small \texttt{\textbf{Leviathan |}} {\footnotesize Cadernos de Pesquisa Política}}} {\diaminvisible{\scriptsize N. 12, pp.1--38, 2017}}} % esquerda
+     {\diam{\textcolor{white}{\small \texttt{\textbf{Leviathan |}} {\footnotesize Cadernos de Pesquisa Política}}} {\diaminvisible{\scriptsize N. 12, pp.1--40, 2017}}} % esquerda
      {} % centro
      {} % direita
   \makeoddhead{leviathan} %%pagina ímpar ou com oneside
@@ -492,7 +492,6 @@ de forma que:
   \mathbf{X^{*}} = \mathbf{X} - \mathbf{C}
 \]
 
-\newpage
 A variância (amostral) var$(i)$ de cada votação, ou dimensão é:
 
 \[
@@ -892,7 +891,6 @@ cmsp2013-2016 & 55 & 10 & 6 & 4 & 3 & 65  \\
 \label{tab:variacao-explicada-wnominate}
 \end{table}
 
-\newpage
 As análises apresentadas nesta seção foram feitas no software de estatística \textbf{R}, e o código que produziu esses resultados está disponível em nosso repositório\footnote{\url{https://github.com/radar-parlamentar/pesquisa/tree/master/R}}. Para os cálculos envolvendo o \wnominate, utilizamos o pacote \textsf{wnominate}\footnote{\url{https://cran.r-project.org/web/packages/wnominate/}} disponibilizado pelo próprio Keith Poole. Já para o cálculo da ACP, utilizamos a função \textsf{prcomp}, nativamente disponível no R.
 
 Esses scripts foram executados em um laptop Dell Vostro 5480, com 8GB de memória RAM e com a 5ª geração do Processador Intel® CoreTM i7-5500U. É importante registrar que mapas ligeiramente diferentes podem ser produzidos pela ACP em computadores diferentes, principalmente no que diz respeito à orientação do mapa, que é arbitrária, e porque não há garantia de unicidade da solução da ACP no caso geral, isto é, pode haver mais de uma maneira possível de se escolher um eixo que maximiza a variância dos dados projetados.
