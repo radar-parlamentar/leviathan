@@ -97,6 +97,9 @@
 % epsaçamento entre o texto e o header
 \setlength{\headsep}{1.2cm} 
 
+% espalamento entre linhas
+\linespread{1.5}
+
 % page number
 %criar um novo estilo de cabeçalhos e rodapés
 \definecolor{darkred}{HTML}{c00000}
@@ -106,7 +109,7 @@
 \makepagestyle{leviathan}
   %%cabeçalhos
   \makeevenhead{leviathan} %%pagina par
-     {\diam{\textcolor{white}{\small \texttt{\textbf{Leviathan |}} {\footnotesize Cadernos de Pesquisa Política}}} {\diaminvisible{\scriptsize N. 12, pp.1--40, 2016}}} % esquerda
+     {\diam{\textcolor{white}{\small \texttt{\textbf{Leviathan |}} {\footnotesize Cadernos de Pesquisa Política}}} {\diaminvisible{\scriptsize N. 12, pp.1--44, 2016}}} % esquerda
      {} % centro
      {} % direita
   \makeoddhead{leviathan} %%pagina ímpar ou com oneside
@@ -203,7 +206,8 @@
 \setlength{\parindent}{1.3cm}
 
 % Controle do espaçamento entre um parágrafo e outro:
-\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+%\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+\setlength{\parskip}{0.1cm}  % tente também \onelineskip
 
 % ---
 
@@ -218,10 +222,10 @@
 
 %\maketitle 
 
-\vspace*{0.1cm}
+%\vspace*{0.05cm}
 
 \begin{center}
-{\huge
+{\LARGE
 Análise de votações nominais do legislativo brasileiro utilizando componentes principais
 }
 \end{center}
